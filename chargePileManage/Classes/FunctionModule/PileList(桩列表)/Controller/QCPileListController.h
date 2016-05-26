@@ -6,8 +6,7 @@
 //  Copyright © 2016年 shQianChen. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface QCPileListController : UITableViewController
+#import "WQBaseTableViewController.h"
+@interface QCPileListController : WQBaseTableViewController
 
 @end

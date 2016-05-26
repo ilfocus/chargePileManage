@@ -6,8 +6,8 @@
 //  Copyright © 2016年 shQianChen. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "WQBaseTableViewController.h"
 
-@interface QCSystemManageController : UITableViewController
+@interface QCSystemManageController : WQBaseTableViewController
 
 @end

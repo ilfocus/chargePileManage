@@ -8,6 +8,12 @@
 
 #import "QCSystemManageController.h"
 
+#import "WQItemModel.h"
+#import "WQItemArrowModel.h"
+#import "WQItemSwitchModel.h"
+#import "WQItemLabelModel.h"
+#import "WQTableViewGroupModel.h"
+
 @interface QCSystemManageController ()
 
 @end
@@ -23,78 +29,50 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.view.backgroundColor = [UIColor blueColor];
+    [self setGroup0];
+    [self setGroup1];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+/**
+ * 设置第0组样式
+ */
+- (void)setGroup0
+{
+    //WQItemModel *clearRecord = [WQItemSwitchModel itemWithIcon:@"setting_clear" title:@"发送完成后清除记录"];album
+    WQItemModel *clearRecord = [WQItemSwitchModel itemWithIcon:@"album" title:@"发送完成后清除记录"];
+    WQItemModel *openSave = [WQItemSwitchModel itemWithIcon:@"setting_draft" title:@"开启草稿保存功能"];
+    WQItemModel *selectedCopy = [WQItemSwitchModel itemWithIcon:@"setting_copy" title:@"模板内容选中就拷贝"];
+    ///////////////////////////////// 有设置目标控制器 /////////////////////////////////////////////////
+    WQItemModel *everyMsgNumber = [WQItemArrowModel itemWithIcon:@"setting_sndNum" title:@"每次群发数量" destVcClass:nil];
+    WQItemModel *setMsgContent = [WQItemArrowModel itemWithIcon:@"setting_sign" title:@"设置短信签名" destVcClass:nil];
+    WQItemModel *useHelp = [WQItemArrowModel itemWithIcon:@"setting_help" title:@"使用帮助" destVcClass:nil];
+    WQItemModel *comQuestion = [WQItemArrowModel itemWithIcon:@"setting_answer" title:@"常见问题解答" destVcClass:nil];
+    //////////////////////////////////////////////////////////////////////////////////////////////////
     
-    // Configure the cell...
     
-    return cell;
+    WQTableViewGroupModel *group = [WQTableViewGroupModel new];
+    group.items = @[clearRecord,openSave,selectedCopy,everyMsgNumber,setMsgContent,useHelp,comQuestion];
+    
+    group.header = @"我是第一组头部内容";
+    group.footer = @"我是第一组尾部内容";
+    
+    [self.data addObject:group];
+    
 }
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+/**
+ * 设置第1组样式
+ */
+- (void)setGroup1
+{
+    WQItemModel *moreSoft = [WQItemArrowModel itemWithIcon:@"setting_more" title:@"更多精品软件" destVcClass:nil];
+    WQItemModel *suggestion = [WQItemArrowModel itemWithIcon:@"setting_feedback" title:@"问题与建议反馈" destVcClass:nil];
+    WQItemModel *score = [WQItemArrowModel itemWithIcon:@"setting_rate" title:@"给短信小秘书打分" destVcClass:nil];
+    
+    WQTableViewGroupModel *group = [WQTableViewGroupModel new];
+    
+    group.items = @[moreSoft,suggestion,score];
+    group.header = @"我是第二组头部内容";
+    group.footer = @"我是第二组尾部内容";
+    [self.data addObject:group];
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

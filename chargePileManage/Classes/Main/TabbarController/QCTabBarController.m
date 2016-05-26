@@ -25,14 +25,6 @@
 
 @implementation QCTabBarController
 
-
-
-
-
-
-
-
-
 #pragma mark - life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
