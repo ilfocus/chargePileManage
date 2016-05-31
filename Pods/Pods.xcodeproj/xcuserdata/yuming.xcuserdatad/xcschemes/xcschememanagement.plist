@@ -14,7 +14,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>LLBootstrapButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,12 +52,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
+		<key>193827166E7EFE394D0352320150E932</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8465400A01B407E2F0AF61FF09CB923A</key>
+		<key>37C3A6AFBF69C7BEACAE6E261F040A70</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,12 +77,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BBCA3E579CCD276E822FD640A6EA8F22</key>
+		<key>D79AF2C84C095DC996BC963C79EA7D49</key>
 		<dict>
 			<key>primary</key>
 			<true/>

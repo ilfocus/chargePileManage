@@ -30,6 +30,12 @@
 
 // 5.定义UI显示间隔
 #define PADDING 5
+/** view内部的边框宽度 */
+#define QCDetailViewBorder 5
+/** 来源的字体 */
+#define QCSubTitleFont [UIFont systemFontOfSize:12]
+/** 正文的字体 */
+#define QCTitleFont [UIFont systemFontOfSize:18]
 
 // 6.定义弱self指针，用于block内部
 #define WEAK_SELF(weakSelf)  __weak __typeof(&*self)weakSelf = self;
@@ -40,5 +46,6 @@
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
 #import "UIImage+adaptive_iOS7.h"
+#import "Masonry.h"   // auto layer
 
 #endif /* Weibo_PrefixHeader_pch */

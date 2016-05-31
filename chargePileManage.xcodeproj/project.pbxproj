@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3A796A3360CF4CCB12033C3A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459A5A6808DA425D666CA21 /* libPods.a */; };
+		7211DDEC1CF8180600234042 /* QCPileListDataMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 7211DDEB1CF8180600234042 /* QCPileListDataMode.m */; };
+		721FFAB91CFC1C6700DDC22D /* QCStopCtrlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 721FFAB81CFC1C6700DDC22D /* QCStopCtrlView.m */; };
 		72378CF71CEC6993005E9E52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72378CF61CEC6993005E9E52 /* main.m */; };
 		72378D001CEC6993005E9E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72378CFE1CEC6993005E9E52 /* Main.storyboard */; };
 		72378D021CEC6993005E9E52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72378D011CEC6993005E9E52 /* Assets.xcassets */; };
@@ -41,6 +43,12 @@
 		726F7EA31CF67B150068513A /* QCPileListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA21CF67B150068513A /* QCPileListCell.m */; };
 		726F7EA61CF6E9890068513A /* QCPileListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA51CF6E9890068513A /* QCPileListCellModel.m */; };
 		726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */; };
+		729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAACD1CFBE69300F7A953 /* QCRunStateView.m */; };
+		729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD01CFC0BDB00F7A953 /* QCFaultInfoView.m */; };
+		729EAAD41CFC146A00F7A953 /* QCChargePileParaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD31CFC146A00F7A953 /* QCChargePileParaView.m */; };
+		729EAAD91CFC14CA00F7A953 /* QCChargeInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */; };
+		729EAADC1CFC14EE00F7A953 /* QCBatteryInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAADB1CFC14EE00F7A953 /* QCBatteryInfoView.m */; };
+		72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +71,10 @@
 /* Begin PBXFileReference section */
 		09485335309A16105A0B61D0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		1459A5A6808DA425D666CA21 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7211DDEA1CF8180600234042 /* QCPileListDataMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListDataMode.h; sourceTree = "<group>"; };
+		7211DDEB1CF8180600234042 /* QCPileListDataMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListDataMode.m; sourceTree = "<group>"; };
+		721FFAB71CFC1C6700DDC22D /* QCStopCtrlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCStopCtrlView.h; sourceTree = "<group>"; };
+		721FFAB81CFC1C6700DDC22D /* QCStopCtrlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCStopCtrlView.m; sourceTree = "<group>"; };
 		72378CF21CEC6993005E9E52 /* chargePileManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chargePileManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72378CF61CEC6993005E9E52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		72378CFF1CEC6993005E9E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -129,6 +141,18 @@
 		726F7EA51CF6E9890068513A /* QCPileListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListCellModel.m; sourceTree = "<group>"; };
 		726F7EA71CF6F16B0068513A /* QCPileListDetailCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListDetailCtrl.h; sourceTree = "<group>"; };
 		726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListDetailCtrl.m; sourceTree = "<group>"; };
+		729EAACC1CFBE69300F7A953 /* QCRunStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCRunStateView.h; sourceTree = "<group>"; };
+		729EAACD1CFBE69300F7A953 /* QCRunStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCRunStateView.m; sourceTree = "<group>"; };
+		729EAACF1CFC0BDB00F7A953 /* QCFaultInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultInfoView.h; sourceTree = "<group>"; };
+		729EAAD01CFC0BDB00F7A953 /* QCFaultInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCFaultInfoView.m; sourceTree = "<group>"; };
+		729EAAD21CFC146A00F7A953 /* QCChargePileParaView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChargePileParaView.h; sourceTree = "<group>"; };
+		729EAAD31CFC146A00F7A953 /* QCChargePileParaView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChargePileParaView.m; sourceTree = "<group>"; };
+		729EAAD71CFC14CA00F7A953 /* QCChargeInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChargeInfoView.h; sourceTree = "<group>"; };
+		729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChargeInfoView.m; sourceTree = "<group>"; };
+		729EAADA1CFC14EE00F7A953 /* QCBatteryInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCBatteryInfoView.h; sourceTree = "<group>"; };
+		729EAADB1CFC14EE00F7A953 /* QCBatteryInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCBatteryInfoView.m; sourceTree = "<group>"; };
+		72EA12171CF7D4D1009A1ED7 /* QCPileListDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListDetailView.h; sourceTree = "<group>"; };
+		72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListDetailView.m; sourceTree = "<group>"; };
 		F6D5489189523ECDE4B2E8BD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -384,10 +408,8 @@
 		7254FA331CED4A6E008EA77F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				726F7E601CF57CFF0068513A /* QCPileListController.h */,
-				726F7E611CF57CFF0068513A /* QCPileListController.m */,
-				726F7EA71CF6F16B0068513A /* QCPileListDetailCtrl.h */,
-				726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */,
+				729EAAE11CFC15AD00F7A953 /* QCPileListCtrl */,
+				729EAAE01CFC158E00F7A953 /* QCPileDetailViewCtrl */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -397,6 +419,8 @@
 			children = (
 				726F7EA41CF6E9890068513A /* QCPileListCellModel.h */,
 				726F7EA51CF6E9890068513A /* QCPileListCellModel.m */,
+				7211DDEA1CF8180600234042 /* QCPileListDataMode.h */,
+				7211DDEB1CF8180600234042 /* QCPileListDataMode.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -404,8 +428,8 @@
 		7254FA351CED4A6E008EA77F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				726F7EA11CF67B150068513A /* QCPileListCell.h */,
-				726F7EA21CF67B150068513A /* QCPileListCell.m */,
+				729EAAD61CFC149300F7A953 /* ChargePileCell */,
+				729EAAD51CFC146F00F7A953 /* ChargePileInfo */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -567,6 +591,54 @@
 				726F7E991CF593E70068513A /* WQBaseCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		729EAAD51CFC146F00F7A953 /* ChargePileInfo */ = {
+			isa = PBXGroup;
+			children = (
+				72EA12171CF7D4D1009A1ED7 /* QCPileListDetailView.h */,
+				72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */,
+				729EAACC1CFBE69300F7A953 /* QCRunStateView.h */,
+				729EAACD1CFBE69300F7A953 /* QCRunStateView.m */,
+				729EAACF1CFC0BDB00F7A953 /* QCFaultInfoView.h */,
+				729EAAD01CFC0BDB00F7A953 /* QCFaultInfoView.m */,
+				729EAAD21CFC146A00F7A953 /* QCChargePileParaView.h */,
+				729EAAD31CFC146A00F7A953 /* QCChargePileParaView.m */,
+				729EAAD71CFC14CA00F7A953 /* QCChargeInfoView.h */,
+				729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */,
+				729EAADA1CFC14EE00F7A953 /* QCBatteryInfoView.h */,
+				729EAADB1CFC14EE00F7A953 /* QCBatteryInfoView.m */,
+				721FFAB71CFC1C6700DDC22D /* QCStopCtrlView.h */,
+				721FFAB81CFC1C6700DDC22D /* QCStopCtrlView.m */,
+			);
+			name = ChargePileInfo;
+			sourceTree = "<group>";
+		};
+		729EAAD61CFC149300F7A953 /* ChargePileCell */ = {
+			isa = PBXGroup;
+			children = (
+				726F7EA11CF67B150068513A /* QCPileListCell.h */,
+				726F7EA21CF67B150068513A /* QCPileListCell.m */,
+			);
+			name = ChargePileCell;
+			sourceTree = "<group>";
+		};
+		729EAAE01CFC158E00F7A953 /* QCPileDetailViewCtrl */ = {
+			isa = PBXGroup;
+			children = (
+				726F7EA71CF6F16B0068513A /* QCPileListDetailCtrl.h */,
+				726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */,
+			);
+			name = QCPileDetailViewCtrl;
+			sourceTree = "<group>";
+		};
+		729EAAE11CFC15AD00F7A953 /* QCPileListCtrl */ = {
+			isa = PBXGroup;
+			children = (
+				726F7E601CF57CFF0068513A /* QCPileListController.h */,
+				726F7E611CF57CFF0068513A /* QCPileListController.m */,
+			);
+			name = QCPileListCtrl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -758,6 +830,7 @@
 				726F7EA31CF67B150068513A /* QCPileListCell.m in Sources */,
 				726F7E501CF568CC0068513A /* QCTableBar.m in Sources */,
 				726F7E9A1CF593E70068513A /* WQBaseTableViewController.m in Sources */,
+				729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */,
 				7254FA471CED4A6E008EA77F /* UIImage+XFCircle.m in Sources */,
 				726F7E9E1CF593E70068513A /* WQItemModel.m in Sources */,
 				726F7E9B1CF593E70068513A /* WQTableViewGroupModel.m in Sources */,
@@ -765,10 +838,13 @@
 				7254FA461CED4A6E008EA77F /* NSString+XFTime.m in Sources */,
 				726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */,
 				726F7E9F1CF593E70068513A /* WQItemSwitchModel.m in Sources */,
+				7211DDEC1CF8180600234042 /* QCPileListDataMode.m in Sources */,
 				726F7E681CF57D900068513A /* QCHistoryRecordController.m in Sources */,
+				729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */,
 				726F7E9C1CF593E70068513A /* WQItemArrowModel.m in Sources */,
 				726F7E621CF57CFF0068513A /* QCPileListController.m in Sources */,
 				7254FA4B1CED4A6E008EA77F /* AppDelegate.m in Sources */,
+				721FFAB91CFC1C6700DDC22D /* QCStopCtrlView.m in Sources */,
 				726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */,
 				726F7E531CF56AF30068513A /* QCTableBarButton.m in Sources */,
 				726F7E5C1CF56E860068513A /* NSDate+WQ.m in Sources */,
@@ -776,9 +852,13 @@
 				7254FA501CED4DCB008EA77F /* QCTabBarController.m in Sources */,
 				72378CF71CEC6993005E9E52 /* main.m in Sources */,
 				7254FA491CED4A6E008EA77F /* UIView+Extension.m in Sources */,
+				729EAAD41CFC146A00F7A953 /* QCChargePileParaView.m in Sources */,
+				72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */,
 				726F7E651CF57D210068513A /* QCSystemManageController.m in Sources */,
 				726F7EA61CF6E9890068513A /* QCPileListCellModel.m in Sources */,
+				729EAADC1CFC14EE00F7A953 /* QCBatteryInfoView.m in Sources */,
 				726F7E591CF56E7A0068513A /* UIImage+adaptive_iOS7.m in Sources */,
+				729EAAD91CFC14CA00F7A953 /* QCChargeInfoView.m in Sources */,
 				7254FA441CED4A6E008EA77F /* NSString+ChineseChar.m in Sources */,
 				7254FA4A1CED4A6E008EA77F /* CDFInitialsAvatar.m in Sources */,
 				726F7E5F1CF57B510068513A /* QCNavigationController.m in Sources */,
@@ -923,6 +1003,7 @@
 			baseConfigurationReference = 09485335309A16105A0B61D0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/chargePileManage/GlobalPrefixHeader.pch";
 				INFOPLIST_FILE = chargePileManage/Info.plist;
@@ -937,6 +1018,7 @@
 			baseConfigurationReference = F6D5489189523ECDE4B2E8BD /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/chargePileManage/GlobalPrefixHeader.pch";
 				INFOPLIST_FILE = chargePileManage/Info.plist;

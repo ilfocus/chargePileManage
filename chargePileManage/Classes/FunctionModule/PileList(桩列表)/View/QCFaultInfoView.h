@@ -1,0 +1,19 @@
+//
+//  QCFaultInfoView.h
+//  chargePileManage
+//
+//  Created by YuMing on 16/5/30.
+//  Copyright © 2016年 shQianChen. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@class QCPileListDataMode;
+@interface QCFaultInfoView : UIButton
+
+@property (nonatomic,copy) NSString *strVolFault;
+@property (nonatomic,copy) NSString *strCurFault;
+@property (nonatomic,copy) NSString *strTempFault;
+@property (nonatomic,copy) NSString *strShortFault;
+
+- (void) refreshViewData:(QCPileListDataMode *)modeData;
+@end

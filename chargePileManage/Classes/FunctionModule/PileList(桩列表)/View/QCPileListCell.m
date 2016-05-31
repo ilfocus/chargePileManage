@@ -10,7 +10,6 @@
 
 #import "WQItemModel.h"
 
-#import "Masonry.h"   // auto layer
 #import "YYKit.h"
 
 /** cell的边框宽度 */
@@ -31,7 +30,7 @@
 @end
 
 @implementation QCPileListCell
-#pragma mark - 初始化
+#pragma mark - init
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
     static NSString *ID = @"cell";

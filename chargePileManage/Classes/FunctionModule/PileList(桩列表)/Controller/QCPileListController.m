@@ -31,23 +31,11 @@
     
     self.tableView.rowHeight = PileListCellHeight;
 }
-
-//- (NSMutableArray *)pileListCellDatas
-//{
-//    if (_pileListCellDatas == nil) {
-//        _pileListCellDatas = [NSMutableArray array];
-//    }
-//    return _pileListCellDatas;
-//}
 /**
  * 设置第0组样式
  */
 - (void)setGroup0
 {
-    //WQItemModel *clearRecord = [WQItemSwitchModel itemWithIcon:@"setting_clear" title:@"发送完成后清除记录"];album
-//    WQItemModel *clearRecord = [WQItemSwitchModel itemWithIcon:@"album" title:@"发送完成后清除记录" subTitle:@"当前状态"];
-//    WQItemModel *openSave = [WQItemSwitchModel itemWithIcon:@"setting_draft" title:@"开启草稿保存功能"];
-//    WQItemModel *selectedCopy = [WQItemSwitchModel itemWithIcon:@"setting_copy" title:@"模板内容选中就拷贝"];
     ///////////////////////////////// 有设置目标控制器 /////////////////////////////////////////////////
     WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:@"0001#充电桩" subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
     WQItemModel *setMsgContent = [QCPileListCellModel itemWithIcon:@"setting_sign" title:@"0002#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];

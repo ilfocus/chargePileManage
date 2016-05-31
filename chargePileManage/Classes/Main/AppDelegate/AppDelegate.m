@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "QCTabBarController.h"
+#import <BmobSDK/Bmob.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [Bmob registerWithAppKey:@"278382c756ccf9a0c7d461054b9cff45"];
+    
     // Override point for customization after application launch.
     [[UIApplication  sharedApplication]setStatusBarHidden:NO];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
