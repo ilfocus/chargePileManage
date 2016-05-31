@@ -12,14 +12,14 @@
 @interface QCChargeInfoView()
 /** title */
 @property (nonatomic, weak) UILabel *titleLbl;
-/** voltage fault */
-@property (nonatomic, weak) UILabel *cpEncodeLbl;
-/** current fault */
-@property (nonatomic, weak) UILabel *cpCategoryLbl;
-/** temp fault */
-@property (nonatomic,weak) UILabel *dataOfPorductLbl;
-/** short fault */
-@property (nonatomic,weak) UILabel *cpOfCompanyLbl;
+/** charge total quantity */
+@property (nonatomic, weak) UILabel *totalQuantityLbl;
+/** charge total fee */
+@property (nonatomic, weak) UILabel *totalFeeLbl;
+/** average electricity price*/
+@property (nonatomic,weak) UILabel *averageElectPriceLbl;
+/** average fee */
+@property (nonatomic,weak) UILabel *averageFeeLbl;
 
 @end
 
@@ -38,43 +38,46 @@
         [self addSubview:titleLbl];
         self.titleLbl = titleLbl;
         
-        // add voltage fault
-        UILabel *cpEncodeLbl = [UILabel new];
-        cpEncodeLbl.text = @"充电总电量：";
-        cpEncodeLbl.font = QCSubTitleFont;
-        [self addSubview:cpEncodeLbl];
-        self.cpEncodeLbl = cpEncodeLbl;
+        // charge total quantity
+        UILabel *totalQuantityLbl = [UILabel new];
+        totalQuantityLbl.text = [@"充电总电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",self.totalQuantity,@" 度"]];
+        totalQuantityLbl.font = QCSubTitleFont;
+        [self addSubview:totalQuantityLbl];
+        self.totalQuantityLbl = totalQuantityLbl;
         
-        // add current fault
-        UILabel *cpCategoryLbl = [UILabel new];
-        cpCategoryLbl.text = @"充电总费用：";
-        cpCategoryLbl.font = QCSubTitleFont;
-        [self addSubview:cpCategoryLbl];
-        self.cpCategoryLbl = cpCategoryLbl;
+        // charge total fee
+        UILabel *totalFeeLbl = [UILabel new];
+        totalFeeLbl.text = [@"充电总费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",self.totalFee,@" 元"]];
+        totalFeeLbl.font = QCSubTitleFont;
+        [self addSubview:totalFeeLbl];
+        self.totalFeeLbl = totalFeeLbl;
         
-        // add temp fault
-        UILabel *dataOfPorductLbl = [UILabel new];
-        dataOfPorductLbl.text = @"平均电价：";
-        dataOfPorductLbl.font = QCSubTitleFont;
-        [self addSubview:dataOfPorductLbl];
-        self.dataOfPorductLbl = dataOfPorductLbl;
+        // average electricity price
+        UILabel *averageElectPriceLbl = [UILabel new];
+        averageElectPriceLbl.text = [@"平均电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",self.averagePrice,@" 元/度"]];
+        averageElectPriceLbl.font = QCSubTitleFont;
+        [self addSubview:averageElectPriceLbl];
+        self.averageElectPriceLbl = averageElectPriceLbl;
         
         // add short fault
-        UILabel *cpOfCompanyLbl = [UILabel new];
-        cpOfCompanyLbl.text = @"平均费用：";
-        cpOfCompanyLbl.font = QCSubTitleFont;
-        [self addSubview:cpOfCompanyLbl];
-        self.cpOfCompanyLbl = cpOfCompanyLbl;
+        UILabel *averageFeeLbl = [UILabel new];
+        averageFeeLbl.text = [@"平均费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",self.averageFee,@" 元"]];
+        averageFeeLbl.font = QCSubTitleFont;
+        [self addSubview:averageFeeLbl];
+        self.averageFeeLbl = averageFeeLbl;
     }
     return self;
 }
-- (void)refreshViewData:(QCPileListDataMode *)modeData
+- (void)refreshChargeInfoViewData:(QCPileListDataMode *)modeData
 {
     if (modeData == nil) {
         return;
     }
-    //self.voltage = modeData.currentVOL;
-    //self.current = modeData.currentCur;
+    self.totalQuantity = modeData.totalQuantity;
+    self.totalFee = modeData.totalFee;
+    
+    self.averagePrice = (modeData.pointPrice + modeData.peakPrice + modeData.flatPrice + modeData.valleyPrice) / 4;
+    self.averageFee = (modeData.pointFee + modeData.peakFee +modeData.flatFee + modeData.valleyFee) / 4;
 }
 - (void)layoutSubviews
 {
@@ -83,18 +86,18 @@
     WEAK_SELF(vs);
     
     CGSize titleSize = [_titleLbl.text sizeWithAttributes:@{NSFontAttributeName : _titleLbl.font}];
-    CGSize cpEncodeLblSize = [_cpEncodeLbl.text sizeWithAttributes:@{NSFontAttributeName : _cpEncodeLbl.font}];
-    CGSize cpCategoryLblSize = [_cpCategoryLbl.text sizeWithAttributes:@{NSFontAttributeName : _cpCategoryLbl.font}];
-    CGSize dataOfPorductLblSize = [_dataOfPorductLbl.text sizeWithAttributes:@{NSFontAttributeName : _dataOfPorductLbl.font}];
-    CGSize cpOfCompanyLblSize = [_cpOfCompanyLbl.text sizeWithAttributes:@{NSFontAttributeName : _cpOfCompanyLbl.font}];
+    CGSize totalQuantityLblSize = [_totalQuantityLbl.text sizeWithAttributes:@{NSFontAttributeName : _totalQuantityLbl.font}];
+    CGSize totalFeeLblSize = [_totalFeeLbl.text sizeWithAttributes:@{NSFontAttributeName : _totalFeeLbl.font}];
+    CGSize averageElectPriceLblSize = [_averageElectPriceLbl.text sizeWithAttributes:@{NSFontAttributeName : _averageElectPriceLbl.font}];
+    CGSize averageFeeLblSize = [_averageFeeLbl.text sizeWithAttributes:@{NSFontAttributeName : _averageFeeLbl.font}];
     
     CGFloat runViewH = self.frame.size.height;
     
     CGFloat valuePadding = (runViewH - titleSize.height -  QCDetailViewBorder
-                            - cpEncodeLblSize.height
-                            - cpEncodeLblSize.height
-                            - cpEncodeLblSize.height
-                            - cpEncodeLblSize.height
+                            - totalQuantityLblSize.height
+                            - totalFeeLblSize.height
+                            - averageElectPriceLblSize.height
+                            - averageFeeLblSize.height
                             - 70) / 3;
     
     [_titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -103,43 +106,71 @@
         make.top.equalTo(vs.mas_top).with.offset(QCDetailViewBorder);
     }];
     
-    [_cpEncodeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(cpEncodeLblSize);
+    [_totalQuantityLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        //make.size.mas_equalTo(totalQuantityLblSize);
         make.top.equalTo(_titleLbl.mas_bottom).with.offset(QCDetailViewBorder * 4);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(totalQuantityLblSize.height);
     }];
     
-    [_cpCategoryLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(cpCategoryLblSize);
-        make.top.equalTo(_cpEncodeLbl.mas_bottom).with.offset(valuePadding);
+    [_totalFeeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        //make.size.mas_equalTo(totalFeeLblSize);
+        make.top.equalTo(_totalQuantityLbl.mas_bottom).with.offset(valuePadding);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(totalFeeLblSize.height);
     }];
     
-    [_dataOfPorductLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(dataOfPorductLblSize);
-        make.top.equalTo(_cpCategoryLbl.mas_bottom).with.offset(valuePadding);
+    [_averageElectPriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        ///make.size.mas_equalTo(averageElectPriceLblSize);
+        make.top.equalTo(_totalFeeLbl.mas_bottom).with.offset(valuePadding);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(averageElectPriceLblSize.height);
     }];
     
-    [_cpOfCompanyLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(cpOfCompanyLblSize);
-        make.top.equalTo(_dataOfPorductLbl.mas_bottom).with.offset(valuePadding);
+    [_averageFeeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        //make.size.mas_equalTo(averageFeeLblSize);
+        make.top.equalTo(_averageElectPriceLbl.mas_bottom).with.offset(valuePadding);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(averageFeeLblSize.height);
     }];
     
 }
 #pragma mark - gets and sets
-//- (void)setVoltage:(float)voltage
-//{
-//    NSString *vol = [@"电压：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", voltage]];
-//    vol = [vol stringByAppendingString:@" V"];
-//    _volValueLabel.text = vol;
-//}
-//- (void)setCurrent:(float)current
-//{
-//    NSString *cur = [@"电流：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", current]];
-//    cur = [cur stringByAppendingString:@" A"];
-//    _curValueLabel.text = cur;
-//}
+- (void) setTotalQuantity:(float)totalQuantity
+{
+    if (_totalQuantity != totalQuantity) {
+        _totalQuantity = totalQuantity;
+        _totalQuantityLbl.text = [@"充电总电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",totalQuantity,@" 度"]];
+    }
+}
+- (void) setTotalFee:(float)totalFee
+{
+    if (_totalFee != totalFee) {
+        _totalFee = totalFee;
+        _totalFeeLbl.text = [@"充电总费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",totalFee,@" 元"]];
+    }
+}
+- (void) setAveragePrice:(float)averagePrice
+{
+    if (_averagePrice != averagePrice) {
+        _averagePrice = averagePrice;
+        _averageElectPriceLbl.text = [@"平均电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",averagePrice,@" 元/度"]];
+    }
+}
 
+- (void) setAverageFee:(float)averageFee
+{
+    if (_averageFee != averageFee) {
+        _averageFee =  averageFee;
+        _averageFeeLbl.text = [@"平均费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",averageFee,@" 元"]];
+    }
+}
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class QCPileListDataMode;
 @interface QCChargeInfoView : UIButton
+@property (nonatomic,assign) float totalQuantity;
+@property (nonatomic,assign) float totalFee;
+@property (nonatomic,assign) float averagePrice;
+@property (nonatomic,assign) float averageFee;
 
+- (void)refreshChargeInfoViewData:(QCPileListDataMode *)modeData;
 @end

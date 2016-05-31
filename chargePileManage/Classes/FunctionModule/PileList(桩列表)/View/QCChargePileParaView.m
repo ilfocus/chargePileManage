@@ -103,27 +103,39 @@
     }];
     
     [_cpEncodeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(cpEncodeLblSize);
+        //make.size.mas_equalTo(cpEncodeLblSize);
         make.top.equalTo(_titleLbl.mas_bottom).with.offset(QCDetailViewBorder * 4);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(cpEncodeLblSize.height);
     }];
     
     [_cpCategoryLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(cpCategoryLblSize);
+        //make.size.mas_equalTo(cpCategoryLblSize);
         make.top.equalTo(_cpEncodeLbl.mas_bottom).with.offset(valuePadding);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(cpCategoryLblSize.height);
     }];
     
     [_dataOfPorductLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(dataOfPorductLblSize);
+        //make.size.mas_equalTo(dataOfPorductLblSize);
         make.top.equalTo(_cpCategoryLbl.mas_bottom).with.offset(valuePadding);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(dataOfPorductLblSize.height);
     }];
     
     [_cpOfCompanyLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(cpOfCompanyLblSize);
+        //make.size.mas_equalTo(cpOfCompanyLblSize);
         make.top.equalTo(_dataOfPorductLbl.mas_bottom).with.offset(valuePadding);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(cpOfCompanyLblSize.height);
     }];
     
 }

@@ -45,7 +45,9 @@
         
         // battery soc
         UILabel *batterySocLbl = [UILabel new];
-        batterySocLbl.text = @"SOC：70%";
+        
+        int soc = (int)(self.batterySoc * 100);
+        batterySocLbl.text = [@"SOC:" stringByAppendingString:[NSString stringWithFormat:@"%d%@",soc,@"%"]];
         batterySocLbl.numberOfLines = 0;
         batterySocLbl.font = QCSubTitleFont;
         [self addSubview:batterySocLbl];
@@ -53,27 +55,28 @@
         
         // charge time
         UILabel *chargeTimeLbl = [UILabel new];
-        chargeTimeLbl.text = @"充电时间：";
+        chargeTimeLbl.text = [@"充电时间：" stringByAppendingString:[NSString stringWithFormat:@"%d%@",self.chargeTime,@" 分钟"]];
         chargeTimeLbl.font = QCSubTitleFont;
         [self addSubview:chargeTimeLbl];
         self.chargeTimeLbl = chargeTimeLbl;
         
         // charge left time
         UILabel *chargeLeftTimeLbl = [UILabel new];
-        chargeLeftTimeLbl.text = @"剩余时间：";
+        chargeLeftTimeLbl.text = [@"剩余时间：" stringByAppendingString:[NSString stringWithFormat:@"%d%@",self.remainTime,@" 分钟"]];
         chargeLeftTimeLbl.font = QCSubTitleFont;
         [self addSubview:chargeLeftTimeLbl];
         self.chargeLeftTimeLbl = chargeLeftTimeLbl;
     }
     return self;
 }
-- (void)refreshViewData:(QCPileListDataMode *)modeData
+- (void)refreshBatteryInfoViewData:(QCPileListDataMode *)modeData
 {
     if (modeData == nil) {
         return;
     }
-    //self.voltage = modeData.currentVOL;
-    //self.current = modeData.currentCur;
+    self.batterySoc = modeData.batterySoc;
+    self.chargeTime = modeData.chargeTime;
+    self.remainTime = modeData.remainTime;
 }
 - (void)layoutSubviews
 {
@@ -109,35 +112,55 @@
     }];
     
     [_batterySocLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(batterySocLblSize);
+        //make.size.mas_equalTo(batterySocLblSize);
         make.top.equalTo(_batteryImg.mas_bottom).with.offset(QCDetailViewBorder);
         make.left.equalTo(_batteryImg.mas_left);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(batterySocLblSize.height);
     }];
     
     [_chargeTimeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(chargeTimeLblSize);
+        //make.size.mas_equalTo(chargeTimeLblSize);
         make.top.equalTo(_batterySocLbl.mas_bottom).with.offset(QCDetailViewBorder);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(chargeTimeLblSize.height);
     }];
     
     [_chargeLeftTimeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(chargeLeftTimeLblSize);
+        //make.size.mas_equalTo(chargeLeftTimeLblSize);
         make.top.equalTo(_chargeTimeLbl.mas_bottom).with.offset(QCDetailViewBorder);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(chargeLeftTimeLblSize.height);
     }];
     
 }
 #pragma mark - gets and sets
-//- (void)setVoltage:(float)voltage
-//{
-//    NSString *vol = [@"电压：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", voltage]];
-//    vol = [vol stringByAppendingString:@" V"];
-//    _volValueLabel.text = vol;
-//}
-//- (void)setCurrent:(float)current
-//{
-//    NSString *cur = [@"电流：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", current]];
-//    cur = [cur stringByAppendingString:@" A"];
-//    _curValueLabel.text = cur;
-//}
+- (void) setBatterySoc:(float)batterySoc
+{
+    if (_batterySoc != batterySoc) {
+        _batterySoc = batterySoc;
+        int soc = (int)(batterySoc * 100);
+        _batterySocLbl.text = [@"SOC:" stringByAppendingString:[NSString stringWithFormat:@"%d%@",soc,@"%"]];
+    }
+}
+- (void) setChargeTime:(int)chargeTime
+{
+    if (_chargeTime != chargeTime) {
+        _chargeTime = chargeTime;
+        _chargeTimeLbl.text = [@"充电时间：" stringByAppendingString:[NSString stringWithFormat:@"%d%@",chargeTime,@" 分钟"]];
+    }
+}
+
+- (void) setRemainTime:(int)remainTime
+{
+    if (_remainTime != remainTime) {
+        _remainTime = remainTime;
+        _chargeLeftTimeLbl.text = [@"剩余时间：" stringByAppendingString:[NSString stringWithFormat:@"%d%@",remainTime,@" 分钟"]];
+    }
+}
 @end

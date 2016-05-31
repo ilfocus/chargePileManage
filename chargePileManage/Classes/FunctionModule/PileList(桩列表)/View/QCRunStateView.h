@@ -14,5 +14,5 @@
 @property (nonatomic,assign) float current;
 @property (nonatomic,copy) NSString *currentState;
 
-- (void) refreshViewData:(QCPileListDataMode *)modeData;
+- (void) refreshRunStateViewData:(QCPileListDataMode *)modeData;
 @end

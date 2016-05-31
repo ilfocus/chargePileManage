@@ -16,6 +16,7 @@
     // sampling infomation
     
     
+    self.chargePileAddress = [[object objectForKey:@"ChargePileAddress"] longValue];
     self.commState = [[object objectForKey:@"CommState"] charValue];
     
     self.currentSOC = [[object objectForKey:@"CurrentSOC"] intValue];
@@ -28,7 +29,18 @@
     self.accTime = [[object objectForKey:@"ACCTime"] intValue];
     
     // fault infomation
-    self.currentAlarmInfo = [object objectForKey:@"currentAlarmInfo"];// array
+    self.cpInOverVol = [[object objectForKey:@"cpInOverVol"] boolValue];
+    self.cpOutOverVol = [[object objectForKey:@"cpOutOverVol"] boolValue];
+    self.cpInUnderVol = [[object objectForKey:@"cpInUnderVol"] boolValue];
+    self.cpOutUnderVol = [[object objectForKey:@"cpOutUnderVol"] boolValue];
+    
+    self.cpInOverCur = [[object objectForKey:@"cpInOverCur"] boolValue];
+    self.cpOutOverCur = [[object objectForKey:@"cpOutOverCur"] boolValue];
+    self.cpInUnderCur = [[object objectForKey:@"cpInUnderCur"] boolValue];
+    self.cpOutUnderCur = [[object objectForKey:@"cpOutUnderCur"] boolValue];
+    
+    self.cpTempHigh = [[object objectForKey:@"cpTempHigh"] boolValue];
+    self.cpOutShort = [[object objectForKey:@"cpOutShort"] boolValue];
     
     // rate infomation
     self.totalQuantity = [[object objectForKey:@"TotalQuantity"] floatValue];
@@ -72,6 +84,5 @@
     
     return self;
 }
-
 
 @end

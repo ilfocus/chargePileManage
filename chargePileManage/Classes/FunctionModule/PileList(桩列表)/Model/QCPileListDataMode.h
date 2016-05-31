@@ -14,8 +14,7 @@
 /**
  *  charge pile address
  */
-@property (nonatomic,copy) NSString *chargePileMachineAddress;
-
+@property (nonatomic,assign) long chargePileAddress;
 
 ///////////////////////  sampling infomation /////////////////
 @property (nonatomic,assign) char commState;
@@ -29,7 +28,19 @@
 @property (nonatomic,assign) int accTime;
 
 ////////////////////// fault infomation //////////////////////
-@property (nonatomic,strong) NSArray *currentAlarmInfo;
+//@property (nonatomic,strong) NSMutableArray *currentAlarmInfo;
+@property (nonatomic,assign) bool cpInOverVol;
+@property (nonatomic,assign) bool cpOutOverVol;
+@property (nonatomic,assign) bool cpInUnderVol;
+@property (nonatomic,assign) bool cpOutUnderVol;
+
+@property (nonatomic,assign) bool cpInOverCur;
+@property (nonatomic,assign) bool cpOutOverCur;
+@property (nonatomic,assign) bool cpInUnderCur;
+@property (nonatomic,assign) bool cpOutUnderCur;
+
+@property (nonatomic,assign) bool cpTempHigh;
+@property (nonatomic,assign) bool cpOutShort;
 ////////////////////// rate infomation ///////////////////////
 @property (nonatomic,assign) float totalQuantity;
 @property (nonatomic,assign) float totalFee;

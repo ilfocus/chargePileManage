@@ -25,6 +25,12 @@
 @interface QCPileListDetailCtrl ()
 
 @property (nonatomic, strong) NSMutableArray *pileDataArray;
+@property (nonatomic,weak) QCRunStateView *runState;
+@property (nonatomic,weak) QCFaultInfoView *faultInfo;
+@property (nonatomic,weak) QCBatteryInfoView *BatteryDetailView;
+@property (nonatomic,weak) QCChargePileParaView *ParaDetailView;
+@property (nonatomic,weak) QCStopCtrlView *StopCtrlDetailView;
+@property (nonatomic,weak) QCChargeInfoView *ChargeInfoDetailView;
 
 @end
 
@@ -46,8 +52,7 @@
 //        WQLog(@"保存数据成功！！！");
 //    }];
     
-    
-//    //查找GameScore表
+
 //    BmobQuery   *bquery = [BmobQuery queryWithClassName:@"ChargePile"];
 //    //查找GameScore表里面id为0c6db13c的数据
 //    [bquery getObjectInBackgroundWithId:@"08346e9854" block:^(BmobObject *object,NSError *error){
@@ -64,10 +69,8 @@
 //            }
 //        }
 //    }];
-//    
-    
     BmobQuery   *bquery = [BmobQuery queryWithClassName:@"ChargePile"];
-    //查找GameScore表的数据
+    
     [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         for (BmobObject *obj in array) {
             //打印playerName
@@ -76,48 +79,79 @@
         }
     }];
     [self setupSubView];
+    
+    NSTimer *myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
+    [myTimer fire];
+    [[NSRunLoop mainRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
 }
-
+- (void) timerEvent
+{
+    [self dataRefresh];
+}
 - (void) clickRunState
 {
     WQLog(@"点击了运行状态！");
 }
+static int pileDataCnt = 0;
+- (void) dataRefresh
+{
+    if (self.pileDataArray == nil
+        || self.pileDataArray.count == 0) {
+        return;
+    }
+    QCPileListDataMode *pileData = [[QCPileListDataMode alloc] init];
+    int count = (int)self.pileDataArray.count;
+    
+    if (pileDataCnt < count - 1) {
+        pileDataCnt ++;
+    } else {
+        pileDataCnt = 0;
+        return;
+    }
+    
+    pileData = self.pileDataArray[pileDataCnt];
+    
+    [_runState refreshRunStateViewData:pileData];
+    [_faultInfo refreshFaultViewData:pileData];
+    [_ChargeInfoDetailView refreshChargeInfoViewData:pileData];
+    [_BatteryDetailView refreshBatteryInfoViewData:pileData];
+}
+
+
 - (void) setupSubView
 {
     
     WEAK_SELF(vs);
     
-    
-//    QCPileListDataMode *pileData = [[QCPileListDataMode alloc] init];
-//    pileData = self.pileDataArray[0];
-    
-    
     CGFloat detailViewH = (self.view.frame.size.height - 85) / 3;
     
     QCRunStateView *runState = [[QCRunStateView alloc] init];
-    QCPileListDataMode *data = [QCPileListDataMode new];
-//    data.currentVOL = pileData.currentVOL;
-//    data.currentCur = pileData.currentCur;
-    [runState refreshViewData:data];
     [self.view addSubview:runState];
     [runState addTarget:self action:@selector(clickRunState) forControlEvents:UIControlEventTouchUpInside];
-    
+    self.runState = runState;
     
     QCFaultInfoView *faultInfo = [[QCFaultInfoView alloc] init];
     [self.view addSubview:faultInfo];
+    self.faultInfo = faultInfo;
+    
     QCBatteryInfoView *BatteryDetailView = [[QCBatteryInfoView alloc] init];
     [self.view addSubview:BatteryDetailView];
+    self.BatteryDetailView = BatteryDetailView;
+    
     QCChargePileParaView *ParaDetailView = [[QCChargePileParaView alloc] init];
     [self.view addSubview:ParaDetailView];
+    self.ParaDetailView = ParaDetailView;
     
     QCStopCtrlView *StopCtrlDetailView = [[QCStopCtrlView alloc] init];
     //[StopCtrlDetailView setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background"] forState:UIControlStateNormal];
     //[StopCtrlDetailView setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
     [self.view addSubview:StopCtrlDetailView];
+    self.StopCtrlDetailView = StopCtrlDetailView;
     
     
     QCChargeInfoView *ChargeInfoDetailView = [[QCChargeInfoView alloc] init];
     [self.view addSubview:ChargeInfoDetailView];
+    self.ChargeInfoDetailView = ChargeInfoDetailView;
     
     [runState mas_makeConstraints:^(MASConstraintMaker *make) {
         

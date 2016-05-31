@@ -72,7 +72,7 @@
     }
     return self;
 }
-- (void)refreshViewData:(QCPileListDataMode *)modeData
+- (void)refreshRunStateViewData:(QCPileListDataMode *)modeData
 {
     if (modeData == nil) {
         return;
@@ -109,35 +109,47 @@
     }];
     
     [_currentStateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(currentStateLabelSize);
         make.top.equalTo(_titleLbl.mas_bottom).with.offset(QCDetailViewBorder * 4);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(currentStateLabelSize.height);
     }];
     
     [_volValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(volValueLabelSize);
         make.top.equalTo(_currentStateLabel.mas_bottom).with.offset(valuePadding);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(volValueLabelSize.height);
     }];
     
     [_curValueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(curValueLabelSize);
         make.top.equalTo(_volValueLabel.mas_bottom).with.offset(valuePadding);
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        
+        make.height.mas_equalTo(curValueLabelSize.height);
     }];
     
 }
 #pragma mark - gets and sets
 - (void)setVoltage:(float)voltage
 {
-    NSString *vol = [@"电压：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", voltage]];
-    vol = [vol stringByAppendingString:@" V"];
-    _volValueLabel.text = vol;
+    if (_voltage != voltage) {
+        _voltage = voltage;
+        NSString *vol = [@"电压：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", voltage]];
+        vol = [vol stringByAppendingString:@" V"];
+        _volValueLabel.text = vol;
+    }
 }
 - (void)setCurrent:(float)current
 {
-    NSString *cur = [@"电流：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", current]];
-    cur = [cur stringByAppendingString:@" A"];
-    _curValueLabel.text = cur;
+    if (_current != current) {
+        _current = current;
+        NSString *cur = [@"电流：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", current]];
+        cur = [cur stringByAppendingString:@" A"];
+        _curValueLabel.text = cur;
+    }
 }
 @end

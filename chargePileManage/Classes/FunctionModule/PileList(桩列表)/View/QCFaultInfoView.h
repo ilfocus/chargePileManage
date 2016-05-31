@@ -15,5 +15,5 @@
 @property (nonatomic,copy) NSString *strTempFault;
 @property (nonatomic,copy) NSString *strShortFault;
 
-- (void) refreshViewData:(QCPileListDataMode *)modeData;
+- (void) refreshFaultViewData:(QCPileListDataMode *)modeData;
 @end
