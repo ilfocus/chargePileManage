@@ -1,9 +1,15 @@
-2016.05.18
-1.创建充电桩管理软件
+2016.06.02
+1.解决UIScrollView滚动问题，主要是frame大小设置问题，应该比contentSize要小
+2.设置故障模块---圆形View裁剪
 
-2016.05.25
-1.完善TabBar功能，实现控制器切换
-2.实现桩列表
+
+2016.06.01
+1.添加PNChart用于图表显示电压电流
+2.添加运行状态控制器及故障信息控制器
+3.设置PNChart,在设置位置时出现崩溃BUG,
+Assertion failure in -[MASViewConstraint addConstraintWithLayoutAttribute:], /Users/yuming/iOS/iOS项目/充电桩管理/chargePileManage/Pods/Masonry/Masonry/MASViewConstraint.m:207
+4.给PNChart设置固定尺寸
+5.重新设计QCPileListDetailView,准备用UIScrollView添加在上面，然后可以上面的每个view都能显示比较多内容。
 
 2016.05.31
 1.完善服务器发送程序，添加了告警和机器地址等部分，解决了服务器发送程序的BUG.主要是添加了故障部分后出现的
@@ -14,6 +20,13 @@
 6.每一个充电桩在服务器中应该对应一张表
 7.调用刷新程序，实现QCPileListDetailCtrl界面数据刷新
 
+
+2016.05.25
+1.完善TabBar功能，实现控制器切换
+2.实现桩列表
+
+2016.05.18
+1.创建充电桩管理软件
 
 #pragma mark - life cycle
 

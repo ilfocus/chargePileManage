@@ -93,7 +93,7 @@
     //WQLog(@"%@",NSStringFromCGSize(batterySocLblSize1));
     
     //CGSize batterySocLblSize = [_batterySocLbl.text sizeWithFont:_batterySocLbl.font];
-    WQLog(@"%@",NSStringFromCGSize(batterySocLblSize));
+    //WQLog(@"%@",NSStringFromCGSize(batterySocLblSize));
     
     
     CGSize chargeTimeLblSize = [_chargeTimeLbl.text sizeWithAttributes:@{NSFontAttributeName : _chargeTimeLbl.font}];

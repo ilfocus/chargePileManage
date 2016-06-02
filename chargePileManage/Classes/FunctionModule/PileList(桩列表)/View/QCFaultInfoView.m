@@ -21,6 +21,8 @@
 /** short fault */
 @property (nonatomic,weak) UILabel *shortFaultLbl;
 
+@property (nonatomic,weak) UIView *faultLed;
+
 @end
 @implementation QCFaultInfoView
 
@@ -29,6 +31,18 @@
     self = [super init];
     if (self) {
         self.backgroundColor = [UIColor grayColor];
+        
+        
+        UIView *faultLed = [UIView new];
+        faultLed.frame = CGRectMake(0, 0, 40, 40);
+        faultLed.layer.masksToBounds = YES;
+        faultLed.layer.cornerRadius = 20.0;
+        faultLed.layer.borderWidth = 1.0;
+        faultLed.layer.borderColor = [[UIColor whiteColor] CGColor];
+        faultLed.backgroundColor = [UIColor greenColor];
+        [self addSubview:faultLed];
+        self.faultLed = faultLed;
+        
         
         UILabel *titleLbl = [UILabel new];
         

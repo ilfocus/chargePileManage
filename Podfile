@@ -8,3 +8,4 @@ pod 'MBProgressHUD', '~> 0.9.2'
 pod 'YYKit'
 pod 'BmobSDK'
 pod "LLBootstrapButton"
+pod 'PNChart'

@@ -44,6 +44,9 @@
 #define SCREEN_FRAME ([UIScreen mainScreen].applicationFrame)
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+#define STATUS_FRAME ([[UIApplication sharedApplication] statusBarFrame])
+#define STATUS_WIDTH ([[UIApplication sharedApplication] statusBarFrame].size.width)
+#define STATUS_HEIGHT ([[UIApplication sharedApplication] statusBarFrame].size.height)
 
 #import "UIImage+adaptive_iOS7.h"
 #import "Masonry.h"   // auto layer

@@ -87,7 +87,9 @@
     WEAK_SELF(vs);
     
     CGSize titleSize = [_titleLbl.text sizeWithAttributes:@{NSFontAttributeName : _titleLbl.font}];
-    
+//    CGSize titleSize1 = [_titleLbl.text sizeWithFont:_titleLbl.font];
+//    WQLog(@"sizeWithAttributes---%@",NSStringFromCGSize(titleSize));
+//    WQLog(@"sizeWithFont---%@",NSStringFromCGSize(titleSize1));
     CGSize currentStateLabelSize = [_currentStateLabel.text sizeWithAttributes:@{NSFontAttributeName : _currentStateLabel.font}];
     
     CGSize volValueLabelSize = [_volValueLabel.text sizeWithAttributes:@{NSFontAttributeName : _volValueLabel.font}];

@@ -73,8 +73,6 @@
     WQTableViewGroupModel *group = self.data[indexPath.section];
     
     cell.item = group.items[indexPath.row];
-    
-    WQLog(@"调用子类tableView方法");
     // 3.返回cell
     return cell;
 }

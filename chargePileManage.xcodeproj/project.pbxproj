@@ -13,6 +13,7 @@
 		72295A6B1CFD896100E40E9A /* QCRunStateCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A6A1CFD896100E40E9A /* QCRunStateCtrl.m */; };
 		72295A6E1CFD898000E40E9A /* QCFaultInfoCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A6D1CFD898000E40E9A /* QCFaultInfoCtrl.m */; };
 		72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A701CFD89C600E40E9A /* QCBatteryInfoCtrl.m */; };
+		72295A751CFEA63E00E40E9A /* QCLoginCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A731CFEA63E00E40E9A /* QCLoginCtrl.m */; };
 		72378CF71CEC6993005E9E52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72378CF61CEC6993005E9E52 /* main.m */; };
 		72378D001CEC6993005E9E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72378CFE1CEC6993005E9E52 /* Main.storyboard */; };
 		72378D021CEC6993005E9E52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72378D011CEC6993005E9E52 /* Assets.xcassets */; };
@@ -84,6 +85,8 @@
 		72295A6D1CFD898000E40E9A /* QCFaultInfoCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCFaultInfoCtrl.m; sourceTree = "<group>"; };
 		72295A6F1CFD89C600E40E9A /* QCBatteryInfoCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCBatteryInfoCtrl.h; sourceTree = "<group>"; };
 		72295A701CFD89C600E40E9A /* QCBatteryInfoCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCBatteryInfoCtrl.m; sourceTree = "<group>"; };
+		72295A721CFEA63E00E40E9A /* QCLoginCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCLoginCtrl.h; sourceTree = "<group>"; };
+		72295A731CFEA63E00E40E9A /* QCLoginCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCLoginCtrl.m; sourceTree = "<group>"; };
 		72378CF21CEC6993005E9E52 /* chargePileManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chargePileManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72378CF61CEC6993005E9E52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		72378CFF1CEC6993005E9E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -386,6 +389,8 @@
 		7254FA2F1CED4A6E008EA77F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				72295A721CFEA63E00E40E9A /* QCLoginCtrl.h */,
+				72295A731CFEA63E00E40E9A /* QCLoginCtrl.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -848,6 +853,7 @@
 				729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */,
 				7254FA471CED4A6E008EA77F /* UIImage+XFCircle.m in Sources */,
 				726F7E9E1CF593E70068513A /* WQItemModel.m in Sources */,
+				72295A751CFEA63E00E40E9A /* QCLoginCtrl.m in Sources */,
 				72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */,
 				726F7E9B1CF593E70068513A /* WQTableViewGroupModel.m in Sources */,
 				726F7E9D1CF593E70068513A /* WQItemLabelModel.m in Sources */,
