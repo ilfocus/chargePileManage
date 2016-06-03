@@ -1,6 +1,11 @@
 2016.06.02
 1.解决UIScrollView滚动问题，主要是frame大小设置问题，应该比contentSize要小
 2.设置故障模块---圆形View裁剪
+3.重构QCFaultInfo模块，封装里面title及故障指示灯，生成类QCFaultView
+4.子控件frame设置后，如果父控件的frame还没有设置，则子控件则会以父类的父类来设置frame.
+5.完成故障模块功能。
+6.调整QCPileListDetail内部模块的Frame,每个模块可以自由设置本身的高度。---可以解决不同机型适配问题
+7.调整每个模块背景，使之更加漂亮。
 
 
 2016.06.01

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define SPACE_BAR_VIEW 10
+
 @interface QCPileListDetailCtrl : UIViewController
 
 @end

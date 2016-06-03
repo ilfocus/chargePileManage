@@ -125,7 +125,6 @@ static int pileDataCnt = 0;
         pileDataCnt = 0;
         return;
     }
-    
     pileData = self.pileDataArray[pileDataCnt];
     
     [_runState refreshRunStateViewData:pileData];
@@ -134,83 +133,135 @@ static int pileDataCnt = 0;
     [_BatteryDetailView refreshBatteryInfoViewData:pileData];
 }
 
-
+#pragma mark - init view
+- (void) setupViewFrame
+{
+    CGFloat viewW = (self.view.width - 4 * QCDetailViewBorder) / 2;
+    
+    //CGFloat viewH = 300;
+    
+    CGFloat runStateviewH = 200;
+    CGFloat faultInfoViewH = 280;
+    CGFloat BatteryDetailViewH = 200;
+    CGFloat ParaDetailViewH = 180;
+    CGFloat StopCtrlDetailViewH = 220;
+    CGFloat ChargeInfoDetailViewH = 220;
+    
+    
+    
+    CGFloat firstRowX  = QCDetailViewBorder;
+    CGFloat secondRowX = viewW + 2 * QCDetailViewBorder;
+    
+    CGFloat firstLineY = SPACE_BAR_VIEW;
+    
+    CGFloat secondeBatteryDetailLineY = runStateviewH + 2 * QCDetailViewBorder + SPACE_BAR_VIEW;
+    CGFloat secondeParaDetailViewLineY = faultInfoViewH + 2 * QCDetailViewBorder + SPACE_BAR_VIEW;
+    
+    
+    CGFloat thirdStopCtrlDetailLineY = secondeBatteryDetailLineY + BatteryDetailViewH + 2 * QCDetailViewBorder;
+    CGFloat thirdChargeInfoLineY = secondeParaDetailViewLineY + ParaDetailViewH + 2 * QCDetailViewBorder;
+    
+    
+    CGFloat scrollViewH = MAX((thirdStopCtrlDetailLineY + StopCtrlDetailViewH), (thirdChargeInfoLineY + ChargeInfoDetailViewH));
+    
+    _runState.frame             = CGRectMake(firstRowX, firstLineY, viewW, runStateviewH);
+    _faultInfo.frame            = CGRectMake(secondRowX, firstLineY, viewW, faultInfoViewH);
+    
+    _BatteryDetailView.frame    = CGRectMake(firstRowX, secondeBatteryDetailLineY, viewW, BatteryDetailViewH);
+    _ParaDetailView.frame       = CGRectMake(secondRowX, secondeParaDetailViewLineY, viewW, ParaDetailViewH);
+    
+    _StopCtrlDetailView.frame   = CGRectMake(firstRowX, thirdStopCtrlDetailLineY, viewW, StopCtrlDetailViewH);
+    _ChargeInfoDetailView.frame = CGRectMake(secondRowX, thirdChargeInfoLineY, viewW, ChargeInfoDetailViewH);
+    
+    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, scrollViewH + 20);
+}
+- (void) setupViewBackGround:(UIButton *) view
+{
+    [view setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background"] forState:UIControlStateNormal];
+    [view setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = 8;
+    view.layer.borderWidth = 1.0;
+    view.layer.borderColor = [WQColor(226,226,226) CGColor];
+}
 - (void) setupSubView
 {
     
-    WEAK_SELF(vs);
+    //WEAK_SELF(vs);
     
-    CGFloat detailViewH = (self.view.frame.size.height - 85) / 3;
+    //CGFloat detailViewH = 300;
     
-    CGFloat viewW = (self.view.width - 4 * QCDetailViewBorder) / 2;
-    CGFloat viewH = 300;
     QCRunStateView *runState = [[QCRunStateView alloc] init];
+    [self setupViewBackGround:runState];
     [_scrollView addSubview:runState];
-    runState.frame = CGRectMake(QCDetailViewBorder, 0, viewW, viewH);
     [runState addTarget:self action:@selector(clickRunState) forControlEvents:UIControlEventTouchUpInside];
     self.runState = runState;
     
+    
     QCFaultInfoView *faultInfo = [[QCFaultInfoView alloc] init];
+    [self setupViewBackGround:faultInfo];
     [faultInfo addTarget:self action:@selector(clickFaultInfo) forControlEvents:UIControlEventTouchUpInside];
-    faultInfo.frame = CGRectMake(viewW + 2 * QCDetailViewBorder, 0, viewW, viewH);
     [_scrollView addSubview:faultInfo];
     self.faultInfo = faultInfo;
     
     QCBatteryInfoView *BatteryDetailView = [[QCBatteryInfoView alloc] init];
-    BatteryDetailView.frame = CGRectMake(QCDetailViewBorder, viewH + 2 * QCDetailViewBorder, viewW, viewH);
+    [self setupViewBackGround:BatteryDetailView];
     [_scrollView addSubview:BatteryDetailView];
     self.BatteryDetailView = BatteryDetailView;
     
     QCChargePileParaView *ParaDetailView = [[QCChargePileParaView alloc] init];
-    ParaDetailView.frame = CGRectMake(viewW + 2 * QCDetailViewBorder, viewH + 2 * QCDetailViewBorder, viewW, viewH);
+    [self setupViewBackGround:ParaDetailView];
     [_scrollView addSubview:ParaDetailView];
     self.ParaDetailView = ParaDetailView;
     
     QCStopCtrlView *StopCtrlDetailView = [[QCStopCtrlView alloc] init];
-    StopCtrlDetailView.frame = CGRectMake(QCDetailViewBorder, 2 * viewH + 4 * QCDetailViewBorder, viewW, viewH);
-    //[StopCtrlDetailView setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background"] forState:UIControlStateNormal];
-    //[StopCtrlDetailView setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
+    [self setupViewBackGround:StopCtrlDetailView];
     [_scrollView addSubview:StopCtrlDetailView];
     self.StopCtrlDetailView = StopCtrlDetailView;
     
     
     QCChargeInfoView *ChargeInfoDetailView = [[QCChargeInfoView alloc] init];
-    ChargeInfoDetailView.frame = CGRectMake(viewW + 2 * QCDetailViewBorder, 2 * viewH + 4 * QCDetailViewBorder, viewW, viewH);
+    [self setupViewBackGround:ChargeInfoDetailView];
     [_scrollView addSubview:ChargeInfoDetailView];
     self.ChargeInfoDetailView = ChargeInfoDetailView;
     
+    
+    [self setupViewFrame];
 //    [runState mas_makeConstraints:^(MASConstraintMaker *make) {
 //        
 //        make.top.equalTo(vs.view.mas_top).with.offset(69);
 //        make.left.equalTo(vs.view.mas_left).with.offset(QCDetailViewBorder);
 //        make.right.equalTo(faultInfo.mas_left).with.offset(-QCDetailViewBorder * 2);
-//        make.height.mas_equalTo(detailViewH);
 //        make.width.equalTo(faultInfo);
+//        
+//        make.height.mas_equalTo(detailViewH);
 //        
 //    }];
 //    [faultInfo mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(vs.view.mas_top).with.offset(69);
 //        make.left.equalTo(runState.mas_right).with.offset(QCDetailViewBorder * 2);
 //        make.right.equalTo(vs.view.mas_right).with.offset(-QCDetailViewBorder);
-//        make.height.mas_equalTo(detailViewH);
 //        make.width.equalTo(runState);
+//        
+//        make.height.mas_equalTo(detailViewH);
 //    }];
 //    
 //    [BatteryDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
 //        make.top.equalTo(runState.mas_bottom).with.offset(QCDetailViewBorder);
 //        make.left.equalTo(vs.view.mas_left).with.offset(QCDetailViewBorder);
 //        make.right.equalTo(ParaDetailView.mas_left).with.offset(-QCDetailViewBorder * 2);
-//        make.height.mas_equalTo(detailViewH);
 //        make.width.equalTo(ParaDetailView);
+//        
+//        make.height.mas_equalTo(detailViewH);
 //        
 //    }];
 //    [ParaDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(faultInfo.mas_bottom).with.offset(QCDetailViewBorder);
 //        make.left.equalTo(BatteryDetailView.mas_right).with.offset(QCDetailViewBorder * 2);
 //        make.right.equalTo(vs.view.mas_right).with.offset(-QCDetailViewBorder);
-//        make.height.mas_equalTo(detailViewH);
 //        make.width.equalTo(BatteryDetailView);
+//        
+//        make.height.mas_equalTo(detailViewH);
 //    }];
 //    
 //    [StopCtrlDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -218,16 +269,18 @@ static int pileDataCnt = 0;
 //        make.top.equalTo(BatteryDetailView.mas_bottom).with.offset(QCDetailViewBorder);
 //        make.left.equalTo(vs.view.mas_left).with.offset(QCDetailViewBorder);
 //        make.right.equalTo(ChargeInfoDetailView.mas_left).with.offset(-QCDetailViewBorder * 2);
-//        make.height.mas_equalTo(detailViewH);
 //        make.width.equalTo(ChargeInfoDetailView);
+//        
+//        make.height.mas_equalTo(detailViewH);
 //        
 //    }];
 //    [ChargeInfoDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(ParaDetailView.mas_bottom).with.offset(QCDetailViewBorder);
 //        make.left.equalTo(StopCtrlDetailView.mas_right).with.offset(QCDetailViewBorder * 2);
 //        make.right.equalTo(vs.view.mas_right).with.offset(-QCDetailViewBorder);
-//        make.height.mas_equalTo(detailViewH);
 //        make.width.equalTo(StopCtrlDetailView);
+//        
+//        make.height.mas_equalTo(detailViewH);
 //    }];
 }
 #pragma mark - button click

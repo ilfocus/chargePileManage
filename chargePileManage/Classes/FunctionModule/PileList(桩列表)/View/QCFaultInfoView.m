@@ -8,24 +8,35 @@
 
 #import "QCFaultInfoView.h"
 #import "QCPileListDataMode.h"
+#import "UIView+Round.h"
+
+// view
+#import "QCFaultView.h"
 
 @interface QCFaultInfoView()
 /** title */
 @property (nonatomic, weak) UILabel *titleLbl;
 /** voltage fault */
-@property (nonatomic, weak) UILabel *volFaultLbl;
+@property (nonatomic, weak) QCFaultView *inOverVolFaultView;
+@property (nonatomic, weak) QCFaultView *inUnderVolFaultView;
+@property (nonatomic, weak) QCFaultView *outOverVolFaultView;
+@property (nonatomic, weak) QCFaultView *outUnderVolFaultView;
 /** current fault */
-@property (nonatomic, weak) UILabel *curFaultLbl;
+@property (nonatomic, weak) QCFaultView *inOverCurFaultView;
+@property (nonatomic, weak) QCFaultView *inUnderCurFaultView;
+@property (nonatomic, weak) QCFaultView *outOverCurFaultView;
+@property (nonatomic, weak) QCFaultView *outUnderCurFaultView;
 /** temp fault */
-@property (nonatomic,weak) UILabel *tempFaultLbl;
+@property (nonatomic,weak) QCFaultView *tempFaultView;
 /** short fault */
-@property (nonatomic,weak) UILabel *shortFaultLbl;
+@property (nonatomic,weak) QCFaultView *shortFaultView;
 
 @property (nonatomic,weak) UIView *faultLed;
 
 @end
 @implementation QCFaultInfoView
-
+#pragma mark - init methods
+/*
 - (instancetype)init
 {
     self = [super init];
@@ -33,13 +44,7 @@
         self.backgroundColor = [UIColor grayColor];
         
         
-        UIView *faultLed = [UIView new];
-        faultLed.frame = CGRectMake(0, 0, 40, 40);
-        faultLed.layer.masksToBounds = YES;
-        faultLed.layer.cornerRadius = 20.0;
-        faultLed.layer.borderWidth = 1.0;
-        faultLed.layer.borderColor = [[UIColor whiteColor] CGColor];
-        faultLed.backgroundColor = [UIColor greenColor];
+        UIView *faultLed = [[UIView alloc] initWithRoundRect:CGRectMake(0, 0, 14, 14)];
         [self addSubview:faultLed];
         self.faultLed = faultLed;
         
@@ -97,153 +102,225 @@
     }
     return self;
 }
-- (void)refreshViewData:(QCPileListDataMode *)modeData
+ */
+- (instancetype)init
 {
-    if (modeData == nil) {
-        return;
+    self = [super init];
+    if (self) {
+        //self.backgroundColor = [UIColor lightGrayColor];
+        [self setupTitle];
+        [self setupFaultModule];
     }
-    //self.voltage = modeData.currentVOL;
-    //self.current = modeData.currentCur;
+    return self;
 }
-- (void)layoutSubviews
+/**
+ *  set up title
+ */
+- (void) setupTitle
+{
+    UILabel *titleLbl = [UILabel new];
+    titleLbl.font = QCTitleFont;
+    titleLbl.text = @"故障信息";
+    [self addSubview:titleLbl];
+    self.titleLbl = titleLbl;
+}
+/**
+ *  set up fault module
+ */
+- (void) setupFaultModule
+{
+    QCFaultView *inOverVolFaultView = [[QCFaultView alloc] initWithTitle:@"输入过压:" faultState:YES];
+    
+    [self addSubview:inOverVolFaultView];
+    self.inOverVolFaultView = inOverVolFaultView;
+    
+    QCFaultView *inUnderVolFaultView = [[QCFaultView alloc] initWithTitle:@"输入欠压:" faultState:YES];
+    [self addSubview:inUnderVolFaultView];
+    self.inUnderVolFaultView = inUnderVolFaultView;
+    
+    QCFaultView *outOverVolFaultView = [[QCFaultView alloc] initWithTitle:@"输出过压:" faultState:YES];
+    [self addSubview:outOverVolFaultView];
+    self.outOverVolFaultView = outOverVolFaultView;
+    
+    QCFaultView *outUnderVolFaultView = [[QCFaultView alloc] initWithTitle:@"输出欠压:" faultState:YES];
+    [self addSubview:outUnderVolFaultView];
+    self.outUnderVolFaultView = outUnderVolFaultView;
+    
+    QCFaultView *inOverCurFaultView = [[QCFaultView alloc] initWithTitle:@"输入过流:" faultState:YES];
+    [self addSubview:inOverCurFaultView];
+    self.inOverCurFaultView = inOverCurFaultView;
+    
+    QCFaultView *inUnderCurFaultView = [[QCFaultView alloc] initWithTitle:@"输入欠流:" faultState:YES];
+    [self addSubview:inUnderCurFaultView];
+    self.inUnderCurFaultView = inUnderCurFaultView;
+    
+    QCFaultView *outOverCurFaultView = [[QCFaultView alloc] initWithTitle:@"输出过流:" faultState:YES];
+    [self addSubview:outOverCurFaultView];
+    self.outOverCurFaultView = outOverCurFaultView;
+    
+    QCFaultView *outUnderCurFaultView = [[QCFaultView alloc] initWithTitle:@"输出欠流:" faultState:YES];
+    [self addSubview:outUnderCurFaultView];
+    self.outUnderCurFaultView = outUnderCurFaultView;
+    
+    QCFaultView *tempFaultView = [[QCFaultView alloc] initWithTitle:@"温度故障:" faultState:YES];
+    [self addSubview:tempFaultView];
+    self.tempFaultView = tempFaultView;
+    
+    QCFaultView *shortFaultView = [[QCFaultView alloc] initWithTitle:@"短路故障:" faultState:YES];
+    [self addSubview:shortFaultView];
+    self.shortFaultView = shortFaultView;
+}
+- (void) setFaultModulePosition
+{
+    WEAK_SELF(vs);
+    
+    [_inOverVolFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_titleLbl.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+        
+    }];
+    [_inUnderVolFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_inOverVolFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+    [_outOverVolFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_inUnderVolFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+    [_outUnderVolFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_outOverVolFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+    
+    [_inOverCurFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_outUnderVolFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+    [_inUnderCurFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_inOverCurFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+    [_outOverCurFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_inUnderCurFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+    [_outUnderCurFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_outOverCurFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+    
+    [_tempFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_outUnderCurFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+    [_shortFaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_tempFaultView.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder * 2);
+        make.height.mas_equalTo(@14);
+        make.width.mas_equalTo(@50);
+    }];
+}
+- (void) layoutSubviews
 {
     [super layoutSubviews];
     
     WEAK_SELF(vs);
     
     CGSize titleSize = [_titleLbl.text sizeWithAttributes:@{NSFontAttributeName : _titleLbl.font}];
-    CGSize volFaultLblSize = [_volFaultLbl.text sizeWithAttributes:@{NSFontAttributeName : _volFaultLbl.font}];
-    CGSize curFaultLblSize = [_curFaultLbl.text sizeWithAttributes:@{NSFontAttributeName : _curFaultLbl.font}];
-    CGSize tempFaultLblSize = [_tempFaultLbl.text sizeWithAttributes:@{NSFontAttributeName : _tempFaultLbl.font}];
-    CGSize shortFaultLblSize = [_shortFaultLbl.text sizeWithAttributes:@{NSFontAttributeName : _shortFaultLbl.font}];
-    
-    CGFloat runViewH = self.frame.size.height;
-    
-    CGFloat valuePadding = (runViewH - titleSize.height -  QCDetailViewBorder
-                            - volFaultLblSize.height
-                            - curFaultLblSize.height
-                            - tempFaultLblSize.height
-                            - shortFaultLblSize.height
-                            - 70) / 3;
     
     [_titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(titleSize);
         make.centerX.equalTo(vs.mas_centerX);
         make.top.equalTo(vs.mas_top).with.offset(QCDetailViewBorder);
     }];
+    [self setFaultModulePosition];
     
-    [_volFaultLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        //make.size.mas_equalTo(volFaultLblSize);
-        make.top.equalTo(_titleLbl.mas_bottom).with.offset(QCDetailViewBorder * 4);
-        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
-        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
-        
-        make.height.mas_equalTo(volFaultLblSize.height);
-    }];
-    
-    [_curFaultLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        //make.size.mas_equalTo(curFaultLblSize);
-        make.top.equalTo(_volFaultLbl.mas_bottom).with.offset(valuePadding);
-        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
-        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
-        
-        make.height.mas_equalTo(curFaultLblSize.height);
-    }];
-    
-    [_tempFaultLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        //make.size.mas_equalTo(tempFaultLblSize);
-        make.top.equalTo(_curFaultLbl.mas_bottom).with.offset(valuePadding);
-        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
-        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
-        
-        make.height.mas_equalTo(tempFaultLblSize.height);
-    }];
-    
-    [_shortFaultLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        //make.size.mas_equalTo(shortFaultLblSize);
-        make.top.equalTo(_tempFaultLbl.mas_bottom).with.offset(valuePadding);
-        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
-        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
-        
-        make.height.mas_equalTo(shortFaultLblSize.height);
-    }];
-    
+}
+#pragma mark - private methods
+- (void) displayFaultLed:(bool)state faultLed:(QCFaultView *)faultLed
+{
+    if (state) {
+        faultLed.blfaultState = NO;
+    } else {
+        faultLed.blfaultState = YES;
+    }
 }
 - (void)refreshFaultViewData:(QCPileListDataMode *)modeData
 {
     if (modeData == nil) {
         return;
     }
+    [self displayFaultLed:modeData.cpInOverVol faultLed:_inOverVolFaultView];
+    [self displayFaultLed:modeData.cpOutOverVol faultLed:_inUnderVolFaultView];
+    [self displayFaultLed:modeData.cpInUnderVol faultLed:_outOverVolFaultView];
+    [self displayFaultLed:modeData.cpOutUnderVol faultLed:_outUnderVolFaultView];
     
-    if (   modeData.cpInOverVol
-        || modeData.cpOutOverVol
-        || modeData.cpInUnderVol
-        || modeData.cpOutUnderVol) {
-        self.strVolFault = @"故障";
-    } else {
-        self.strVolFault = @"正常";
-    }
-    if (   modeData.cpInOverCur
-        || modeData.cpOutOverCur
-        || modeData.cpInUnderCur
-        || modeData.cpOutUnderCur) {
-        self.strCurFault = @"故障";
-    } else {
-        self.strCurFault = @"正常";
-    }
-    if (modeData.cpTempHigh) {
-        self.strTempFault = @"故障";
-    } else {
-        self.strTempFault = @"正常";
-    }
-    if (modeData.cpOutShort) {
-        self.strShortFault = @"故障";
-    } else {
-        self.strShortFault = @"故障";
-    }
+    [self displayFaultLed:modeData.cpInOverCur faultLed:_inOverCurFaultView];
+    [self displayFaultLed:modeData.cpOutOverCur faultLed:_inUnderCurFaultView];
+    [self displayFaultLed:modeData.cpInUnderCur faultLed:_outOverCurFaultView];
+    [self displayFaultLed:modeData.cpOutUnderCur faultLed:_outUnderCurFaultView];
+    
+    [self displayFaultLed:modeData.cpTempHigh faultLed:_tempFaultView];
+    [self displayFaultLed:modeData.cpOutShort faultLed:_shortFaultView];
     
 }
 #pragma mark - gets and sets
-- (void) setStrVolFault:(NSString *)strVolFault
-{
-    if (strVolFault == nil) {
-        return;
-    }
-    if (_strVolFault != strVolFault) {
-        _strVolFault = strVolFault;
-        _volFaultLbl.text = [@"电压故障:" stringByAppendingString:strVolFault];
-    }
-}
-- (void) setStrCurFault:(NSString *)strCurFault
-{
-    if (strCurFault == nil) {
-        return;
-    }
-    if (_strCurFault != strCurFault) {
-        _strCurFault = strCurFault;
-        _curFaultLbl.text = [@"电流故障:" stringByAppendingString:strCurFault];
-    }
-}
-- (void) setStrTempFault:(NSString *)strTempFault
-{
-    if (strTempFault == nil) {
-        return;
-    }
-    if (_strTempFault != strTempFault) {
-        _strTempFault = strTempFault;
-        _tempFaultLbl.text = [@"温度故障:" stringByAppendingString:strTempFault];
-    }
-}
-- (void) setStrShortFault:(NSString *)strShortFault
-{
-    if (strShortFault == nil) {
-        return;
-    }
-    if (_strShortFault != strShortFault) {
-        _strShortFault = strShortFault;
-        _shortFaultLbl.text = [@"短路故障:" stringByAppendingString:strShortFault];
-    }
-    
-    
-}
+//- (void) setStrVolFault:(NSString *)strVolFault
+//{
+//    if (strVolFault == nil) {
+//        return;
+//    }
+//    if (_strVolFault != strVolFault) {
+//        _strVolFault = strVolFault;
+//        _volFaultLbl.text = [@"电压故障:" stringByAppendingString:strVolFault];
+//    }
+//}
+//- (void) setStrCurFault:(NSString *)strCurFault
+//{
+//    if (strCurFault == nil) {
+//        return;
+//    }
+//    if (_strCurFault != strCurFault) {
+//        _strCurFault = strCurFault;
+//        _curFaultLbl.text = [@"电流故障:" stringByAppendingString:strCurFault];
+//    }
+//}
+//- (void) setStrTempFault:(NSString *)strTempFault
+//{
+//    if (strTempFault == nil) {
+//        return;
+//    }
+//    if (_strTempFault != strTempFault) {
+//        _strTempFault = strTempFault;
+//        _tempFaultLbl.text = [@"温度故障:" stringByAppendingString:strTempFault];
+//    }
+//}
+//- (void) setStrShortFault:(NSString *)strShortFault
+//{
+//    if (strShortFault == nil) {
+//        return;
+//    }
+//    if (_strShortFault != strShortFault) {
+//        _strShortFault = strShortFault;
+//        _shortFaultLbl.text = [@"短路故障:" stringByAppendingString:strShortFault];
+//    }
+//}
 @end

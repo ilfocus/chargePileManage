@@ -29,7 +29,12 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor grayColor];
+        //self.backgroundColor = [UIColor grayColor];
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = 8;
+        self.layer.borderWidth = 1.0;
+        self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        
         
         UILabel *titleLbl = [UILabel new];
         

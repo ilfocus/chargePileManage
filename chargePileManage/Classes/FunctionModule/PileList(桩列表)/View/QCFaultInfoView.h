@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#define GREEN_COLOR [UIColor greenColor]
+#define RED_COLOR   [UIColor redColor]
+
 @class QCPileListDataMode;
 @interface QCFaultInfoView : UIButton
 

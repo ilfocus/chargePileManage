@@ -47,6 +47,8 @@
 		726F7EA31CF67B150068513A /* QCPileListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA21CF67B150068513A /* QCPileListCell.m */; };
 		726F7EA61CF6E9890068513A /* QCPileListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA51CF6E9890068513A /* QCPileListCellModel.m */; };
 		726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */; };
+		7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE01CFFBADA003D386B /* UIView+Round.m */; };
+		7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE41CFFC590003D386B /* QCFaultView.m */; };
 		729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAACD1CFBE69300F7A953 /* QCRunStateView.m */; };
 		729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD01CFC0BDB00F7A953 /* QCFaultInfoView.m */; };
 		729EAAD41CFC146A00F7A953 /* QCChargePileParaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD31CFC146A00F7A953 /* QCChargePileParaView.m */; };
@@ -153,6 +155,10 @@
 		726F7EA51CF6E9890068513A /* QCPileListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListCellModel.m; sourceTree = "<group>"; };
 		726F7EA71CF6F16B0068513A /* QCPileListDetailCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListDetailCtrl.h; sourceTree = "<group>"; };
 		726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListDetailCtrl.m; sourceTree = "<group>"; };
+		7292BADF1CFFBADA003D386B /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
+		7292BAE01CFFBADA003D386B /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Round.m"; sourceTree = "<group>"; };
+		7292BAE31CFFC590003D386B /* QCFaultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultView.h; sourceTree = "<group>"; };
+		7292BAE41CFFC590003D386B /* QCFaultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCFaultView.m; sourceTree = "<group>"; };
 		729EAACC1CFBE69300F7A953 /* QCRunStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCRunStateView.h; sourceTree = "<group>"; };
 		729EAACD1CFBE69300F7A953 /* QCRunStateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCRunStateView.m; sourceTree = "<group>"; };
 		729EAACF1CFC0BDB00F7A953 /* QCFaultInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultInfoView.h; sourceTree = "<group>"; };
@@ -297,6 +303,7 @@
 		7254FA181CED4A6E008EA77F /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				7292BADB1CFFBA24003D386B /* UIViewCategory */,
 				726F7E5A1CF56E860068513A /* NSDate+WQ.h */,
 				726F7E5B1CF56E860068513A /* NSDate+WQ.m */,
 				726F7E541CF56E7A0068513A /* UIBarButtonItem+YM.h */,
@@ -309,8 +316,6 @@
 				7254FA1E1CED4A6E008EA77F /* NSString+XFTime.m */,
 				7254FA1F1CED4A6E008EA77F /* UIImage+XFCircle.h */,
 				7254FA201CED4A6E008EA77F /* UIImage+XFCircle.m */,
-				7254FA231CED4A6E008EA77F /* UIView+Extension.h */,
-				7254FA241CED4A6E008EA77F /* UIView+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -607,15 +612,36 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		7292BADB1CFFBA24003D386B /* UIViewCategory */ = {
+			isa = PBXGroup;
+			children = (
+				7254FA231CED4A6E008EA77F /* UIView+Extension.h */,
+				7254FA241CED4A6E008EA77F /* UIView+Extension.m */,
+				7292BADF1CFFBADA003D386B /* UIView+Round.h */,
+				7292BAE01CFFBADA003D386B /* UIView+Round.m */,
+			);
+			name = UIViewCategory;
+			sourceTree = "<group>";
+		};
+		7292BAE21CFFC54F003D386B /* QCFaultInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				729EAACF1CFC0BDB00F7A953 /* QCFaultInfoView.h */,
+				729EAAD01CFC0BDB00F7A953 /* QCFaultInfoView.m */,
+				7292BAE31CFFC590003D386B /* QCFaultView.h */,
+				7292BAE41CFFC590003D386B /* QCFaultView.m */,
+			);
+			name = QCFaultInfoView;
+			sourceTree = "<group>";
+		};
 		729EAAD51CFC146F00F7A953 /* ChargePileInfo */ = {
 			isa = PBXGroup;
 			children = (
+				7292BAE21CFFC54F003D386B /* QCFaultInfoView */,
 				72EA12171CF7D4D1009A1ED7 /* QCPileListDetailView.h */,
 				72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */,
 				729EAACC1CFBE69300F7A953 /* QCRunStateView.h */,
 				729EAACD1CFBE69300F7A953 /* QCRunStateView.m */,
-				729EAACF1CFC0BDB00F7A953 /* QCFaultInfoView.h */,
-				729EAAD01CFC0BDB00F7A953 /* QCFaultInfoView.m */,
 				729EAAD21CFC146A00F7A953 /* QCChargePileParaView.h */,
 				729EAAD31CFC146A00F7A953 /* QCChargePileParaView.m */,
 				729EAAD71CFC14CA00F7A953 /* QCChargeInfoView.h */,
@@ -849,6 +875,7 @@
 			files = (
 				726F7EA31CF67B150068513A /* QCPileListCell.m in Sources */,
 				726F7E501CF568CC0068513A /* QCTableBar.m in Sources */,
+				7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */,
 				726F7E9A1CF593E70068513A /* WQBaseTableViewController.m in Sources */,
 				729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */,
 				7254FA471CED4A6E008EA77F /* UIImage+XFCircle.m in Sources */,
@@ -860,6 +887,7 @@
 				7254FA461CED4A6E008EA77F /* NSString+XFTime.m in Sources */,
 				726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */,
 				726F7E9F1CF593E70068513A /* WQItemSwitchModel.m in Sources */,
+				7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */,
 				7211DDEC1CF8180600234042 /* QCPileListDataMode.m in Sources */,
 				726F7E681CF57D900068513A /* QCHistoryRecordController.m in Sources */,
 				729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */,

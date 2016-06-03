@@ -28,7 +28,7 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor grayColor];
+        //self.backgroundColor = [UIColor grayColor];
         
         UILabel *titleLbl = [UILabel new];
         
