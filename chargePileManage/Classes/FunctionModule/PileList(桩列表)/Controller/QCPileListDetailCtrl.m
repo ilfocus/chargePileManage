@@ -141,11 +141,13 @@ static int pileDataCnt = 0;
     //CGFloat viewH = 300;
     
     CGFloat runStateviewH = 200;
+    
     CGFloat faultInfoViewH = 280;
     CGFloat BatteryDetailViewH = 200;
+    
     CGFloat ParaDetailViewH = 180;
     CGFloat StopCtrlDetailViewH = 220;
-    CGFloat ChargeInfoDetailViewH = 220;
+    CGFloat ChargeInfoDetailViewH = 160;
     
     
     
@@ -200,7 +202,7 @@ static int pileDataCnt = 0;
     
     QCFaultInfoView *faultInfo = [[QCFaultInfoView alloc] init];
     [self setupViewBackGround:faultInfo];
-    [faultInfo addTarget:self action:@selector(clickFaultInfo) forControlEvents:UIControlEventTouchUpInside];
+    //[faultInfo addTarget:self action:@selector(clickFaultInfo) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:faultInfo];
     self.faultInfo = faultInfo;
     

@@ -47,6 +47,12 @@
 		726F7EA31CF67B150068513A /* QCPileListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA21CF67B150068513A /* QCPileListCell.m */; };
 		726F7EA61CF6E9890068513A /* QCPileListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA51CF6E9890068513A /* QCPileListCellModel.m */; };
 		726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */; };
+		7288032F1D048216009AB66E /* WBPopMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803241D048216009AB66E /* WBPopMenuModel.m */; };
+		728803301D048216009AB66E /* WBPopMenuSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803261D048216009AB66E /* WBPopMenuSingleton.m */; };
+		728803311D048216009AB66E /* WBPopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803281D048216009AB66E /* WBPopMenuView.m */; };
+		728803321D048216009AB66E /* WBTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288032A1D048216009AB66E /* WBTableViewCell.m */; };
+		728803331D048216009AB66E /* WBTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288032C1D048216009AB66E /* WBTableViewDataSource.m */; };
+		728803341D048216009AB66E /* WBTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288032E1D048216009AB66E /* WBTableViewDelegate.m */; };
 		7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE01CFFBADA003D386B /* UIView+Round.m */; };
 		7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE41CFFC590003D386B /* QCFaultView.m */; };
 		729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAACD1CFBE69300F7A953 /* QCRunStateView.m */; };
@@ -54,6 +60,8 @@
 		729EAAD41CFC146A00F7A953 /* QCChargePileParaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD31CFC146A00F7A953 /* QCChargePileParaView.m */; };
 		729EAAD91CFC14CA00F7A953 /* QCChargeInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */; };
 		729EAADC1CFC14EE00F7A953 /* QCBatteryInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAADB1CFC14EE00F7A953 /* QCBatteryInfoView.m */; };
+		72E281F61D0108CD00AD5B86 /* QCChargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E281F51D0108CD00AD5B86 /* QCChargeView.m */; };
+		72E281FC1D0148B300AD5B86 /* DXPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E281FB1D0148B300AD5B86 /* DXPopover.m */; };
 		72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */; };
 /* End PBXBuildFile section */
 
@@ -155,6 +163,18 @@
 		726F7EA51CF6E9890068513A /* QCPileListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListCellModel.m; sourceTree = "<group>"; };
 		726F7EA71CF6F16B0068513A /* QCPileListDetailCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListDetailCtrl.h; sourceTree = "<group>"; };
 		726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListDetailCtrl.m; sourceTree = "<group>"; };
+		728803231D048216009AB66E /* WBPopMenuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBPopMenuModel.h; sourceTree = "<group>"; };
+		728803241D048216009AB66E /* WBPopMenuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBPopMenuModel.m; sourceTree = "<group>"; };
+		728803251D048216009AB66E /* WBPopMenuSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBPopMenuSingleton.h; sourceTree = "<group>"; };
+		728803261D048216009AB66E /* WBPopMenuSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBPopMenuSingleton.m; sourceTree = "<group>"; };
+		728803271D048216009AB66E /* WBPopMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBPopMenuView.h; sourceTree = "<group>"; };
+		728803281D048216009AB66E /* WBPopMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBPopMenuView.m; sourceTree = "<group>"; };
+		728803291D048216009AB66E /* WBTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBTableViewCell.h; sourceTree = "<group>"; };
+		7288032A1D048216009AB66E /* WBTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTableViewCell.m; sourceTree = "<group>"; };
+		7288032B1D048216009AB66E /* WBTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBTableViewDataSource.h; sourceTree = "<group>"; };
+		7288032C1D048216009AB66E /* WBTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTableViewDataSource.m; sourceTree = "<group>"; };
+		7288032D1D048216009AB66E /* WBTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBTableViewDelegate.h; sourceTree = "<group>"; };
+		7288032E1D048216009AB66E /* WBTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTableViewDelegate.m; sourceTree = "<group>"; };
 		7292BADF1CFFBADA003D386B /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
 		7292BAE01CFFBADA003D386B /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Round.m"; sourceTree = "<group>"; };
 		7292BAE31CFFC590003D386B /* QCFaultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultView.h; sourceTree = "<group>"; };
@@ -169,6 +189,10 @@
 		729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChargeInfoView.m; sourceTree = "<group>"; };
 		729EAADA1CFC14EE00F7A953 /* QCBatteryInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCBatteryInfoView.h; sourceTree = "<group>"; };
 		729EAADB1CFC14EE00F7A953 /* QCBatteryInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCBatteryInfoView.m; sourceTree = "<group>"; };
+		72E281F41D0108CD00AD5B86 /* QCChargeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChargeView.h; sourceTree = "<group>"; };
+		72E281F51D0108CD00AD5B86 /* QCChargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChargeView.m; sourceTree = "<group>"; };
+		72E281FA1D0148B300AD5B86 /* DXPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPopover.h; sourceTree = "<group>"; };
+		72E281FB1D0148B300AD5B86 /* DXPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPopover.m; sourceTree = "<group>"; };
 		72EA12171CF7D4D1009A1ED7 /* QCPileListDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListDetailView.h; sourceTree = "<group>"; };
 		72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListDetailView.m; sourceTree = "<group>"; };
 		F6D5489189523ECDE4B2E8BD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -323,6 +347,8 @@
 		7254FA251CED4A6E008EA77F /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				728803221D048216009AB66E /* PopMenuView */,
+				72E281F91D0148B300AD5B86 /* DXPopover */,
 				7254FA261CED4A6E008EA77F /* CDFInitialsAvatar */,
 			);
 			path = Lib;
@@ -612,6 +638,25 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		728803221D048216009AB66E /* PopMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				728803231D048216009AB66E /* WBPopMenuModel.h */,
+				728803241D048216009AB66E /* WBPopMenuModel.m */,
+				728803251D048216009AB66E /* WBPopMenuSingleton.h */,
+				728803261D048216009AB66E /* WBPopMenuSingleton.m */,
+				728803271D048216009AB66E /* WBPopMenuView.h */,
+				728803281D048216009AB66E /* WBPopMenuView.m */,
+				728803291D048216009AB66E /* WBTableViewCell.h */,
+				7288032A1D048216009AB66E /* WBTableViewCell.m */,
+				7288032B1D048216009AB66E /* WBTableViewDataSource.h */,
+				7288032C1D048216009AB66E /* WBTableViewDataSource.m */,
+				7288032D1D048216009AB66E /* WBTableViewDelegate.h */,
+				7288032E1D048216009AB66E /* WBTableViewDelegate.m */,
+			);
+			path = PopMenuView;
+			sourceTree = "<group>";
+		};
 		7292BADB1CFFBA24003D386B /* UIViewCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +682,7 @@
 		729EAAD51CFC146F00F7A953 /* ChargePileInfo */ = {
 			isa = PBXGroup;
 			children = (
+				72E281F31D0108A500AD5B86 /* QCChargeInfoView */,
 				7292BAE21CFFC54F003D386B /* QCFaultInfoView */,
 				72EA12171CF7D4D1009A1ED7 /* QCPileListDetailView.h */,
 				72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */,
@@ -644,8 +690,6 @@
 				729EAACD1CFBE69300F7A953 /* QCRunStateView.m */,
 				729EAAD21CFC146A00F7A953 /* QCChargePileParaView.h */,
 				729EAAD31CFC146A00F7A953 /* QCChargePileParaView.m */,
-				729EAAD71CFC14CA00F7A953 /* QCChargeInfoView.h */,
-				729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */,
 				729EAADA1CFC14EE00F7A953 /* QCBatteryInfoView.h */,
 				729EAADB1CFC14EE00F7A953 /* QCBatteryInfoView.m */,
 				721FFAB71CFC1C6700DDC22D /* QCStopCtrlView.h */,
@@ -685,6 +729,26 @@
 				726F7E611CF57CFF0068513A /* QCPileListController.m */,
 			);
 			name = QCPileListCtrl;
+			sourceTree = "<group>";
+		};
+		72E281F31D0108A500AD5B86 /* QCChargeInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				729EAAD71CFC14CA00F7A953 /* QCChargeInfoView.h */,
+				729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */,
+				72E281F41D0108CD00AD5B86 /* QCChargeView.h */,
+				72E281F51D0108CD00AD5B86 /* QCChargeView.m */,
+			);
+			name = QCChargeInfoView;
+			sourceTree = "<group>";
+		};
+		72E281F91D0148B300AD5B86 /* DXPopover */ = {
+			isa = PBXGroup;
+			children = (
+				72E281FA1D0148B300AD5B86 /* DXPopover.h */,
+				72E281FB1D0148B300AD5B86 /* DXPopover.m */,
+			);
+			path = DXPopover;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -878,7 +942,10 @@
 				7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */,
 				726F7E9A1CF593E70068513A /* WQBaseTableViewController.m in Sources */,
 				729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */,
+				7288032F1D048216009AB66E /* WBPopMenuModel.m in Sources */,
+				72E281FC1D0148B300AD5B86 /* DXPopover.m in Sources */,
 				7254FA471CED4A6E008EA77F /* UIImage+XFCircle.m in Sources */,
+				728803321D048216009AB66E /* WBTableViewCell.m in Sources */,
 				726F7E9E1CF593E70068513A /* WQItemModel.m in Sources */,
 				72295A751CFEA63E00E40E9A /* QCLoginCtrl.m in Sources */,
 				72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */,
@@ -895,8 +962,10 @@
 				726F7E621CF57CFF0068513A /* QCPileListController.m in Sources */,
 				7254FA4B1CED4A6E008EA77F /* AppDelegate.m in Sources */,
 				721FFAB91CFC1C6700DDC22D /* QCStopCtrlView.m in Sources */,
+				728803331D048216009AB66E /* WBTableViewDataSource.m in Sources */,
 				726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */,
 				726F7E531CF56AF30068513A /* QCTableBarButton.m in Sources */,
+				728803301D048216009AB66E /* WBPopMenuSingleton.m in Sources */,
 				726F7E5C1CF56E860068513A /* NSDate+WQ.m in Sources */,
 				726F7EA01CF593E70068513A /* WQBaseCell.m in Sources */,
 				7254FA501CED4DCB008EA77F /* QCTabBarController.m in Sources */,
@@ -906,11 +975,14 @@
 				72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */,
 				726F7E651CF57D210068513A /* QCSystemManageController.m in Sources */,
 				726F7EA61CF6E9890068513A /* QCPileListCellModel.m in Sources */,
+				728803311D048216009AB66E /* WBPopMenuView.m in Sources */,
 				729EAADC1CFC14EE00F7A953 /* QCBatteryInfoView.m in Sources */,
+				728803341D048216009AB66E /* WBTableViewDelegate.m in Sources */,
 				72295A6B1CFD896100E40E9A /* QCRunStateCtrl.m in Sources */,
 				726F7E591CF56E7A0068513A /* UIImage+adaptive_iOS7.m in Sources */,
 				729EAAD91CFC14CA00F7A953 /* QCChargeInfoView.m in Sources */,
 				7254FA441CED4A6E008EA77F /* NSString+ChineseChar.m in Sources */,
+				72E281F61D0108CD00AD5B86 /* QCChargeView.m in Sources */,
 				7254FA4A1CED4A6E008EA77F /* CDFInitialsAvatar.m in Sources */,
 				72295A6E1CFD898000E40E9A /* QCFaultInfoCtrl.m in Sources */,
 				726F7E5F1CF57B510068513A /* QCNavigationController.m in Sources */,
