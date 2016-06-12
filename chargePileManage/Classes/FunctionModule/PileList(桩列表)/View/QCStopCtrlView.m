@@ -50,6 +50,7 @@
         
         // start button
         UIButton *startBtn = [UIButton new];
+        startBtn.backgroundColor = [UIColor greenColor];
         [startBtn setTitle:@"启动" forState:UIControlStateNormal];
         startBtn.titleLabel.font = QCSubTitleFont;
         [startBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -58,32 +59,31 @@
         
         // pause button
         UIButton *pauseBtn = [UIButton new];
+        pauseBtn.backgroundColor = [UIColor greenColor];
         [pauseBtn setTitle:@"暂停" forState:UIControlStateNormal];
         [pauseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         pauseBtn.titleLabel.font = QCSubTitleFont;
-        
         [self addSubview:pauseBtn];
         self.pauseBtn = pauseBtn;
         
         // recover button
         UIButton *recoverBtn = [UIButton new];
+        recoverBtn.backgroundColor = [UIColor greenColor];
         [recoverBtn setTitle:@"恢复" forState:UIControlStateNormal];
         [recoverBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         recoverBtn.titleLabel.font = QCSubTitleFont;
-        
         [self addSubview:recoverBtn];
         self.recoverBtn = recoverBtn;
         
         // stop button
         UIButton *stopBtn = [UIButton new];
+        stopBtn.backgroundColor = [UIColor greenColor];
         stopBtn.titleLabel.text = @"停止";
         [stopBtn setTitle:@"停止" forState:UIControlStateNormal];
         [stopBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         stopBtn.titleLabel.font = QCSubTitleFont;
-        
         [self addSubview:stopBtn];
         self.stopBtn = stopBtn;
-        
         
     }
     return self;

@@ -39,6 +39,23 @@
 
 @property (nonatomic,weak) QCChargeView *chargeView;
 
+
+@property (nonatomic,copy) NSString *strPointQuantity;
+@property (nonatomic,copy) NSString *strPointPrice;
+@property (nonatomic,copy) NSString *strPointFee;
+
+@property (nonatomic,copy) NSString *strPeakQuantity;
+@property (nonatomic,copy) NSString *strPeakPrice;
+@property (nonatomic,copy) NSString *strPeakFee;
+
+@property (nonatomic,copy) NSString *strFlatQuantity;
+@property (nonatomic,copy) NSString *strFlatPrice;
+@property (nonatomic,copy) NSString *strFlatFee;
+
+@property (nonatomic,copy) NSString *strValleyQuantity;
+@property (nonatomic,copy) NSString *strValleyPrice;
+@property (nonatomic,copy) NSString *strValleyFee;
+
 @end
 
 @implementation QCChargeInfoView
@@ -142,7 +159,6 @@
     for (NSInteger i = 0; i < [self titles].count; i++) {
         
         WBPopMenuModel * info = [WBPopMenuModel new];
-        info.image = [self images][i];
         info.title = [self titles][i];
         [obj addObject:info];
     }
@@ -156,12 +172,37 @@
     
 }
 - (NSArray *) titles {
-    return @[@"扫一扫",
-             @"加好友",
-             @"创建讨论组",
-             @"发送到电脑",
-             @"面对面快传",
-             @"收钱"];
+    
+    _strPointQuantity = [@"尖电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointQuantity]];
+    _strPointPrice    = [@"尖电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointPrice]];
+    _strPointFee    = [@"尖费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointFee]];
+    
+    _strPeakQuantity = [@"峰电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakQuantity]];
+    _strPeakPrice    = [@"峰电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakPrice]];
+    _strPeakFee      = [@"峰费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakFee]];
+    
+    _strFlatQuantity = [@"平电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatQuantity]];
+    _strFlatPrice    = [@"平电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatPrice]];
+    _strFlatFee    = [@"平费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatFee]];
+    
+    _strValleyQuantity = [@"谷电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyQuantity]];
+    _strValleyPrice    = [@"谷电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyPrice]];
+    _strValleyFee    = [@"谷费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyFee]];
+    
+    
+    return @[_strPointQuantity,
+             _strPeakQuantity,
+             _strFlatQuantity,
+             _strValleyQuantity,
+             _strPointPrice,
+             _strPeakPrice,
+             _strFlatPrice,
+             _strValleyPrice,
+             _strPointFee,
+             _strPeakFee,
+             _strFlatFee,
+             _strValleyFee
+             ];
 }
 - (NSArray *) images {
     return @[@"right_menu_QR@3x",
@@ -181,6 +222,22 @@
     
     self.averagePrice = (modeData.pointPrice + modeData.peakPrice + modeData.flatPrice + modeData.valleyPrice) / 4;
     self.averageFee = (modeData.pointFee + modeData.peakFee +modeData.flatFee + modeData.valleyFee) / 4;
+    
+    self.pointQuantity = modeData.pointQuantity;
+    self.pointPrice = modeData.pointPrice;
+    self.pointFee = modeData.pointFee;
+    
+    self.peakQuantity = modeData.peakQuantity;
+    self.peakPrice = modeData.peakPrice;
+    self.peakFee = modeData.peakFee;
+    
+    self.flatQuantity = modeData.flatQuantity;
+    self.flatPrice = modeData.flatPrice;
+    self.flatFee = modeData.flatFee;
+    
+    self.valleyQuantity = modeData.valleyQuantity;
+    self.valleyPrice = modeData.valleyPrice;
+    self.valleyFee = modeData.valleyFee;
 }
 - (void)layoutSubviews
 {
@@ -350,7 +407,6 @@ static CGFloat randomFloatBetweenLowAndHigh(CGFloat low, CGFloat high)
     [self.popover dismiss];
     
 }
-
 - (void)bounceTargetView:(UIView *)targetView
 {
     [UIView animateWithDuration:0.1 animations:^{

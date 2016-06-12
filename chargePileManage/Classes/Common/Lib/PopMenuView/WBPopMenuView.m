@@ -13,7 +13,7 @@
 #import "WBPopMenuModel.h"
 #import "WBPopMenuSingleton.h"
 
-#define WBNUMBER 6
+#define WBNUMBER 12
 
 @interface WBPopMenuView ()
 @property (nonatomic, strong) WBTableViewDataSource * tableViewDataSource;
@@ -41,7 +41,7 @@
         self.tableViewDataSource = [[WBTableViewDataSource alloc]initWithItems:items cellClass:[WBTableViewCell class] configureCellBlock:^(WBTableViewCell *cell, WBPopMenuModel *model) {
             WBTableViewCell * tableViewCell = (WBTableViewCell *)cell;
             tableViewCell.textLabel.text = model.title;
-            tableViewCell.imageView.image = [UIImage imageNamed:model.image];
+            //tableViewCell.imageView.image = [UIImage imageNamed:model.image];
         }];
         self.tableViewDelegate = [[WBTableViewDelegate alloc]initWithDidSelectRowAtIndexPath:^(NSInteger indexRow) {
             if (self.action) {
@@ -74,7 +74,7 @@
     CGFloat menuX = [UIScreen mainScreen].bounds.size.width / 2;
 //    WQLog(@"bounds.width---%f",[UIScreen mainScreen].bounds.size.width);
 //    WQLog(@"self.menuWidth---%f",self.menuWidth);
-    CGFloat menuY = 180 - 20 * WBNUMBER;
+    CGFloat menuY = 100 - 20 * WBNUMBER;
     CGFloat width = self.menuWidth;
     CGFloat heigh = 40 * WBNUMBER;
     return (CGRect){menuX,menuY,width,heigh};

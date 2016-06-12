@@ -1,3 +1,9 @@
+2016.06.12
+1.CUICatalog: Invalid asset name supplied: 问题，解决方法：//tableViewCell.imageView.image = [UIImage imageNamed:model.image];
+2.点击充电详细信息中，可以弹出UI界面，并能够展示充电的详细数据信息。
+3.设计充电桩启停模块
+
+
 
 2016.06.03
 实现内容：
