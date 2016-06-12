@@ -15,8 +15,13 @@
 
 #import "QCPileListCell.h"
 #import "QCPileListCellModel.h"
-
 #import "QCPileListDetailCtrl.h"
+
+//#import "MJExtension.h"
+#import "MJRefresh.h"
+#import "QCChiBaoZiHeader.h"
+
+static const CGFloat QCDuration = 2.0;
 
 @interface QCPileListController ()
 //@property (nonatomic, strong) NSMutableArray *pileListCellDatas;
@@ -30,6 +35,27 @@
     [self setGroup0];
     
     self.tableView.rowHeight = PileListCellHeight;
+    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+    QCChiBaoZiHeader *header = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    // 马上进入刷新状态
+    [header beginRefreshing];
+    // 设置header
+    self.tableView.mj_header = header;
+}
+- (void)loadNewData
+{
+    // 1.添加假数据
+//    for (int i = 0; i<5; i++) {
+//        [self.data insertObject:MJRandomData atIndex:0];
+//    }
+    
+    // 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 刷新表格
+        [self.tableView reloadData];
+        // 拿到当前的下拉刷新控件，结束刷新状态
+        [self.tableView.mj_header endRefreshing];
+    });
 }
 /**
  * 设置第0组样式

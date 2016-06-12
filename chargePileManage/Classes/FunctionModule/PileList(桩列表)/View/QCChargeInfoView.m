@@ -339,6 +339,14 @@
     }
 }
 
+- (void) setPointQuantity:(float)pointQuantity
+{
+    if (_pointQuantity != pointQuantity) {
+        _pointQuantity =  pointQuantity;
+        //_averageFeeLbl.text = [@"平均费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f%@",averageFee,@" 元"]];
+    }
+}
+
 #pragma mark - popView
 static int i = 0;
 static int j = 1;

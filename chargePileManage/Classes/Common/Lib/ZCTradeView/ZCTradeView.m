@@ -248,7 +248,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    ZCLog(@"dealloc---");
+//    ZCLog(@"dealloc---");
 }
 
 #pragma mark - UIAlertViewDelegate

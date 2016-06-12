@@ -61,6 +61,7 @@
 		7288034B1D0D3734009AB66E /* ZCTradeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803411D0D3734009AB66E /* ZCTradeInputView.m */; };
 		7288034C1D0D3734009AB66E /* ZCTradeKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803431D0D3734009AB66E /* ZCTradeKeyboard.m */; };
 		7288034D1D0D3734009AB66E /* ZCTradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803451D0D3734009AB66E /* ZCTradeView.m */; };
+		728803511D0D5333009AB66E /* QCChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803501D0D5333009AB66E /* QCChiBaoZiHeader.m */; };
 		7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE01CFFBADA003D386B /* UIView+Round.m */; };
 		7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE41CFFC590003D386B /* QCFaultView.m */; };
 		729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAACD1CFBE69300F7A953 /* QCRunStateView.m */; };
@@ -199,6 +200,8 @@
 		728803431D0D3734009AB66E /* ZCTradeKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeKeyboard.m; sourceTree = "<group>"; };
 		728803441D0D3734009AB66E /* ZCTradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTradeView.h; sourceTree = "<group>"; };
 		728803451D0D3734009AB66E /* ZCTradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeView.m; sourceTree = "<group>"; };
+		7288034F1D0D5333009AB66E /* QCChiBaoZiHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChiBaoZiHeader.h; sourceTree = "<group>"; };
+		728803501D0D5333009AB66E /* QCChiBaoZiHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChiBaoZiHeader.m; sourceTree = "<group>"; };
 		7292BADF1CFFBADA003D386B /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
 		7292BAE01CFFBADA003D386B /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Round.m"; sourceTree = "<group>"; };
 		7292BAE31CFFC590003D386B /* QCFaultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultView.h; sourceTree = "<group>"; };
@@ -498,6 +501,7 @@
 		7254FA351CED4A6E008EA77F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7288034E1D0D52F3009AB66E /* RefreshHeader */,
 				729EAAD61CFC149300F7A953 /* ChargePileCell */,
 				729EAAD51CFC146F00F7A953 /* ChargePileInfo */,
 			);
@@ -703,6 +707,15 @@
 				728803451D0D3734009AB66E /* ZCTradeView.m */,
 			);
 			path = ZCTradeView;
+			sourceTree = "<group>";
+		};
+		7288034E1D0D52F3009AB66E /* RefreshHeader */ = {
+			isa = PBXGroup;
+			children = (
+				7288034F1D0D5333009AB66E /* QCChiBaoZiHeader.h */,
+				728803501D0D5333009AB66E /* QCChiBaoZiHeader.m */,
+			);
+			name = RefreshHeader;
 			sourceTree = "<group>";
 		};
 		7292BADB1CFFBA24003D386B /* UIViewCategory */ = {
@@ -998,6 +1011,7 @@
 				728803321D048216009AB66E /* WBTableViewCell.m in Sources */,
 				7288034A1D0D3734009AB66E /* ZCAudioTool.m in Sources */,
 				726F7E9E1CF593E70068513A /* WQItemModel.m in Sources */,
+				728803511D0D5333009AB66E /* QCChiBaoZiHeader.m in Sources */,
 				72295A751CFEA63E00E40E9A /* QCLoginCtrl.m in Sources */,
 				72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */,
 				728803481D0D3734009AB66E /* UIAlertView+Quick.m in Sources */,

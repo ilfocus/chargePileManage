@@ -104,6 +104,7 @@
     [view show];
     view.delegate = self;
     
+    // set command
     if (btn.tag == self.startBtn.tag) {
         WQLog(@"点击启动按钮！");
     }
@@ -121,6 +122,12 @@
 -(NSString *)finish:(NSString *)pwd{
     
     WQLog(@"%@",pwd);
+    // 如果密码正确，执行发送命令
+    if ([pwd isEqualToString:@"123456"]) {
+        WQLog(@"密码输入正确！");
+    } else {
+        WQLog(@"密码输入错误！");
+    }
     return pwd;
 }
 
