@@ -53,6 +53,14 @@
 		728803321D048216009AB66E /* WBTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288032A1D048216009AB66E /* WBTableViewCell.m */; };
 		728803331D048216009AB66E /* WBTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288032C1D048216009AB66E /* WBTableViewDataSource.m */; };
 		728803341D048216009AB66E /* WBTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288032E1D048216009AB66E /* WBTableViewDelegate.m */; };
+		728803461D0D3734009AB66E /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803371D0D3734009AB66E /* NSString+Extension.m */; };
+		728803471D0D3734009AB66E /* trade.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 728803391D0D3734009AB66E /* trade.bundle */; };
+		728803481D0D3734009AB66E /* UIAlertView+Quick.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288033B1D0D3734009AB66E /* UIAlertView+Quick.m */; };
+		728803491D0D3734009AB66E /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288033D1D0D3734009AB66E /* UIView+Extension.m */; };
+		7288034A1D0D3734009AB66E /* ZCAudioTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288033F1D0D3734009AB66E /* ZCAudioTool.m */; };
+		7288034B1D0D3734009AB66E /* ZCTradeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803411D0D3734009AB66E /* ZCTradeInputView.m */; };
+		7288034C1D0D3734009AB66E /* ZCTradeKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803431D0D3734009AB66E /* ZCTradeKeyboard.m */; };
+		7288034D1D0D3734009AB66E /* ZCTradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803451D0D3734009AB66E /* ZCTradeView.m */; };
 		7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE01CFFBADA003D386B /* UIView+Round.m */; };
 		7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE41CFFC590003D386B /* QCFaultView.m */; };
 		729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAACD1CFBE69300F7A953 /* QCRunStateView.m */; };
@@ -175,6 +183,22 @@
 		7288032C1D048216009AB66E /* WBTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTableViewDataSource.m; sourceTree = "<group>"; };
 		7288032D1D048216009AB66E /* WBTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBTableViewDelegate.h; sourceTree = "<group>"; };
 		7288032E1D048216009AB66E /* WBTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBTableViewDelegate.m; sourceTree = "<group>"; };
+		728803361D0D3734009AB66E /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		728803371D0D3734009AB66E /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		728803381D0D3734009AB66E /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		728803391D0D3734009AB66E /* trade.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = trade.bundle; sourceTree = "<group>"; };
+		7288033A1D0D3734009AB66E /* UIAlertView+Quick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Quick.h"; sourceTree = "<group>"; };
+		7288033B1D0D3734009AB66E /* UIAlertView+Quick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Quick.m"; sourceTree = "<group>"; };
+		7288033C1D0D3734009AB66E /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		7288033D1D0D3734009AB66E /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		7288033E1D0D3734009AB66E /* ZCAudioTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCAudioTool.h; sourceTree = "<group>"; };
+		7288033F1D0D3734009AB66E /* ZCAudioTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCAudioTool.m; sourceTree = "<group>"; };
+		728803401D0D3734009AB66E /* ZCTradeInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTradeInputView.h; sourceTree = "<group>"; };
+		728803411D0D3734009AB66E /* ZCTradeInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeInputView.m; sourceTree = "<group>"; };
+		728803421D0D3734009AB66E /* ZCTradeKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTradeKeyboard.h; sourceTree = "<group>"; };
+		728803431D0D3734009AB66E /* ZCTradeKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeKeyboard.m; sourceTree = "<group>"; };
+		728803441D0D3734009AB66E /* ZCTradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTradeView.h; sourceTree = "<group>"; };
+		728803451D0D3734009AB66E /* ZCTradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeView.m; sourceTree = "<group>"; };
 		7292BADF1CFFBADA003D386B /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
 		7292BAE01CFFBADA003D386B /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Round.m"; sourceTree = "<group>"; };
 		7292BAE31CFFC590003D386B /* QCFaultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultView.h; sourceTree = "<group>"; };
@@ -347,6 +371,7 @@
 		7254FA251CED4A6E008EA77F /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				728803351D0D3734009AB66E /* ZCTradeView */,
 				728803221D048216009AB66E /* PopMenuView */,
 				72E281F91D0148B300AD5B86 /* DXPopover */,
 				7254FA261CED4A6E008EA77F /* CDFInitialsAvatar */,
@@ -657,6 +682,29 @@
 			path = PopMenuView;
 			sourceTree = "<group>";
 		};
+		728803351D0D3734009AB66E /* ZCTradeView */ = {
+			isa = PBXGroup;
+			children = (
+				728803361D0D3734009AB66E /* NSString+Extension.h */,
+				728803371D0D3734009AB66E /* NSString+Extension.m */,
+				728803381D0D3734009AB66E /* Singleton.h */,
+				728803391D0D3734009AB66E /* trade.bundle */,
+				7288033A1D0D3734009AB66E /* UIAlertView+Quick.h */,
+				7288033B1D0D3734009AB66E /* UIAlertView+Quick.m */,
+				7288033C1D0D3734009AB66E /* UIView+Extension.h */,
+				7288033D1D0D3734009AB66E /* UIView+Extension.m */,
+				7288033E1D0D3734009AB66E /* ZCAudioTool.h */,
+				7288033F1D0D3734009AB66E /* ZCAudioTool.m */,
+				728803401D0D3734009AB66E /* ZCTradeInputView.h */,
+				728803411D0D3734009AB66E /* ZCTradeInputView.m */,
+				728803421D0D3734009AB66E /* ZCTradeKeyboard.h */,
+				728803431D0D3734009AB66E /* ZCTradeKeyboard.m */,
+				728803441D0D3734009AB66E /* ZCTradeView.h */,
+				728803451D0D3734009AB66E /* ZCTradeView.m */,
+			);
+			path = ZCTradeView;
+			sourceTree = "<group>";
+		};
 		7292BADB1CFFBA24003D386B /* UIViewCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -864,6 +912,7 @@
 				7254FA4C1CED4A6E008EA77F /* 功能说明.txt in Resources */,
 				72378D051CEC6993005E9E52 /* LaunchScreen.storyboard in Resources */,
 				72378D021CEC6993005E9E52 /* Assets.xcassets in Resources */,
+				728803471D0D3734009AB66E /* trade.bundle in Resources */,
 				72378D001CEC6993005E9E52 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -939,6 +988,7 @@
 			files = (
 				726F7EA31CF67B150068513A /* QCPileListCell.m in Sources */,
 				726F7E501CF568CC0068513A /* QCTableBar.m in Sources */,
+				728803491D0D3734009AB66E /* UIView+Extension.m in Sources */,
 				7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */,
 				726F7E9A1CF593E70068513A /* WQBaseTableViewController.m in Sources */,
 				729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */,
@@ -946,13 +996,16 @@
 				72E281FC1D0148B300AD5B86 /* DXPopover.m in Sources */,
 				7254FA471CED4A6E008EA77F /* UIImage+XFCircle.m in Sources */,
 				728803321D048216009AB66E /* WBTableViewCell.m in Sources */,
+				7288034A1D0D3734009AB66E /* ZCAudioTool.m in Sources */,
 				726F7E9E1CF593E70068513A /* WQItemModel.m in Sources */,
 				72295A751CFEA63E00E40E9A /* QCLoginCtrl.m in Sources */,
 				72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */,
+				728803481D0D3734009AB66E /* UIAlertView+Quick.m in Sources */,
 				726F7E9B1CF593E70068513A /* WQTableViewGroupModel.m in Sources */,
 				726F7E9D1CF593E70068513A /* WQItemLabelModel.m in Sources */,
 				7254FA461CED4A6E008EA77F /* NSString+XFTime.m in Sources */,
 				726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */,
+				7288034C1D0D3734009AB66E /* ZCTradeKeyboard.m in Sources */,
 				726F7E9F1CF593E70068513A /* WQItemSwitchModel.m in Sources */,
 				7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */,
 				7211DDEC1CF8180600234042 /* QCPileListDataMode.m in Sources */,
@@ -965,6 +1018,7 @@
 				728803331D048216009AB66E /* WBTableViewDataSource.m in Sources */,
 				726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */,
 				726F7E531CF56AF30068513A /* QCTableBarButton.m in Sources */,
+				7288034D1D0D3734009AB66E /* ZCTradeView.m in Sources */,
 				728803301D048216009AB66E /* WBPopMenuSingleton.m in Sources */,
 				726F7E5C1CF56E860068513A /* NSDate+WQ.m in Sources */,
 				726F7EA01CF593E70068513A /* WQBaseCell.m in Sources */,
@@ -972,10 +1026,12 @@
 				72378CF71CEC6993005E9E52 /* main.m in Sources */,
 				7254FA491CED4A6E008EA77F /* UIView+Extension.m in Sources */,
 				729EAAD41CFC146A00F7A953 /* QCChargePileParaView.m in Sources */,
+				728803461D0D3734009AB66E /* NSString+Extension.m in Sources */,
 				72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */,
 				726F7E651CF57D210068513A /* QCSystemManageController.m in Sources */,
 				726F7EA61CF6E9890068513A /* QCPileListCellModel.m in Sources */,
 				728803311D048216009AB66E /* WBPopMenuView.m in Sources */,
+				7288034B1D0D3734009AB66E /* ZCTradeInputView.m in Sources */,
 				729EAADC1CFC14EE00F7A953 /* QCBatteryInfoView.m in Sources */,
 				728803341D048216009AB66E /* WBTableViewDelegate.m in Sources */,
 				72295A6B1CFD896100E40E9A /* QCRunStateCtrl.m in Sources */,

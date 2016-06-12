@@ -9,8 +9,9 @@
 #import "QCStopCtrlView.h"
 #import "QCPileListDataMode.h"
 #import "LLBootstrap.h"
+#import "ZCTradeView.h"
 
-@interface QCStopCtrlView()
+@interface QCStopCtrlView()<ZCTradeViewDelegate>
 /** title */
 @property (nonatomic, weak) UILabel *titleLbl;
 /** chargePileBtn */
@@ -41,16 +42,18 @@
         self.titleLbl = titleLbl;
         
         // execute button
-        UIButton *chargePileButton = [UIButton new];
-        [chargePileButton setTitle:@"执行" forState:UIControlStateNormal];
-        [chargePileButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        chargePileButton.titleLabel.font = QCSubTitleFont;
-        [self addSubview:chargePileButton];
-        self.chargePileButton = chargePileButton;
+//        UIButton *chargePileButton = [UIButton new];
+//        [chargePileButton setTitle:@"执行" forState:UIControlStateNormal];
+//        [chargePileButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//        chargePileButton.titleLabel.font = QCSubTitleFont;
+//        [self addSubview:chargePileButton];
+//        self.chargePileButton = chargePileButton;
         
         // start button
         UIButton *startBtn = [UIButton new];
         startBtn.backgroundColor = [UIColor greenColor];
+        startBtn.tag = 0;
+        [startBtn addTarget:self action:@selector(pushButton:) forControlEvents:UIControlEventTouchUpInside];
         [startBtn setTitle:@"启动" forState:UIControlStateNormal];
         startBtn.titleLabel.font = QCSubTitleFont;
         [startBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -60,6 +63,8 @@
         // pause button
         UIButton *pauseBtn = [UIButton new];
         pauseBtn.backgroundColor = [UIColor greenColor];
+        pauseBtn.tag = 1;
+        [pauseBtn addTarget:self action:@selector(pushButton:) forControlEvents:UIControlEventTouchUpInside];
         [pauseBtn setTitle:@"暂停" forState:UIControlStateNormal];
         [pauseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         pauseBtn.titleLabel.font = QCSubTitleFont;
@@ -69,6 +74,8 @@
         // recover button
         UIButton *recoverBtn = [UIButton new];
         recoverBtn.backgroundColor = [UIColor greenColor];
+        recoverBtn.tag = 2;
+        [recoverBtn addTarget:self action:@selector(pushButton:) forControlEvents:UIControlEventTouchUpInside];
         [recoverBtn setTitle:@"恢复" forState:UIControlStateNormal];
         [recoverBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         recoverBtn.titleLabel.font = QCSubTitleFont;
@@ -78,6 +85,8 @@
         // stop button
         UIButton *stopBtn = [UIButton new];
         stopBtn.backgroundColor = [UIColor greenColor];
+        stopBtn.tag = 3;
+        [stopBtn addTarget:self action:@selector(pushButton:) forControlEvents:UIControlEventTouchUpInside];
         stopBtn.titleLabel.text = @"停止";
         [stopBtn setTitle:@"停止" forState:UIControlStateNormal];
         [stopBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -88,6 +97,33 @@
     }
     return self;
 }
+
+- (void) pushButton:(UIButton *)btn
+{
+    ZCTradeView *view = [[ZCTradeView alloc] init];
+    [view show];
+    view.delegate = self;
+    
+    if (btn.tag == self.startBtn.tag) {
+        WQLog(@"点击启动按钮！");
+    }
+    if (btn.tag == self.pauseBtn.tag) {
+        WQLog(@"点击暂停按钮！");
+    }
+    if (btn.tag == self.recoverBtn.tag) {
+        WQLog(@"点击恢复按钮！");
+    }
+    if (btn.tag == self.stopBtn.tag) {
+        WQLog(@"点击停止按钮！");
+    }
+}
+
+-(NSString *)finish:(NSString *)pwd{
+    
+    WQLog(@"%@",pwd);
+    return pwd;
+}
+
 - (void)refreshViewData:(QCPileListDataMode *)modeData
 {
     if (modeData == nil) {
@@ -112,38 +148,43 @@
         make.top.equalTo(vs.mas_top).with.offset(QCDetailViewBorder);
     }];
     
-    [_chargePileButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 100));
-        make.top.equalTo(_titleLbl.mas_bottom).with.offset(QCDetailViewBorder * 2);
-        make.centerX.equalTo(vs.mas_centerX);
-    }];
+//    [_chargePileButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(100, 100));
+//        make.top.equalTo(_titleLbl.mas_bottom).with.offset(QCDetailViewBorder * 2);
+//        make.centerX.equalTo(vs.mas_centerX);
+//    }];
     
     [_startBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_chargePileButton.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.top.equalTo(_titleLbl.mas_bottom).with.offset(QCDetailViewBorder * 2);
         
         make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
-        
-        make.size.mas_equalTo(CGSizeMake(buttonW, 30));
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        make.height.mas_equalTo(@35);
+        //        make.size.mas_equalTo(CGSizeMake(buttonW, 30));
     }];
     
     [_pauseBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_chargePileButton.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.top.equalTo(_startBtn.mas_bottom).with.offset(QCDetailViewBorder * 2);
         
-        make.left.equalTo(_startBtn.mas_right).with.offset(QCDetailViewBorder);
-        make.size.mas_equalTo(CGSizeMake(buttonW, 30));
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        make.height.mas_equalTo(@35);
     }];
     
     [_recoverBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_chargePileButton.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        make.top.equalTo(_pauseBtn.mas_bottom).with.offset(QCDetailViewBorder * 2);
         
-        make.left.equalTo(_pauseBtn.mas_right).with.offset(QCDetailViewBorder);
-        make.size.mas_equalTo(CGSizeMake(buttonW, 30));
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        make.height.mas_equalTo(@35);
     }];
 
     [_stopBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_chargePileButton.mas_bottom).with.offset(QCDetailViewBorder * 2);
-        make.left.equalTo(_recoverBtn.mas_right).with.offset(QCDetailViewBorder);
-        make.size.mas_equalTo(CGSizeMake(buttonW, 30));
+        make.top.equalTo(_recoverBtn.mas_bottom).with.offset(QCDetailViewBorder * 2);
+        
+        make.left.equalTo(vs.mas_left).with.offset(QCDetailViewBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCDetailViewBorder);
+        make.height.mas_equalTo(@35);
     }];
     
 }
