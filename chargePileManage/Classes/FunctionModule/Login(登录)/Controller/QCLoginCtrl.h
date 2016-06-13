@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+//#define UserRememberBoolKey @"rememberPwd"
+////#define UserAutoLoginBoolKey @"autoLogin"
 
 @interface QCLoginCtrl : UIViewController
-
+extern NSString *const UserRememberBoolKey;
+extern NSString *const UserAutoLoginBoolKey;
 @end

@@ -7,6 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QCLoginCtrl">
             <connections>
+                <outlet property="autoLogin" destination="KRQ-4r-Qnp" id="sLg-dS-7QM"/>
+                <outlet property="pwdText" destination="1fa-ws-RR3" id="AjO-9d-USr"/>
+                <outlet property="rememberPwd" destination="Vyh-Mv-iPN" id="SaE-sS-0HO"/>
+                <outlet property="userIDText" destination="4eo-HY-cho" id="LBU-Pb-mfo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -163,24 +167,6 @@
                                 </mask>
                             </variation>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-m5-xhX">
-                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                            <color key="backgroundColor" red="1" green="0.16205514579999999" blue="0.47732887750000003" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="38" id="Cpa-bL-jNP"/>
-                            </constraints>
-                            <state key="normal" title="登录"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="Cpa-bL-jNP"/>
-                                </mask>
-                            </variation>
-                            <variation key="widthClass=compact">
-                                <mask key="constraints">
-                                    <include reference="Cpa-bL-jNP"/>
-                                </mask>
-                            </variation>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KRQ-4r-Qnp">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                             <constraints>
@@ -201,6 +187,9 @@
                                     <exclude reference="ej0-u3-tT4"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <action selector="autoLogin:" destination="-1" eventType="touchUpInside" id="rmv-wm-ZUY"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlZ-m6-v8Z">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -359,6 +348,30 @@
                                     <include reference="iPh-JT-xHa"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <action selector="rememberPwd:" destination="-1" eventType="touchUpInside" id="2tD-GD-N7J"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-m5-xhX">
+                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <color key="backgroundColor" red="1" green="0.16205514579999999" blue="0.47732887750000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="38" id="Cpa-bL-jNP"/>
+                            </constraints>
+                            <state key="normal" title="登录"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Cpa-bL-jNP"/>
+                                </mask>
+                            </variation>
+                            <variation key="widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="Cpa-bL-jNP"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="login:" destination="-1" eventType="touchUpInside" id="5FL-4y-kXF"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.83137254900000002" green="0.83137254900000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -408,11 +421,11 @@
                     <variation key="default">
                         <mask key="subviews">
                             <exclude reference="VMC-dX-kpT"/>
-                            <exclude reference="DFJ-m5-xhX"/>
                             <exclude reference="KRQ-4r-Qnp"/>
                             <exclude reference="hlZ-m6-v8Z"/>
                             <exclude reference="yXX-Pu-7Ai"/>
                             <exclude reference="Vyh-Mv-iPN"/>
+                            <exclude reference="DFJ-m5-xhX"/>
                         </mask>
                         <mask key="constraints">
                             <exclude reference="4pH-TM-ioJ"/>
@@ -447,11 +460,11 @@
                     <variation key="widthClass=compact">
                         <mask key="subviews">
                             <include reference="VMC-dX-kpT"/>
-                            <include reference="DFJ-m5-xhX"/>
                             <include reference="KRQ-4r-Qnp"/>
                             <include reference="hlZ-m6-v8Z"/>
                             <include reference="yXX-Pu-7Ai"/>
                             <include reference="Vyh-Mv-iPN"/>
+                            <include reference="DFJ-m5-xhX"/>
                         </mask>
                         <mask key="constraints">
                             <include reference="4pH-TM-ioJ"/>

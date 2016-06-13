@@ -22,16 +22,26 @@
     
     [Bmob registerWithAppKey:@"278382c756ccf9a0c7d461054b9cff45"];
     
+    [self setupSystem];
+    
     // Override point for customization after application launch.
 //    [[UIApplication  sharedApplication]setStatusBarHidden:NO];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
     //QCLoginCtrl *loginVC = [[QCLoginCtrl alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
-    //self.window.rootViewController = [[QCTabBarController alloc]init];
-    self.window.rootViewController = [[QCLoginCtrl alloc] init];
+    self.window.rootViewController = [[QCTabBarController alloc]init];
+    //self.window.rootViewController = [[QCLoginCtrl alloc] init];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void) setupSystem
+{
+//    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
+//    [accountDefaults setBool:YES forKey:UserRememberBoolKey];
+//    [accountDefaults setBool:NO forKey:UserAutoLoginBoolKey];
+//    [accountDefaults synchronize];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

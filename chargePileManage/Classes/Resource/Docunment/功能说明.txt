@@ -1,3 +1,14 @@
+2016.06.13
+1.以xib形式创建用户登录界面
+2.在xib界面上，添加控件，完成界面搭建
+3.采用autoLayer进行登录界面布局
+4.xib文件是后添加到登录模块的，导致一直加载故障
+5.重新创建QCLoginCtrl部分，并在创建时候添加xib文件，解决加载xib文件故障问题。
+6.添加保存自动登录和记住密码状态的功能
+7.保存用户名和密码
+8.添加第三方库，实现状态指示器，用于显示信息，给用户提醒。
+
+
 2016.06.12
 1.CUICatalog: Invalid asset name supplied: 问题，解决方法：//tableViewCell.imageView.image = [UIImage imageNamed:model.image];
 2.点击充电详细信息中，可以弹出UI界面，并能够展示充电的详细数据信息。
