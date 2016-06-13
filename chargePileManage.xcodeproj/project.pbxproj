@@ -13,7 +13,6 @@
 		72295A6B1CFD896100E40E9A /* QCRunStateCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A6A1CFD896100E40E9A /* QCRunStateCtrl.m */; };
 		72295A6E1CFD898000E40E9A /* QCFaultInfoCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A6D1CFD898000E40E9A /* QCFaultInfoCtrl.m */; };
 		72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A701CFD89C600E40E9A /* QCBatteryInfoCtrl.m */; };
-		72295A751CFEA63E00E40E9A /* QCLoginCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A731CFEA63E00E40E9A /* QCLoginCtrl.m */; };
 		72378CF71CEC6993005E9E52 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72378CF61CEC6993005E9E52 /* main.m */; };
 		72378D001CEC6993005E9E52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72378CFE1CEC6993005E9E52 /* Main.storyboard */; };
 		72378D021CEC6993005E9E52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72378D011CEC6993005E9E52 /* Assets.xcassets */; };
@@ -62,6 +61,8 @@
 		7288034C1D0D3734009AB66E /* ZCTradeKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803431D0D3734009AB66E /* ZCTradeKeyboard.m */; };
 		7288034D1D0D3734009AB66E /* ZCTradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803451D0D3734009AB66E /* ZCTradeView.m */; };
 		728803511D0D5333009AB66E /* QCChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803501D0D5333009AB66E /* QCChiBaoZiHeader.m */; };
+		728803611D0E7791009AB66E /* QCLoginCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288035F1D0E7791009AB66E /* QCLoginCtrl.m */; };
+		728803621D0E7791009AB66E /* QCLoginCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728803601D0E7791009AB66E /* QCLoginCtrl.xib */; };
 		7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE01CFFBADA003D386B /* UIView+Round.m */; };
 		7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE41CFFC590003D386B /* QCFaultView.m */; };
 		729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAACD1CFBE69300F7A953 /* QCRunStateView.m */; };
@@ -104,8 +105,6 @@
 		72295A6D1CFD898000E40E9A /* QCFaultInfoCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCFaultInfoCtrl.m; sourceTree = "<group>"; };
 		72295A6F1CFD89C600E40E9A /* QCBatteryInfoCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCBatteryInfoCtrl.h; sourceTree = "<group>"; };
 		72295A701CFD89C600E40E9A /* QCBatteryInfoCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCBatteryInfoCtrl.m; sourceTree = "<group>"; };
-		72295A721CFEA63E00E40E9A /* QCLoginCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCLoginCtrl.h; sourceTree = "<group>"; };
-		72295A731CFEA63E00E40E9A /* QCLoginCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCLoginCtrl.m; sourceTree = "<group>"; };
 		72378CF21CEC6993005E9E52 /* chargePileManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chargePileManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72378CF61CEC6993005E9E52 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		72378CFF1CEC6993005E9E52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -202,6 +201,9 @@
 		728803451D0D3734009AB66E /* ZCTradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeView.m; sourceTree = "<group>"; };
 		7288034F1D0D5333009AB66E /* QCChiBaoZiHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChiBaoZiHeader.h; sourceTree = "<group>"; };
 		728803501D0D5333009AB66E /* QCChiBaoZiHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChiBaoZiHeader.m; sourceTree = "<group>"; };
+		7288035E1D0E7791009AB66E /* QCLoginCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCLoginCtrl.h; sourceTree = "<group>"; };
+		7288035F1D0E7791009AB66E /* QCLoginCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCLoginCtrl.m; sourceTree = "<group>"; };
+		728803601D0E7791009AB66E /* QCLoginCtrl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QCLoginCtrl.xib; sourceTree = "<group>"; };
 		7292BADF1CFFBADA003D386B /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
 		7292BAE01CFFBADA003D386B /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Round.m"; sourceTree = "<group>"; };
 		7292BAE31CFFC590003D386B /* QCFaultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultView.h; sourceTree = "<group>"; };
@@ -448,8 +450,9 @@
 		7254FA2F1CED4A6E008EA77F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				72295A721CFEA63E00E40E9A /* QCLoginCtrl.h */,
-				72295A731CFEA63E00E40E9A /* QCLoginCtrl.m */,
+				7288035E1D0E7791009AB66E /* QCLoginCtrl.h */,
+				7288035F1D0E7791009AB66E /* QCLoginCtrl.m */,
+				728803601D0E7791009AB66E /* QCLoginCtrl.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -924,6 +927,7 @@
 			files = (
 				7254FA4C1CED4A6E008EA77F /* 功能说明.txt in Resources */,
 				72378D051CEC6993005E9E52 /* LaunchScreen.storyboard in Resources */,
+				728803621D0E7791009AB66E /* QCLoginCtrl.xib in Resources */,
 				72378D021CEC6993005E9E52 /* Assets.xcassets in Resources */,
 				728803471D0D3734009AB66E /* trade.bundle in Resources */,
 				72378D001CEC6993005E9E52 /* Main.storyboard in Resources */,
@@ -1012,7 +1016,6 @@
 				7288034A1D0D3734009AB66E /* ZCAudioTool.m in Sources */,
 				726F7E9E1CF593E70068513A /* WQItemModel.m in Sources */,
 				728803511D0D5333009AB66E /* QCChiBaoZiHeader.m in Sources */,
-				72295A751CFEA63E00E40E9A /* QCLoginCtrl.m in Sources */,
 				72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */,
 				728803481D0D3734009AB66E /* UIAlertView+Quick.m in Sources */,
 				726F7E9B1CF593E70068513A /* WQTableViewGroupModel.m in Sources */,
@@ -1024,6 +1027,7 @@
 				7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */,
 				7211DDEC1CF8180600234042 /* QCPileListDataMode.m in Sources */,
 				726F7E681CF57D900068513A /* QCHistoryRecordController.m in Sources */,
+				728803611D0E7791009AB66E /* QCLoginCtrl.m in Sources */,
 				729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */,
 				726F7E9C1CF593E70068513A /* WQItemArrowModel.m in Sources */,
 				726F7E621CF57CFF0068513A /* QCPileListController.m in Sources */,

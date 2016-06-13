@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "QCTabBarController.h"
+#import "QCLoginCtrl.h"
 #import <BmobSDK/Bmob.h>
 
 @interface AppDelegate ()
@@ -22,12 +23,13 @@
     [Bmob registerWithAppKey:@"278382c756ccf9a0c7d461054b9cff45"];
     
     // Override point for customization after application launch.
-    [[UIApplication  sharedApplication]setStatusBarHidden:NO];
+//    [[UIApplication  sharedApplication]setStatusBarHidden:NO];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
+    //QCLoginCtrl *loginVC = [[QCLoginCtrl alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[QCTabBarController alloc]init];
-    //self.window.rootViewController = [[ZZLoginViewController alloc]init];
+    //self.window.rootViewController = [[QCTabBarController alloc]init];
+    self.window.rootViewController = [[QCLoginCtrl alloc] init];
     [self.window makeKeyAndVisible];
     return YES;
 }

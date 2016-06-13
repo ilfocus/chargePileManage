@@ -2,7 +2,7 @@
 //  QCLoginCtrl.m
 //  chargePileManage
 //
-//  Created by YuMing on 16/6/13.
+//  Created by YuMing on 16/6/1.
 //  Copyright © 2016年 shQianChen. All rights reserved.
 //
 

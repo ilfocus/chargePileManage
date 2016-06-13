@@ -20,6 +20,7 @@
 #import "QCChargeInfoView.h"
 #import "QCBatteryInfoView.h"
 #import "QCStopCtrlView.h"
+#import "QCLoginCtrl.h"
 // third lib
 #import "MJExtension.h"
 #import <BmobSDK/Bmob.h>
@@ -288,9 +289,13 @@ static int pileDataCnt = 0;
 #pragma mark - button click
 - (void) clickRunState
 {
-    QCRunStateCtrl *runStateCtrl = [[QCRunStateCtrl alloc] init];
-    runStateCtrl.title = @"运行状态";
-    [self.navigationController pushViewController:runStateCtrl animated:YES];
+    //QCRunStateCtrl *runStateCtrl = [[QCRunStateCtrl alloc] init];
+    QCLoginCtrl *loginVC = [[QCLoginCtrl alloc] init];
+    loginVC.title = @"运行状态";
+    [self.navigationController pushViewController:loginVC animated:YES];
+    
+    
+    
     
 }
 - (void) clickFaultInfo
