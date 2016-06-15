@@ -30,8 +30,8 @@
     
     //QCLoginCtrl *loginVC = [[QCLoginCtrl alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [[QCTabBarController alloc]init];
-    //self.window.rootViewController = [[QCLoginCtrl alloc] init];
+    //self.window.rootViewController = [[QCTabBarController alloc]init];
+    self.window.rootViewController = [[QCLoginCtrl alloc] init];
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -7,8 +7,12 @@
 //
 
 #import "QCLoginCtrl.h"
+#import "QCTabBarController.h"
+#import "QCReminderUserTool.h"
 
-#import "MBProgressHUD.h"
+#import "YYKit.h"
+
+
 
 @interface QCLoginCtrl ()
 @property (weak, nonatomic) IBOutlet UITextField *userIDText;
@@ -31,18 +35,8 @@ NSString *const UserAutoLoginBoolKey = @"autoLogin";
 NSString *const userNameStrKey = @"userName";
 NSString *const userPwdStrKey = @"userPwd";
 
-- (instancetype) init {
-    self = [super init];
-    if (self) {
-        WQLog(@"初始化类！");
-    }
-    return self;
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    WQLog(@"加载view");
     // Do any additional setup after loading the view from its nib.
     
     [self setupView];
@@ -57,7 +51,6 @@ NSString *const userPwdStrKey = @"userPwd";
         self.userIDText.text = [accountDefaults objectForKey:userNameStrKey];
         self.pwdText.text = [accountDefaults objectForKey:userPwdStrKey];
         
-        
     } else {
         [self.rememberPwd setImage:[UIImage imageNamed:@"photo_state_normal" ] forState:UIControlStateNormal];
     }
@@ -67,35 +60,40 @@ NSString *const userPwdStrKey = @"userPwd";
     } else {
         [self.autoLogin setImage:[UIImage imageNamed:@"photo_state_normal" ] forState:UIControlStateNormal];
     }
-    WQLog(@"_autoLoginFlg--%i",_autoLoginFlg);
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    if (_autoLoginFlg) {
+        // 在这里添加登录效果
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[QCTabBarController alloc]init];
+    }
+}
 
 - (IBAction)login:(id)sender {
     
-    WQLog(@"点击登录按钮！！！");
-    
-    WQLog(@"用户名:%@",self.userIDText.text);
-    WQLog(@"密码:%@",self.pwdText.text);
-    
     // 可以保存密码，点击登录后，通过服务器进行帐号验证
-    if (self.userIDText.text == nil && self.pwdText.text == nil) {
+    if ([self.userIDText.text isNotBlank] && [self.pwdText.text isNotBlank]) {
         // 验证
-        WQLog(@"用户名及密码不为空！");
+        if ([self.userIDText.text isEqualToString:@"wangqi"] && [self.pwdText.text isEqualToString:@"123456"]) {
+            //[QCReminderUserTool showCorrect:self.view str:@"输入帐号正确"];
+            [QCReminderUserTool showLoad:self.view];
+            //sleep(3.0);
+            [UIApplication sharedApplication].keyWindow.rootViewController = [[QCTabBarController alloc]init];
+        } else {
+            if (![self.userIDText.text isEqualToString:@"wangqi"]) {
+                [QCReminderUserTool showError:self.view str:@"用户名不存在"];
+            } else if (![self.pwdText.text isEqualToString:@"123456"]) {
+                [QCReminderUserTool showError:self.view str:@"密码不正确"];
+            }
+            
+        }
     } else {
-        WQLog(@"————————空————————");
-        //[MBProgressHUD showError:@"测试showError"];
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        
-        // Set the label text.
-        // You can also adjust other label properties if needed.
-        // hud.label.font = [UIFont italicSystemFontOfSize:16.f];
-        
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [hud hide:YES];
-            });
-        });
+        if (![self.userIDText.text isNotBlank]) {
+            [QCReminderUserTool showError:self.view str:@"用户名不能为空"];
+        } else if (![self.pwdText.text isNotBlank]) {
+            [QCReminderUserTool showError:self.view str:@"密码不能为空"];
+        }
     }
     
 }

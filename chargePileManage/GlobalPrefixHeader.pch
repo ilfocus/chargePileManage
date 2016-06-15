@@ -29,6 +29,9 @@
 #endif
 
 // 5.定义UI显示间隔
+/** cell的边框宽度 */
+#define QCStatusCellBorder 5
+/** 间距 */
 #define PADDING 5
 /** view内部的边框宽度 */
 #define QCDetailViewBorder 5

@@ -22,7 +22,6 @@
 @property (nonatomic, weak) UILabel *titleLabel;
 /** 子标题 */
 @property (nonatomic, weak) UILabel *subTitleLabel;
-
 /**
  *  箭头
  */
@@ -33,7 +32,7 @@
 #pragma mark - init
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
-    static NSString *ID = @"cell";
+    static NSString *ID = @"QCPileListCell";
     
     QCPileListCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {

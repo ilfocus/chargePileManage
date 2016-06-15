@@ -11,7 +11,7 @@
 
 #import "QCNavigationController.h"
 #import "QCPileListController.h"
-#import "QCHistoryRecordController.h"
+#import "QCHistoryRecordCtrl.h"
 #import "QCSystemManageController.h"
 
 
@@ -95,7 +95,7 @@
     [self setupChildViewController:home title:@"桩列表" imageName:@"tabbar_home" selectedImageName:@"tabbar_home_selected"];
     
     // 2.历史记录
-    QCHistoryRecordController *message = [[QCHistoryRecordController alloc]init];
+    QCHistoryRecordCtrl *message = [[QCHistoryRecordCtrl alloc]init];
     message.tabBarItem.badgeValue = @"10";
     [self setupChildViewController:message title:@"历史记录" imageName:@"tabbar_message_center" selectedImageName:@"tabbar_message_center_selected"];
     
