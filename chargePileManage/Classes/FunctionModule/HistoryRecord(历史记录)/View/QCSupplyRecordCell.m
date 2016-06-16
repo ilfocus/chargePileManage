@@ -1,29 +1,29 @@
 //
-//  QCHistoryRecordCell.m
+//  QCSupplyRecordCell.m
 //  chargePileManage
 //
-//  Created by YuMing on 16/6/14.
+//  Created by YuMing on 16/6/15.
 //  Copyright © 2016年 shQianChen. All rights reserved.
 //
 
-#import "QCHistoryRecordCell.h"
+#import "QCSupplyRecordCell.h"
 
-@interface QCHistoryRecordCell ()
+@interface QCSupplyRecordCell ()
 @property (nonatomic,weak) UILabel *chargePileNumLbl;
 @property (nonatomic,weak) UILabel *chargeTimeLbl;
 @property (nonatomic,weak) UILabel *chargeCostLbl;
 @end
 
-@implementation QCHistoryRecordCell
+@implementation QCSupplyRecordCell
 
 #pragma mark - init
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
     static NSString *ID = @"QCHistoryRecordCell";
     
-    QCHistoryRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    QCSupplyRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (cell == nil) {
-        cell = [[QCHistoryRecordCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+        cell = [[QCSupplyRecordCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
     }
     return cell;
 }
@@ -42,7 +42,7 @@
     
     UILabel *chargePileNumLbl = [UILabel new];
     chargePileNumLbl.font = QCTitleFont;
-    chargePileNumLbl.text = @"桩号:";
+    chargePileNumLbl.text = @"用户:";
     chargePileNumLbl.textColor = [UIColor blackColor];
     [self addSubview:chargePileNumLbl];
     self.chargePileNumLbl = chargePileNumLbl;
@@ -100,17 +100,6 @@
         make.left.equalTo(vs.mas_left).with.offset(QCStatusCellBorder);
         
     }];
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

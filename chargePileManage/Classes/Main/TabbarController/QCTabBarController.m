@@ -12,7 +12,7 @@
 #import "QCNavigationController.h"
 #import "QCPileListController.h"
 #import "QCHistoryRecordCtrl.h"
-#import "QCSystemManageController.h"
+#import "QCSysManageCtrl.h"
 
 
 @interface QCTabBarController () <QCTableBarDelegate>
@@ -100,7 +100,7 @@
     [self setupChildViewController:message title:@"历史记录" imageName:@"tabbar_message_center" selectedImageName:@"tabbar_message_center_selected"];
     
     // 3.系统管理
-    QCSystemManageController *me = [[QCSystemManageController alloc]init];
+    QCSysManageCtrl *me = [[QCSysManageCtrl alloc]init];
     me.tabBarItem.badgeValue = @"10";
     [self setupChildViewController:me title:@"系统管理" imageName:@"tabbar_profile" selectedImageName:@"tabbar_profile_selected"];
     

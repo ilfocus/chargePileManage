@@ -67,13 +67,25 @@ static const CGFloat QCDuration = 2.0;
     WQItemModel *setMsgContent = [QCPileListCellModel itemWithIcon:@"setting_sign" title:@"0002#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
     WQItemModel *useHelp = [QCPileListCellModel itemWithIcon:@"setting_help" title:@"0003#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
     WQItemModel *comQuestion = [QCPileListCellModel itemWithIcon:@"setting_answer" title:@"0004#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
+    
+    WQItemModel *everyMsgNumber1 = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:@"0005#充电桩" subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
+    WQItemModel *setMsgContent1 = [QCPileListCellModel itemWithIcon:@"setting_sign" title:@"0006#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
+    WQItemModel *useHelp1 = [QCPileListCellModel itemWithIcon:@"setting_help" title:@"0007#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
+    WQItemModel *comQuestion1 = [QCPileListCellModel itemWithIcon:@"setting_answer" title:@"0008#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
+    
+    WQItemModel *everyMsgNumber2 = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:@"0009#充电桩" subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
+    WQItemModel *setMsgContent2 = [QCPileListCellModel itemWithIcon:@"setting_sign" title:@"00010#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
+    WQItemModel *useHelp2 = [QCPileListCellModel itemWithIcon:@"setting_help" title:@"00011#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
+    WQItemModel *comQuestion2 = [QCPileListCellModel itemWithIcon:@"setting_answer" title:@"00012#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
     //////////////////////////////////////////////////////////////////////////////////////////////////
     
     
     WQTableViewGroupModel *group = [WQTableViewGroupModel new];
     //group.items = @[clearRecord,openSave,selectedCopy,everyMsgNumber,setMsgContent,useHelp,comQuestion];
     
-    group.items = @[everyMsgNumber,setMsgContent,useHelp,comQuestion];
+    group.items = @[everyMsgNumber,setMsgContent,useHelp,comQuestion,
+                    everyMsgNumber1,setMsgContent1,useHelp1,comQuestion1,
+                    everyMsgNumber2,setMsgContent2,useHelp2,comQuestion2];
     //group.header = @"我是第一组头部内容";
     //group.footer = @"我是第一组尾部内容";
     

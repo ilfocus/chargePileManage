@@ -14,6 +14,8 @@
 #import "WQItemLabelModel.h"
 #import "WQTableViewGroupModel.h"
 
+#import "QCSysManageHeaderView.h"
+
 @interface QCSystemManageController ()
 
 @end
@@ -28,6 +30,11 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    QCSysManageHeaderView *header = [[QCSysManageHeaderView alloc] init];
+    header.frame = CGRectMake(0, 64, SCREEN_WIDTH, 150);
+    header.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:header];
     
     [self setGroup0];
     [self setGroup1];
