@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ChameleonFramework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -49,6 +54,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVSegmentedControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UICountingLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,6 +72,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0E44717E0BD8FDC2D8BFA4C4E4AECCDA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>11929A53A8AD141288485C2968E5803E</key>
 		<dict>
 			<key>primary</key>
@@ -72,12 +87,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>40B55DD482843CDE27CC5FA2D222A4A7</key>
+		<key>3E67C653BEFADA289700F6F96AA2C503</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5F7FD63230A6778BD1801C563238F728</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,17 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9ADE7ED056D3AC533BB5E55D65350BF6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2CB5D783B10645BC434B45F5D618D29</key>
 		<dict>
 			<key>primary</key>
 			<true/>

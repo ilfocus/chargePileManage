@@ -47,7 +47,7 @@
             [self setBackgroundImage:[UIImage imageWithNamed:@"tabbar_slider"] forState:UIControlStateSelected];
         }
         // 设置选中时的字体颜色
-        [self setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+        [self setTitleColor:[UIColor flatGreenColorDark] forState:UIControlStateSelected];
         
         // 添加一个提醒数字按钮
         UIButton *badgeButton = [[UIButton alloc]init];

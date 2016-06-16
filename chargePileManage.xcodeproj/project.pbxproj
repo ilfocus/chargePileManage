@@ -34,6 +34,20 @@
 		7257605C1D10FB940003ECAA /* QCSysManageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7257605B1D10FB940003ECAA /* QCSysManageHeaderView.m */; };
 		7257605F1D1121990003ECAA /* QCSysManageCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7257605E1D1121990003ECAA /* QCSysManageCtrl.m */; };
 		725760621D1127AA0003ECAA /* QCSysManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760611D1127AA0003ECAA /* QCSysManageCell.m */; };
+		725760651D123AA70003ECAA /* QCPersonalInfoCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760641D123AA70003ECAA /* QCPersonalInfoCtrl.m */; };
+		7257608E1D1284C40003ECAA /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7257606A1D1284C40003ECAA /* FAImageView.m */; };
+		7257608F1D1284C40003ECAA /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 7257606C1D1284C40003ECAA /* NSString+FontAwesome.m */; };
+		725760901D1284C40003ECAA /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 7257606E1D1284C40003ECAA /* UIFont+FontAwesome.m */; };
+		725760911D1284C40003ECAA /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760701D1284C40003ECAA /* UIImage+FontAwesome.m */; };
+		725760931D1284C40003ECAA /* NSDateFormatter+Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760741D1284C40003ECAA /* NSDateFormatter+Singleton.m */; };
+		725760941D1284C40003ECAA /* NSString+pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760761D1284C40003ECAA /* NSString+pinyin.m */; };
+		725760951D1284C40003ECAA /* NSString+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760781D1284C40003ECAA /* NSString+Util.m */; };
+		725760961D1284C40003ECAA /* NSTextAttachment+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 7257607A1D1284C40003ECAA /* NSTextAttachment+Util.m */; };
+		725760971D1284C40003ECAA /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7257607C1D1284C40003ECAA /* UIBarButtonItem+Badge.m */; };
+		725760981D1284C40003ECAA /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7257607E1D1284C40003ECAA /* UIButton+Badge.m */; };
+		7257609A1D1284C40003ECAA /* UIImage+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760821D1284C40003ECAA /* UIImage+Util.m */; };
+		7257609D1D1284C40003ECAA /* UIScrollView+ScalableCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760881D1284C40003ECAA /* UIScrollView+ScalableCover.m */; };
+		725760A51D1286B90003ECAA /* UIColor+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760A41D1286B90003ECAA /* UIColor+hex.m */; };
 		726F7E501CF568CC0068513A /* QCTableBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E4F1CF568CC0068513A /* QCTableBar.m */; };
 		726F7E531CF56AF30068513A /* QCTableBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E521CF56AF30068513A /* QCTableBarButton.m */; };
 		726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E551CF56E7A0068513A /* UIBarButtonItem+YM.m */; };
@@ -41,7 +55,6 @@
 		726F7E5C1CF56E860068513A /* NSDate+WQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E5B1CF56E860068513A /* NSDate+WQ.m */; };
 		726F7E5F1CF57B510068513A /* QCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E5E1CF57B510068513A /* QCNavigationController.m */; };
 		726F7E621CF57CFF0068513A /* QCPileListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E611CF57CFF0068513A /* QCPileListController.m */; };
-		726F7E651CF57D210068513A /* QCSystemManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E641CF57D210068513A /* QCSystemManageController.m */; };
 		726F7E9A1CF593E70068513A /* WQBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E891CF593E70068513A /* WQBaseTableViewController.m */; };
 		726F7E9B1CF593E70068513A /* WQTableViewGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E8D1CF593E70068513A /* WQTableViewGroupModel.m */; };
 		726F7E9C1CF593E70068513A /* WQItemArrowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E901CF593E70068513A /* WQItemArrowModel.m */; };
@@ -153,6 +166,34 @@
 		7257605E1D1121990003ECAA /* QCSysManageCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSysManageCtrl.m; sourceTree = "<group>"; };
 		725760601D1127AA0003ECAA /* QCSysManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSysManageCell.h; sourceTree = "<group>"; };
 		725760611D1127AA0003ECAA /* QCSysManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSysManageCell.m; sourceTree = "<group>"; };
+		725760631D123AA70003ECAA /* QCPersonalInfoCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPersonalInfoCtrl.h; sourceTree = "<group>"; };
+		725760641D123AA70003ECAA /* QCPersonalInfoCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPersonalInfoCtrl.m; sourceTree = "<group>"; };
+		725760691D1284C40003ECAA /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
+		7257606A1D1284C40003ECAA /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
+		7257606B1D1284C40003ECAA /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		7257606C1D1284C40003ECAA /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		7257606D1D1284C40003ECAA /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		7257606E1D1284C40003ECAA /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
+		7257606F1D1284C40003ECAA /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
+		725760701D1284C40003ECAA /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
+		725760731D1284C40003ECAA /* NSDateFormatter+Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Singleton.h"; sourceTree = "<group>"; };
+		725760741D1284C40003ECAA /* NSDateFormatter+Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Singleton.m"; sourceTree = "<group>"; };
+		725760751D1284C40003ECAA /* NSString+pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+pinyin.h"; sourceTree = "<group>"; };
+		725760761D1284C40003ECAA /* NSString+pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+pinyin.m"; sourceTree = "<group>"; };
+		725760771D1284C40003ECAA /* NSString+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Util.h"; sourceTree = "<group>"; };
+		725760781D1284C40003ECAA /* NSString+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Util.m"; sourceTree = "<group>"; };
+		725760791D1284C40003ECAA /* NSTextAttachment+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTextAttachment+Util.h"; sourceTree = "<group>"; };
+		7257607A1D1284C40003ECAA /* NSTextAttachment+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTextAttachment+Util.m"; sourceTree = "<group>"; };
+		7257607B1D1284C40003ECAA /* UIBarButtonItem+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Badge.h"; sourceTree = "<group>"; };
+		7257607C1D1284C40003ECAA /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
+		7257607D1D1284C40003ECAA /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
+		7257607E1D1284C40003ECAA /* UIButton+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Badge.m"; sourceTree = "<group>"; };
+		725760811D1284C40003ECAA /* UIImage+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Util.h"; sourceTree = "<group>"; };
+		725760821D1284C40003ECAA /* UIImage+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Util.m"; sourceTree = "<group>"; };
+		725760871D1284C40003ECAA /* UIScrollView+ScalableCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+ScalableCover.h"; sourceTree = "<group>"; };
+		725760881D1284C40003ECAA /* UIScrollView+ScalableCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ScalableCover.m"; sourceTree = "<group>"; };
+		725760A31D1286B90003ECAA /* UIColor+hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+hex.h"; sourceTree = "<group>"; };
+		725760A41D1286B90003ECAA /* UIColor+hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hex.m"; sourceTree = "<group>"; };
 		726F7E4E1CF568CC0068513A /* QCTableBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCTableBar.h; sourceTree = "<group>"; };
 		726F7E4F1CF568CC0068513A /* QCTableBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCTableBar.m; sourceTree = "<group>"; };
 		726F7E511CF56AF30068513A /* QCTableBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCTableBarButton.h; sourceTree = "<group>"; };
@@ -167,8 +208,6 @@
 		726F7E5E1CF57B510068513A /* QCNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCNavigationController.m; sourceTree = "<group>"; };
 		726F7E601CF57CFF0068513A /* QCPileListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListController.h; sourceTree = "<group>"; };
 		726F7E611CF57CFF0068513A /* QCPileListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListController.m; sourceTree = "<group>"; };
-		726F7E631CF57D210068513A /* QCSystemManageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSystemManageController.h; sourceTree = "<group>"; };
-		726F7E641CF57D210068513A /* QCSystemManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSystemManageController.m; sourceTree = "<group>"; };
 		726F7E881CF593E70068513A /* WQBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQBaseTableViewController.h; sourceTree = "<group>"; };
 		726F7E891CF593E70068513A /* WQBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WQBaseTableViewController.m; sourceTree = "<group>"; };
 		726F7E8C1CF593E70068513A /* WQTableViewGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WQTableViewGroupModel.h; sourceTree = "<group>"; };
@@ -384,6 +423,23 @@
 		7254FA181CED4A6E008EA77F /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				725760681D1284C40003ECAA /* FontAwesome */,
+				725760731D1284C40003ECAA /* NSDateFormatter+Singleton.h */,
+				725760741D1284C40003ECAA /* NSDateFormatter+Singleton.m */,
+				725760751D1284C40003ECAA /* NSString+pinyin.h */,
+				725760761D1284C40003ECAA /* NSString+pinyin.m */,
+				725760771D1284C40003ECAA /* NSString+Util.h */,
+				725760781D1284C40003ECAA /* NSString+Util.m */,
+				725760791D1284C40003ECAA /* NSTextAttachment+Util.h */,
+				7257607A1D1284C40003ECAA /* NSTextAttachment+Util.m */,
+				7257607B1D1284C40003ECAA /* UIBarButtonItem+Badge.h */,
+				7257607C1D1284C40003ECAA /* UIBarButtonItem+Badge.m */,
+				7257607D1D1284C40003ECAA /* UIButton+Badge.h */,
+				7257607E1D1284C40003ECAA /* UIButton+Badge.m */,
+				725760811D1284C40003ECAA /* UIImage+Util.h */,
+				725760821D1284C40003ECAA /* UIImage+Util.m */,
+				725760871D1284C40003ECAA /* UIScrollView+ScalableCover.h */,
+				725760881D1284C40003ECAA /* UIScrollView+ScalableCover.m */,
 				7292BADB1CFFBA24003D386B /* UIViewCategory */,
 				726F7E5A1CF56E860068513A /* NSDate+WQ.h */,
 				726F7E5B1CF56E860068513A /* NSDate+WQ.m */,
@@ -397,6 +453,8 @@
 				7254FA1E1CED4A6E008EA77F /* NSString+XFTime.m */,
 				7254FA1F1CED4A6E008EA77F /* UIImage+XFCircle.h */,
 				7254FA201CED4A6E008EA77F /* UIImage+XFCircle.m */,
+				725760A31D1286B90003ECAA /* UIColor+hex.h */,
+				725760A41D1286B90003ECAA /* UIColor+hex.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -556,10 +614,10 @@
 		7254FA371CED4A6E008EA77F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				726F7E631CF57D210068513A /* QCSystemManageController.h */,
-				726F7E641CF57D210068513A /* QCSystemManageController.m */,
 				7257605D1D1121990003ECAA /* QCSysManageCtrl.h */,
 				7257605E1D1121990003ECAA /* QCSysManageCtrl.m */,
+				725760631D123AA70003ECAA /* QCPersonalInfoCtrl.h */,
+				725760641D123AA70003ECAA /* QCPersonalInfoCtrl.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -645,6 +703,21 @@
 			children = (
 			);
 			path = Picture;
+			sourceTree = "<group>";
+		};
+		725760681D1284C40003ECAA /* FontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				725760691D1284C40003ECAA /* FAImageView.h */,
+				7257606A1D1284C40003ECAA /* FAImageView.m */,
+				7257606B1D1284C40003ECAA /* NSString+FontAwesome.h */,
+				7257606C1D1284C40003ECAA /* NSString+FontAwesome.m */,
+				7257606D1D1284C40003ECAA /* UIFont+FontAwesome.h */,
+				7257606E1D1284C40003ECAA /* UIFont+FontAwesome.m */,
+				7257606F1D1284C40003ECAA /* UIImage+FontAwesome.h */,
+				725760701D1284C40003ECAA /* UIImage+FontAwesome.m */,
+			);
+			path = FontAwesome;
 			sourceTree = "<group>";
 		};
 		726F7E861CF593B20068513A /* ComTableCntl */ = {
@@ -1045,13 +1118,16 @@
 				726F7E501CF568CC0068513A /* QCTableBar.m in Sources */,
 				728803491D0D3734009AB66E /* UIView+Extension.m in Sources */,
 				7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */,
+				725760971D1284C40003ECAA /* UIBarButtonItem+Badge.m in Sources */,
 				725760561D10E9B60003ECAA /* QCChargeRecordCell.m in Sources */,
 				726F7E9A1CF593E70068513A /* WQBaseTableViewController.m in Sources */,
 				729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */,
 				7257605F1D1121990003ECAA /* QCSysManageCtrl.m in Sources */,
+				725760A51D1286B90003ECAA /* UIColor+hex.m in Sources */,
 				725760621D1127AA0003ECAA /* QCSysManageCell.m in Sources */,
 				7288032F1D048216009AB66E /* WBPopMenuModel.m in Sources */,
 				72E281FC1D0148B300AD5B86 /* DXPopover.m in Sources */,
+				7257609A1D1284C40003ECAA /* UIImage+Util.m in Sources */,
 				72077A361D0F9B55000B9785 /* QCReminderUserTool.m in Sources */,
 				7254FA471CED4A6E008EA77F /* UIImage+XFCircle.m in Sources */,
 				728803321D048216009AB66E /* WBTableViewCell.m in Sources */,
@@ -1060,6 +1136,7 @@
 				728803511D0D5333009AB66E /* QCChiBaoZiHeader.m in Sources */,
 				72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */,
 				728803481D0D3734009AB66E /* UIAlertView+Quick.m in Sources */,
+				725760931D1284C40003ECAA /* NSDateFormatter+Singleton.m in Sources */,
 				726F7E9B1CF593E70068513A /* WQTableViewGroupModel.m in Sources */,
 				726F7E9D1CF593E70068513A /* WQItemLabelModel.m in Sources */,
 				7254FA461CED4A6E008EA77F /* NSString+XFTime.m in Sources */,
@@ -1067,20 +1144,25 @@
 				7288034C1D0D3734009AB66E /* ZCTradeKeyboard.m in Sources */,
 				726F7E9F1CF593E70068513A /* WQItemSwitchModel.m in Sources */,
 				7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */,
+				7257608F1D1284C40003ECAA /* NSString+FontAwesome.m in Sources */,
 				7211DDEC1CF8180600234042 /* QCPileListDataMode.m in Sources */,
+				725760911D1284C40003ECAA /* UIImage+FontAwesome.m in Sources */,
 				728803611D0E7791009AB66E /* QCLoginCtrl.m in Sources */,
 				729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */,
 				726F7E9C1CF593E70068513A /* WQItemArrowModel.m in Sources */,
 				725760531D0FD1C20003ECAA /* QCHistoryRecordCtrl.m in Sources */,
+				725760941D1284C40003ECAA /* NSString+pinyin.m in Sources */,
 				726F7E621CF57CFF0068513A /* QCPileListController.m in Sources */,
 				7254FA4B1CED4A6E008EA77F /* AppDelegate.m in Sources */,
 				721FFAB91CFC1C6700DDC22D /* QCStopCtrlView.m in Sources */,
 				728803331D048216009AB66E /* WBTableViewDataSource.m in Sources */,
 				726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */,
+				725760901D1284C40003ECAA /* UIFont+FontAwesome.m in Sources */,
 				726F7E531CF56AF30068513A /* QCTableBarButton.m in Sources */,
 				7288034D1D0D3734009AB66E /* ZCTradeView.m in Sources */,
 				728803301D048216009AB66E /* WBPopMenuSingleton.m in Sources */,
 				726F7E5C1CF56E860068513A /* NSDate+WQ.m in Sources */,
+				725760651D123AA70003ECAA /* QCPersonalInfoCtrl.m in Sources */,
 				726F7EA01CF593E70068513A /* WQBaseCell.m in Sources */,
 				7254FA501CED4DCB008EA77F /* QCTabBarController.m in Sources */,
 				725760591D10EA270003ECAA /* QCSupplyRecordCell.m in Sources */,
@@ -1090,16 +1172,20 @@
 				729EAAD41CFC146A00F7A953 /* QCChargePileParaView.m in Sources */,
 				728803461D0D3734009AB66E /* NSString+Extension.m in Sources */,
 				72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */,
-				726F7E651CF57D210068513A /* QCSystemManageController.m in Sources */,
+				725760961D1284C40003ECAA /* NSTextAttachment+Util.m in Sources */,
 				726F7EA61CF6E9890068513A /* QCPileListCellModel.m in Sources */,
+				7257608E1D1284C40003ECAA /* FAImageView.m in Sources */,
+				7257609D1D1284C40003ECAA /* UIScrollView+ScalableCover.m in Sources */,
 				728803311D048216009AB66E /* WBPopMenuView.m in Sources */,
 				7288034B1D0D3734009AB66E /* ZCTradeInputView.m in Sources */,
 				729EAADC1CFC14EE00F7A953 /* QCBatteryInfoView.m in Sources */,
 				728803341D048216009AB66E /* WBTableViewDelegate.m in Sources */,
 				72295A6B1CFD896100E40E9A /* QCRunStateCtrl.m in Sources */,
 				726F7E591CF56E7A0068513A /* UIImage+adaptive_iOS7.m in Sources */,
+				725760981D1284C40003ECAA /* UIButton+Badge.m in Sources */,
 				729EAAD91CFC14CA00F7A953 /* QCChargeInfoView.m in Sources */,
 				7254FA441CED4A6E008EA77F /* NSString+ChineseChar.m in Sources */,
+				725760951D1284C40003ECAA /* NSString+Util.m in Sources */,
 				72E281F61D0108CD00AD5B86 /* QCChargeView.m in Sources */,
 				7254FA4A1CED4A6E008EA77F /* CDFInitialsAvatar.m in Sources */,
 				72295A6E1CFD898000E40E9A /* QCFaultInfoCtrl.m in Sources */,
@@ -1195,7 +1281,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1233,7 +1319,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1245,10 +1331,12 @@
 			baseConfigurationReference = 09485335309A16105A0B61D0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/chargePileManage/GlobalPrefixHeader.pch";
 				INFOPLIST_FILE = chargePileManage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.shQianChen.chargePileManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1260,10 +1348,12 @@
 			baseConfigurationReference = F6D5489189523ECDE4B2E8BD /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/chargePileManage/GlobalPrefixHeader.pch";
 				INFOPLIST_FILE = chargePileManage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.shQianChen.chargePileManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";

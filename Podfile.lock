@@ -15,6 +15,9 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - BmobSDK (1.7.0)
+  - ChameleonFramework (2.0.4):
+    - ChameleonFramework/Default (= 2.0.4)
+  - ChameleonFramework/Default (2.0.4)
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
@@ -25,6 +28,7 @@ PODS:
   - MJRefresh (3.1.0)
   - PNChart (0.8.9):
     - UICountingLabel (~> 1.2.0)
+  - SVSegmentedControl (0.2)
   - UICountingLabel (1.2.0)
   - YYKit (1.0.6):
     - YYKit/no-arc (= 1.0.6)
@@ -33,6 +37,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - BmobSDK
+  - ChameleonFramework
   - FMDB
   - LLBootstrapButton
   - Masonry
@@ -40,11 +45,13 @@ DEPENDENCIES:
   - MJExtension (~> 3.0.7)
   - MJRefresh
   - PNChart
+  - SVSegmentedControl
   - YYKit
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   BmobSDK: 1a7bb2aa514e69663f5b561a5c5cc5b479b20ad2
+  ChameleonFramework: 5abe69b1f2a6cc79c3c435fcd9d3d855748225ee
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   LLBootstrapButton: b4f9735e1684f7525aa3b8aea65c55f0af66348d
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
@@ -52,6 +59,7 @@ SPEC CHECKSUMS:
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
+  SVSegmentedControl: cc585b217cd1bc43a14a96a8fdfd16a1c3845b25
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   YYKit: a80c77ab7be226ebe539ef1495dfc25d5766d61e
 

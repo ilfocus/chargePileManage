@@ -9,6 +9,9 @@
 #import "QCHistoryRecordCtrl.h"
 #import "QCChargeRecordCell.h"
 #import "QCSupplyRecordCell.h"
+#import "UIColor+hex.h"
+
+#import "SVSegmentedControl.h"
 
 
 @interface QCHistoryRecordCtrl () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
@@ -29,6 +32,12 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+//    if (([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0)) {
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
+//        self.automaticallyAdjustsScrollViewInsets = NO;
+//    }
+//    
+    
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2,0);
@@ -41,26 +50,35 @@
     
     CGFloat segmentedHeight = 40;
     NSArray *array=@[@"充电记录",@"供电记录"];
+    
     UISegmentedControl *segmentedView = [[UISegmentedControl alloc] initWithItems:array];
     segmentedView.selectedSegmentIndex = 0;
-    
+    segmentedView.tintColor = [UIColor colorWithHex:0x15A230];
     [segmentedView addTarget:self action:@selector(charge:) forControlEvents:UIControlEventValueChanged];
     segmentedView.frame = CGRectMake(0, 64, SCREEN_WIDTH, segmentedHeight);;
     [self.view addSubview:segmentedView];
     self.segmentedView = segmentedView;
     
-    
-    CGRect chargeRecordViewFrame = CGRectMake(0, 64 + segmentedHeight, SCREEN_WIDTH, SCREEN_HEIGHT);
-    UITableView *chargeRecordView = [[UITableView alloc] initWithFrame:chargeRecordViewFrame style:UITableViewStylePlain];
+    CGFloat tableViewY = 64 + segmentedHeight;
+    CGFloat tableViewH = self.view.frame.size.height - self.tabBarController.tabBar.frame.size.height - tableViewY;
+    CGRect chargeRecordViewFrame = CGRectMake(0, tableViewY, SCREEN_WIDTH, tableViewH);
+    UITableView *chargeRecordView = [[UITableView alloc] initWithFrame:chargeRecordViewFrame style:UITableViewStyleGrouped];
+    //chargeRecordView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController.tabBar.frame.size.height + 20, 0);
     chargeRecordView.rowHeight = 100;
+    UIView *chargeHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    chargeRecordView.tableHeaderView = chargeHeaderView;
     [_scrollView addSubview:chargeRecordView];
     self.chargeRecordView = chargeRecordView;
     self.chargeRecordView.delegate = self;
     self.chargeRecordView.dataSource = self;
+    //chargeRecordView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    //chargeRecordView.height = self.view.bounds.size.height;
     
-    CGRect supplyRecordViewFrame = CGRectMake(SCREEN_WIDTH, 64 + segmentedHeight, SCREEN_WIDTH, SCREEN_HEIGHT);
-    UITableView *supplyRecordView = [[UITableView alloc] initWithFrame:supplyRecordViewFrame style:UITableViewStylePlain];
+    CGRect supplyRecordViewFrame = CGRectMake(SCREEN_WIDTH, tableViewY, SCREEN_WIDTH, tableViewH);
+    UITableView *supplyRecordView = [[UITableView alloc] initWithFrame:supplyRecordViewFrame style:UITableViewStyleGrouped];
     supplyRecordView.rowHeight = 100;
+    UIView *supplyHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    supplyRecordView.tableHeaderView = supplyHeaderView;
     [_scrollView addSubview:supplyRecordView];
     self.supplyRecordView = supplyRecordView;
     self.supplyRecordView.delegate = self;
@@ -110,11 +128,11 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //NSLog(@"ContentOffset  x is  %f,yis %f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    if (scrollView.contentOffset.x < SCREEN_WIDTH / 2) {
-        _segmentedView.selectedSegmentIndex = 0;
-    } else {
-        _segmentedView.selectedSegmentIndex = 1;
-    }
+//    if (scrollView.contentOffset.x < SCREEN_WIDTH / 2) {
+//        _segmentedView.selectedSegmentIndex = 0;
+//    } else {
+//        _segmentedView.selectedSegmentIndex = 1;
+//    }
 }
 
 @end

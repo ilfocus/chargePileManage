@@ -8,6 +8,7 @@
 
 #import "QCSysManageHeaderView.h"
 #import "YYKit.h"
+#import "UIColor+hex.h"
 
 @interface QCSysManageHeaderView ()
 
@@ -34,13 +35,14 @@
 //        view.layer.borderWidth = 1.0;
 //        view.layer.borderColor = [WQColor(226,226,226) CGColor];
         UIImageView *bgImage = [[UIImageView alloc] init];
-        [bgImage setImage:[UIImage resizedImageWithName:@"common_card_background"]];
+        bgImage.backgroundColor = [UIColor flatGreenColorDark];
+        //[bgImage setImage:[UIImage resizedImageWithName:@"common_card_background"]];
         [self addSubview:bgImage];
-        [self sendSubviewToBack:bgImage];
-        bgImage.layer.masksToBounds = YES;
-        bgImage.layer.cornerRadius = 8;
-        bgImage.layer.borderWidth = 1.0;
-        bgImage.layer.borderColor = [WQColor(226,226,226) CGColor];
+//        [self sendSubviewToBack:bgImage];
+//        bgImage.layer.masksToBounds = YES;
+//        bgImage.layer.cornerRadius = 8;
+//        bgImage.layer.borderWidth = 1.0;
+//        bgImage.layer.borderColor = [WQColor(226,226,226) CGColor];
         self.bgImage = bgImage;
         
         [self setupView];
@@ -54,15 +56,15 @@
     
     UIImage *image = [UIImage imageNamed:@"icon"];
     
-    userImageView.image = [image imageByRoundCornerRadius:50 borderWidth:1 borderColor:[UIColor whiteColor]];
+    userImageView.image = [image imageByRoundCornerRadius:35 borderWidth:1 borderColor:[UIColor whiteColor]];
     
     [self addSubview:userImageView];
     self.userImageView = userImageView;
     
     UILabel *userNameLbl = [[UILabel alloc] init];
-    userNameLbl.font = [UIFont systemFontOfSize:15];
+    userNameLbl.font = [UIFont systemFontOfSize:13];
     userNameLbl.text = @"我的帐号";
-    userNameLbl.textColor = [UIColor grayColor];
+    userNameLbl.textColor = [UIColor whiteColor];
     [self addSubview:userNameLbl];
     self.userNameLbl = userNameLbl;
 }
@@ -78,7 +80,7 @@
     CGSize userNameSize = [_userNameLbl.text sizeWithAttributes:@{NSFontAttributeName : _userNameLbl.font}];
     
     [_userImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 100));
+        make.size.mas_equalTo(CGSizeMake(70, 70));
         make.centerX.equalTo(vs.mas_centerX);
         make.top.equalTo(vs.mas_top).with.offset(QCDetailViewBorder);
     }];

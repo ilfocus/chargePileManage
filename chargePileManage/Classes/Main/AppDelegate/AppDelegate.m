@@ -11,6 +11,8 @@
 #import "QCLoginCtrl.h"
 #import <BmobSDK/Bmob.h>
 
+#import "UIColor+hex.h"
+
 @interface AppDelegate ()
 
 @end
@@ -42,6 +44,14 @@
 //    [accountDefaults setBool:YES forKey:UserRememberBoolKey];
 //    [accountDefaults setBool:NO forKey:UserAutoLoginBoolKey];
 //    [accountDefaults synchronize];
+    NSDictionary *navbarTitleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHex:0x15A230]];
+    
+    [[UITabBar appearance] setTintColor:[UIColor colorWithHex:0x15A230]]; // selected color
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHex:0x15A230]} forState:UIControlStateSelected];
+    [[UITabBar appearance] setBarTintColor:[UIColor colorWithHex:0xE1E1E1]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

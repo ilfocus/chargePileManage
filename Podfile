@@ -9,3 +9,5 @@ pod 'YYKit'
 pod 'BmobSDK'
 pod "LLBootstrapButton"
 pod 'PNChart'
+pod 'ChameleonFramework'
+pod 'SVSegmentedControl'

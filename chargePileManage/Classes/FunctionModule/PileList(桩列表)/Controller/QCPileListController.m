@@ -41,6 +41,9 @@ static const CGFloat QCDuration = 2.0;
     [header beginRefreshing];
     // 设置header
     self.tableView.mj_header = header;
+    
+    UIView *headerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    self.tableView.tableHeaderView = headerView;
 }
 - (void)loadNewData
 {
@@ -108,6 +111,7 @@ static const CGFloat QCDuration = 2.0;
     
     QCPileListCell *cell = [QCPileListCell cellWithTableView:tableView];
     // 2、设置cell数据
+    
     WQTableViewGroupModel *group = self.data[indexPath.section];
     
     cell.item = group.items[indexPath.row];

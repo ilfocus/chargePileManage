@@ -10,11 +10,15 @@
 
 #import "QCSysManageHeaderView.h"
 #import "QCSysManageCell.h"
+#import "QCPersonalInfoCtrl.h"
+#import "QCLoginCtrl.h"
 
 #import "WQItemModel.h"
 #import "WQItemArrowModel.h"
 
-@interface QCSysManageCtrl () <UITableViewDelegate,UITableViewDataSource>
+
+
+@interface QCSysManageCtrl () <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 @property (nonatomic,weak) UITableView *manageView;
 @property (nonatomic,strong) NSMutableArray *dataArray;
 
@@ -27,26 +31,68 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = WQColor(226,226,226);
     
-    CGFloat headerViewH = 150;
+    CGFloat headerViewH = 100;
     QCSysManageHeaderView *header = [[QCSysManageHeaderView alloc] init];
     header.frame = CGRectMake(0, 64, SCREEN_WIDTH, headerViewH);
     [self.view addSubview:header];
     
-    CGRect tableFrame = CGRectMake(0, headerViewH + 64, SCREEN_WIDTH, SCREEN_HEIGHT);
+    CGFloat tableViewY = headerViewH + 64;
+    CGFloat tableViewH = self.view.frame.size.height - self.tabBarController.tabBar.frame.size.height - tableViewY;
+    CGRect tableFrame = CGRectMake(0, tableViewY, SCREEN_WIDTH, tableViewH);
     UITableView *manageView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
+    manageView.backgroundColor = WQColor(226, 226, 226);
+    UIView *headerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    manageView.tableHeaderView = headerView;
     [self.view addSubview:manageView];
     self.manageView = manageView;
     self.manageView.delegate = self;
     self.manageView.dataSource = self;
     
+    [self setupFooterView:manageView];
     [self setupTableView];
+    
+    
+    WQLog(@"tableViewheaderView---%f",manageView.tableHeaderView.frame.size.height);
+}
+/**
+ *  jump to login view
+ */
+- (void) logOut
+{
+    WQLog(@"退出登录！");
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确定要退出登录吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+    
+    //[UIApplication sharedApplication].keyWindow.rootViewController = [[QCLoginCtrl alloc] init];
+}
+
+- (void) setupFooterView:(UITableView *)tableView
+{
+    UIView *view = [[UIView alloc] init];
+    view.frame = CGRectMake(0, 0, 0, 50);
+    view.backgroundColor = WQColor(226, 226, 226);
+    tableView.tableFooterView = view;
+    
+    CGFloat btnW = SCREEN_WIDTH - 20;
+    UIButton *btn = [[UIButton alloc] init];
+    btn.backgroundColor = [UIColor flatGreenColorDark];
+    //[btn setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background"] forState:UIControlStateNormal];
+    [btn setTitle:@"退出登录" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(logOut) forControlEvents:UIControlEventTouchUpInside];
+    btn.frame = CGRectMake(10, 0, btnW, 40);
+    btn.layer.masksToBounds = YES;
+    btn.layer.cornerRadius = 8;
+    btn.layer.borderWidth = 1.0;
+    btn.layer.borderColor = [WQColor(226,226,226) CGColor];
+    [view addSubview:btn];
     
 }
 
 - (void) setupTableView
 {
-    WQItemModel *clearRecord = [WQItemArrowModel itemWithIcon:@"album" title:@"个人资料"];
-    WQItemModel *openSave = [WQItemArrowModel itemWithIcon:@"setting_draft" title:@"我的消息"];
+    WQItemModel *personalInfo = [WQItemArrowModel itemWithIcon:@"album" title:@"个人资料" destVcClass:[QCPersonalInfoCtrl class]];
+    WQItemModel *myNews = [WQItemArrowModel itemWithIcon:@"setting_draft" title:@"我的消息"];
     ///////////////////////////////// 通用设置 /////////////////////////////////////////////////
     WQItemModel *feedBack = [WQItemArrowModel itemWithIcon:@"setting_sndNum" title:@"意见反馈" destVcClass:nil];
     WQItemModel *sotfwareScore = [WQItemArrowModel itemWithIcon:@"setting_sign" title:@"软件评分" destVcClass:nil];
@@ -55,7 +101,7 @@
     WQItemModel *aboutUs = [WQItemArrowModel itemWithIcon:@"setting_copy" title:@"关于我们" destVcClass:nil];
     //////////////////////////////////////////////////////////////////////////////////////////////////
 
-    NSArray *tempArray = @[clearRecord,openSave,feedBack,sotfwareScore,useHelp,customService,aboutUs];
+    NSArray *tempArray = @[personalInfo,myNews,feedBack,sotfwareScore,useHelp,customService,aboutUs];
     
     self.dataArray = (NSMutableArray *)tempArray;
 }
@@ -77,8 +123,42 @@
     return cell;
 }
 #pragma mark - UITableViewDelegate
-
-
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    WQItemModel *item = self.dataArray[indexPath.row];
+    
+    if (item.option) {
+        item.option();
+    }  else if ([item isKindOfClass:[WQItemArrowModel class]]) {
+        WQItemArrowModel *arrowItem = (WQItemArrowModel *)item;
+        // 如果没有需要跳转的控制器
+        if (arrowItem.destVcClass == nil) {
+            return;
+        }
+        UIViewController *vc = [[arrowItem.destVcClass alloc]init];
+        vc.title = arrowItem.title;
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+#pragma mark - AlertViewDelegate
+/**
+ *  alertView dismiss
+ */
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
+    if (buttonIndex == 1) {
+        bool autoLogin = [[accountDefaults objectForKey:UserAutoLoginBoolKey] boolValue];
+        if (autoLogin) {
+            [accountDefaults setBool:NO forKey:UserAutoLoginBoolKey];
+            [accountDefaults synchronize];
+        }
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[QCLoginCtrl alloc] init];
+    }
+}
 #pragma mark - gets and sets
 - (NSMutableArray *) dataArray
 {

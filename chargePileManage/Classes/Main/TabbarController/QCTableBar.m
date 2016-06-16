@@ -55,7 +55,7 @@
     if (self) {
         if (!iOS7) {
             // 百度发现colorWithPatternImage在执行旋转操作时比较损耗内存
-            self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithNamed:@"tabbar_background"]];
+            //self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithNamed:@"tabbar_background"]];
         }
         // 在tabBar按钮上添加加号按钮
         if (isAddMidButton) {

@@ -53,5 +53,6 @@
 
 #import "UIImage+adaptive_iOS7.h"
 #import "Masonry.h"   // auto layer
+#import <ChameleonFramework/Chameleon.h> // 颜色库
 
 #endif /* Weibo_PrefixHeader_pch */

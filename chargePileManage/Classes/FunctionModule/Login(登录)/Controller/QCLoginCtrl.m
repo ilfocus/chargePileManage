@@ -14,7 +14,7 @@
 
 
 
-@interface QCLoginCtrl ()
+@interface QCLoginCtrl () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userIDText;
 @property (weak, nonatomic) IBOutlet UITextField *pwdText;
 @property (weak, nonatomic) IBOutlet UIButton *autoLogin;
@@ -38,6 +38,8 @@ NSString *const userPwdStrKey = @"userPwd";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    _userIDText.delegate = self;
+    _pwdText.delegate = self;
     
     [self setupView];
 }
@@ -73,12 +75,20 @@ NSString *const userPwdStrKey = @"userPwd";
 - (IBAction)login:(id)sender {
     
     // 可以保存密码，点击登录后，通过服务器进行帐号验证
+    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
     if ([self.userIDText.text isNotBlank] && [self.pwdText.text isNotBlank]) {
         // 验证
         if ([self.userIDText.text isEqualToString:@"wangqi"] && [self.pwdText.text isEqualToString:@"123456"]) {
-            //[QCReminderUserTool showCorrect:self.view str:@"输入帐号正确"];
+            
             [QCReminderUserTool showLoad:self.view];
-            //sleep(3.0);
+            
+            if (_rememberPwdFlg) {  // 登录时，如果有选中记住密码，则记住
+                if (self.userIDText.text && self.pwdText.text) {
+                    [accountDefaults setObject:self.userIDText.text forKey:userNameStrKey];
+                    [accountDefaults setObject:self.pwdText.text forKey:userPwdStrKey];
+                }
+            }
+            
             [UIApplication sharedApplication].keyWindow.rootViewController = [[QCTabBarController alloc]init];
         } else {
             if (![self.userIDText.text isEqualToString:@"wangqi"]) {
@@ -129,4 +139,30 @@ NSString *const userPwdStrKey = @"userPwd";
     [accountDefaults setBool:_autoLoginFlg forKey:UserAutoLoginBoolKey];
     [accountDefaults synchronize];
 }
+
+#pragma mark - UITextFiledDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == _userIDText) {
+        WQLog(@"用户完成");
+        [_userIDText resignFirstResponder];
+    }
+    if (textField == _pwdText) {
+        WQLog(@"密码完成");
+        [_pwdText resignFirstResponder];
+    }
+    
+    return YES;
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    if (![_userIDText isExclusiveTouch]) {
+        [_userIDText resignFirstResponder];
+    }
+    if (![_pwdText isExclusiveTouch]) {
+        [_pwdText resignFirstResponder];
+    }
+}
+
 @end

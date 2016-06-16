@@ -1,13 +1,13 @@
 //
-//  QCSystemManageController.h
+//  QCPersonalInfoCtrl.h
 //  chargePileManage
 //
-//  Created by YuMing on 16/5/25.
+//  Created by YuMing on 16/6/16.
 //  Copyright © 2016年 shQianChen. All rights reserved.
 //
 
 #import "WQBaseTableViewController.h"
 
-@interface QCSystemManageController : WQBaseTableViewController
+@interface QCPersonalInfoCtrl : WQBaseTableViewController
 
 @end
