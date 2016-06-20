@@ -57,6 +57,7 @@
 		725760BA1D13E5130003ECAA /* QCItemSegmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760B91D13E5130003ECAA /* QCItemSegmentModel.m */; };
 		725760FE1D1775710003ECAA /* QCFeedBackCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760FC1D1775710003ECAA /* QCFeedBackCtrl.m */; };
 		725760FF1D1775710003ECAA /* QCFeedBackCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725760FD1D1775710003ECAA /* QCFeedBackCtrl.xib */; };
+		725761021D1787660003ECAA /* QCDataCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 725761011D1787660003ECAA /* QCDataCacheTool.m */; };
 		726F7E501CF568CC0068513A /* QCTableBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E4F1CF568CC0068513A /* QCTableBar.m */; };
 		726F7E531CF56AF30068513A /* QCTableBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E521CF56AF30068513A /* QCTableBarButton.m */; };
 		726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E551CF56E7A0068513A /* UIBarButtonItem+YM.m */; };
@@ -219,6 +220,8 @@
 		725760FB1D1775710003ECAA /* QCFeedBackCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFeedBackCtrl.h; sourceTree = "<group>"; };
 		725760FC1D1775710003ECAA /* QCFeedBackCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCFeedBackCtrl.m; sourceTree = "<group>"; };
 		725760FD1D1775710003ECAA /* QCFeedBackCtrl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QCFeedBackCtrl.xib; sourceTree = "<group>"; };
+		725761001D1787660003ECAA /* QCDataCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCDataCacheTool.h; sourceTree = "<group>"; };
+		725761011D1787660003ECAA /* QCDataCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCDataCacheTool.m; sourceTree = "<group>"; };
 		726F7E4E1CF568CC0068513A /* QCTableBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCTableBar.h; sourceTree = "<group>"; };
 		726F7E4F1CF568CC0068513A /* QCTableBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCTableBar.m; sourceTree = "<group>"; };
 		726F7E511CF56AF30068513A /* QCTableBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCTableBarButton.h; sourceTree = "<group>"; };
@@ -357,6 +360,8 @@
 			children = (
 				72077A341D0F9B55000B9785 /* QCReminderUserTool.h */,
 				72077A351D0F9B55000B9785 /* QCReminderUserTool.m */,
+				725761001D1787660003ECAA /* QCDataCacheTool.h */,
+				725761011D1787660003ECAA /* QCDataCacheTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1213,6 +1218,7 @@
 				725760AB1D138C450003ECAA /* QCPersonalInfoCell.m in Sources */,
 				721FFAB91CFC1C6700DDC22D /* QCStopCtrlView.m in Sources */,
 				728803331D048216009AB66E /* WBTableViewDataSource.m in Sources */,
+				725761021D1787660003ECAA /* QCDataCacheTool.m in Sources */,
 				726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */,
 				725760901D1284C40003ECAA /* UIFont+FontAwesome.m in Sources */,
 				726F7E531CF56AF30068513A /* QCTableBarButton.m in Sources */,

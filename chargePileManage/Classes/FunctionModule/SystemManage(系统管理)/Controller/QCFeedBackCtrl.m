@@ -9,6 +9,8 @@
 #import "QCFeedBackCtrl.h"
 
 @interface QCFeedBackCtrl ()
+@property (weak, nonatomic) IBOutlet UITextField *feedBackText;
+@property (weak, nonatomic) IBOutlet UIButton *submit;
 
 @end
 
@@ -17,6 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = WQColor(226,226,226);
+    
+    _feedBackText.backgroundColor = [UIColor whiteColor];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -12,6 +12,7 @@
 #import "QCSysManageCell.h"
 #import "QCPersonalInfoCtrl.h"
 #import "QCLoginCtrl.h"
+#import "QCFeedBackCtrl.h"
 
 #import "WQItemModel.h"
 #import "WQItemArrowModel.h"
@@ -94,7 +95,7 @@
     WQItemModel *personalInfo = [WQItemArrowModel itemWithIcon:@"album" title:@"个人资料" destVcClass:[QCPersonalInfoCtrl class]];
     WQItemModel *myNews = [WQItemArrowModel itemWithIcon:@"setting_draft" title:@"我的消息"];
     ///////////////////////////////// 通用设置 /////////////////////////////////////////////////
-    WQItemModel *feedBack = [WQItemArrowModel itemWithIcon:@"setting_sndNum" title:@"意见反馈" destVcClass:nil];
+    WQItemModel *feedBack = [WQItemArrowModel itemWithIcon:@"setting_sndNum" title:@"意见反馈" destVcClass:[QCFeedBackCtrl class]];
     WQItemModel *sotfwareScore = [WQItemArrowModel itemWithIcon:@"setting_sign" title:@"软件评分" destVcClass:nil];
     WQItemModel *useHelp = [WQItemArrowModel itemWithIcon:@"setting_help" title:@"使用帮助" destVcClass:nil];
     WQItemModel *customService = [WQItemArrowModel itemWithIcon:@"setting_answer" title:@"客服帮助" destVcClass:nil];

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QCFeedBackCtrl">
             <connections>
+                <outlet property="feedBackText" destination="DVM-T6-jVp" id="glP-i7-oM9"/>
+                <outlet property="submit" destination="EiV-6V-RZR" id="Tfl-Ix-zfV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +16,81 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="请留下您的宝贵意见..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DVM-T6-jVp">
+                    <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="119" id="ONH-2R-Ebh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="ONH-2R-Ebh"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="ONH-2R-Ebh"/>
+                        </mask>
+                    </variation>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EiV-6V-RZR">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.17653091739999999" green="0.77919823229999996" blue="0.22900795860000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="0xf-uQ-eqE"/>
+                    </constraints>
+                    <state key="normal" title="提交"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="0xf-uQ-eqE"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="0xf-uQ-eqE"/>
+                        </mask>
+                    </variation>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="EiV-6V-RZR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5so-Zn-pRo"/>
+                <constraint firstAttribute="trailing" secondItem="DVM-T6-jVp" secondAttribute="trailing" id="AJI-xk-QvE"/>
+                <constraint firstItem="DVM-T6-jVp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="74" id="BMb-gw-Ne5"/>
+                <constraint firstAttribute="bottom" secondItem="EiV-6V-RZR" secondAttribute="bottom" id="JBz-Lj-zHW"/>
+                <constraint firstItem="DVM-T6-jVp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fRR-O5-t1z"/>
+                <constraint firstAttribute="trailing" secondItem="EiV-6V-RZR" secondAttribute="trailing" id="qaY-xX-65D"/>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="DVM-T6-jVp"/>
+                    <exclude reference="EiV-6V-RZR"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="AJI-xk-QvE"/>
+                    <exclude reference="BMb-gw-Ne5"/>
+                    <exclude reference="fRR-O5-t1z"/>
+                    <exclude reference="5so-Zn-pRo"/>
+                    <exclude reference="JBz-Lj-zHW"/>
+                    <exclude reference="qaY-xX-65D"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="DVM-T6-jVp"/>
+                    <include reference="EiV-6V-RZR"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="AJI-xk-QvE"/>
+                    <include reference="BMb-gw-Ne5"/>
+                    <include reference="fRR-O5-t1z"/>
+                    <include reference="5so-Zn-pRo"/>
+                    <include reference="JBz-Lj-zHW"/>
+                    <include reference="qaY-xX-65D"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>
