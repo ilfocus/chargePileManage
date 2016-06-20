@@ -48,6 +48,15 @@
 		7257609A1D1284C40003ECAA /* UIImage+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760821D1284C40003ECAA /* UIImage+Util.m */; };
 		7257609D1D1284C40003ECAA /* UIScrollView+ScalableCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760881D1284C40003ECAA /* UIScrollView+ScalableCover.m */; };
 		725760A51D1286B90003ECAA /* UIColor+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760A41D1286B90003ECAA /* UIColor+hex.m */; };
+		725760A81D1384230003ECAA /* QCNickNameAlertCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760A71D1384230003ECAA /* QCNickNameAlertCtrl.m */; };
+		725760AB1D138C450003ECAA /* QCPersonalInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760AA1D138C450003ECAA /* QCPersonalInfoCell.m */; };
+		725760AE1D139B3C0003ECAA /* QCSignatureCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760AD1D139B3C0003ECAA /* QCSignatureCtrl.m */; };
+		725760B31D13A06E0003ECAA /* QCChargePwdCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760B11D13A06E0003ECAA /* QCChargePwdCtrl.m */; };
+		725760B41D13A06E0003ECAA /* QCChargePwdCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725760B21D13A06E0003ECAA /* QCChargePwdCtrl.xib */; };
+		725760B71D13E4FA0003ECAA /* QCItemIconModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760B61D13E4FA0003ECAA /* QCItemIconModel.m */; };
+		725760BA1D13E5130003ECAA /* QCItemSegmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760B91D13E5130003ECAA /* QCItemSegmentModel.m */; };
+		725760FE1D1775710003ECAA /* QCFeedBackCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 725760FC1D1775710003ECAA /* QCFeedBackCtrl.m */; };
+		725760FF1D1775710003ECAA /* QCFeedBackCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 725760FD1D1775710003ECAA /* QCFeedBackCtrl.xib */; };
 		726F7E501CF568CC0068513A /* QCTableBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E4F1CF568CC0068513A /* QCTableBar.m */; };
 		726F7E531CF56AF30068513A /* QCTableBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E521CF56AF30068513A /* QCTableBarButton.m */; };
 		726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7E551CF56E7A0068513A /* UIBarButtonItem+YM.m */; };
@@ -194,6 +203,22 @@
 		725760881D1284C40003ECAA /* UIScrollView+ScalableCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ScalableCover.m"; sourceTree = "<group>"; };
 		725760A31D1286B90003ECAA /* UIColor+hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+hex.h"; sourceTree = "<group>"; };
 		725760A41D1286B90003ECAA /* UIColor+hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+hex.m"; sourceTree = "<group>"; };
+		725760A61D1384230003ECAA /* QCNickNameAlertCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCNickNameAlertCtrl.h; sourceTree = "<group>"; };
+		725760A71D1384230003ECAA /* QCNickNameAlertCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCNickNameAlertCtrl.m; sourceTree = "<group>"; };
+		725760A91D138C450003ECAA /* QCPersonalInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPersonalInfoCell.h; sourceTree = "<group>"; };
+		725760AA1D138C450003ECAA /* QCPersonalInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPersonalInfoCell.m; sourceTree = "<group>"; };
+		725760AC1D139B3C0003ECAA /* QCSignatureCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSignatureCtrl.h; sourceTree = "<group>"; };
+		725760AD1D139B3C0003ECAA /* QCSignatureCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSignatureCtrl.m; sourceTree = "<group>"; };
+		725760B01D13A06E0003ECAA /* QCChargePwdCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChargePwdCtrl.h; sourceTree = "<group>"; };
+		725760B11D13A06E0003ECAA /* QCChargePwdCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChargePwdCtrl.m; sourceTree = "<group>"; };
+		725760B21D13A06E0003ECAA /* QCChargePwdCtrl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QCChargePwdCtrl.xib; sourceTree = "<group>"; };
+		725760B51D13E4FA0003ECAA /* QCItemIconModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCItemIconModel.h; sourceTree = "<group>"; };
+		725760B61D13E4FA0003ECAA /* QCItemIconModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCItemIconModel.m; sourceTree = "<group>"; };
+		725760B81D13E5130003ECAA /* QCItemSegmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCItemSegmentModel.h; sourceTree = "<group>"; };
+		725760B91D13E5130003ECAA /* QCItemSegmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCItemSegmentModel.m; sourceTree = "<group>"; };
+		725760FB1D1775710003ECAA /* QCFeedBackCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFeedBackCtrl.h; sourceTree = "<group>"; };
+		725760FC1D1775710003ECAA /* QCFeedBackCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCFeedBackCtrl.m; sourceTree = "<group>"; };
+		725760FD1D1775710003ECAA /* QCFeedBackCtrl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QCFeedBackCtrl.xib; sourceTree = "<group>"; };
 		726F7E4E1CF568CC0068513A /* QCTableBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCTableBar.h; sourceTree = "<group>"; };
 		726F7E4F1CF568CC0068513A /* QCTableBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCTableBar.m; sourceTree = "<group>"; };
 		726F7E511CF56AF30068513A /* QCTableBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCTableBarButton.h; sourceTree = "<group>"; };
@@ -614,10 +639,9 @@
 		7254FA371CED4A6E008EA77F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				725760AF1D139EAB0003ECAA /* QCPersonalInfo */,
 				7257605D1D1121990003ECAA /* QCSysManageCtrl.h */,
 				7257605E1D1121990003ECAA /* QCSysManageCtrl.m */,
-				725760631D123AA70003ECAA /* QCPersonalInfoCtrl.h */,
-				725760641D123AA70003ECAA /* QCPersonalInfoCtrl.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -636,6 +660,8 @@
 				7257605B1D10FB940003ECAA /* QCSysManageHeaderView.m */,
 				725760601D1127AA0003ECAA /* QCSysManageCell.h */,
 				725760611D1127AA0003ECAA /* QCSysManageCell.m */,
+				725760A91D138C450003ECAA /* QCPersonalInfoCell.h */,
+				725760AA1D138C450003ECAA /* QCPersonalInfoCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -720,6 +746,25 @@
 			path = FontAwesome;
 			sourceTree = "<group>";
 		};
+		725760AF1D139EAB0003ECAA /* QCPersonalInfo */ = {
+			isa = PBXGroup;
+			children = (
+				725760631D123AA70003ECAA /* QCPersonalInfoCtrl.h */,
+				725760641D123AA70003ECAA /* QCPersonalInfoCtrl.m */,
+				725760A61D1384230003ECAA /* QCNickNameAlertCtrl.h */,
+				725760A71D1384230003ECAA /* QCNickNameAlertCtrl.m */,
+				725760AC1D139B3C0003ECAA /* QCSignatureCtrl.h */,
+				725760AD1D139B3C0003ECAA /* QCSignatureCtrl.m */,
+				725760B01D13A06E0003ECAA /* QCChargePwdCtrl.h */,
+				725760B11D13A06E0003ECAA /* QCChargePwdCtrl.m */,
+				725760B21D13A06E0003ECAA /* QCChargePwdCtrl.xib */,
+				725760FB1D1775710003ECAA /* QCFeedBackCtrl.h */,
+				725760FC1D1775710003ECAA /* QCFeedBackCtrl.m */,
+				725760FD1D1775710003ECAA /* QCFeedBackCtrl.xib */,
+			);
+			name = QCPersonalInfo;
+			sourceTree = "<group>";
+		};
 		726F7E861CF593B20068513A /* ComTableCntl */ = {
 			isa = PBXGroup;
 			children = (
@@ -768,6 +813,10 @@
 				726F7E941CF593E70068513A /* WQItemModel.m */,
 				726F7E951CF593E70068513A /* WQItemSwitchModel.h */,
 				726F7E961CF593E70068513A /* WQItemSwitchModel.m */,
+				725760B51D13E4FA0003ECAA /* QCItemIconModel.h */,
+				725760B61D13E4FA0003ECAA /* QCItemIconModel.m */,
+				725760B81D13E5130003ECAA /* QCItemSegmentModel.h */,
+				725760B91D13E5130003ECAA /* QCItemSegmentModel.m */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -1036,6 +1085,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				725760B41D13A06E0003ECAA /* QCChargePwdCtrl.xib in Resources */,
+				725760FF1D1775710003ECAA /* QCFeedBackCtrl.xib in Resources */,
 				7254FA4C1CED4A6E008EA77F /* 功能说明.txt in Resources */,
 				72378D051CEC6993005E9E52 /* LaunchScreen.storyboard in Resources */,
 				728803621D0E7791009AB66E /* QCLoginCtrl.xib in Resources */,
@@ -1120,6 +1171,7 @@
 				7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */,
 				725760971D1284C40003ECAA /* UIBarButtonItem+Badge.m in Sources */,
 				725760561D10E9B60003ECAA /* QCChargeRecordCell.m in Sources */,
+				725760AE1D139B3C0003ECAA /* QCSignatureCtrl.m in Sources */,
 				726F7E9A1CF593E70068513A /* WQBaseTableViewController.m in Sources */,
 				729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */,
 				7257605F1D1121990003ECAA /* QCSysManageCtrl.m in Sources */,
@@ -1139,6 +1191,7 @@
 				725760931D1284C40003ECAA /* NSDateFormatter+Singleton.m in Sources */,
 				726F7E9B1CF593E70068513A /* WQTableViewGroupModel.m in Sources */,
 				726F7E9D1CF593E70068513A /* WQItemLabelModel.m in Sources */,
+				725760BA1D13E5130003ECAA /* QCItemSegmentModel.m in Sources */,
 				7254FA461CED4A6E008EA77F /* NSString+XFTime.m in Sources */,
 				726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */,
 				7288034C1D0D3734009AB66E /* ZCTradeKeyboard.m in Sources */,
@@ -1152,8 +1205,12 @@
 				726F7E9C1CF593E70068513A /* WQItemArrowModel.m in Sources */,
 				725760531D0FD1C20003ECAA /* QCHistoryRecordCtrl.m in Sources */,
 				725760941D1284C40003ECAA /* NSString+pinyin.m in Sources */,
+				725760A81D1384230003ECAA /* QCNickNameAlertCtrl.m in Sources */,
+				725760B71D13E4FA0003ECAA /* QCItemIconModel.m in Sources */,
 				726F7E621CF57CFF0068513A /* QCPileListController.m in Sources */,
 				7254FA4B1CED4A6E008EA77F /* AppDelegate.m in Sources */,
+				725760B31D13A06E0003ECAA /* QCChargePwdCtrl.m in Sources */,
+				725760AB1D138C450003ECAA /* QCPersonalInfoCell.m in Sources */,
 				721FFAB91CFC1C6700DDC22D /* QCStopCtrlView.m in Sources */,
 				728803331D048216009AB66E /* WBTableViewDataSource.m in Sources */,
 				726F7E581CF56E7A0068513A /* UIBarButtonItem+YM.m in Sources */,
@@ -1166,6 +1223,7 @@
 				726F7EA01CF593E70068513A /* WQBaseCell.m in Sources */,
 				7254FA501CED4DCB008EA77F /* QCTabBarController.m in Sources */,
 				725760591D10EA270003ECAA /* QCSupplyRecordCell.m in Sources */,
+				725760FE1D1775710003ECAA /* QCFeedBackCtrl.m in Sources */,
 				7257605C1D10FB940003ECAA /* QCSysManageHeaderView.m in Sources */,
 				72378CF71CEC6993005E9E52 /* main.m in Sources */,
 				7254FA491CED4A6E008EA77F /* UIView+Extension.m in Sources */,

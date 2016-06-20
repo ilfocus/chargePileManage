@@ -67,6 +67,7 @@
     chargeRecordView.rowHeight = 100;
     UIView *chargeHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     chargeRecordView.tableHeaderView = chargeHeaderView;
+    chargeRecordView.tableFooterView = chargeHeaderView;
     [_scrollView addSubview:chargeRecordView];
     self.chargeRecordView = chargeRecordView;
     self.chargeRecordView.delegate = self;
@@ -79,6 +80,7 @@
     supplyRecordView.rowHeight = 100;
     UIView *supplyHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     supplyRecordView.tableHeaderView = supplyHeaderView;
+    supplyRecordView.tableFooterView = supplyHeaderView;
     [_scrollView addSubview:supplyRecordView];
     self.supplyRecordView = supplyRecordView;
     self.supplyRecordView.delegate = self;
@@ -89,6 +91,7 @@
 #pragma mark - private method
 - (void) charge:(UISegmentedControl *)segmented
 {
+    WQLog(@"scrollView---charge");
     if (segmented.selectedSegmentIndex == 0) {
         [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     } else {
@@ -128,11 +131,11 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //NSLog(@"ContentOffset  x is  %f,yis %f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-//    if (scrollView.contentOffset.x < SCREEN_WIDTH / 2) {
-//        _segmentedView.selectedSegmentIndex = 0;
-//    } else {
-//        _segmentedView.selectedSegmentIndex = 1;
-//    }
+    if (scrollView.contentOffset.x < SCREEN_WIDTH / 2) {
+        _segmentedView.selectedSegmentIndex = 0;
+    } else {
+        _segmentedView.selectedSegmentIndex = 1;
+    }
 }
 
 @end

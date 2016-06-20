@@ -12,6 +12,11 @@
 #import "WQItemArrowModel.h"
 #import "WQItemLabelModel.h"
 #import "WQItemSwitchModel.h"
+#import "QCItemIconModel.h"
+#import "QCItemSegmentModel.h"
+
+
+#import "UIColor+hex.h"
 
 
 @interface WQBaseCell()
@@ -19,6 +24,14 @@
  *  箭头
  */
 @property (nonatomic,strong) UIImageView *arrowView;
+/**
+ *  头像
+ */
+@property (nonatomic,strong) UIImageView *iconView;
+/**
+ *  性别选择
+ */
+@property (nonatomic,strong) UISegmentedControl *segmentedView;
 /**
  *  开关
  */
@@ -52,6 +65,10 @@
     [defaults setBool:self.switchView.isOn forKey:self.item.title];
     [defaults synchronize];
 }
+- (void) charge:(UISegmentedControl *)segmented
+{
+    WQLog(@"点击了segmented");
+}
 /**
  * 设置数据
  */
@@ -78,6 +95,10 @@
         self.switchView.on = [defaults boolForKey:self.item.title];
     } else if ([self.item isKindOfClass:[WQItemLabelModel class]]) { // 标签
         self.accessoryView = self.labelView;
+    } else if ([self.item isKindOfClass:[QCItemIconModel class]]) {
+        self.accessoryView = self.iconView;
+    } else if ([self.item isKindOfClass:[QCItemSegmentModel class]]) {
+        self.accessoryView = self.segmentedView;
     } else {
         self.accessoryView = nil;
     }
@@ -119,4 +140,30 @@
     }
     return _switchView;
 }
+
+
+- (UIImageView *)iconView
+{
+    if (_iconView == nil) {
+        _iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"personalIcon"]];
+        _iconView.frame = CGRectMake(0, 0, 30, 30);
+    }
+    return _iconView;
+}
+
+- (UISegmentedControl *)segmentedView
+{
+    if (_segmentedView == nil) {
+        CGFloat segmentedHeight = 25;
+        NSArray *array=@[@"男",@"女"];
+        _segmentedView = [[UISegmentedControl alloc] initWithItems:array];
+        _segmentedView.frame = CGRectMake(0, 0, 60, segmentedHeight);;
+        _segmentedView.selectedSegmentIndex = 0;
+        _segmentedView.tintColor = [UIColor colorWithHex:0x15A230];
+        [_segmentedView addTarget:self action:@selector(charge:) forControlEvents:UIControlEventValueChanged];
+        
+    }
+    return _segmentedView;
+}
+
 @end

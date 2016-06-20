@@ -55,7 +55,6 @@
     UIImageView *userImageView = [[UIImageView alloc] init];
     
     UIImage *image = [UIImage imageNamed:@"icon"];
-    
     userImageView.image = [image imageByRoundCornerRadius:35 borderWidth:1 borderColor:[UIColor whiteColor]];
     
     [self addSubview:userImageView];
