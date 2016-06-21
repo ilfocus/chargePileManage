@@ -25,6 +25,9 @@ static FMDatabaseQueue *_queue;
     }];
 }
 
+
+//- (instancetype) initWithDBName:()
+
 + (void)addChargePileDatas:(NSArray *)dictArray
 {
     for (NSDictionary *dict in dictArray) {

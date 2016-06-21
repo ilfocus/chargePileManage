@@ -21,10 +21,13 @@
 #import "QCBatteryInfoView.h"
 #import "QCStopCtrlView.h"
 #import "QCLoginCtrl.h"
+#import "QCDataCacheTool.h"
 // third lib
 #import "MJExtension.h"
 #import <BmobSDK/Bmob.h>
 #import "YYKit.h"
+#import "AFNetworking.h"
+#import "MJExtension.h"
 
 
 @interface QCPileListDetailCtrl ()
@@ -52,14 +55,40 @@
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT * 2);
-    
-    //WQLog(@"%@",NSStringFromCGSize(scrollView.contentSize));
-    //scrollView.backgroundColor = [UIColor orangeColor];
     scrollView.scrollEnabled = YES;
-    //scrollView.pagingEnabled = YES;
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
     
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        @"上海市",@"address",
+                                        @"0001",@"cpNumber",
+                                        @"220",@"vol",
+                                        @"16",@"cur",nil];
+    
+    [QCDataCacheTool addChargePileData:(NSDictionary *)dict];
+    
+    
+    // 1.创建请示管理对象
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURL *URL = [NSURL URLWithString:@"http://192.168.1.111:8080/cpserver/getChargePileList"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            //NSLog(@"%@", responseObject);
+            
+            for (NSDictionary *dict in responseObject) {
+                NSString *str = dict[@"cpnm"];
+                NSLog(@"str=%@", str);
+            }
+            
+        }
+    }];
+    [dataTask resume];
+//    NSLog(@"strAfterDecodeByUTF8AndURI=%@", [self gb2312toutf8:@"\\U4e2d\\U6587\\U5145\\U7535\\U6869"]);
 //    BmobObject *gameScore = [BmobObject objectWithClassName:@"GameScore"];
 //    [gameScore setObject:@"小明" forKey:@"playerName"];
 //    [gameScore setObject:@78 forKey:@"score"];
@@ -97,14 +126,16 @@
     }];
     [self setupSubView];
     
-//    UIView *viewTest = [UIView new];
-//    viewTest.backgroundColor = [UIColor redColor];
-//    viewTest.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 100);
-//    [_scrollView addSubview:viewTest];
-    
     NSTimer *myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
     [myTimer fire];
     [[NSRunLoop mainRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
+}
++(NSString *) gb2312toutf8:(NSData *) data{
+    
+    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+    NSString *retStr = [[NSString alloc] initWithData:data encoding:enc];
+    
+    return retStr;
 }
 - (void) timerEvent
 {
