@@ -7,7 +7,16 @@
 //
 
 #import "QCPileListNumModel.h"
+#import <BmobSDK/Bmob.h>
 
 @implementation QCPileListNumModel
-
+- (instancetype) initWithObject:(BmobObject *)object
+{
+    // sampling infomation
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    
+    self.chargePileNum = [numberFormatter stringFromNumber:[object objectForKey:@"ChargePileAddress"]];
+    
+    return self;
+}
 @end

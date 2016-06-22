@@ -24,6 +24,9 @@
 #import "QCDataCacheTool.h"
 
 #import "QCPileListNumModel.h"
+
+// Tool
+#import "QCHttpTool.h"
 // third lib
 #import "MJExtension.h"
 #import <BmobSDK/Bmob.h>
@@ -48,6 +51,7 @@
 
 @implementation QCPileListDetailCtrl
 
+static int pileDataCnt = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -119,65 +123,32 @@
         }
     }];
     [dataTask resume];
-//    NSLog(@"strAfterDecodeByUTF8AndURI=%@", [self gb2312toutf8:@"\\U4e2d\\U6587\\U5145\\U7535\\U6869"]);
-//    BmobObject *gameScore = [BmobObject objectWithClassName:@"GameScore"];
-//    [gameScore setObject:@"小明" forKey:@"playerName"];
-//    [gameScore setObject:@78 forKey:@"score"];
-//    [gameScore setObject:[NSNumber numberWithBool:YES] forKey:@"cheatMode"];
-//    [gameScore saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
-//        //进行操作
-//        WQLog(@"保存数据成功！！！");
-//    }];
     
-
-//    BmobQuery   *bquery = [BmobQuery queryWithClassName:@"ChargePile"];
-//    //查找GameScore表里面id为0c6db13c的数据
-//    [bquery getObjectInBackgroundWithId:@"08346e9854" block:^(BmobObject *object,NSError *error){
-//        if (error){
-//            //进行错误处理
-//            NSLog(@"获得数据失败！！！");
-//        }else{
-//            //表里有id为0c6db13c的数据
-//            if (object) {
-//                
-//                QCPileListDataMode *pileData = [[QCPileListDataMode alloc] initWithObject:object];
-//                
-//                [self.pileDataArray addObject:pileData];
-//            }
-//        }
-//    }];
-    BmobQuery   *bquery = [BmobQuery queryWithClassName:@"ChargePile"];
-    
-    [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        for (BmobObject *obj in array) {
-            //打印playerName
-            QCPileListDataMode *pileData = [[QCPileListDataMode alloc] initWithObject:obj];
-            [cacheCPData addChargePileData:dbName sqlData:sqlData cpData:pileData];
-            [self.pileDataArray addObject:pileData];
+    [QCHttpTool bombQueryData:20 success:^(NSArray *arr) {
+        for (QCPileListDataMode *obj in arr) {
+            // 保存数据（充电桩数据）到数据库中
+            [cacheCPData addChargePileData:dbName sqlData:sqlData cpData:obj];
+            [self.pileDataArray addObject:obj];
         }
-        
-        NSArray *arr = [cacheCPData cpDataWithParam:dbName];
-        WQLog(@"cacheCPData---%@",arr);
+        // 从数据库读取（充电桩数据）
+        NSArray *array = [cacheCPData cpDataWithParam:dbName];
+        WQLog(@"cacheCPData---%@",array);
+    } failure:^(NSError *error) {
+        NSLog(@"Error: %@", error);
     }];
+    
+    
     [self setupSubView];
     
     NSTimer *myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
     [myTimer fire];
     [[NSRunLoop mainRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
 }
-+(NSString *) gb2312toutf8:(NSData *) data{
-    
-    NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-    NSString *retStr = [[NSString alloc] initWithData:data encoding:enc];
-    
-    return retStr;
-}
+
 - (void) timerEvent
 {
     [self dataRefresh];
 }
-
-static int pileDataCnt = 0;
 - (void) dataRefresh
 {
     if (self.pileDataArray == nil
@@ -360,10 +331,6 @@ static int pileDataCnt = 0;
     QCLoginCtrl *loginVC = [[QCLoginCtrl alloc] init];
     loginVC.title = @"运行状态";
     [self.navigationController pushViewController:loginVC animated:YES];
-    
-    
-    
-    
 }
 - (void) clickFaultInfo
 {

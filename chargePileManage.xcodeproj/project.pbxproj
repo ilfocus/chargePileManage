@@ -21,6 +21,7 @@
 		72378D101CEC6993005E9E52 /* chargePileManageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72378D0F1CEC6993005E9E52 /* chargePileManageTests.m */; };
 		72378D1B1CEC6994005E9E52 /* chargePileManageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72378D1A1CEC6994005E9E52 /* chargePileManageUITests.m */; };
 		724186ED1D18F31F00FB54F0 /* QCPileListNumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 724186EC1D18F31F00FB54F0 /* QCPileListNumModel.m */; };
+		724187031D1A6D3800FB54F0 /* QCHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 724187021D1A6D3800FB54F0 /* QCHttpTool.m */; };
 		7254FA441CED4A6E008EA77F /* NSString+ChineseChar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7254FA1A1CED4A6E008EA77F /* NSString+ChineseChar.m */; };
 		7254FA461CED4A6E008EA77F /* NSString+XFTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 7254FA1E1CED4A6E008EA77F /* NSString+XFTime.m */; };
 		7254FA471CED4A6E008EA77F /* UIImage+XFCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7254FA201CED4A6E008EA77F /* UIImage+XFCircle.m */; };
@@ -151,6 +152,8 @@
 		72378D1C1CEC6994005E9E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		724186EB1D18F31F00FB54F0 /* QCPileListNumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListNumModel.h; sourceTree = "<group>"; };
 		724186EC1D18F31F00FB54F0 /* QCPileListNumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListNumModel.m; sourceTree = "<group>"; };
+		724187011D1A6D3800FB54F0 /* QCHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCHttpTool.h; sourceTree = "<group>"; };
+		724187021D1A6D3800FB54F0 /* QCHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCHttpTool.m; sourceTree = "<group>"; };
 		7254FA051CED4618008EA77F /* GlobalPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalPrefixHeader.pch; sourceTree = "<group>"; };
 		7254FA191CED4A6E008EA77F /* NSString+ChineseChar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ChineseChar.h"; sourceTree = "<group>"; };
 		7254FA1A1CED4A6E008EA77F /* NSString+ChineseChar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ChineseChar.m"; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 				72077A351D0F9B55000B9785 /* QCReminderUserTool.m */,
 				725761001D1787660003ECAA /* QCDataCacheTool.h */,
 				725761011D1787660003ECAA /* QCDataCacheTool.m */,
+				724187011D1A6D3800FB54F0 /* QCHttpTool.h */,
+				724187021D1A6D3800FB54F0 /* QCHttpTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1178,6 +1183,7 @@
 				726F7EA31CF67B150068513A /* QCPileListCell.m in Sources */,
 				726F7E501CF568CC0068513A /* QCTableBar.m in Sources */,
 				728803491D0D3734009AB66E /* UIView+Extension.m in Sources */,
+				724187031D1A6D3800FB54F0 /* QCHttpTool.m in Sources */,
 				7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */,
 				725760971D1284C40003ECAA /* UIBarButtonItem+Badge.m in Sources */,
 				725760561D10E9B60003ECAA /* QCChargeRecordCell.m in Sources */,

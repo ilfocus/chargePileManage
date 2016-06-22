@@ -24,6 +24,10 @@ typedef void (^WQItemOption)();
  */
 @property (nonatomic,copy) NSString *subTitle;
 /**
+ *  总费用
+ */
+@property (nonatomic,assign) float costValue;
+/**
  * 点击cell需要完成的事，block来实现
  */
 @property (nonatomic,copy) WQItemOption option;

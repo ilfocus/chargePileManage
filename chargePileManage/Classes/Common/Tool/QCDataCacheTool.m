@@ -99,23 +99,23 @@ static FMDatabaseQueue *_queue;
     }];
 }
 
-+ (void)addChargePileDatas:(NSArray *)dictArray
-{
-    for (NSDictionary *dict in dictArray) {
-        [self addChargePileData:dict];
-    }
-}
-+ (void) addChargePileData:(NSDictionary *) dict
-{
-    [_queue inDatabase:^(FMDatabase *db) {
-        // 1.获得需要存储的数据
-        NSString *address   = dict[@"address"];
-        NSString *cpNumber  = dict[@"cpNumber"];
-        NSData   *data      = [NSKeyedArchiver archivedDataWithRootObject:dict];
-        // 2.存储数据
-        [db executeUpdate:@"insert into t_data (address,cpNumber,dict) values(?,?,?)",address,cpNumber,data];
-    }];
-}
+//+ (void)addChargePileDatas:(NSArray *)dictArray
+//{
+//    for (NSDictionary *dict in dictArray) {
+//        [self addChargePileData:dict];
+//    }
+//}
+//+ (void) addChargePileData:(NSDictionary *) dict
+//{
+//    [_queue inDatabase:^(FMDatabase *db) {
+//        // 1.获得需要存储的数据
+//        NSString *address   = dict[@"address"];
+//        NSString *cpNumber  = dict[@"cpNumber"];
+//        NSData   *data      = [NSKeyedArchiver archivedDataWithRootObject:dict];
+//        // 2.存储数据
+//        [db executeUpdate:@"insert into t_data (address,cpNumber,dict) values(?,?,?)",address,cpNumber,data];
+//    }];
+//}
 
 
 #pragma - mark read db data

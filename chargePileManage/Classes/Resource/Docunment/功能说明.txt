@@ -1,5 +1,12 @@
 2016.06.22
-
+1.给首页界面添加总费用,并从bomb获得充电桩数量
+2.整理服务器端的数据表
+3.调整PileListCell，在其中添加费用显示
+4.实现可以随意添加和删除QCPileListController中的PileListCell。可以根据服务器中的数据来更新充电桩列表。
+5.编写网络请求类QCHttpTool用来封装网络请求(目前封装了Bomb请求命令）
+6.编写访问充电桩数目网络请求，并实现从服务器取下多个充电桩桩号
+7.解决更新QCPileListController中Cell数量时,出现程序崩溃Bug(此时indexPath.row > group.items.count).
+8.刷新数据，并能够在QCPileListController界面上以列表形式显示充电桩数目（此数目从服务器得到）
 
 2016.06.21
 1.添加数据库执行方法，封装类，用以操作数据库

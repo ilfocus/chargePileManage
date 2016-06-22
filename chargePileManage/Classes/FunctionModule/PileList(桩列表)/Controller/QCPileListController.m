@@ -16,49 +16,100 @@
 #import "QCPileListCell.h"
 #import "QCPileListCellModel.h"
 #import "QCPileListDetailCtrl.h"
+#import "QCHttpTool.h"
+#import "QCPileListNumModel.h"
 
 //#import "MJExtension.h"
 #import "MJRefresh.h"
 #import "QCChiBaoZiHeader.h"
-
-static const CGFloat QCDuration = 2.0;
+#import <BmobSDK/Bmob.h>
 
 @interface QCPileListController ()
-//@property (nonatomic, strong) NSMutableArray *pileListCellDatas;
 @end
 
 @implementation QCPileListController
+static const CGFloat QCDuration = 2.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setGroup0];
     
-    self.tableView.rowHeight = PileListCellHeight;
-    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+    [self setupView];
+}
+/**
+ *  设置界面
+ */
+- (void) setupView
+{
     QCChiBaoZiHeader *header = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    // 马上进入刷新状态
-    [header beginRefreshing];
-    // 设置header
     self.tableView.mj_header = header;
-    
-    UIView *headerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
-    self.tableView.tableHeaderView = headerView;
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    self.tableView.rowHeight = PileListCellHeight;
 }
 - (void)loadNewData
 {
-    // 1.添加假数据
-//    for (int i = 0; i<5; i++) {
-//        [self.data insertObject:MJRandomData atIndex:0];
-//    }
+    __block NSMutableArray *pileNumberArr = nil;
+    [QCHttpTool bombQueryCPNumber:@"ChargePile3" numOfData:10 success:^(NSArray *arr) {
+        pileNumberArr = [NSMutableArray array];
+        NSMutableArray *numArray = [NSMutableArray array];
+        for (QCPileListNumModel *obj in arr) {
+            // 保存数据（充电桩数据）到数据库中
+            [pileNumberArr addObject:obj];
+//            WQLog(@"pileNumber---%@",obj.chargePileNum);
+            NSString *title = [obj.chargePileNum stringByAppendingString:@"#充电桩"];
+            WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:title subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
+            
+            [numArray addObject:everyMsgNumber];
+            
+        }
+        
+        WQTableViewGroupModel *group = [WQTableViewGroupModel new];
+        
+        group.items = (NSArray *)numArray;
+        
+        [self.data removeAllObjects];
+        [self.data addObject:group];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self.tableView reloadData]; // 刷新表格
+            [self.tableView.mj_header endRefreshing];// 拿到当前的下拉刷新控件，结束刷新状态
+        });
+        
+    } failure:^(NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
     
+    NSMutableArray *numArray = [NSMutableArray array];
+    for (QCPileListNumModel *obj in pileNumberArr) {
+        NSString *title = [obj.chargePileNum stringByAppendingString:@"#充电桩"];
+        WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:title subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
+        
+        [numArray addObject:everyMsgNumber];
+    }
+    
+    
+//    ///////////////////////////////// 有设置目标控制器 /////////////////////////////////////////////////
+//    WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:@"0001#充电桩" subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
+//    everyMsgNumber.costValue = 1234.05;
+//    WQItemModel *setMsgContent = [QCPileListCellModel itemWithIcon:@"setting_sign" title:@"0002#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
+//    setMsgContent.costValue = 15.67;
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+//    WQTableViewGroupModel *group = [WQTableViewGroupModel new];
+//    
+//    group.items = (NSArray *)numArray;
+//    
+//    [self.data removeAllObjects];
+//    [self.data addObject:group];
     // 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // 刷新表格
-        [self.tableView reloadData];
-        // 拿到当前的下拉刷新控件，结束刷新状态
-        [self.tableView.mj_header endRefreshing];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        [self.tableView reloadData]; // 刷新表格
+//        [self.tableView.mj_header endRefreshing];// 拿到当前的下拉刷新控件，结束刷新状态
+//    });
 }
 /**
  * 设置第0组样式
@@ -67,7 +118,9 @@ static const CGFloat QCDuration = 2.0;
 {
     ///////////////////////////////// 有设置目标控制器 /////////////////////////////////////////////////
     WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:@"0001#充电桩" subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
+    everyMsgNumber.costValue = 1234.05;
     WQItemModel *setMsgContent = [QCPileListCellModel itemWithIcon:@"setting_sign" title:@"0002#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
+    setMsgContent.costValue = 15.67;
     WQItemModel *useHelp = [QCPileListCellModel itemWithIcon:@"setting_help" title:@"0003#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
     WQItemModel *comQuestion = [QCPileListCellModel itemWithIcon:@"setting_answer" title:@"0004#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
     
@@ -84,16 +137,12 @@ static const CGFloat QCDuration = 2.0;
     
     
     WQTableViewGroupModel *group = [WQTableViewGroupModel new];
-    //group.items = @[clearRecord,openSave,selectedCopy,everyMsgNumber,setMsgContent,useHelp,comQuestion];
     
     group.items = @[everyMsgNumber,setMsgContent,useHelp,comQuestion,
                     everyMsgNumber1,setMsgContent1,useHelp1,comQuestion1,
-                    everyMsgNumber2,setMsgContent2,useHelp2,comQuestion2];
-    //group.header = @"我是第一组头部内容";
-    //group.footer = @"我是第一组尾部内容";
+                    everyMsgNumber2,setMsgContent2,useHelp2,comQuestion2];;
     
     [self.data addObject:group];
-    
 }
 
 
@@ -113,6 +162,14 @@ static const CGFloat QCDuration = 2.0;
     // 2、设置cell数据
     
     WQTableViewGroupModel *group = self.data[indexPath.section];
+    
+    WQLog(@"group.items---%d",group.items.count);
+    WQLog(@"indexPath.row---%d",indexPath.row);   // 去掉的话，数据刷新有问题
+    
+    if (indexPath.row > group.items.count) {
+        // WQLog(@"indexPath.row > group.items.count");
+        return cell;
+    }
     
     cell.item = group.items[indexPath.row];
     // 3.返回cell

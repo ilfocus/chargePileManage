@@ -64,7 +64,7 @@
     [super layoutSubviews];
     
     WEAK_SELF(vs);
-    CGFloat lblWidth = self.frame.size.width / 3;
+//    CGFloat lblWidth = self.frame.size.width / 3;
     CGSize titleLblSize = [_titleLbl.text sizeWithAttributes:@{NSFontAttributeName : _titleLbl.font}];
     titleLblSize.width += 1;
     titleLblSize.height += 1;

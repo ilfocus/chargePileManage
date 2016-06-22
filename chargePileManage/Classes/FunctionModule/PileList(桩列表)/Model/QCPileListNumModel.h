@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class BmobObject;
 @interface QCPileListNumModel : NSObject
 @property (nonatomic,copy) NSString *address;
 @property (nonatomic,assign) NSString *chargePileNum;
+
+- (instancetype) initWithObject:(BmobObject *)object;
 @end

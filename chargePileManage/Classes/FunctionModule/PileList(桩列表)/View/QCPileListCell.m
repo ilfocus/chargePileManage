@@ -23,6 +23,11 @@
 /** 子标题 */
 @property (nonatomic, weak) UILabel *subTitleLabel;
 /**
+ *  费用
+ */
+@property (nonatomic,weak) UILabel *costLabel;
+@property (nonatomic,assign) float costValue;
+/**
  *  箭头
  */
 @property (nonatomic,strong) UIImageView *arrowView;
@@ -73,13 +78,21 @@
     
     // 子标题
     UILabel *subTitleLabel = [UILabel new];
-    //subTitleLabel.backgroundColor = [UIColor blueColor];
     subTitleLabel.font = QCSubTitleFont;
     subTitleLabel.text = @"当前状态：空闲";
     subTitleLabel.textColor = [UIColor lightGrayColor];
     [self addSubview:subTitleLabel];
     self.subTitleLabel = subTitleLabel;
     
+    
+    // 显示费用
+    UILabel *costLabel = [UILabel new];
+    NSString *cost = [@"费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.costValue]];
+    cost = [cost stringByAppendingString:@" 元"];
+    costLabel.font = QCSubTitleFont;
+    costLabel.textColor = [UIColor lightGrayColor];
+    [self addSubview:costLabel];
+    self.costLabel = costLabel;
     
     // 添加最右边箭头
     self.accessoryView = self.arrowView;
@@ -97,6 +110,12 @@
     }
     self.titleLabel.text = self.item.title;
     self.subTitleLabel.text = self.item.subTitle;
+    self.costValue = self.item.costValue;
+    
+    NSString *cost = [@"费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.costValue]];
+    cost = [cost stringByAppendingString:@" 元"];
+    
+    self.costLabel.text = cost;
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -125,11 +144,21 @@
     
     [_subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.size.mas_equalTo(CGSizeMake(200, 20));
+        make.size.mas_equalTo(CGSizeMake(100, 20));
         
         make.top.equalTo(_titleLabel.mas_bottom).with.offset(-QCStatusCellBorder);
         
         make.left.equalTo(_titleLabel.mas_left);
+        
+    }];
+    
+    [_costLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.size.mas_equalTo(CGSizeMake(100, 20));
+        
+        make.top.equalTo(_titleLabel.mas_bottom).with.offset(-QCStatusCellBorder);
+        
+        make.left.equalTo(_subTitleLabel.mas_right).with.offset(QCStatusCellBorder);
         
     }];
 }
