@@ -10,11 +10,11 @@
 
 @class BmobObject;
 
-@interface QCPileListDataMode : NSObject
+@interface QCPileListDataMode : NSObject <NSCoding>
 /**
  *  charge pile address
  */
-@property (nonatomic,assign) long chargePileAddress;
+@property (nonatomic,assign) long long chargePileAddress;
 
 ///////////////////////  sampling infomation /////////////////
 @property (nonatomic,assign) char commState;

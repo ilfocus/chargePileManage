@@ -22,6 +22,8 @@
 #import "QCStopCtrlView.h"
 #import "QCLoginCtrl.h"
 #import "QCDataCacheTool.h"
+
+#import "QCPileListNumModel.h"
 // third lib
 #import "MJExtension.h"
 #import <BmobSDK/Bmob.h>
@@ -59,14 +61,45 @@
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
     
+    NSString *dbName = @"chargePileData.sqlite";
+    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,address text,chargePileNum text)";
     
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        @"上海市",@"address",
-                                        @"0001",@"cpNumber",
-                                        @"220",@"vol",
-                                        @"16",@"cur",nil];
+    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+    QCPileListNumModel *model = [[QCPileListNumModel alloc] init];
+    model.address = @"上海市";
+    model.chargePileNum = @"11111111";
+    QCPileListNumModel *model1 = [[QCPileListNumModel alloc] init];
+    model1.address = @"北京市";
+    model1.chargePileNum = @"22222222";
+    QCPileListNumModel *model2 = [[QCPileListNumModel alloc] init];
+    model2.address = @"深圳市";
+    model2.chargePileNum = @"33333333";
+    QCPileListNumModel *model3 = [[QCPileListNumModel alloc] init];
+    model3.address = @"天津市";
+    model3.chargePileNum = @"44444444";
+    NSArray *arr = @[model,model1,model2,model3];
+    [cache addChargePileDatas:dbName sqlCmd:sqlCmd cpNumArray:arr];
+//    [cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:model];
     
-    [QCDataCacheTool addChargePileData:(NSDictionary *)dict];
+    NSString *sqlData = @"create table if not exists t_data (id integer primary key autoincrement,address text,cpdata blob)";
+    QCDataCacheTool *cacheCPData = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlData];
+    
+    
+//    NSString *dbName1 = @"cpName1.sqlite";
+//    NSString *sqlCmd1 = @"create table if not exists t_data (id integer primary key autoincrement,address text,cpNumber text,dict blob)";
+//    QCDataCacheTool *cache1 = [[QCDataCacheTool alloc] initWithDBName:dbName1 sqlCmd:sqlCmd1];
+//    
+//    NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:
+//                          @"上海市",@"address",
+//                          @"0001",@"cpNumber",
+//                          @"220",@"vol",
+//                          @"16",@"cur",nil];
+//    
+//    [cache1 addChargePileData:dbName1 sqlCmd:sqlCmd1 dict:dict1];
+    
+    
+    
+//    [QCDataCacheTool addChargePileData:dict];
     
     
     // 1.创建请示管理对象
@@ -78,8 +111,6 @@
         if (error) {
             NSLog(@"Error: %@", error);
         } else {
-            //NSLog(@"%@", responseObject);
-            
             for (NSDictionary *dict in responseObject) {
                 NSString *str = dict[@"cpnm"];
                 NSLog(@"str=%@", str);
@@ -121,8 +152,12 @@
         for (BmobObject *obj in array) {
             //打印playerName
             QCPileListDataMode *pileData = [[QCPileListDataMode alloc] initWithObject:obj];
+            [cacheCPData addChargePileData:dbName sqlData:sqlData cpData:pileData];
             [self.pileDataArray addObject:pileData];
         }
+        
+        NSArray *arr = [cacheCPData cpDataWithParam:dbName];
+        WQLog(@"cacheCPData---%@",arr);
     }];
     [self setupSubView];
     
