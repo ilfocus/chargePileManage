@@ -51,6 +51,11 @@
 #define STATUS_WIDTH ([[UIApplication sharedApplication] statusBarFrame].size.width)
 #define STATUS_HEIGHT ([[UIApplication sharedApplication] statusBarFrame].size.height)
 
+// BOMB_SERVER LOCAL_SEVER
+#define BOMB_SERVER    0
+#define LOCAOL_SERVER  1
+#define SERVER_TYPE    BOMB_SERVER
+
 #import "UIImage+adaptive_iOS7.h"
 #import "Masonry.h"   // auto layer
 #import <ChameleonFramework/Chameleon.h> // 颜色库

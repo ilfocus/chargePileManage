@@ -7,10 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#if SERVER_TYPE
 @class BmobObject;
 @interface QCPileListNumModel : NSObject
 @property (nonatomic,copy) NSString *address;
 @property (nonatomic,assign) NSString *chargePileNum;
-
 - (instancetype) initWithObject:(BmobObject *)object;
 @end
+#else
+@interface QCPileListNumModel : NSObject
+
+@property (nonatomic,copy) NSString *cpid;
+@property (nonatomic,copy) NSString *cpnm;
+
+@property (nonatomic,assign) float price;
+@property (nonatomic,assign) int status;
+
+@end
+#endif

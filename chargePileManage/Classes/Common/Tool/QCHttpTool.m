@@ -10,21 +10,11 @@
 #import <BmobSDK/Bmob.h>
 #import "QCPileListDataMode.h"
 #import "QCPileListNumModel.h"
+#import "AFNetworking.h"
 
 @implementation QCHttpTool
 
-//+ (void) bombQueryData:(NSInteger) numOfData success:(void (^)(NSArray *arr))success failure:(void (^)(NSError *error))failure
-//{
-//    BmobQuery *bquery = [BmobQuery queryWithClassName:@"ChargePile"];
-//    bquery.limit = numOfData;
-//    [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-//        if (error) {
-//            failure(error);
-//        } else {
-//            success(array);
-//        }
-//    }];
-//}
+#if SERVER_TYPE
 /**
  *  从Bomb调用数据，成功返回充电桩数据数组，失败返回错误信息
  *
@@ -89,12 +79,46 @@
         } else {
             for (BmobObject *obj in array) {
                 QCPileListNumModel *pileData = [[QCPileListNumModel alloc] initWithObject:obj];
-                [pileArray addObject:pileData];
-//                NSString *chargePileNum = [obj objectForKey:@"ChargePileAddress"];
-//                WQLog(@"BmobObject---%@",chargePileNum);
+                [pileArray addObject:pileData];;
             }
             success(pileArray);
         }
     }];
 }
+#else
++ (void) httpQueryCPNumber:(NSDictionary *)params success:( void (^)(id json) )success failure:( void (^)(NSError *error) )failure
+{
+    // 1.创建请示管理对象
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:@"http://192.168.1.111:8080/cpserver/getChargePileList" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    [dataTask resume];
+}
++ (void) httpQueryCPData:(NSDictionary *)params success:( void (^)(id json) )success failure:( void (^)(NSError *error) )failure
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:@"http://192.168.1.111:8080/cpserver/getChargePileDetail" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    [dataTask resume];
+}
+#endif
+
 @end

@@ -10,6 +10,7 @@
 #import <BmobSDK/Bmob.h>
 
 @implementation QCPileListNumModel
+#if SERVER_TYPE
 - (instancetype) initWithObject:(BmobObject *)object
 {
     // sampling infomation
@@ -19,4 +20,7 @@
     
     return self;
 }
+#else
+
+#endif
 @end

@@ -77,6 +77,7 @@
 		726F7EA31CF67B150068513A /* QCPileListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA21CF67B150068513A /* QCPileListCell.m */; };
 		726F7EA61CF6E9890068513A /* QCPileListCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA51CF6E9890068513A /* QCPileListCellModel.m */; };
 		726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */; };
+		7286B7B81D1BC7B200CF6E2E /* NSArray+SortAndDistinct.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286B7B71D1BC7B200CF6E2E /* NSArray+SortAndDistinct.m */; };
 		7288032F1D048216009AB66E /* WBPopMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803241D048216009AB66E /* WBPopMenuModel.m */; };
 		728803301D048216009AB66E /* WBPopMenuSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803261D048216009AB66E /* WBPopMenuSingleton.m */; };
 		728803311D048216009AB66E /* WBPopMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803281D048216009AB66E /* WBPopMenuView.m */; };
@@ -262,6 +263,8 @@
 		726F7EA51CF6E9890068513A /* QCPileListCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListCellModel.m; sourceTree = "<group>"; };
 		726F7EA71CF6F16B0068513A /* QCPileListDetailCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListDetailCtrl.h; sourceTree = "<group>"; };
 		726F7EA81CF6F16B0068513A /* QCPileListDetailCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListDetailCtrl.m; sourceTree = "<group>"; };
+		7286B7B61D1BC7B200CF6E2E /* NSArray+SortAndDistinct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SortAndDistinct.h"; sourceTree = "<group>"; };
+		7286B7B71D1BC7B200CF6E2E /* NSArray+SortAndDistinct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SortAndDistinct.m"; sourceTree = "<group>"; };
 		728803231D048216009AB66E /* WBPopMenuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBPopMenuModel.h; sourceTree = "<group>"; };
 		728803241D048216009AB66E /* WBPopMenuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBPopMenuModel.m; sourceTree = "<group>"; };
 		728803251D048216009AB66E /* WBPopMenuSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBPopMenuSingleton.h; sourceTree = "<group>"; };
@@ -493,6 +496,8 @@
 				7254FA201CED4A6E008EA77F /* UIImage+XFCircle.m */,
 				725760A31D1286B90003ECAA /* UIColor+hex.h */,
 				725760A41D1286B90003ECAA /* UIColor+hex.m */,
+				7286B7B61D1BC7B200CF6E2E /* NSArray+SortAndDistinct.h */,
+				7286B7B71D1BC7B200CF6E2E /* NSArray+SortAndDistinct.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1210,6 +1215,7 @@
 				725760BA1D13E5130003ECAA /* QCItemSegmentModel.m in Sources */,
 				7254FA461CED4A6E008EA77F /* NSString+XFTime.m in Sources */,
 				726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */,
+				7286B7B81D1BC7B200CF6E2E /* NSArray+SortAndDistinct.m in Sources */,
 				7288034C1D0D3734009AB66E /* ZCTradeKeyboard.m in Sources */,
 				726F7E9F1CF593E70068513A /* WQItemSwitchModel.m in Sources */,
 				7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */,

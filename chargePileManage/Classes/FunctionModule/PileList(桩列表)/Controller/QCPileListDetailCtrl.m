@@ -32,7 +32,6 @@
 #import <BmobSDK/Bmob.h>
 #import "YYKit.h"
 #import "AFNetworking.h"
-#import "MJExtension.h"
 
 
 @interface QCPileListDetailCtrl ()
@@ -66,77 +65,62 @@ static int pileDataCnt = 0;
     self.scrollView = scrollView;
     
     NSString *dbName = @"chargePileData.sqlite";
-    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,address text,chargePileNum text)";
-    
-    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
-    QCPileListNumModel *model = [[QCPileListNumModel alloc] init];
-    model.address = @"上海市";
-    model.chargePileNum = @"11111111";
-    QCPileListNumModel *model1 = [[QCPileListNumModel alloc] init];
-    model1.address = @"北京市";
-    model1.chargePileNum = @"22222222";
-    QCPileListNumModel *model2 = [[QCPileListNumModel alloc] init];
-    model2.address = @"深圳市";
-    model2.chargePileNum = @"33333333";
-    QCPileListNumModel *model3 = [[QCPileListNumModel alloc] init];
-    model3.address = @"天津市";
-    model3.chargePileNum = @"44444444";
-    NSArray *arr = @[model,model1,model2,model3];
-    [cache addChargePileDatas:dbName sqlCmd:sqlCmd cpNumArray:arr];
-//    [cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:model];
+//    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,address text,chargePileNum text)";
+//
+//    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+//    QCPileListNumModel *model = [[QCPileListNumModel alloc] init];
+//    model.address = @"上海市";
+//    model.chargePileNum = @"11111111";
+//    QCPileListNumModel *model1 = [[QCPileListNumModel alloc] init];
+//    model1.address = @"北京市";
+//    model1.chargePileNum = @"22222222";
+//    QCPileListNumModel *model2 = [[QCPileListNumModel alloc] init];
+//    model2.address = @"深圳市";
+//    model2.chargePileNum = @"33333333";
+//    QCPileListNumModel *model3 = [[QCPileListNumModel alloc] init];
+//    model3.address = @"天津市";
+//    model3.chargePileNum = @"44444444";
+//    NSArray *arr = @[model,model1,model2,model3];
+//    [cache addChargePileDatas:dbName sqlCmd:sqlCmd cpNumArray:arr];
+//    
+//
     
     NSString *sqlData = @"create table if not exists t_data (id integer primary key autoincrement,address text,cpdata blob)";
     QCDataCacheTool *cacheCPData = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlData];
-    
-    
-//    NSString *dbName1 = @"cpName1.sqlite";
-//    NSString *sqlCmd1 = @"create table if not exists t_data (id integer primary key autoincrement,address text,cpNumber text,dict blob)";
-//    QCDataCacheTool *cache1 = [[QCDataCacheTool alloc] initWithDBName:dbName1 sqlCmd:sqlCmd1];
-//    
-//    NSDictionary *dict1 = [NSDictionary dictionaryWithObjectsAndKeys:
-//                          @"上海市",@"address",
-//                          @"0001",@"cpNumber",
-//                          @"220",@"vol",
-//                          @"16",@"cur",nil];
-//    
-//    [cache1 addChargePileData:dbName1 sqlCmd:sqlCmd1 dict:dict1];
-    
-    
-    
-//    [QCDataCacheTool addChargePileData:dict];
-    
-    
-    // 1.创建请示管理对象
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    NSURL *URL = [NSURL URLWithString:@"http://192.168.1.111:8080/cpserver/getChargePileList"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            for (NSDictionary *dict in responseObject) {
-                NSString *str = dict[@"cpnm"];
-                NSLog(@"str=%@", str);
+#if SERVER_TYPE
+        [QCHttpTool bombQueryData:20 success:^(NSArray *arr) {
+            for (QCPileListDataMode *obj in arr) {
+                // 保存数据（充电桩数据）到数据库中
+                [cacheCPData addChargePileData:dbName sqlData:sqlData cpData:obj];
+                [self.pileDataArray addObject:obj];
             }
-            
-        }
-    }];
-    [dataTask resume];
+            // 从数据库读取（充电桩数据）
+            NSArray *array = [cacheCPData cpDataWithParam:dbName];
+            WQLog(@"Bomb:cacheCPData---%@",array);
+        } failure:^(NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+#else
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"cpid"] = @"CP000001";
     
-    [QCHttpTool bombQueryData:20 success:^(NSArray *arr) {
-        for (QCPileListDataMode *obj in arr) {
-            // 保存数据（充电桩数据）到数据库中
-            [cacheCPData addChargePileData:dbName sqlData:sqlData cpData:obj];
-            [self.pileDataArray addObject:obj];
+    [QCHttpTool httpQueryCPData:params success:^(id json) {
+        
+        NSArray *array = json[@"detail"];
+        if (array) {
+            for (NSDictionary *dict1 in array) {
+                QCPileListDataMode *result = [QCPileListDataMode mj_objectWithKeyValues:dict1];
+                [cacheCPData addChargePileData:dbName sqlData:sqlData cpData:result];
+                WQLog(@"充电桩详细数据---%@",result);
+                [self.pileDataArray addObject:result];
+            }
+            NSArray *array = [cacheCPData cpDataWithParam:dbName];
+            WQLog(@"Http:cacheCPData---%@",array);
         }
-        // 从数据库读取（充电桩数据）
-        NSArray *array = [cacheCPData cpDataWithParam:dbName];
-        WQLog(@"cacheCPData---%@",array);
     } failure:^(NSError *error) {
-        NSLog(@"Error: %@", error);
+        WQLog(@"获得数据失败---%@",error);
     }];
-    
+#endif
     
     [self setupSubView];
     
@@ -162,7 +146,6 @@ static int pileDataCnt = 0;
         pileDataCnt ++;
     } else {
         pileDataCnt = 0;
-        return;
     }
     pileData = self.pileDataArray[pileDataCnt];
     

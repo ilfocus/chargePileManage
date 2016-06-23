@@ -124,9 +124,9 @@
     
     [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.size.mas_equalTo(CGSizeMake(57, 57));
+        make.size.mas_equalTo(CGSizeMake(48, 48));
         
-        make.top.equalTo(vs.mas_top).with.offset(QCStatusCellBorder);
+        make.centerY.equalTo(vs.mas_centerY);
         
         make.left.equalTo(vs.mas_left).with.offset(QCStatusCellBorder);
         

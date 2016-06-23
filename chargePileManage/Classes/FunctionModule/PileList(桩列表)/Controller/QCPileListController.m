@@ -18,11 +18,14 @@
 #import "QCPileListDetailCtrl.h"
 #import "QCHttpTool.h"
 #import "QCPileListNumModel.h"
-
-//#import "MJExtension.h"
+// third lib
+#import "MJExtension.h"
 #import "MJRefresh.h"
 #import "QCChiBaoZiHeader.h"
 #import <BmobSDK/Bmob.h>
+
+// category
+#import "NSArray+SortAndDistinct.h"
 
 @interface QCPileListController ()
 @end
@@ -47,69 +50,74 @@ static const CGFloat QCDuration = 2.0;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     self.tableView.rowHeight = PileListCellHeight;
 }
-- (void)loadNewData
+
+- (void) updateCPNumber:(NSArray *)arr
 {
-    __block NSMutableArray *pileNumberArr = nil;
-    [QCHttpTool bombQueryCPNumber:@"ChargePile3" numOfData:10 success:^(NSArray *arr) {
-        pileNumberArr = [NSMutableArray array];
-        NSMutableArray *numArray = [NSMutableArray array];
-        for (QCPileListNumModel *obj in arr) {
-            // 保存数据（充电桩数据）到数据库中
-            [pileNumberArr addObject:obj];
-//            WQLog(@"pileNumber---%@",obj.chargePileNum);
-            NSString *title = [obj.chargePileNum stringByAppendingString:@"#充电桩"];
-            WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:title subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
-            
-            [numArray addObject:everyMsgNumber];
-            
-        }
-        
-        WQTableViewGroupModel *group = [WQTableViewGroupModel new];
-        
-        group.items = (NSArray *)numArray;
-        
-        [self.data removeAllObjects];
-        [self.data addObject:group];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self.tableView reloadData]; // 刷新表格
-            [self.tableView.mj_header endRefreshing];// 拿到当前的下拉刷新控件，结束刷新状态
-        });
-        
-    } failure:^(NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
-    
     NSMutableArray *numArray = [NSMutableArray array];
-    for (QCPileListNumModel *obj in pileNumberArr) {
-        NSString *title = [obj.chargePileNum stringByAppendingString:@"#充电桩"];
-        WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:title subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
-        
+    if (arr == nil) {
+        return;
+    }
+    NSArray *sortArray = [NSArray numStrArraySortAndDistinct:arr];
+    
+    if (sortArray == nil) {
+        return;
+    }
+    
+    for (NSString *str in sortArray) {
+        NSString *cpNumber = [NSString stringWithFormat:@"%04d",[str intValue]];
+        NSString *title = [cpNumber stringByAppendingString:@"#充电桩"];
+        WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"chargePile" title:title subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
         [numArray addObject:everyMsgNumber];
     }
     
+    WQTableViewGroupModel *group = [WQTableViewGroupModel new];
+    group.items = (NSArray *)numArray;
     
-//    ///////////////////////////////// 有设置目标控制器 /////////////////////////////////////////////////
-//    WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"setting_sndNum" title:@"0001#充电桩" subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
-//    everyMsgNumber.costValue = 1234.05;
-//    WQItemModel *setMsgContent = [QCPileListCellModel itemWithIcon:@"setting_sign" title:@"0002#充电桩" subTitle:@"当前状态:空闲" destVcClass:[QCPileListDetailCtrl class]];
-//    setMsgContent.costValue = 15.67;
-    //////////////////////////////////////////////////////////////////////////////////////////////////
+    [self.data removeAllObjects];
+    [self.data addObject:group];
     
-    
-//    WQTableViewGroupModel *group = [WQTableViewGroupModel new];
-//    
-//    group.items = (NSArray *)numArray;
-//    
-//    [self.data removeAllObjects];
-//    [self.data addObject:group];
-    // 2.模拟2秒后刷新表格UI（真实开发中，可以移除这段gcd代码）
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        
-//        [self.tableView reloadData]; // 刷新表格
-//        [self.tableView.mj_header endRefreshing];// 拿到当前的下拉刷新控件，结束刷新状态
-//    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [self.tableView reloadData]; // 刷新表格
+        [self.tableView.mj_header endRefreshing];// 拿到当前的下拉刷新控件，结束刷新状态
+    });
+}
+
+- (void) loadNewData
+{
+#if SERVER_TYPE
+    [QCHttpTool bombQueryCPNumber:@"ChargePile3" numOfData:10 success:^(NSArray *arr) {
+        
+        NSMutableArray *pileNumberArr = [NSMutableArray array];
+        for (QCPileListNumModel *obj in arr) {
+            [pileNumberArr addObject:obj.chargePileNum];
+        }
+        [self updateCPNumber:pileNumberArr];
+    } failure:^(NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+#else
+    [QCHttpTool httpQueryCPNumber:nil success:^(id json) {
+        NSArray *array = json[@"detail"];
+        if (array) {
+            NSMutableArray *cpNumArr = [NSMutableArray array];
+            for (NSDictionary *dict1 in array) {
+                QCPileListNumModel *result = [QCPileListNumModel mj_objectWithKeyValues:dict1];
+                NSString *str = [result.cpid substringFromIndex:2];
+                int cpNum = [str intValue];
+                NSString *str1 = [NSString stringWithFormat:@"%d",cpNum];
+                [cpNumArr addObject:str1];
+                WQLog(@"得到数据成功---%@",str1);
+            }
+            if (cpNumArr) {
+                [self updateCPNumber:cpNumArr];
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        WQLog(@"获得数据失败---%@",error);
+    }];
+#endif
 }
 /**
  * 设置第0组样式
@@ -166,7 +174,7 @@ static const CGFloat QCDuration = 2.0;
     WQLog(@"group.items---%d",group.items.count);
     WQLog(@"indexPath.row---%d",indexPath.row);   // 去掉的话，数据刷新有问题
     
-    if (indexPath.row > group.items.count) {
+    if (indexPath.row >= group.items.count) {
         // WQLog(@"indexPath.row > group.items.count");
         return cell;
     }

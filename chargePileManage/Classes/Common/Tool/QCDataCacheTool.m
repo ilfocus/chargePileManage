@@ -79,10 +79,13 @@ static FMDatabaseQueue *_queue;
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
     [queue inDatabase:^(FMDatabase *db) {
-        
+#if SERVER_TYPE
         NSString *address   = number.address;
         NSString *cpNumber  = number.chargePileNum;
         [db executeUpdate:@"insert into t_number (address,chargePileNum) values(?,?)",address,cpNumber];
+#else
+        
+#endif
     }];
 }
 // 保存充电桩数据
