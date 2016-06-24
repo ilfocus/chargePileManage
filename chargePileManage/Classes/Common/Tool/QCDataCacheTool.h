@@ -35,4 +35,10 @@
  *  读取数据
  */
 - (NSArray *)cpDataWithParam:(NSString *)dbName;
+- (NSArray *)getCPListWithParam:(NSString *)dbName;
+
+
+#pragma - mark store and get cpid
+- (NSArray *)getCPListNumberWithParam:(NSString *)dbName;
+- (void) storeCPListNumberWithParam:(NSString *)dbName chargePileID:(QCPileListNumModel *)number;
 @end

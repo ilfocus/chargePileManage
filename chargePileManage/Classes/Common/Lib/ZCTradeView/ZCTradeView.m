@@ -143,7 +143,8 @@
     
     CGFloat marginTop;
     if (iphone4) {
-        marginTop = 42;
+//        marginTop = 42;
+        marginTop = 74;
     } else if (iphone5) {
         marginTop = 100;
     } else if (iphone6) {

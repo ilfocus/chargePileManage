@@ -9,6 +9,7 @@
 #ifndef Global_PrefixHeader_pch
 #define Global_PrefixHeader_pch
 
+#import "M2DeviceHelper.h"
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
@@ -43,13 +44,26 @@
 // 6.定义弱self指针，用于block内部
 #define WEAK_SELF(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
-//获取屏幕 宽度、高度
+// 7.获取屏幕 宽度、高度
 #define SCREEN_FRAME ([UIScreen mainScreen].applicationFrame)
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 #define STATUS_FRAME ([[UIApplication sharedApplication] statusBarFrame])
 #define STATUS_WIDTH ([[UIApplication sharedApplication] statusBarFrame].size.width)
 #define STATUS_HEIGHT ([[UIApplication sharedApplication] statusBarFrame].size.height)
+// 8.判断设备型号
+#define kFBaseWidth [[UIScreen mainScreen]bounds].size.width
+#define kFBaseHeight [[UIScreen mainScreen]bounds].size.height
+#define kFBaseHeightNoStatus (kFBaseHeight-kFBaseStatusHeight)
+//没有状态条和导航栏的高度
+#define kFBaseHeightNoStatusNoNav (kFBaseHeight-kFBaseStatusHeight - kFBaseNavHeight)
+#define kFBaseHeightNoStatusNoNavNoTab (kFBaseHeight-kFBaseStatusHeight - kFBaseNavHeight -kFBaseTabBarHeight)
+#define kIsIphone4Screen ([M2DeviceHelper isIphone4Screen])
+#define kIsIphone5Screen ([M2DeviceHelper isIphone5Screen])
+#define kIsIphone6Screen ([M2DeviceHelper isIphone6Screen])
+#define kIsIphone6PlusScreen ([M2DeviceHelper isIphone6PlusScreen])
+#define kIsIphoneSeries ([M2DeviceHelper isIphoneSeries])
+#define kIsIpadSeries ([M2DeviceHelper isIpadSeries])
 
 // BOMB_SERVER LOCAL_SEVER
 #define BOMB_SERVER    0

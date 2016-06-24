@@ -42,6 +42,7 @@ static FMDatabaseQueue *_queue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:sqlCmd];
         }];
+        [queue close];
     }
     return self;
 }
@@ -65,6 +66,7 @@ static FMDatabaseQueue *_queue;
         NSData   *data      = [NSKeyedArchiver archivedDataWithRootObject:dict];
         [db executeUpdate:@"insert into t_data (address,cpNumber,dict) values(?,?,?)",address,cpNumber,data];
     }];
+    [queue close];
 }
 
 // 保存充电桩号码
@@ -84,9 +86,14 @@ static FMDatabaseQueue *_queue;
         NSString *cpNumber  = number.chargePileNum;
         [db executeUpdate:@"insert into t_number (address,chargePileNum) values(?,?)",address,cpNumber];
 #else
-        
+        NSString *price = [NSString stringWithFormat:@"%.2f",number.price];
+        NSString *status = [NSString stringWithFormat:@"%d",number.status];
+        [db executeUpdate:@"insert into t_number (cpid,cpnm,price,status) values(?,?,?,?)",number.cpid,number.cpnm,(int)price,status];
+//    [db executeUpdate:@"insert into t_number (cpid,cpnm) values(?,?)",number.cpid,number.cpnm];
+
 #endif
     }];
+    [queue close];
 }
 // 保存充电桩数据
 - (void)addChargePileData:(NSString *)dbName sqlData:(NSString *)sqlCmd cpData:(QCPileListDataMode *)data
@@ -100,6 +107,7 @@ static FMDatabaseQueue *_queue;
         
         [db executeUpdate:@"insert into t_data (address,cpdata) values(?,?)",address,cpData];
     }];
+    [queue close];
 }
 
 //+ (void)addChargePileDatas:(NSArray *)dictArray
@@ -127,25 +135,10 @@ static FMDatabaseQueue *_queue;
 {
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
-    
-    // 1.定义数组
     __block NSMutableArray *statusArray = nil;
-    // 2.使用数据库
     [queue inDatabase:^(FMDatabase *db) {
-        // 创建数组
         statusArray = [NSMutableArray array];
-        
-        // accessToken
-        //NSString *accessToken = [IWAccountTool account].access_token;
-        
         FMResultSet *rs = nil;
-//        if (param.since_id) { // 如果有since_id
-//            rs = [db executeQuery:@"select * from t_status where access_token = ? and idstr > ? order by idstr desc limit 0,?;", accessToken, param.since_id, param.count];
-//        } else if (param.max_id) { // 如果有max_id
-//            rs = [db executeQuery:@"select * from t_status where access_token = ? and idstr <= ? order by idstr desc limit 0,?;", accessToken, param.max_id, param.count];
-//        } else { // 如果没有since_id和max_id
-//            rs = [db executeQuery:@"select * from t_status where access_token = ? order by idstr desc limit 0,?;", accessToken, param.count];
-//        }
         rs = [db executeQuery:@"select * from t_data"];
         while (rs.next) {
             NSData *data = [rs dataForColumn:@"cpdata"];
@@ -153,9 +146,70 @@ static FMDatabaseQueue *_queue;
             [statusArray addObject:status];
         }
     }];
-    
-    // 3.返回数据
+    [queue close];
     return statusArray;
+}
+
+- (NSArray *)getCPListWithParam:(NSString *)dbName
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    __block NSMutableArray *statusArray = nil;
+    [queue inDatabase:^(FMDatabase *db) {
+        statusArray = [NSMutableArray array];
+        FMResultSet *rs = nil;
+        rs = [db executeQuery:@"select * from t_number"];
+        while (rs.next) {
+            QCPileListNumModel *cpNum = [[QCPileListNumModel alloc] init];
+#if SERVER_TYPE
+            cpNum.chargePileNum = [rs stringForColumn:@"chargePileNum"];
+#else
+            cpNum.cpid = [rs stringForColumn:@"cpid"];
+            cpNum.cpnm = [rs stringForColumn:@"cpnm"];
+            cpNum.price = [[rs stringForColumn:@"price"] floatValue];
+            cpNum.status = [[rs stringForColumn:@"status"] intValue];
+            
+            WQLog(@"cpNum---cpid:%@,cpnm:%@,price:%f,status:%d",cpNum.cpid,cpNum.cpnm,cpNum.price,cpNum.status);
+#endif
+            
+            [statusArray addObject:cpNum];
+        }
+    }];
+    [queue close];
+    return statusArray;
+}
+#pragma - mark store cpid
+- (NSArray *)getCPListNumberWithParam:(NSString *)dbName
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    __block NSMutableArray *statusArray = nil;
+    [queue inDatabase:^(FMDatabase *db) {
+        statusArray = [NSMutableArray array];
+        FMResultSet *rs = nil;
+        rs = [db executeQuery:@"select * from t_cpid"];
+        while (rs.next) {
+            [statusArray addObject:[rs stringForColumn:@"cpid"]];
+        }
+    }];
+    [queue close];
+    return statusArray;
+}
+- (void) storeCPListNumberWithParam:(NSString *)dbName chargePileID:(QCPileListNumModel *)number
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    
+    [queue inDatabase:^(FMDatabase *db) {
+#if SERVER_TYPE
+        NSString *address   = number.address;
+        NSString *cpNumber  = number.chargePileNum;
+        [db executeUpdate:@"insert into t_number (address,chargePileNum) values(?,?)",address,cpNumber];
+#else
+        [db executeUpdate:@"insert into t_number (cpid) values(?)",number.cpid];
+#endif
+    }];
+    [queue close];
 }
 
 @end

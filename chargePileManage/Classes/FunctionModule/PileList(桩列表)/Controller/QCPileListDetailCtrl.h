@@ -11,5 +11,5 @@
 #define SPACE_BAR_VIEW 10
 
 @interface QCPileListDetailCtrl : UIViewController
-
+@property (nonatomic,copy) NSString *cpid;
 @end

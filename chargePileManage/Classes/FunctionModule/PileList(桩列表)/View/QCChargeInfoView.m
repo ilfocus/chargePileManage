@@ -173,21 +173,33 @@
 }
 - (NSArray *) titles {
     
-    _strPointQuantity = [@"尖电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointQuantity]];
-    _strPointPrice    = [@"尖电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointPrice]];
-    _strPointFee    = [@"尖费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointFee]];
+    _strPointQuantity   = [@"尖电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointQuantity]];
+    _strPointQuantity   = [_strPointQuantity stringByAppendingString:@" 度"];
+    _strPointPrice      = [@"尖电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointPrice]];
+    _strPointPrice      = [_strPointPrice stringByAppendingString:@" 度/元"];
+    _strPointFee        = [@"尖费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.pointFee]];
+    _strPointFee        = [_strPointFee stringByAppendingString:@" 元"];
     
-    _strPeakQuantity = [@"峰电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakQuantity]];
-    _strPeakPrice    = [@"峰电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakPrice]];
-    _strPeakFee      = [@"峰费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakFee]];
+    _strPeakQuantity    = [@"峰电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakQuantity]];
+    _strPeakQuantity    = [_strPeakQuantity stringByAppendingString:@" 度"];
+    _strPeakPrice       = [@"峰电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakPrice]];
+    _strPeakPrice       = [_strPeakPrice stringByAppendingString:@" 度/元"];
+    _strPeakFee         = [@"峰费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.peakFee]];
+    _strPeakFee         = [_strPeakFee stringByAppendingString:@" 元"];
     
-    _strFlatQuantity = [@"平电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatQuantity]];
-    _strFlatPrice    = [@"平电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatPrice]];
-    _strFlatFee    = [@"平费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatFee]];
+    _strFlatQuantity    = [@"平电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatQuantity]];
+    _strFlatQuantity    = [_strFlatQuantity stringByAppendingString:@" 度"];
+    _strFlatPrice       = [@"平电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatPrice]];
+    _strFlatPrice       = [_strFlatPrice stringByAppendingString:@" 度/元"];
+    _strFlatFee         = [@"平费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.flatFee]];
+    _strFlatFee         = [_strFlatFee stringByAppendingString:@" 元"];
     
-    _strValleyQuantity = [@"谷电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyQuantity]];
-    _strValleyPrice    = [@"谷电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyPrice]];
-    _strValleyFee    = [@"谷费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyFee]];
+    _strValleyQuantity  = [@"谷电量：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyQuantity]];
+    _strValleyQuantity  = [_strValleyQuantity stringByAppendingString:@" 度"];
+    _strValleyPrice     = [@"谷电价：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyPrice]];
+    _strValleyPrice     = [_strValleyPrice stringByAppendingString:@" 度/元"];
+    _strValleyFee       = [@"谷费用：" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.valleyFee]];
+    _strValleyFee       = [_strValleyFee stringByAppendingString:@" 元"];
     
     
     return @[_strPointQuantity,

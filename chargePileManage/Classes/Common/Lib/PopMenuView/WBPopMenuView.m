@@ -33,12 +33,14 @@
                      menuWidth:(CGFloat)menuWidth
                          items:(NSArray *)items
                         action:(void(^)(NSInteger index))action {
+    
     if (self = [super initWithFrame:frame]) {
         self.menuWidth = menuWidth;
         self.menuItem = items;
         self.action = [action copy];
-
+        
         self.tableViewDataSource = [[WBTableViewDataSource alloc]initWithItems:items cellClass:[WBTableViewCell class] configureCellBlock:^(WBTableViewCell *cell, WBPopMenuModel *model) {
+            
             WBTableViewCell * tableViewCell = (WBTableViewCell *)cell;
             tableViewCell.textLabel.text = model.title;
             //tableViewCell.imageView.image = [UIImage imageNamed:model.image];
@@ -51,12 +53,15 @@
 
 
         self.tableView = [[UITableView alloc]initWithFrame:[self menuFrame] style:UITableViewStylePlain];
+        
         self.tableView.dataSource = self.tableViewDataSource;
         self.tableView.delegate   = self.tableViewDelegate;
+        
         self.tableView.layer.cornerRadius = 10.0f;
-        self.tableView.layer.anchorPoint = CGPointMake(1.0, 0);
+        //self.tableView.layer.anchorPoint = CGPointMake(1.0, 0);
         self.tableView.transform = CGAffineTransformMakeScale(0.0001, 0.0001);
         self.tableView.rowHeight = 40;
+        
         [self addSubview:self.tableView];
         
         if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -71,12 +76,28 @@
 }
 
 - (CGRect)menuFrame {
-    CGFloat menuX = [UIScreen mainScreen].bounds.size.width / 2;
-//    WQLog(@"bounds.width---%f",[UIScreen mainScreen].bounds.size.width);
-//    WQLog(@"self.menuWidth---%f",self.menuWidth);
-    CGFloat menuY = 100 - 20 * WBNUMBER;
+//    CGFloat menuX = [UIScreen mainScreen].bounds.size.width / 2;
+//    //CGFloat menuY = 100 - 20 * WBNUMBER;
+//    CGFloat menuY = -SCREEN_HEIGHT + 74;
+//    CGFloat width = self.menuWidth;
+//    CGFloat heigh = 40 * WBNUMBER;
+    CGFloat menuX = [UIScreen mainScreen].bounds.size.width / 2 - 100;
+    CGFloat menuY = 20;
     CGFloat width = self.menuWidth;
     CGFloat heigh = 40 * WBNUMBER;
+    
+    
+    if (kIsIphone4Screen) {
+        menuY = 25;
+    } else if(kIsIphone5Screen) {
+        menuY = 54;
+    } else if(kIsIphone6Screen) {
+        menuY = 74;
+    } else if(kIsIphone6PlusScreen) {
+        menuY = 124;
+    } else if(kIsIpadSeries) {
+        menuY = 124;
+    }
     return (CGRect){menuX,menuY,width,heigh};
 }
 

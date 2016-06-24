@@ -64,6 +64,8 @@ static int pileDataCnt = 0;
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
     
+    
+    
     NSString *dbName = @"chargePileData.sqlite";
 //    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,address text,chargePileNum text)";
 //
@@ -86,6 +88,7 @@ static int pileDataCnt = 0;
 //
     
     NSString *sqlData = @"create table if not exists t_data (id integer primary key autoincrement,address text,cpdata blob)";
+    
     QCDataCacheTool *cacheCPData = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlData];
 #if SERVER_TYPE
         [QCHttpTool bombQueryData:20 success:^(NSArray *arr) {
@@ -96,14 +99,18 @@ static int pileDataCnt = 0;
             }
             // 从数据库读取（充电桩数据）
             NSArray *array = [cacheCPData cpDataWithParam:dbName];
-            WQLog(@"Bomb:cacheCPData---%@",array);
+            //WQLog(@"Bomb:cacheCPData---%@",array);
         } failure:^(NSError *error) {
             NSLog(@"Error: %@", error);
         }];
 #else
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"cpid"] = @"CP000001";
     
+    NSString *chargePileID  = [NSString stringWithFormat:@"CP%06d",[self.cpid intValue]];
+    //params[@"cpid"] = @"CP000001";
+    WQLog(@"充电桩的CPID---%@",chargePileID);
+    params[@"cpid"] = chargePileID;
+    params[@"datacnt"] = @10;
     [QCHttpTool httpQueryCPData:params success:^(id json) {
         
         NSArray *array = json[@"detail"];
@@ -115,7 +122,7 @@ static int pileDataCnt = 0;
                 [self.pileDataArray addObject:result];
             }
             NSArray *array = [cacheCPData cpDataWithParam:dbName];
-            WQLog(@"Http:cacheCPData---%@",array);
+            //WQLog(@"Http:cacheCPData---%@",array);
         }
     } failure:^(NSError *error) {
         WQLog(@"获得数据失败---%@",error);

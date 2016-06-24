@@ -18,6 +18,7 @@
 #import "QCPileListDetailCtrl.h"
 #import "QCHttpTool.h"
 #import "QCPileListNumModel.h"
+#import "QCDataCacheTool.h"
 // third lib
 #import "MJExtension.h"
 #import "MJRefresh.h"
@@ -31,14 +32,27 @@
 @end
 
 @implementation QCPileListController
-static const CGFloat QCDuration = 2.0;
+static const CGFloat QCDuration = 0.5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setGroup0];
+    //[self setGroup0];
     
     [self setupView];
+    
+//    NSString *dbName = @"chargePileData.sqlite";
+//    
+//    NSString *sqlCmd = @"create table if not exists t_cpid (id integer primary key autoincrement,cpid text)";
+//    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+//    
+//    NSArray *array = [cache getCPListWithParam:dbName];
+//    
+//    if (array) {
+//        // 不为空
+//    }
+    
+    
 }
 /**
  *  设置界面
@@ -49,16 +63,36 @@ static const CGFloat QCDuration = 2.0;
     self.tableView.mj_header = header;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     self.tableView.rowHeight = PileListCellHeight;
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void) updateCPNumber:(NSArray *)arr
 {
-    NSMutableArray *numArray = [NSMutableArray array];
+    
     if (arr == nil) {
         return;
     }
-    NSArray *sortArray = [NSArray numStrArraySortAndDistinct:arr];
     
+    NSMutableArray *cpNumArray = [NSMutableArray array];
+    NSMutableDictionary *model = [NSMutableDictionary dictionary];
+#if SERVER_TYPE
+    for (QCPileListNumModel *result in arr) {
+        [cpNumArray addObject:result.chargePileNum];
+        [model setObject:result forKey:result.chargePileNum];
+    }
+#else
+    for (QCPileListNumModel *result in arr) {
+        NSString *str = [result.cpid substringFromIndex:2];
+        int cpNum = [str intValue];
+        NSString *str1 = [NSString stringWithFormat:@"%d",cpNum];
+        [cpNumArray addObject:str1];
+        [model setObject:result forKey:str1];
+    }
+#endif
+    
+    
+    NSMutableArray *numArray = [NSMutableArray array];
+    NSArray *sortArray = [NSArray numStrArraySortAndDistinct:cpNumArray];
     if (sortArray == nil) {
         return;
     }
@@ -66,7 +100,45 @@ static const CGFloat QCDuration = 2.0;
     for (NSString *str in sortArray) {
         NSString *cpNumber = [NSString stringWithFormat:@"%04d",[str intValue]];
         NSString *title = [cpNumber stringByAppendingString:@"#充电桩"];
-        WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"chargePile" title:title subTitle:@"当前状态:空闲"destVcClass:[QCPileListDetailCtrl class]];
+        NSString *subTitle = nil;
+#if SERVER_TYPE
+        subTitle = @"当前状态:空闲";
+#else
+        QCPileListNumModel *result = [model objectForKey:str];
+        int state = result.status;
+        switch (state) {
+            case 0:
+                subTitle = [@"当前状态:" stringByAppendingString:@"故障"];
+                break;
+            case 1:
+                subTitle = [@"当前状态:" stringByAppendingString:@"空闲"];
+                break;
+            case 2:
+                subTitle = [@"当前状态:" stringByAppendingString:@"充电"];
+                break;
+            case 3:
+                subTitle = [@"当前状态:" stringByAppendingString:@"停车"];
+                break;
+            case 4:
+                subTitle = [@"当前状态:" stringByAppendingString:@"预约"];
+                break;
+            case 5:
+                subTitle = [@"当前状态:" stringByAppendingString:@"维护"];
+                break;
+            default:
+                subTitle = [@"当前状态:" stringByAppendingString:@"空闲"];
+                break;
+        }
+#endif
+        
+        WQItemModel *everyMsgNumber = [QCPileListCellModel itemWithIcon:@"chargePile" title:title subTitle:subTitle destVcClass:[QCPileListDetailCtrl class]];
+#if SERVER_TYPE
+        
+#else
+        
+        everyMsgNumber.cpid = cpNumber;
+        everyMsgNumber.costValue = result.price;
+#endif
         [numArray addObject:everyMsgNumber];
     }
     
@@ -76,16 +148,23 @@ static const CGFloat QCDuration = 2.0;
     [self.data removeAllObjects];
     [self.data addObject:group];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        [self.tableView reloadData]; // 刷新表格
-        [self.tableView.mj_header endRefreshing];// 拿到当前的下拉刷新控件，结束刷新状态
-    });
+    [self.tableView reloadData]; // 刷新表格
+    [self.tableView.mj_header endRefreshing];// 拿到当前的下拉刷新控件，结束刷新状态
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(QCDuration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        [self.tableView reloadData]; // 刷新表格
+//        [self.tableView.mj_header endRefreshing];// 拿到当前的下拉刷新控件，结束刷新状态
+//    });
 }
 
 - (void) loadNewData
 {
+    NSString *dbName = @"chargePileData.sqlite";
+    
 #if SERVER_TYPE
+    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,address text,chargePileNum text)";
+    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
     [QCHttpTool bombQueryCPNumber:@"ChargePile3" numOfData:10 success:^(NSArray *arr) {
         
         NSMutableArray *pileNumberArr = [NSMutableArray array];
@@ -97,17 +176,21 @@ static const CGFloat QCDuration = 2.0;
         NSLog(@"Error: %@", error);
     }];
 #else
+    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text,price text,status text)";
+//    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text)";
+    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+    
+    // 取数据,先从缓存取，如果缓存为空再请求网络
+    
+    
     [QCHttpTool httpQueryCPNumber:nil success:^(id json) {
         NSArray *array = json[@"detail"];
         if (array) {
             NSMutableArray *cpNumArr = [NSMutableArray array];
             for (NSDictionary *dict1 in array) {
                 QCPileListNumModel *result = [QCPileListNumModel mj_objectWithKeyValues:dict1];
-                NSString *str = [result.cpid substringFromIndex:2];
-                int cpNum = [str intValue];
-                NSString *str1 = [NSString stringWithFormat:@"%d",cpNum];
-                [cpNumArr addObject:str1];
-                WQLog(@"得到数据成功---%@",str1);
+                [cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:result];
+                [cpNumArr addObject:result];
             }
             if (cpNumArr) {
                 [self updateCPNumber:cpNumArr];
@@ -171,11 +254,10 @@ static const CGFloat QCDuration = 2.0;
     
     WQTableViewGroupModel *group = self.data[indexPath.section];
     
-    WQLog(@"group.items---%d",group.items.count);
-    WQLog(@"indexPath.row---%d",indexPath.row);   // 去掉的话，数据刷新有问题
+//    WQLog(@"group.items---%d",group.items.count);
+//    WQLog(@"indexPath.row---%d",indexPath.row);   // 去掉的话，数据刷新有问题
     
     if (indexPath.row >= group.items.count) {
-        // WQLog(@"indexPath.row > group.items.count");
         return cell;
     }
     
@@ -200,6 +282,7 @@ static const CGFloat QCDuration = 2.0;
     }
     QCPileListDetailCtrl *vc = [[arrowItem.destVcClass alloc]init];
     vc.title = arrowItem.title;
+    vc.cpid  = item.cpid;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
