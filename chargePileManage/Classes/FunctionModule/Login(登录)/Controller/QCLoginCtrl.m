@@ -13,7 +13,6 @@
 #import "YYKit.h"
 
 
-
 @interface QCLoginCtrl () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *userIDText;
 @property (weak, nonatomic) IBOutlet UITextField *pwdText;

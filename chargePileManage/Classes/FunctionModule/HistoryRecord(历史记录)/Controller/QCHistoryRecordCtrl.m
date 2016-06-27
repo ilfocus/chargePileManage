@@ -12,19 +12,31 @@
 #import "UIColor+hex.h"
 
 #import "SVSegmentedControl.h"
+// third lib
+#import "MJExtension.h"
+#import "MJRefresh.h"
+#import "QCChiBaoZiHeader.h"
+#import "YLSearchViewController.h"
 
 
-@interface QCHistoryRecordCtrl () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+@interface QCHistoryRecordCtrl () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,SearchResultDelegate>
 @property (nonatomic,weak) UIScrollView *scrollView;
 @property (nonatomic,weak) UITableView *chargeRecordView;
 @property (nonatomic,weak) UITableView *supplyRecordView;
 
 @property (nonatomic,weak) UISegmentedControl *segmentedView;
 
+@property (nonatomic,weak) UISearchBar *searchBar;
+@property (nonatomic,strong) UISearchDisplayController *searchDisplayController;
+
+@property (nonatomic,strong) NSMutableArray *chargeRecordDataArray;
+@property (nonatomic,strong) NSMutableArray *supplyRecordDataArray;
+
 @end
 
 @implementation QCHistoryRecordCtrl
 
+#pragma - mark initView
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -32,38 +44,30 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-//    if (([[[UIDevice currentDevice] systemVersion] doubleValue] >= 7.0)) {
-//        self.edgesForExtendedLayout = UIRectEdgeNone;
-//        self.automaticallyAdjustsScrollViewInsets = NO;
-//    }
-//    
-    
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2,0);
     scrollView.scrollEnabled = YES;
     scrollView.pagingEnabled = YES;
-    //scrollView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
     self.scrollView.delegate = self;
     
     CGFloat segmentedHeight = 40;
-    NSArray *array=@[@"充电记录",@"供电记录"];
-    
+    CGFloat segmentedY = 64;
+    NSArray *array = @[@"充电记录",@"供电记录"];
     UISegmentedControl *segmentedView = [[UISegmentedControl alloc] initWithItems:array];
     segmentedView.selectedSegmentIndex = 0;
     segmentedView.tintColor = [UIColor colorWithHex:0x15A230];
     [segmentedView addTarget:self action:@selector(charge:) forControlEvents:UIControlEventValueChanged];
-    segmentedView.frame = CGRectMake(0, 64, SCREEN_WIDTH, segmentedHeight);;
+    segmentedView.frame = CGRectMake(0, segmentedY, SCREEN_WIDTH, segmentedHeight);;
     [self.view addSubview:segmentedView];
     self.segmentedView = segmentedView;
     
-    CGFloat tableViewY = 64 + segmentedHeight;
+    CGFloat tableViewY = segmentedY + segmentedHeight;
     CGFloat tableViewH = self.view.frame.size.height - self.tabBarController.tabBar.frame.size.height - tableViewY;
     CGRect chargeRecordViewFrame = CGRectMake(0, tableViewY, SCREEN_WIDTH, tableViewH);
     UITableView *chargeRecordView = [[UITableView alloc] initWithFrame:chargeRecordViewFrame style:UITableViewStyleGrouped];
-    //chargeRecordView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController.tabBar.frame.size.height + 20, 0);
     chargeRecordView.rowHeight = 100;
     UIView *chargeHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     chargeRecordView.tableHeaderView = chargeHeaderView;
@@ -72,8 +76,6 @@
     self.chargeRecordView = chargeRecordView;
     self.chargeRecordView.delegate = self;
     self.chargeRecordView.dataSource = self;
-    //chargeRecordView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    //chargeRecordView.height = self.view.bounds.size.height;
     
     CGRect supplyRecordViewFrame = CGRectMake(SCREEN_WIDTH, tableViewY, SCREEN_WIDTH, tableViewH);
     UITableView *supplyRecordView = [[UITableView alloc] initWithFrame:supplyRecordViewFrame style:UITableViewStyleGrouped];
@@ -86,16 +88,81 @@
     self.supplyRecordView.delegate = self;
     self.supplyRecordView.dataSource = self;
     
+    
+    UIBarButtonItem *uibtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(addNewItem:)];
+    self.navigationItem.rightBarButtonItem  = uibtn;
+    
+    
+    QCChiBaoZiHeader *chargeRecordheader = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadChargeRecordData)];
+    self.chargeRecordView.mj_header = chargeRecordheader;
+    self.chargeRecordView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    
+    QCChiBaoZiHeader *supplyRecordheader = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadChargeRecordData)];
+    self.supplyRecordView.mj_header = supplyRecordheader;
+    self.supplyRecordView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    
+}
+#pragma - mark lazy load
+- (NSMutableArray *)chargeRecordDataArray
+{
+    if (_chargeRecordDataArray != nil) {
+        _chargeRecordDataArray = [NSMutableArray array];
+    }
+    return _chargeRecordDataArray;
+}
+- (NSMutableArray *) supplyRecordDataArray
+{
+    if (_supplyRecordDataArray != nil) {
+        _supplyRecordDataArray = [NSMutableArray array];
+    }
+    return _supplyRecordDataArray;
 }
 
+
+#pragma mark -- SearchResultDelegate
+
+- (void)searchResultData:(NSString *)value {
+
+    WQLog(@"搜索---%@",value);
+}
 #pragma mark - private method
+
+- (void) loadChargeRecordData
+{
+    WQLog(@"---loadChargeRecordData---");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.chargeRecordView.mj_header endRefreshing];
+    });
+}
+
+- (void) loadSupplyRecordData
+{
+    WQLog(@"---loadSupplyRecordData---");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.supplyRecordView.mj_header endRefreshing];
+    });
+}
+
+- (void) addNewItem:(UIBarButtonItem *)btn
+{
+    NSLog(@"点击UIBarButtonItem!!!");
+    YLSearchViewController *vc = [[YLSearchViewController alloc] initWithNibName:@"YLSearchViewController" bundle:nil];
+    //把搜索数据传过去
+    vc.serchArray = [NSMutableArray arrayWithObjects:@"你好！code4App",@"I love code",@"Hello world",@"乔布斯",@"code4App",@"愿你开心", nil];
+    //设置代理
+    vc.delegate = self;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void) charge:(UISegmentedControl *)segmented
 {
     WQLog(@"scrollView---charge");
     if (segmented.selectedSegmentIndex == 0) {
         [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        _searchBar.placeholder = @"桩号查询";
     } else {
         [_scrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:YES];
+        _searchBar.placeholder = @"用户查询";
     }
     _scrollView.bouncesZoom = NO;
 
@@ -131,10 +198,17 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //NSLog(@"ContentOffset  x is  %f,yis %f",scrollView.contentOffset.x,scrollView.contentOffset.y);
+    
+    // 历史记录界面，在供电记录界面，当下拉TableView时，选择按钮会跳到充电记录界面中。
+    WQLog(@"---contentOffset---%f",scrollView.contentOffset.x);
     if (scrollView.contentOffset.x < SCREEN_WIDTH / 2) {
+        WQLog(@"充电记录");
         _segmentedView.selectedSegmentIndex = 0;
+        _searchBar.placeholder = @"桩号查询";
     } else {
+        WQLog(@"用电记录");
         _segmentedView.selectedSegmentIndex = 1;
+        _searchBar.placeholder = @"用户查询";
     }
 }
 

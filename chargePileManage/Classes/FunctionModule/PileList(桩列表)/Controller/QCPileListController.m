@@ -41,16 +41,15 @@ static const CGFloat QCDuration = 0.5;
     
     [self setupView];
     
-//    NSString *dbName = @"chargePileData.sqlite";
-//    
-//    NSString *sqlCmd = @"create table if not exists t_cpid (id integer primary key autoincrement,cpid text)";
-//    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
-//    
-//    NSArray *array = [cache getCPListWithParam:dbName];
-//    
-//    if (array) {
-//        // 不为空
-//    }
+    // 第一次从数据库加载数据，并显示在界面上
+    NSString *dbName = @"chargePileData.sqlite";
+    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text)";
+    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+    NSArray *array = [cache getCPListWithParam:dbName];
+    if (array) {
+        WQLog(@"cache---array:%@",array);
+        [self updateCPNumber:array];
+    }
     
     
 }
@@ -63,7 +62,7 @@ static const CGFloat QCDuration = 0.5;
     self.tableView.mj_header = header;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     self.tableView.rowHeight = PileListCellHeight;
-    [self.tableView.mj_header beginRefreshing];
+    //[self.tableView.mj_header beginRefreshing];
 }
 
 - (void) updateCPNumber:(NSArray *)arr
@@ -189,7 +188,8 @@ static const CGFloat QCDuration = 0.5;
             NSMutableArray *cpNumArr = [NSMutableArray array];
             for (NSDictionary *dict1 in array) {
                 QCPileListNumModel *result = [QCPileListNumModel mj_objectWithKeyValues:dict1];
-                [cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:result];
+                // 存储充电桩号码数据
+                //[cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:result];
                 [cpNumArr addObject:result];
             }
             if (cpNumArr) {
