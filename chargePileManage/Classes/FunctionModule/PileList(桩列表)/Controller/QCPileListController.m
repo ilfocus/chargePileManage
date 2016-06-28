@@ -50,9 +50,13 @@ static const CGFloat QCDuration = 0.5;
         WQLog(@"cache---array:%@",array);
         [self updateCPNumber:array];
     }
-    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPileList:) name:@"enterSystem" object:nil];
     
 }
+//- (void) showPileList:(NSNotification *)center
+//{
+//    WQLog(@"EnterSystem notification---%@",center);
+//}
 /**
  *  设置界面
  */

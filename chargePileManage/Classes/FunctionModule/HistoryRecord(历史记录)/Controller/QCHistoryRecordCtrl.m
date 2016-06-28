@@ -16,6 +16,8 @@
 #import "MJExtension.h"
 #import "MJRefresh.h"
 #import "QCChiBaoZiHeader.h"
+//#import "MJChiBaoZiFooter.h"
+#import "QCChiBaoZiFooter.h"
 #import "YLSearchViewController.h"
 
 
@@ -95,10 +97,14 @@
     
     QCChiBaoZiHeader *chargeRecordheader = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadChargeRecordData)];
     self.chargeRecordView.mj_header = chargeRecordheader;
+    
+    self.chargeRecordView.mj_footer = [QCChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreCPData)];
+    
     self.chargeRecordView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     
-    QCChiBaoZiHeader *supplyRecordheader = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadChargeRecordData)];
+    QCChiBaoZiHeader *supplyRecordheader = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadSupplyRecordData)];
     self.supplyRecordView.mj_header = supplyRecordheader;
+    self.supplyRecordView.mj_footer = [QCChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreSRData)];
     self.supplyRecordView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     
 }
@@ -125,13 +131,23 @@
 
     WQLog(@"搜索---%@",value);
 }
-#pragma mark - private method
 
+#pragma - mark mjRefresh Data
 - (void) loadChargeRecordData
 {
     WQLog(@"---loadChargeRecordData---");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.chargeRecordView.mj_header endRefreshing];
+        WQLog(@"---self.chargeRecordView.mj_header---");
+    });
+}
+
+- (void) loadMoreCPData
+{
+    WQLog(@"---loadChargeRecordData---");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.chargeRecordView.mj_footer endRefreshing];
+        WQLog(@"---self.chargeRecordView.mj_header---");
     });
 }
 
@@ -140,8 +156,20 @@
     WQLog(@"---loadSupplyRecordData---");
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.supplyRecordView.mj_header endRefreshing];
+        WQLog(@"---self.supplyRecordView.mj_header---");
     });
 }
+- (void) loadMoreSRData
+{
+    WQLog(@"---loadMoreSRData---");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.supplyRecordView.mj_footer endRefreshing];
+        WQLog(@"---loadMoreSRData---");
+    });
+}
+
+#pragma mark - private method
+
 
 - (void) addNewItem:(UIBarButtonItem *)btn
 {
@@ -197,19 +225,22 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    //NSLog(@"ContentOffset  x is  %f,yis %f",scrollView.contentOffset.x,scrollView.contentOffset.y);
+    //WQLog(@"scrollView.contentOffset---%@",NSStringFromCGPoint(scrollView.contentOffset));
     
-    // 历史记录界面，在供电记录界面，当下拉TableView时，选择按钮会跳到充电记录界面中。
-    WQLog(@"---contentOffset---%f",scrollView.contentOffset.x);
-    if (scrollView.contentOffset.x < SCREEN_WIDTH / 2) {
-        WQLog(@"充电记录");
-        _segmentedView.selectedSegmentIndex = 0;
-        _searchBar.placeholder = @"桩号查询";
+    if ([scrollView isMemberOfClass:[UIScrollView class]]) {
+        //WQLog(@"是scrollView---%@",scrollView);
+        if (scrollView.contentOffset.x < SCREEN_WIDTH / 2) {
+            _segmentedView.selectedSegmentIndex = 0;
+            //_searchBar.placeholder = @"桩号查询";
+        } else {
+            _segmentedView.selectedSegmentIndex = 1;
+            //_searchBar.placeholder = @"用户查询";
+        }
     } else {
-        WQLog(@"用电记录");
-        _segmentedView.selectedSegmentIndex = 1;
-        _searchBar.placeholder = @"用户查询";
+//        WQLog(@"不是scrollView---%@",scrollView);
     }
+    
+    
 }
 
 @end

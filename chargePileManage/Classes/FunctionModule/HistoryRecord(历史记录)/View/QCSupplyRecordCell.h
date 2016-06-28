@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class QCSupplyRecordModel;
 @interface QCSupplyRecordCell : UITableViewCell
+
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+@property (nonatomic,strong) QCSupplyRecordModel *cpSupplyRecord;
+
 @end

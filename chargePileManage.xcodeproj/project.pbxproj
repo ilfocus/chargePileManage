@@ -23,6 +23,8 @@
 		7227923B1D21123800A2D643 /* YLSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722792311D21123800A2D643 /* YLSearchViewController.xib */; };
 		7227923E1D211B2200A2D643 /* QCChargeRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7227923D1D211B2200A2D643 /* QCChargeRecordModel.m */; };
 		722792411D211B3B00A2D643 /* QCSupplyRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 722792401D211B3B00A2D643 /* QCSupplyRecordModel.m */; };
+		7227925A1D222D8900A2D643 /* QCChiBaoZiFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 722792591D222D8900A2D643 /* QCChiBaoZiFooter.m */; };
+		722792601D224A1300A2D643 /* UIGestureRecognizer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 7227925F1D224A1300A2D643 /* UIGestureRecognizer+Block.m */; };
 		72295A6B1CFD896100E40E9A /* QCRunStateCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A6A1CFD896100E40E9A /* QCRunStateCtrl.m */; };
 		72295A6E1CFD898000E40E9A /* QCFaultInfoCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A6D1CFD898000E40E9A /* QCFaultInfoCtrl.m */; };
 		72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72295A701CFD89C600E40E9A /* QCBatteryInfoCtrl.m */; };
@@ -168,6 +170,10 @@
 		7227923D1D211B2200A2D643 /* QCChargeRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChargeRecordModel.m; sourceTree = "<group>"; };
 		7227923F1D211B3B00A2D643 /* QCSupplyRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSupplyRecordModel.h; sourceTree = "<group>"; };
 		722792401D211B3B00A2D643 /* QCSupplyRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSupplyRecordModel.m; sourceTree = "<group>"; };
+		722792581D222D8900A2D643 /* QCChiBaoZiFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChiBaoZiFooter.h; sourceTree = "<group>"; };
+		722792591D222D8900A2D643 /* QCChiBaoZiFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChiBaoZiFooter.m; sourceTree = "<group>"; };
+		7227925E1D224A1300A2D643 /* UIGestureRecognizer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+Block.h"; sourceTree = "<group>"; };
+		7227925F1D224A1300A2D643 /* UIGestureRecognizer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+Block.m"; sourceTree = "<group>"; };
 		72295A691CFD896100E40E9A /* QCRunStateCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCRunStateCtrl.h; sourceTree = "<group>"; };
 		72295A6A1CFD896100E40E9A /* QCRunStateCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCRunStateCtrl.m; sourceTree = "<group>"; };
 		72295A6C1CFD898000E40E9A /* QCFaultInfoCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultInfoCtrl.h; sourceTree = "<group>"; };
@@ -562,6 +568,8 @@
 				725760A41D1286B90003ECAA /* UIColor+hex.m */,
 				7286B7B61D1BC7B200CF6E2E /* NSArray+SortAndDistinct.h */,
 				7286B7B71D1BC7B200CF6E2E /* NSArray+SortAndDistinct.m */,
+				7227925E1D224A1300A2D643 /* UIGestureRecognizer+Block.h */,
+				7227925F1D224A1300A2D643 /* UIGestureRecognizer+Block.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -635,6 +643,8 @@
 				725760551D10E9B60003ECAA /* QCChargeRecordCell.m */,
 				725760571D10EA270003ECAA /* QCSupplyRecordCell.h */,
 				725760581D10EA270003ECAA /* QCSupplyRecordCell.m */,
+				722792581D222D8900A2D643 /* QCChiBaoZiFooter.h */,
+				722792591D222D8900A2D643 /* QCChiBaoZiFooter.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1285,6 +1295,7 @@
 				726F7E9D1CF593E70068513A /* WQItemLabelModel.m in Sources */,
 				725760BA1D13E5130003ECAA /* QCItemSegmentModel.m in Sources */,
 				7254FA461CED4A6E008EA77F /* NSString+XFTime.m in Sources */,
+				722792601D224A1300A2D643 /* UIGestureRecognizer+Block.m in Sources */,
 				722792351D21123800A2D643 /* NSString+PinYin4Cocoa.m in Sources */,
 				726F7EA91CF6F16B0068513A /* QCPileListDetailCtrl.m in Sources */,
 				7286B7B81D1BC7B200CF6E2E /* NSArray+SortAndDistinct.m in Sources */,
@@ -1298,6 +1309,7 @@
 				725760911D1284C40003ECAA /* UIImage+FontAwesome.m in Sources */,
 				728803611D0E7791009AB66E /* QCLoginCtrl.m in Sources */,
 				729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */,
+				7227925A1D222D8900A2D643 /* QCChiBaoZiFooter.m in Sources */,
 				726F7E9C1CF593E70068513A /* WQItemArrowModel.m in Sources */,
 				725760531D0FD1C20003ECAA /* QCHistoryRecordCtrl.m in Sources */,
 				725760941D1284C40003ECAA /* NSString+pinyin.m in Sources */,

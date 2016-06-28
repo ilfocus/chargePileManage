@@ -91,32 +91,31 @@
     
     [_chargePileNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.size.mas_equalTo(chargePileNumSize);
-        
+        make.height.mas_equalTo(chargePileNumSize.height);
         make.top.equalTo(vs.mas_top).with.offset(QCStatusCellBorder);
         
         make.left.equalTo(vs.mas_left).with.offset(QCStatusCellBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCStatusCellBorder);
         
     }];
     
     [_chargeTimeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.size.mas_equalTo(chargePileNumSize);
-        
+        make.height.mas_equalTo(chargePileNumSize.height);
         make.top.equalTo(_chargePileNumLbl.mas_bottom).with.offset(QCStatusCellBorder);
         
         make.left.equalTo(vs.mas_left).with.offset(QCStatusCellBorder);
+        make.right.equalTo(vs.mas_right).with.offset(-QCStatusCellBorder);
         
     }];
     
     [_chargeCostLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.size.mas_equalTo(chargePileNumSize);
+        make.height.mas_equalTo(chargePileNumSize.height);
         
         make.top.equalTo(_chargeTimeLbl.mas_bottom).with.offset(QCStatusCellBorder);
         
         make.left.equalTo(vs.mas_left).with.offset(QCStatusCellBorder);
-        
+        make.right.equalTo(vs.mas_right).with.offset(-QCStatusCellBorder);
     }];
 }
 
@@ -128,7 +127,6 @@
     _cpRecord = cpRecord;
     
     // 设置数据
-    
     _chargePileNumLbl.text = [@"桩号:" stringByAppendingString:cpRecord.cpID];
     _chargeTimeLbl.text = [@"时间:" stringByAppendingString:cpRecord.chargeElectDate];
     _chargeCostLbl.text = [@"费用:" stringByAppendingString:[NSString stringWithFormat:@"%.2f",cpRecord.chargeElectCost]];
