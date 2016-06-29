@@ -25,26 +25,10 @@
 {
     self = [super init];
     if (self) {
-        
-        
-        
-//        [self setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background"] forState:UIControlStateNormal];
-//        [self setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
-//        view.layer.masksToBounds = YES;
-//        view.layer.cornerRadius = 8;
-//        view.layer.borderWidth = 1.0;
-//        view.layer.borderColor = [WQColor(226,226,226) CGColor];
         UIImageView *bgImage = [[UIImageView alloc] init];
         bgImage.backgroundColor = [UIColor flatGreenColorDark];
-        //[bgImage setImage:[UIImage resizedImageWithName:@"common_card_background"]];
         [self addSubview:bgImage];
-//        [self sendSubviewToBack:bgImage];
-//        bgImage.layer.masksToBounds = YES;
-//        bgImage.layer.cornerRadius = 8;
-//        bgImage.layer.borderWidth = 1.0;
-//        bgImage.layer.borderColor = [WQColor(226,226,226) CGColor];
         self.bgImage = bgImage;
-        
         [self setupView];
     }
     return self;
@@ -53,10 +37,9 @@
 {
     
     UIImageView *userImageView = [[UIImageView alloc] init];
-    
-    UIImage *image = [UIImage imageNamed:@"icon"];
+    UIImage *image = [UIImage imageNamed:@"cp_icon"];
+//    image = [image imageByResizeToSize:CGSizeMake(20, 20)];
     userImageView.image = [image imageByRoundCornerRadius:35 borderWidth:1 borderColor:[UIColor whiteColor]];
-    
     [self addSubview:userImageView];
     self.userImageView = userImageView;
     

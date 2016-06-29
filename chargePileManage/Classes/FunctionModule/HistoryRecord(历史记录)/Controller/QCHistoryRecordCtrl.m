@@ -70,7 +70,9 @@
     CGFloat tableViewH = self.view.frame.size.height - self.tabBarController.tabBar.frame.size.height - tableViewY;
     CGRect chargeRecordViewFrame = CGRectMake(0, tableViewY, SCREEN_WIDTH, tableViewH);
     UITableView *chargeRecordView = [[UITableView alloc] initWithFrame:chargeRecordViewFrame style:UITableViewStyleGrouped];
-    chargeRecordView.rowHeight = 100;
+    chargeRecordView.rowHeight = 90;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     UIView *chargeHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     chargeRecordView.tableHeaderView = chargeHeaderView;
     chargeRecordView.tableFooterView = chargeHeaderView;
@@ -81,7 +83,7 @@
     
     CGRect supplyRecordViewFrame = CGRectMake(SCREEN_WIDTH, tableViewY, SCREEN_WIDTH, tableViewH);
     UITableView *supplyRecordView = [[UITableView alloc] initWithFrame:supplyRecordViewFrame style:UITableViewStyleGrouped];
-    supplyRecordView.rowHeight = 100;
+    supplyRecordView.rowHeight = 90;
     UIView *supplyHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     supplyRecordView.tableHeaderView = supplyHeaderView;
     supplyRecordView.tableFooterView = supplyHeaderView;

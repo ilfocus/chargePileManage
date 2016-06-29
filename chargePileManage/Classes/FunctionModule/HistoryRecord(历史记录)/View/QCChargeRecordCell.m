@@ -39,6 +39,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         // 添加顶部的view
         [self setupCellView];
     }
@@ -51,9 +54,9 @@
     chargePileNumLbl.font = QCTitleFont;
     
     if (self.strChargePileNum) {
-        chargePileNumLbl.text = [@"桩号:" stringByAppendingString:self.strChargePileNum];
+        chargePileNumLbl.text = [@"桩号: " stringByAppendingString:self.strChargePileNum];
     } else {
-        chargePileNumLbl.text = @"桩号:";
+        chargePileNumLbl.text = @"桩号: ";
     }
     
     chargePileNumLbl.textColor = [UIColor blackColor];
@@ -63,9 +66,9 @@
     UILabel *chargeTimeLbl = [UILabel new];
     chargeTimeLbl.font = QCTitleFont;
     if (self.strChargePileTime) {
-        chargeTimeLbl.text = [@"时间:" stringByAppendingString:self.strChargePileTime];
+        chargeTimeLbl.text = [@"时间: " stringByAppendingString:self.strChargePileTime];
     } else {
-        chargeTimeLbl.text = @"时间";
+        chargeTimeLbl.text = @"时间: ";
     }
     
     chargeTimeLbl.textColor = [UIColor blackColor];
@@ -75,7 +78,7 @@
     
     UILabel *chargeCostLbl = [UILabel new];
     chargeCostLbl.font = QCTitleFont;
-    chargeCostLbl.text = [@"费用:" stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.fChargePileCost]];
+    chargeCostLbl.text = [@"费用: " stringByAppendingString:[NSString stringWithFormat:@"%.2f", self.fChargePileCost]];
     chargeCostLbl.textColor = [UIColor blackColor];
     [self addSubview:chargeCostLbl];
     self.chargeCostLbl = chargeCostLbl;
@@ -92,7 +95,7 @@
     [_chargePileNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.height.mas_equalTo(chargePileNumSize.height);
-        make.top.equalTo(vs.mas_top).with.offset(QCStatusCellBorder);
+        make.top.equalTo(vs.mas_top).with.offset(2 * QCStatusCellBorder);
         
         make.left.equalTo(vs.mas_left).with.offset(QCStatusCellBorder);
         make.right.equalTo(vs.mas_right).with.offset(-QCStatusCellBorder);
@@ -127,9 +130,9 @@
     _cpRecord = cpRecord;
     
     // 设置数据
-    _chargePileNumLbl.text = [@"桩号:" stringByAppendingString:cpRecord.cpID];
-    _chargeTimeLbl.text = [@"时间:" stringByAppendingString:cpRecord.chargeElectDate];
-    _chargeCostLbl.text = [@"费用:" stringByAppendingString:[NSString stringWithFormat:@"%.2f",cpRecord.chargeElectCost]];
+    _chargePileNumLbl.text = [@"桩号: " stringByAppendingString:cpRecord.cpID];
+    _chargeTimeLbl.text = [@"时间: " stringByAppendingString:cpRecord.chargeElectDate];
+    _chargeCostLbl.text = [@"费用: " stringByAppendingString:[NSString stringWithFormat:@"%.2f",cpRecord.chargeElectCost]];
 }
 
 

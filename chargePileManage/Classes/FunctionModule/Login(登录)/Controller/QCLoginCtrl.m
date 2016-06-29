@@ -14,10 +14,12 @@
 
 
 @interface QCLoginCtrl () <UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *userIDText;
 @property (weak, nonatomic) IBOutlet UITextField *pwdText;
 @property (weak, nonatomic) IBOutlet UIButton *autoLogin;
 @property (weak, nonatomic) IBOutlet UIButton *rememberPwd;
+
 @property (nonatomic,assign) bool rememberPwdFlg;
 @property (nonatomic,assign) bool autoLoginFlg;
 
@@ -36,22 +38,21 @@ NSString *const userPwdStrKey = @"userPwd";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     _userIDText.delegate = self;
-    _pwdText.delegate = self;
-    
+    _pwdText.delegate    = self;
     [self setupView];
 }
 
 - (void) setupView
 {
     NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
+    
+    
     _rememberPwdFlg = [[accountDefaults objectForKey:UserRememberBoolKey] boolValue];
     if (_rememberPwdFlg) {
         [self.rememberPwd setImage:[UIImage imageNamed:@"photo_state_selected" ] forState:UIControlStateNormal];
         self.userIDText.text = [accountDefaults objectForKey:userNameStrKey];
         self.pwdText.text = [accountDefaults objectForKey:userPwdStrKey];
-        
     } else {
         [self.rememberPwd setImage:[UIImage imageNamed:@"photo_state_normal" ] forState:UIControlStateNormal];
     }
@@ -62,11 +63,9 @@ NSString *const userPwdStrKey = @"userPwd";
         [self.autoLogin setImage:[UIImage imageNamed:@"photo_state_normal" ] forState:UIControlStateNormal];
     }
 }
-
 - (void) viewDidAppear:(BOOL)animated
 {
     if (_autoLoginFlg) {
-        // 在这里添加登录效果
         [UIApplication sharedApplication].keyWindow.rootViewController = [[QCTabBarController alloc]init];
     }
 }

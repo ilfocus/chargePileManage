@@ -46,6 +46,7 @@
 
 @property (nonatomic,strong) UIScrollView *scrollView;
 
+@property (nonatomic,weak) NSTimer *myTimer;
 @end
 
 @implementation QCPileListDetailCtrl
@@ -131,10 +132,28 @@ static int pileDataCnt = 0;
     
     [self setupSubView];
     
-    NSTimer *myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
-    [myTimer fire];
-    [[NSRunLoop mainRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
+    _myTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerEvent) userInfo:nil repeats:YES];
+    
+    [[NSRunLoop mainRunLoop] addTimer:_myTimer forMode:NSDefaultRunLoopMode];
+    
+//    [_myTimer setFireDate:[NSDate distantPast]];
+    [_myTimer fire];
 }
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+//    [_myTimer setFireDate:[NSDate distantFuture]];
+    [_myTimer invalidate];
+    _myTimer = nil;
+}
+
+- (void) dealloc
+{
+//    [NSRunLoop mainRunLoop]
+    //[_myTimer setFireDate:[NSDate distantFuture]];
+    WQLog(@"释放---%@---定时器",self.title);
+}
+
 
 - (void) timerEvent
 {
@@ -155,6 +174,8 @@ static int pileDataCnt = 0;
         pileDataCnt = 0;
     }
     pileData = self.pileDataArray[pileDataCnt];
+    
+    WQLog(@"数据刷新---%@",self.title);
     
     [_runState refreshRunStateViewData:pileData];
     [_faultInfo refreshFaultViewData:pileData];
@@ -320,7 +341,7 @@ static int pileDataCnt = 0;
     //QCRunStateCtrl *runStateCtrl = [[QCRunStateCtrl alloc] init];
     QCLoginCtrl *loginVC = [[QCLoginCtrl alloc] init];
     loginVC.title = @"运行状态";
-    [self.navigationController pushViewController:loginVC animated:YES];
+    //[self.navigationController pushViewController:loginVC animated:YES];
 }
 - (void) clickFaultInfo
 {
