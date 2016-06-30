@@ -28,6 +28,7 @@ PODS:
   - MJRefresh (3.1.0)
   - PNChart (0.8.9):
     - UICountingLabel (~> 1.2.0)
+  - Reveal-iOS-SDK (1.6.2)
   - SVSegmentedControl (0.2)
   - UICountingLabel (1.2.0)
   - YYKit (1.0.6):
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - MJExtension (~> 3.0.7)
   - MJRefresh
   - PNChart
+  - Reveal-iOS-SDK
   - SVSegmentedControl
   - YYKit
 
@@ -59,6 +61,7 @@ SPEC CHECKSUMS:
   MJExtension: d86aacb740c87519d20e3cca55b6fa4be6cc7548
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   PNChart: 84774d225c2126ded6c93d4dbe6ae98c3a73c2d2
+  Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SVSegmentedControl: cc585b217cd1bc43a14a96a8fdfd16a1c3845b25
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   YYKit: a80c77ab7be226ebe539ef1495dfc25d5766d61e

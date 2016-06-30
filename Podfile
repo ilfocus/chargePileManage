@@ -11,3 +11,4 @@ pod "LLBootstrapButton"
 pod 'PNChart'
 pod 'ChameleonFramework'
 pod 'SVSegmentedControl'
+pod 'Reveal-iOS-SDK', :configurations => ['Debug']

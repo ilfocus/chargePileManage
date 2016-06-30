@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class QCPileListNumModel;
 @class QCPileListDataMode;
+@class QCPileListUserModel;
 @interface QCDataCacheTool : NSObject
 /**
  *  缓存一条数据
@@ -25,6 +26,7 @@
 // 保存一条充电桩号码模型数据
 - (void)addChargePileData:(NSString *)dbName sqlCmd:(NSString *)sqlCmd chargeNum:(QCPileListNumModel *)number;
 - (void)addChargePileData:(NSString *)dbName sqlData:(NSString *)sqlCmd cpData:(QCPileListDataMode *)data;
+- (void)addChargePileUser:(NSString *)dbName cpData:(QCPileListUserModel *)data;
 
 /**
  *  初始化
@@ -36,7 +38,7 @@
  */
 - (NSArray *)cpDataWithParam:(NSString *)dbName;
 - (NSArray *)getCPListWithParam:(NSString *)dbName;
-
+- (NSArray *)getChargePileUser:(NSString *) dbName;
 
 #pragma - mark store and get cpid
 - (NSArray *)getCPListNumberWithParam:(NSString *)dbName;

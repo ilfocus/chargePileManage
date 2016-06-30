@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '62982D64FB26B5CCBED63366'
+               BlueprintIdentifier = '56E88F105D42DA6D926B08E6'
                BlueprintName = 'SVSegmentedControl'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libSVSegmentedControl.a'>

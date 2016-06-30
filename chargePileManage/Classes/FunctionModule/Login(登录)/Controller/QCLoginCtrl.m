@@ -11,6 +11,8 @@
 #import "QCReminderUserTool.h"
 
 #import "YYKit.h"
+#import "QCDataCacheTool.h"
+#import "QCPileListUserModel.h"
 
 
 @interface QCLoginCtrl () <UITextFieldDelegate>
@@ -31,10 +33,10 @@
 
 @implementation QCLoginCtrl
 
-NSString *const UserRememberBoolKey = @"rememberPwd";
-NSString *const UserAutoLoginBoolKey = @"autoLogin";
-NSString *const userNameStrKey = @"userName";
-NSString *const userPwdStrKey = @"userPwd";
+NSString *const UserRememberBoolKey     = @"rememberPwd";
+NSString *const UserAutoLoginBoolKey    = @"autoLogin";
+NSString *const userNameStrKey          = @"userName";
+NSString *const userPwdStrKey           = @"userPwd";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -77,6 +79,27 @@ NSString *const userPwdStrKey = @"userPwd";
     if ([self.userIDText.text isNotBlank] && [self.pwdText.text isNotBlank]) {
         // 验证
         if ([self.userIDText.text isEqualToString:@"wangqi"] && [self.pwdText.text isEqualToString:@"123456"]) {
+            
+            // 验证成功后，把数据存入数据库中
+            NSString *dbName = @"chargePileData.sqlite";
+            NSString *sqlCmd = @"CREATE TABLE IF NOT EXISTS t_user (id integer PRIMARY KEY AUTOINCREMENT,userID text,passWord text,icon blob,nickName text,sex text,permission text,area text)";
+            QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+            
+            //  设置模型数据
+            
+            QCPileListUserModel *userData = [[QCPileListUserModel alloc] init];
+            
+            userData.userID = @"wangqi";
+            userData.passWord = @"12345";
+            userData.icon = [UIImage imageNamed:@"icon"];
+            userData.nickName = @"小小鸟";
+            userData.sex = @"男";
+            userData.permission = @"超级管理员";
+            userData.area = @"上海市";
+            // 保存模型
+            [cache addChargePileUser:dbName cpData:userData];
+            
+//            NSArray *arr = [cache getChargePileUser:dbName];
             
             [QCReminderUserTool showLoad:self.view];
             

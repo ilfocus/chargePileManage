@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.view.backgroundColor = WQColor(226,226,226);
     
     CGFloat headerViewH = 100;
@@ -51,24 +51,16 @@
     
     [self setupFooterView:manageView];
     [self setupTableView];
-    
-    
-    WQLog(@"tableViewheaderView---%f",manageView.tableHeaderView.frame.size.height);
 }
 /**
  *  jump to login view
  */
 - (void) logOut
 {
-    WQLog(@"退出登录！");
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确定要退出登录吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
     
-//    UIViewController *uiTest
-    
-    
-//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确定要退出登录吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//    [alert show];
-    
-    //[UIApplication sharedApplication].keyWindow.rootViewController = [[QCLoginCtrl alloc] init];
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[QCLoginCtrl alloc] init];
 }
 
 - (void) setupFooterView:(UITableView *)tableView

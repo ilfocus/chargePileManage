@@ -20,7 +20,10 @@
 #import "QCSignatureCtrl.h"
 #import "QCChargePwdCtrl.h"
 
-@interface QCPersonalInfoCtrl ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+#import "QCDataCacheTool.h"
+#import "QCPileListUserModel.h"
+
+@interface QCPersonalInfoCtrl () <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 
 @property (nonatomic,weak) UITableView *personalInfoView;
 @property (nonatomic,strong) NSMutableArray *dataArray;
@@ -38,7 +41,6 @@
 
     UITableView *personalInfoView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
     personalInfoView.backgroundColor = WQColor(226, 226, 226);
-//    personalInfoView.backgroundColor = [UIColor blueColor];
     UIView *headerView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     personalInfoView.tableHeaderView = headerView;
     
@@ -50,6 +52,12 @@
     [self setupView];
     
     [self setupFooterView:personalInfoView];
+    
+    NSString *dbName = @"chargePileData.sqlite";
+    NSString *sqlCmd = @"CREATE TABLE IF NOT EXISTS t_user (id integer PRIMARY KEY AUTOINCREMENT,userID text,passWord text,icon blob,nickName text,sex text,permission text,area text)";
+    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+    NSArray *arr = [cache getChargePileUser:dbName];
+    WQLog(@"---arr---%@",arr);
 }
 - (void) setupFooterView:(UITableView *)tableView
 {
@@ -86,11 +94,11 @@
     WQItemModel *nickName = [WQItemArrowModel itemWithTitle:@"昵称" subTitle:@"输入昵称" destVcClass:[QCNickNameAlertCtrl class]];
     WQItemModel *sex = [QCItemSegmentModel itemWithTitle:@"性别"];
     WQItemModel *changePwd = [WQItemArrowModel itemWithTitle:@"修改密码" destVcClass:[QCChargePwdCtrl class]];
-    WQItemModel *signature = [WQItemArrowModel itemWithTitle:@"个性签名" subTitle:@"个性签名" destVcClass:[QCSignatureCtrl class]];
+    //WQItemModel *signature = [WQItemArrowModel itemWithTitle:@"个性签名" subTitle:@"个性签名" destVcClass:[QCSignatureCtrl class]];
     WQItemModel *accountPermission = [WQItemArrowModel itemWithTitle:@"帐号权限" subTitle:@"系统用户" destVcClass:nil];
     WQItemModel *address = [WQItemArrowModel itemWithTitle:@"所在小区" subTitle:@"星晓家园" destVcClass:nil];
     
-    NSArray *tempArray = @[icon,nickName,sex,changePwd,signature,accountPermission,address];
+    NSArray *tempArray = @[icon,nickName,sex,changePwd,accountPermission,address];
     
     self.dataArray = (NSMutableArray *)tempArray;
 }
@@ -107,10 +115,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QCPersonalInfoCell *cell = [QCPersonalInfoCell cellWithTableView:tableView];
-    cell.item = self.dataArray[indexPath.row];
+    
+    WQItemModel *item = self.dataArray[indexPath.row];
+    
+    cell.item = item;
+    
+//    if ([item.title isEqualToString:@"头像"]) {
+//        //tableView.rowHeight = 80;
+//    }
+    
+    
     return cell;
 }
 #pragma mark - UITableViewDelegate
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    WQItemModel *item = self.dataArray[indexPath.row];
+    
+    if ([item.title isEqualToString:@"头像"]) {
+        return 65;
+    }
+    return 44;
+}
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

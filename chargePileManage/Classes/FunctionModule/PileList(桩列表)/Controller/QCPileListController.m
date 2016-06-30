@@ -32,31 +32,22 @@
 @end
 
 @implementation QCPileListController
-static const CGFloat QCDuration = 0.5;
+//static const CGFloat QCDuration = 0.5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[self setGroup0];
-    
     [self setupView];
     
     // 第一次从数据库加载数据，并显示在界面上
-    NSString *dbName = @"chargePileData.sqlite";
-    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text)";
-    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
-    NSArray *array = [cache getCPListWithParam:dbName];
-    if (array) {
-        WQLog(@"cache---array:%@",array);
-        [self updateCPNumber:array];
-    }
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPileList:) name:@"enterSystem" object:nil];
-    
+//    NSString *dbName = @"chargePileData.sqlite";
+//    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text)";
+//    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+//    NSArray *array = [cache getCPListWithParam:dbName];
+//    if (array) {
+//        [self updateCPNumber:array];
+//    }
 }
-//- (void) showPileList:(NSNotification *)center
-//{
-//    WQLog(@"EnterSystem notification---%@",center);
-//}
 /**
  *  设置界面
  */
@@ -92,7 +83,6 @@ static const CGFloat QCDuration = 0.5;
         [model setObject:result forKey:str1];
     }
 #endif
-    
     
     NSMutableArray *numArray = [NSMutableArray array];
     NSArray *sortArray = [NSArray numStrArraySortAndDistinct:cpNumArray];
@@ -193,7 +183,7 @@ static const CGFloat QCDuration = 0.5;
             for (NSDictionary *dict1 in array) {
                 QCPileListNumModel *result = [QCPileListNumModel mj_objectWithKeyValues:dict1];
                 // 存储充电桩号码数据
-                //[cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:result];
+                [cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:result];
                 [cpNumArr addObject:result];
             }
             if (cpNumArr) {

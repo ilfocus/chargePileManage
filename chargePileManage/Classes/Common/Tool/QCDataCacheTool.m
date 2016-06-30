@@ -11,6 +11,7 @@
 
 #import "QCPileListNumModel.h"
 #import "QCPileListDataMode.h"
+#import "QCPileListUserModel.h"
 
 
 @interface QCDataCacheTool ()
@@ -89,7 +90,6 @@ static FMDatabaseQueue *_queue;
         NSString *price = [NSString stringWithFormat:@"%.2f",number.price];
         NSString *status = [NSString stringWithFormat:@"%d",number.status];
         [db executeUpdate:@"insert into t_number (cpid,cpnm,price,status) values(?,?,?,?)",number.cpid,number.cpnm,(int)price,status];
-//    [db executeUpdate:@"insert into t_number (cpid,cpnm) values(?,?)",number.cpid,number.cpnm];
 
 #endif
     }];
@@ -109,25 +109,49 @@ static FMDatabaseQueue *_queue;
     }];
     [queue close];
 }
+#pragma - mark add and read USER_INFO
+/**
+ *  添加用户组数据到数据库中
+ *
+ *  @param dbName 数据库名称
+ *  @param sqlCmd sql命令
+ *  @param data   需要保存的数据
+ */
+- (void)addChargePileUser:(NSString *)dbName cpData:(QCPileListUserModel *)data
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    [queue inDatabase:^(FMDatabase *db) {
+        NSData *iconData = [NSKeyedArchiver archivedDataWithRootObject:data.icon];
+        [db executeUpdate:@"INSERT INTO t_user (userID,passWord,icon,nickName,sex,permission,area) values(?,?,?,?,?,?,?)",data.userID,data.passWord,iconData,data.nickName,data.sex,data.permission,data.area];
+    }];
+    [queue close];
+}
 
-//+ (void)addChargePileDatas:(NSArray *)dictArray
-//{
-//    for (NSDictionary *dict in dictArray) {
-//        [self addChargePileData:dict];
-//    }
-//}
-//+ (void) addChargePileData:(NSDictionary *) dict
-//{
-//    [_queue inDatabase:^(FMDatabase *db) {
-//        // 1.获得需要存储的数据
-//        NSString *address   = dict[@"address"];
-//        NSString *cpNumber  = dict[@"cpNumber"];
-//        NSData   *data      = [NSKeyedArchiver archivedDataWithRootObject:dict];
-//        // 2.存储数据
-//        [db executeUpdate:@"insert into t_data (address,cpNumber,dict) values(?,?,?)",address,cpNumber,data];
-//    }];
-//}
-
+- (NSArray *) getChargePileUser:(NSString *) dbName
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    __block NSMutableArray *statusArray = nil;
+    
+    [queue inDatabase:^(FMDatabase *db) {
+        statusArray = [NSMutableArray array];
+        FMResultSet *rs = nil;
+        rs = [db executeQuery:@"select * from t_user"];
+        while (rs.next) {
+            QCPileListUserModel *user = [[QCPileListUserModel alloc] init];
+            user.userID = [rs stringForColumn:@"userID"];
+            user.passWord = [rs stringForColumn:@"passWord"];
+            user.icon = [NSKeyedUnarchiver unarchiveObjectWithData:[rs dataForColumn:@"icon"]];
+            user.nickName = [rs stringForColumn:@"nickName"];
+            user.sex = [rs stringForColumn:@"permission"];
+            user.area = [rs stringForColumn:@"area"];
+            [statusArray addObject:user];
+        }
+    }];
+    [queue close];
+    return statusArray;
+}
 
 #pragma - mark read db data
 
@@ -143,6 +167,7 @@ static FMDatabaseQueue *_queue;
         while (rs.next) {
             NSData *data = [rs dataForColumn:@"cpdata"];
             QCPileListDataMode *status = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            
             [statusArray addObject:status];
         }
     }];

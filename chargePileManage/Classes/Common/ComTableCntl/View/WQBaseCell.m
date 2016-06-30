@@ -17,6 +17,7 @@
 
 
 #import "UIColor+hex.h"
+#import "YYKit.h"
 
 
 @interface WQBaseCell()
@@ -145,8 +146,23 @@
 - (UIImageView *)iconView
 {
     if (_iconView == nil) {
-        _iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"personalIcon"]];
-        _iconView.frame = CGRectMake(0, 0, 30, 30);
+        
+        _iconView = [UIImageView new];
+        
+        UIImage *image = [UIImage imageNamed:@"loginIcon"];
+        _iconView.image = [image imageByRoundCornerRadius:60 borderWidth:0 borderColor:[UIColor whiteColor]];
+       
+        _iconView.frame = CGRectMake(0, 0, 60, 60);
+        
+        _iconView.layer.cornerRadius = _iconView.frame.size.width / 2;
+        _iconView.clipsToBounds = YES;
+        _iconView.backgroundColor = [UIColor flatWhiteColor];
+        _iconView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        
+        
+//        _iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"personalIcon"]];
+//        _iconView.frame = CGRectMake(0, 0, 30, 30);
     }
     return _iconView;
 }
