@@ -20,6 +20,5 @@
 /**
  *  存放着items模型，也就是一组数组中总的行数据数
  */
-#warning NSArray为什么要用关键字copy
 @property (nonatomic,copy) NSArray *items;
 @end

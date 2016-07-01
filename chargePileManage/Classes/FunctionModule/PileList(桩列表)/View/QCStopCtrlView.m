@@ -147,7 +147,7 @@
     
     CGSize titleSize = [_titleLbl.text sizeWithAttributes:@{NSFontAttributeName : _titleLbl.font}];
     
-    CGFloat buttonW = (self.frame.size.width - QCDetailViewBorder * 5) / 4;
+//    CGFloat buttonW = (self.frame.size.width - QCDetailViewBorder * 5) / 4;
     
     [_titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(titleSize);

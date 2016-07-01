@@ -11,8 +11,6 @@
 #define PileListCellHeight 70
 /** 来源的字体 */
 #define QCSubTitleFont [UIFont systemFontOfSize:12]
-/** 正文的字体 */
-#define QCTitleFont [UIFont systemFontOfSize:20]
 
 @interface QCPileListCell : UITableViewCell
 /**

@@ -46,7 +46,10 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    return [self init];
+    if (self = [super initWithFrame:frame]) {
+        //
+    }
+    return self;
 }
 
 - (void)_setup
@@ -66,9 +69,9 @@
     CGFloat outerSideEdge = CGRectGetMaxX(frame)-CGRectGetWidth(self.containerView.bounds);
     if (outerSideEdge > 0) {
         frame.origin.x -= (outerSideEdge+sideEdge);
-    }else {
+    } else {
         if (CGRectGetMinX(frame)<0) {
-            frame.origin.x += abs(CGRectGetMinX(frame))+sideEdge;
+            frame.origin.x += fabsf(CGRectGetMinX(frame))+sideEdge;
         }
     }
     

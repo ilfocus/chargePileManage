@@ -123,7 +123,7 @@ static int pileDataCnt = 0;
                 [self.pileDataArray addObject:result];
             }
             NSArray *array = [cacheCPData cpDataWithParam:dbName];
-            //WQLog(@"Http:cacheCPData---%@",array);
+            WQLog(@"Http:cacheCPData---%@",array);
         }
     } failure:^(NSError *error) {
         WQLog(@"获得数据失败---%@",error);

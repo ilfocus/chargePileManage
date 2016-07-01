@@ -174,8 +174,7 @@
     QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
     
     // 取数据,先从缓存取，如果缓存为空再请求网络
-    
-    
+
     [QCHttpTool httpQueryCPNumber:nil success:^(id json) {
         NSArray *array = json[@"detail"];
         if (array) {

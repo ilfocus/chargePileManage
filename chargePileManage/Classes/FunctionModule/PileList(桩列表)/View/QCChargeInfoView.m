@@ -387,7 +387,6 @@ static int j = 1;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     cell.textLabel.text = self.configs[indexPath.row];
-    NSLog(@"cellForRowAtIndexPath---%lu",indexPath.row);
     return cell;
 }
 static CGFloat randomFloatBetweenLowAndHigh(CGFloat low, CGFloat high)

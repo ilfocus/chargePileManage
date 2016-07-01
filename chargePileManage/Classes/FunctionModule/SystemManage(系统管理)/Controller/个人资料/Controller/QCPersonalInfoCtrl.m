@@ -23,16 +23,30 @@
 #import "QCDataCacheTool.h"
 #import "QCPileListUserModel.h"
 
+#import "QCPersonInfoModel.h"
+#import "QCPersonInfoArrowModel.h"
+#import "QCPersonInfoLabelModel.h"
+#import "QCPersonInfoSwitchModel.h"
+#import "QCPersonInfoIconModel.h"
+#import "QCPersonInfoSegmentModel.h"
+
+
 @interface QCPersonalInfoCtrl () <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 
 @property (nonatomic,weak) UITableView *personalInfoView;
 @property (nonatomic,strong) NSMutableArray *dataArray;
+@property (nonatomic,strong) QCPileListUserModel *userData;
+
+@property (nonatomic,copy) NSString *subNickName;
+@property (nonatomic,copy) NSString *subPermission;
+@property (nonatomic,copy) NSString *subAddress;
 
 @end
 
 @implementation QCPersonalInfoCtrl
 #pragma mark - init
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -58,8 +72,13 @@
     QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
     NSArray *arr = [cache getChargePileUser:dbName];
     WQLog(@"---arr---%@",arr);
+    if (arr) {
+        self.userData = arr[0];
+    }
+    
+    
 }
-- (void) setupFooterView:(UITableView *)tableView
+- (void)setupFooterView:(UITableView *)tableView
 {
     UIView *view = [[UIView alloc] init];
     view.frame = CGRectMake(0, 0, 0, 50);
@@ -69,7 +88,6 @@
     CGFloat btnW = SCREEN_WIDTH - 20;
     UIButton *btn = [[UIButton alloc] init];
     btn.backgroundColor = [UIColor flatGreenColorDark];
-    //[btn setBackgroundImage:[UIImage resizedImageWithName:@"common_card_background"] forState:UIControlStateNormal];
     [btn setTitle:@"保存" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(savePersonalInfo) forControlEvents:UIControlEventTouchUpInside];
@@ -81,25 +99,21 @@
     [view addSubview:btn];
     
 }
-- (void) savePersonalInfo
+- (void)savePersonalInfo
 {
     WQLog(@"保存！！！");
 }
-/**
- *  帐号权限分成：系统用户、管理员、厂商用户、普通用户
- */
-- (void) setupView
+- (void)setupView
 {
-    WQItemModel *icon = [QCItemIconModel itemWithTitle:@"头像"];
-    WQItemModel *nickName = [WQItemArrowModel itemWithTitle:@"昵称" subTitle:@"输入昵称" destVcClass:[QCNickNameAlertCtrl class]];
-    WQItemModel *sex = [QCItemSegmentModel itemWithTitle:@"性别"];
-    WQItemModel *changePwd = [WQItemArrowModel itemWithTitle:@"修改密码" destVcClass:[QCChargePwdCtrl class]];
-    //WQItemModel *signature = [WQItemArrowModel itemWithTitle:@"个性签名" subTitle:@"个性签名" destVcClass:[QCSignatureCtrl class]];
-    WQItemModel *accountPermission = [WQItemArrowModel itemWithTitle:@"帐号权限" subTitle:@"系统用户" destVcClass:nil];
-    WQItemModel *address = [WQItemArrowModel itemWithTitle:@"所在小区" subTitle:@"星晓家园" destVcClass:nil];
+    QCPersonInfoModel *icon = [QCPersonInfoIconModel itemWithTitle:@"头像"];
     
+    QCPersonInfoModel *nickName = [QCPersonInfoArrowModel itemWithTitle:@"昵称" subTitle:@"输入昵称" destVcClass:[QCNickNameAlertCtrl class]];
+    QCPersonInfoModel *sex = [QCPersonInfoSegmentModel itemWithTitle:@"性别"];
+    QCPersonInfoModel *changePwd = [QCPersonInfoArrowModel itemWithTitle:@"修改密码" destVcClass:[QCChargePwdCtrl class]];
+    QCPersonInfoModel *accountPermission = [QCPersonInfoArrowModel itemWithTitle:@"帐号权限" subTitle:@"系统用户" destVcClass:nil];
+    QCPersonInfoModel *address = [QCPersonInfoArrowModel itemWithTitle:@"所在小区" subTitle:@"星晓家园" destVcClass:nil];
+
     NSArray *tempArray = @[icon,nickName,sex,changePwd,accountPermission,address];
-    
     self.dataArray = (NSMutableArray *)tempArray;
 }
 #pragma mark - UITableViewDateSource
@@ -107,7 +121,6 @@
 {
     return 1;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.dataArray.count;
@@ -115,40 +128,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QCPersonalInfoCell *cell = [QCPersonalInfoCell cellWithTableView:tableView];
-    
-    WQItemModel *item = self.dataArray[indexPath.row];
-    
+    QCPersonInfoModel *item = self.dataArray[indexPath.row];
     cell.item = item;
-    
-//    if ([item.title isEqualToString:@"头像"]) {
-//        //tableView.rowHeight = 80;
-//    }
-    
-    
     return cell;
 }
 #pragma mark - UITableViewDelegate
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WQItemModel *item = self.dataArray[indexPath.row];
+    QCPersonInfoModel *item = self.dataArray[indexPath.row];
     
     if ([item.title isEqualToString:@"头像"]) {
         return 65;
     }
     return 44;
 }
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    WQItemModel *item = self.dataArray[indexPath.row];
+    QCPersonInfoModel *item = self.dataArray[indexPath.row];
     
     if (item.option) {
         item.option();
-    }  else if ([item isKindOfClass:[WQItemArrowModel class]]) {
-        WQItemArrowModel *arrowItem = (WQItemArrowModel *)item;
+    }  else if ([item isKindOfClass:[QCPersonInfoArrowModel class]]) {
+        QCPersonInfoArrowModel *arrowItem = (QCPersonInfoArrowModel *)item;
         // 如果没有需要跳转的控制器
         if (arrowItem.destVcClass == nil) {
             return;
@@ -183,24 +186,16 @@
     }
 }
 #pragma mark - AlertViewDelegate
-/**
- *  alertView dismiss
- */
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    UITextField *text = [alertView textFieldAtIndex:0];
-//}
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     UITextField *text = [alertView textFieldAtIndex:0];
-    
     
     if (buttonIndex == 0) {
         WQLog(@"点击取消");
     } else {
         
         if (alertView.tag == 0) {
-            for (WQItemModel *item in self.dataArray) {
+            for (QCPersonInfoModel *item in self.dataArray) {
                 if ([item.title isEqualToString:@"昵称"]) {
                     item.subTitle = text.text;
                     [_personalInfoView reloadData];
@@ -209,7 +204,7 @@
             }
         }
         if (alertView.tag == 1) {
-            for (WQItemModel *item in self.dataArray) {
+            for (QCPersonInfoModel *item in self.dataArray) {
                 if ([item.title isEqualToString:@"个性签名"]) {
                     item.subTitle = text.text;
                     [_personalInfoView reloadData];
@@ -228,5 +223,18 @@
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+- (void)setUserData:(QCPileListUserModel *)userData
+{
+    if (_userData != userData) {
+        _userData = userData;
+        
+        for (QCPersonInfoModel *user in self.dataArray) {
+            if ([user.title isEqualToString:@"昵称"]) {
+                user.subTitle = userData.nickName;
+            }
+        }
+    }
+    [self.personalInfoView reloadData];
 }
 @end

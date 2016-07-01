@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class WQItemModel;
+
 @interface WQBaseCell : UITableViewCell
 /**
  *  cell的模型数据

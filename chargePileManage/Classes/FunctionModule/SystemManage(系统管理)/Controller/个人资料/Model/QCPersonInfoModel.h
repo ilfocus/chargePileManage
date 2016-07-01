@@ -1,16 +1,17 @@
 //
-//  WQTableViewItemsModel.h
-//  MessageGroups
+//  QCPersonalInfoModel.h
+//  chargePileManage
 //
-//  Created by YuMing on 16/3/28.
-//  Copyright © 2016年 JAsolar. All rights reserved.
+//  Created by YuMing on 16/7/1.
+//  Copyright © 2016年 shQianChen. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
+
 typedef void (^WQItemOption)();
 
-@interface WQItemModel : NSObject
+@interface QCPersonInfoModel : NSObject
 /**
  *  图标
  */
@@ -51,4 +52,5 @@ typedef void (^WQItemOption)();
  *  item上只设置文字
  */
 + (instancetype)itemWithTitle:(NSString *)title;
+
 @end

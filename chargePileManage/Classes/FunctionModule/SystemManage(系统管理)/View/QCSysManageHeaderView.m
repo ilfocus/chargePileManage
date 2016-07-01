@@ -43,7 +43,6 @@
     userView.backgroundColor = [UIColor clearColor];
     [self addSubview:userView];
     self.userView = userView;
-    
     [userView addGestureRecognizer:[UITapGestureRecognizer gestureRecognizerWithActionBlock:^(id gestureRecognizer) {
         UIActionSheet *myActionSheet = [[UIActionSheet alloc]
                                         initWithTitle:nil
@@ -55,7 +54,6 @@
     }]];
     
     UIImageView *userImageView = [[UIImageView alloc] init];
-    
     UIImage *image = [UIImage imageNamed:@"loginIcon"];
     userImageView.image = [image imageByRoundCornerRadius:70 borderWidth:0 borderColor:[UIColor whiteColor]];
     userImageView.frame = CGRectMake(0, 0, 66, 66);
@@ -63,7 +61,6 @@
     userImageView.clipsToBounds = YES;
     userImageView.backgroundColor = [UIColor flatWhiteColor];
     userImageView.contentMode = UIViewContentModeScaleAspectFit;
-    
     [self.userView addSubview:userImageView];
     self.userImageView = userImageView;
     
@@ -77,16 +74,16 @@
 #pragma - mark UIActionSheetDelegate
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //呼出的菜单按钮点击后的响应
     if (buttonIndex == actionSheet.cancelButtonIndex) {
         return;
     }
+    
     switch (buttonIndex) {
-        case 0: {  //打开照相机拍照
+        case 0: {
             [self takePhoto];
             break;
         }
-        case 1: { //打开本地相册
+        case 1: {
             [self localPhoto];
             break;
         }
@@ -107,13 +104,13 @@
 {
     UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+        
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-        //设置拍照后的图片可被编辑
         picker.allowsEditing = YES;
         picker.sourceType = sourceType;
-        
         [[self viewController] presentViewController:picker animated:YES completion:nil];
+        
     } else {
         NSLog(@"模拟其中无法打开照相机,请在真机中使用");
     }
@@ -121,10 +118,8 @@
 - (void) localPhoto
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     picker.delegate = self;
-    //设置选择后的图片可被编辑
     picker.allowsEditing = YES;
     [[self viewController] presentViewController:picker animated:YES completion:nil];
 }
