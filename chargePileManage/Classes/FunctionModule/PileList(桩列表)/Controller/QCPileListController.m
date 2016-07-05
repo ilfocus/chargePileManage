@@ -12,7 +12,6 @@
 #import "WQItemArrowModel.h"
 #import "WQTableViewGroupModel.h"
 //#import "WQBaseCell.h"
-
 #import "QCPileListCell.h"
 #import "QCPileListCellModel.h"
 #import "QCPileListDetailCtrl.h"
@@ -29,40 +28,45 @@
 #import "NSArray+SortAndDistinct.h"
 
 @interface QCPileListController ()
+
+@property (nonatomic,strong) NSArray *cpListArray;
+
 @end
 
 @implementation QCPileListController
-//static const CGFloat QCDuration = 0.5;
 
+#pragma - mark initViewAndData
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupView];
     
-    // 第一次从数据库加载数据，并显示在界面上
-//    NSString *dbName = @"chargePileData.sqlite";
-//    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text)";
-//    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
-//    NSArray *array = [cache getCPListWithParam:dbName];
-//    if (array) {
-//        [self updateCPNumber:array];
-//    }
+    [self loadDataFromDB];
 }
-/**
- *  设置界面
- */
+
+- (void) loadDataFromDB
+{
+    // 第一次从数据库加载数据，并显示在界面上
+    NSString *dbName = @"chargePileData.sqlite";
+    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text,price text,status text)";
+    QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
+    NSArray *array = [cache getCPListWithParam:dbName];
+    if (array) {
+        self.cpListArray = array;
+        [self updateCPNumber:array];   // 这里做了去重操作
+    }
+}
+
 - (void) setupView
 {
     QCChiBaoZiHeader *header = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.tableView.mj_header = header;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     self.tableView.rowHeight = PileListCellHeight;
-    //[self.tableView.mj_header beginRefreshing];
 }
 
 - (void) updateCPNumber:(NSArray *)arr
 {
-    
     if (arr == nil) {
         return;
     }
@@ -170,7 +174,6 @@
     }];
 #else
     NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text,price text,status text)";
-//    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text)";
     QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
     
     // 取数据,先从缓存取，如果缓存为空再请求网络
@@ -182,7 +185,21 @@
             for (NSDictionary *dict1 in array) {
                 QCPileListNumModel *result = [QCPileListNumModel mj_objectWithKeyValues:dict1];
                 // 存储充电桩号码数据
-                [cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:result];
+                if (self.cpListArray.count != 0) { // 数组数据不为空
+                    bool numberEqualFlg = NO;
+                    for (QCPileListNumModel *num in self.cpListArray) {
+                        if ([num.cpid isEqualToString:result.cpid]) {
+                            numberEqualFlg = YES;
+                        }
+                    }
+                    if (numberEqualFlg == NO) {
+                        [cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:result];
+                    }
+                    
+                } else {
+                    [cache addChargePileData:dbName sqlCmd:sqlCmd chargeNum:result];
+                }
+                
                 [cpNumArr addObject:result];
             }
             if (cpNumArr) {
@@ -279,5 +296,13 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+#pragma - mark gets and sets
+- (NSArray *) cpListArray
+{
+    if (_cpListArray == nil) {
+        _cpListArray = [NSArray array];
+    }
+    return _cpListArray;
 }
 @end

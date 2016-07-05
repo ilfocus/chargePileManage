@@ -124,7 +124,13 @@
         
         _iconView = [UIImageView new];
         
-        UIImage *image = [UIImage imageNamed:@"loginIcon"];
+        UIImage *image = nil;
+        if (_item.image) {
+            image = _item.image;
+        } else {
+            image = [UIImage imageNamed:@"loginIcon"];
+        }
+        
         _iconView.image = [image imageByRoundCornerRadius:60 borderWidth:0 borderColor:[UIColor whiteColor]];
         
         _iconView.frame = CGRectMake(0, 0, 60, 60);
@@ -142,8 +148,16 @@
         CGFloat segmentedHeight = 25;
         NSArray *array=@[@"男",@"女"];
         _segmentedView = [[UISegmentedControl alloc] initWithItems:array];
-        _segmentedView.frame = CGRectMake(0, 0, 60, segmentedHeight);;
-        _segmentedView.selectedSegmentIndex = 0;
+        _segmentedView.frame = CGRectMake(0, 0, 60, segmentedHeight);
+        
+        if (_item.gender == 0) {
+            _segmentedView.selectedSegmentIndex = 0;
+        } else {
+            _segmentedView.selectedSegmentIndex = 1;
+        }
+        
+        
+        
         _segmentedView.tintColor = [UIColor colorWithHex:0x15A230];
         [_segmentedView addTarget:self action:@selector(charge:) forControlEvents:UIControlEventValueChanged];
         

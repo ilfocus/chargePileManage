@@ -19,19 +19,9 @@
 @end
 
 @implementation QCDataCacheTool
+
 static FMDatabaseQueue *_queue;
 #pragma - mark init db
-//+ (void) initialize
-//{
-//    // 0.获得沙盒中的数据库文件名
-//    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]stringByAppendingPathComponent:@"statuses.sqlite"];
-//    // 1.创建队列
-//    _queue = [FMDatabaseQueue databaseQueueWithPath:path];
-//    // 2.创表
-//    [_queue inDatabase:^(FMDatabase *db) {
-//        [db executeUpdate:@"create table if not exists t_status (id integer primary key autoincrement,access_token text,idstr text,dict blob)"];
-//    }];
-//}
 - (instancetype) initWithDBName:(NSString *)dbName sqlCmd:(NSString *)sqlCmd
 {
     self = [super init];
@@ -144,7 +134,8 @@ static FMDatabaseQueue *_queue;
             user.passWord = [rs stringForColumn:@"passWord"];
             user.icon = [NSKeyedUnarchiver unarchiveObjectWithData:[rs dataForColumn:@"icon"]];
             user.nickName = [rs stringForColumn:@"nickName"];
-            user.sex = [rs stringForColumn:@"permission"];
+            user.sex = [rs stringForColumn:@"sex"];
+            user.permission = [rs stringForColumn:@"permission"];
             user.area = [rs stringForColumn:@"area"];
             [statusArray addObject:user];
         }

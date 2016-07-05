@@ -109,6 +109,11 @@
     self.supplyRecordView.mj_footer = [QCChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreSRData)];
     self.supplyRecordView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     
+    
+    // 加载20条数据库中充电数据
+    
+    // 加载20条数据库中用户信息
+    
 }
 #pragma - mark lazy load
 - (NSMutableArray *)chargeRecordDataArray

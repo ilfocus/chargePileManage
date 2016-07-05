@@ -30,6 +30,8 @@
 #import "QCPersonInfoIconModel.h"
 #import "QCPersonInfoSegmentModel.h"
 
+#import "QCLoginCtrl.h"
+
 
 @interface QCPersonalInfoCtrl () <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 
@@ -67,16 +69,27 @@
     
     [self setupFooterView:personalInfoView];
     
+//    self.userData = [self takeDataFromDB];
+    [self takeDataFromDB];
+}
+
+- (void) takeDataFromDB
+{
     NSString *dbName = @"chargePileData.sqlite";
     NSString *sqlCmd = @"CREATE TABLE IF NOT EXISTS t_user (id integer PRIMARY KEY AUTOINCREMENT,userID text,passWord text,icon blob,nickName text,sex text,permission text,area text)";
     QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
     NSArray *arr = [cache getChargePileUser:dbName];
-    WQLog(@"---arr---%@",arr);
-    if (arr) {
-        self.userData = arr[0];
+    
+    // 从NSUserDefault中得到帐号信息
+    NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [accountDefaults objectForKey:userNameStrKey];
+    // 从arr中取出对应帐号的具体信息，并将数据取到模型中
+    
+    for (QCPileListUserModel *user in arr) {
+        if ([user.userID isEqualToString:userName]) {
+            self.userData = user;
+        }
     }
-    
-    
 }
 - (void)setupFooterView:(UITableView *)tableView
 {
@@ -233,6 +246,26 @@
             if ([user.title isEqualToString:@"昵称"]) {
                 user.subTitle = userData.nickName;
             }
+            if ([user.title isEqualToString:@"头像"]) {
+                user.image = userData.icon;
+            }
+            if ([user.title isEqualToString:@"性别"]) {
+                if ([userData.sex isEqualToString:@"男"]) {
+                    user.gender = 0;
+                } else {
+                    user.gender = 1;
+                }
+            }
+            if ([user.title isEqualToString:@"修改密码"]) {
+                
+            }
+            if ([user.title isEqualToString:@"帐号权限"]) {
+                user.subTitle = userData.permission;
+            }
+            if ([user.title isEqualToString:@"所在小区"]) {
+                user.subTitle = userData.area;
+            }
+            
         }
     }
     [self.personalInfoView reloadData];

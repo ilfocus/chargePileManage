@@ -76,8 +76,10 @@ NSString *const userPwdStrKey           = @"userPwd";
     
     // 可以保存密码，点击登录后，通过服务器进行帐号验证
     NSUserDefaults *accountDefaults = [NSUserDefaults standardUserDefaults];
-    if ([self.userIDText.text isNotBlank] && [self.pwdText.text isNotBlank]) {
-        // 验证
+    if ([self.userIDText.text isNotBlank] && [self.pwdText.text isNotBlank]) { // 帐号密码都不为空
+        // 帐号密码发送到服务器进行验证，验证成功后返回用户信息
+        
+        //
         if ([self.userIDText.text isEqualToString:@"wangqi"] && [self.pwdText.text isEqualToString:@"123456"]) {
             
             // 验证成功后，把数据存入数据库中
@@ -85,22 +87,31 @@ NSString *const userPwdStrKey           = @"userPwd";
             NSString *sqlCmd = @"CREATE TABLE IF NOT EXISTS t_user (id integer PRIMARY KEY AUTOINCREMENT,userID text,passWord text,icon blob,nickName text,sex text,permission text,area text)";
             QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
             
+            NSArray *arr = [cache getChargePileUser:dbName];
             //  设置模型数据
-            
             QCPileListUserModel *userData = [[QCPileListUserModel alloc] init];
-            
-            userData.userID = @"wangqi";
-            userData.passWord = @"12345";
+            userData.userID = [accountDefaults objectForKey:userNameStrKey];
+            userData.passWord = [accountDefaults objectForKey:userPwdStrKey];
             userData.icon = [UIImage imageNamed:@"icon"];
-            userData.nickName = @"小小鸟";
+            userData.nickName = @"小小鸟er";
             userData.sex = @"男";
             userData.permission = @"超级管理员";
             userData.area = @"上海市";
+            
             // 保存模型
-            [cache addChargePileUser:dbName cpData:userData];
-            
-//            NSArray *arr = [cache getChargePileUser:dbName];
-            
+            if (arr.count == 0) {
+                [cache addChargePileUser:dbName cpData:userData];
+            } else {
+                bool userFlg = NO;
+                for (QCPileListUserModel *user in arr) {
+                    if ([userData.userID isEqualToString:user.userID]) {
+                        userFlg = YES;
+                    }
+                }
+                if (userFlg == NO) {
+                    [cache addChargePileUser:dbName cpData:userData];
+                }
+            }
             [QCReminderUserTool showLoad:self.view];
             
             if (_rememberPwdFlg) {  // 登录时，如果有选中记住密码，则记住

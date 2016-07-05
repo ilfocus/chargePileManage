@@ -17,6 +17,10 @@ typedef void (^WQItemOption)();
  */
 @property (nonatomic,copy) NSString *icon;
 /**
+ *  头像
+ */
+@property (nonatomic,strong) UIImage *image;
+/**
  *  标题
  */
 @property (nonatomic,copy) NSString *title;

@@ -13,4 +13,6 @@
 @interface QCLoginCtrl : UIViewController
 extern NSString *const UserRememberBoolKey;
 extern NSString *const UserAutoLoginBoolKey;
+extern NSString *const userNameStrKey;
+extern NSString *const userPwdStrKey;
 @end

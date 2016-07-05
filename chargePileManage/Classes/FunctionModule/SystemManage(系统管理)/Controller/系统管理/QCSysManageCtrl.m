@@ -17,12 +17,9 @@
 #import "WQItemModel.h"
 #import "WQItemArrowModel.h"
 
-
-
 @interface QCSysManageCtrl () <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 @property (nonatomic,weak) UITableView *manageView;
 @property (nonatomic,strong) NSMutableArray *dataArray;
-
 @end
 
 @implementation QCSysManageCtrl
@@ -59,8 +56,6 @@
 {
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确定要退出登录吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     [alert show];
-    
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[QCLoginCtrl alloc] init];
 }
 
 - (void) setupFooterView:(UITableView *)tableView
