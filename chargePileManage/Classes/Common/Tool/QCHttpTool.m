@@ -119,6 +119,23 @@
     }];
     [dataTask resume];
 }
+
++ (void) httpQueryData:(NSString *)URLString params:(NSDictionary *)params success:( void (^)(id json) )success failure:( void (^)(NSError *error) )failure
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURLSessionDataTask *dataTask = [manager GET:URLString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    [dataTask resume];
+}
 #endif
 
 @end

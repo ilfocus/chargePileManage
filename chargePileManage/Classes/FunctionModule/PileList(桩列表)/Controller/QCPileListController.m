@@ -41,7 +41,7 @@
     
     [self setupView];
     
-    [self loadDataFromDB];
+//    [self loadDataFromDB];
 }
 
 - (void) loadDataFromDB
@@ -80,7 +80,8 @@
     }
 #else
     for (QCPileListNumModel *result in arr) {
-        NSString *str = [result.cpid substringFromIndex:2];
+//        NSString *str = [result.cpid substringFromIndex:2];
+        NSString *str = result.cpid;
         int cpNum = [str intValue];
         NSString *str1 = [NSString stringWithFormat:@"%d",cpNum];
         [cpNumArray addObject:str1];

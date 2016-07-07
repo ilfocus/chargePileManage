@@ -12,6 +12,8 @@
 #import "QCPileListNumModel.h"
 #import "QCPileListDataMode.h"
 #import "QCPileListUserModel.h"
+#import "QCChargeRecordModel.h"
+#import "QCSupplyRecordModel.h"
 
 
 @interface QCDataCacheTool ()
@@ -38,7 +40,7 @@ static FMDatabaseQueue *_queue;
     return self;
 }
 
-#pragma - mark add db data
+#pragma - mark add and read CP_DATA
 //  增加多条字典数据
 - (void)addChargePileDatas:(NSString *)dbName sqlCmd:(NSString *)sqlCmd array:(NSArray *)dictArray
 {
@@ -59,32 +61,26 @@ static FMDatabaseQueue *_queue;
     }];
     [queue close];
 }
-
-// 保存充电桩号码
-- (void)addChargePileDatas:(NSString *)dbName sqlCmd:(NSString *)sqlCmd cpNumArray:(NSArray *)cpArray
-{
-    for (QCPileListNumModel *model in cpArray) {
-        [self addChargePileData:dbName sqlCmd:sqlCmd chargeNum:model];
-    }
-}
-- (void)addChargePileData:(NSString *)dbName sqlCmd:(NSString *)sqlCmd chargeNum:(QCPileListNumModel *)number
+- (NSArray *)cpDataWithParam:(NSString *)dbName
 {
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    __block NSMutableArray *statusArray = nil;
     [queue inDatabase:^(FMDatabase *db) {
-#if SERVER_TYPE
-        NSString *address   = number.address;
-        NSString *cpNumber  = number.chargePileNum;
-        [db executeUpdate:@"insert into t_number (address,chargePileNum) values(?,?)",address,cpNumber];
-#else
-        NSString *price = [NSString stringWithFormat:@"%.2f",number.price];
-        NSString *status = [NSString stringWithFormat:@"%d",number.status];
-        [db executeUpdate:@"insert into t_number (cpid,cpnm,price,status) values(?,?,?,?)",number.cpid,number.cpnm,(int)price,status];
-
-#endif
+        statusArray = [NSMutableArray array];
+        FMResultSet *rs = nil;
+        rs = [db executeQuery:@"select * from t_data"];
+        while (rs.next) {
+            NSData *data = [rs dataForColumn:@"cpdata"];
+            QCPileListDataMode *status = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            
+            [statusArray addObject:status];
+        }
     }];
     [queue close];
+    return statusArray;
 }
+
 // 保存充电桩数据
 - (void)addChargePileData:(NSString *)dbName sqlData:(NSString *)sqlCmd cpData:(QCPileListDataMode *)data
 {
@@ -100,13 +96,6 @@ static FMDatabaseQueue *_queue;
     [queue close];
 }
 #pragma - mark add and read USER_INFO
-/**
- *  添加用户组数据到数据库中
- *
- *  @param dbName 数据库名称
- *  @param sqlCmd sql命令
- *  @param data   需要保存的数据
- */
 - (void)addChargePileUser:(NSString *)dbName cpData:(QCPileListUserModel *)data
 {
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
@@ -117,8 +106,7 @@ static FMDatabaseQueue *_queue;
     }];
     [queue close];
 }
-
-- (NSArray *) getChargePileUser:(NSString *) dbName
+- (NSArray *)getChargePileUser:(NSString *) dbName
 {
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
@@ -143,29 +131,90 @@ static FMDatabaseQueue *_queue;
     [queue close];
     return statusArray;
 }
+#pragma - mark add and read CHARGE_RECORD
+- (void)addChargeRecordData:(NSString *)dbName cpData:(QCChargeRecordModel *)data
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    [queue inDatabase:^(FMDatabase *db) {
+        NSString *cost = [NSString stringWithFormat:@"%.2f",data.chargeElectCost];
+        [db executeUpdate:@"INSERT INTO t_chargeRecord (chargeNum,time,cost) values(?,?,?)",data.cpID,data.chargeElectDate,cost];
+    }];
+    [queue close];
+}
 
-#pragma - mark read db data
-
-- (NSArray *)cpDataWithParam:(NSString *)dbName
+- (NSArray *)getChargeRecordData:(NSString *) dbName
 {
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
     FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
     __block NSMutableArray *statusArray = nil;
+    
     [queue inDatabase:^(FMDatabase *db) {
         statusArray = [NSMutableArray array];
         FMResultSet *rs = nil;
-        rs = [db executeQuery:@"select * from t_data"];
+        rs = [db executeQuery:@"select * from t_chargeRecord"];
         while (rs.next) {
-            NSData *data = [rs dataForColumn:@"cpdata"];
-            QCPileListDataMode *status = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            
-            [statusArray addObject:status];
+            QCChargeRecordModel *cpRecord = [[QCChargeRecordModel alloc] init];
+            cpRecord.cpID = [rs stringForColumn:@"chargeNum"];
+            cpRecord.chargeElectDate = [rs stringForColumn:@"time"];
+            cpRecord.chargeElectCost = [[rs stringForColumn:@"cost"] floatValue];
+            [statusArray addObject:cpRecord];
+        }
+    }];
+    [queue close];
+    return statusArray;
+}
+#pragma - mark add and read SUPPLY_RECORD
+- (void)addSupplyRecordData:(NSString *)dbName cpData:(QCSupplyRecordModel *)data
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    [queue inDatabase:^(FMDatabase *db) {
+        NSString *cost = [NSString stringWithFormat:@"%.2f",data.supplyElectCost];
+        [db executeUpdate:@"INSERT INTO t_supplyRecord (userID,time,cost) values(?,?,?)",data.userID,data.chargeElectDate,cost];
+    }];
+    [queue close];
+}
+
+- (NSArray *)getSupplyRecordData:(NSString *) dbName
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    __block NSMutableArray *statusArray = nil;
+    
+    [queue inDatabase:^(FMDatabase *db) {
+        statusArray = [NSMutableArray array];
+        FMResultSet *rs = nil;
+        rs = [db executeQuery:@"select * from t_supplyRecord"];
+        while (rs.next) {
+            QCSupplyRecordModel *supplyRecord = [[QCSupplyRecordModel alloc] init];
+            supplyRecord.userID = [rs stringForColumn:@"userID"];
+            supplyRecord.chargeElectDate = [rs stringForColumn:@"time"];
+            supplyRecord.supplyElectCost = [[rs stringForColumn:@"cost"] floatValue];
+            [statusArray addObject:supplyRecord];
         }
     }];
     [queue close];
     return statusArray;
 }
 
+#pragma - mark add and read CP_NUMBER
+- (void) storeCPListNumberWithParam:(NSString *)dbName chargePileID:(QCPileListNumModel *)number
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    
+    [queue inDatabase:^(FMDatabase *db) {
+#if SERVER_TYPE
+        NSString *address   = number.address;
+        NSString *cpNumber  = number.chargePileNum;
+        [db executeUpdate:@"insert into t_number (address,chargePileNum) values(?,?)",address,cpNumber];
+#else
+        [db executeUpdate:@"insert into t_number (cpid) values(?)",number.cpid];
+#endif
+    }];
+    [queue close];
+}
 - (NSArray *)getCPListWithParam:(NSString *)dbName
 {
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
@@ -194,6 +243,31 @@ static FMDatabaseQueue *_queue;
     [queue close];
     return statusArray;
 }
+// 保存充电桩号码
+- (void)addChargePileDatas:(NSString *)dbName sqlCmd:(NSString *)sqlCmd cpNumArray:(NSArray *)cpArray
+{
+    for (QCPileListNumModel *model in cpArray) {
+        [self addChargePileData:dbName sqlCmd:sqlCmd chargeNum:model];
+    }
+}
+- (void)addChargePileData:(NSString *)dbName sqlCmd:(NSString *)sqlCmd chargeNum:(QCPileListNumModel *)number
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    [queue inDatabase:^(FMDatabase *db) {
+#if SERVER_TYPE
+        NSString *address   = number.address;
+        NSString *cpNumber  = number.chargePileNum;
+        [db executeUpdate:@"insert into t_number (address,chargePileNum) values(?,?)",address,cpNumber];
+#else
+        NSString *price = [NSString stringWithFormat:@"%.2f",number.price];
+        NSString *status = [NSString stringWithFormat:@"%d",number.status];
+        [db executeUpdate:@"insert into t_number (cpid,cpnm,price,status) values(?,?,?,?)",number.cpid,number.cpnm,(int)price,status];
+        
+#endif
+    }];
+    [queue close];
+}
 #pragma - mark store cpid
 - (NSArray *)getCPListNumberWithParam:(NSString *)dbName
 {
@@ -211,21 +285,6 @@ static FMDatabaseQueue *_queue;
     [queue close];
     return statusArray;
 }
-- (void) storeCPListNumberWithParam:(NSString *)dbName chargePileID:(QCPileListNumModel *)number
-{
-    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
-    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
-    
-    [queue inDatabase:^(FMDatabase *db) {
-#if SERVER_TYPE
-        NSString *address   = number.address;
-        NSString *cpNumber  = number.chargePileNum;
-        [db executeUpdate:@"insert into t_number (address,chargePileNum) values(?,?)",address,cpNumber];
-#else
-        [db executeUpdate:@"insert into t_number (cpid) values(?)",number.cpid];
-#endif
-    }];
-    [queue close];
-}
+
 
 @end

@@ -65,8 +65,6 @@ static int pileDataCnt = 0;
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
     
-    
-    
     NSString *dbName = @"chargePileData.sqlite";
 //    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,address text,chargePileNum text)";
 //
@@ -107,11 +105,12 @@ static int pileDataCnt = 0;
 #else
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
-    NSString *chargePileID  = [NSString stringWithFormat:@"CP%06d",[self.cpid intValue]];
+    NSString *chargePileID  = [NSString stringWithFormat:@"%d",[self.cpid intValue]];
     //params[@"cpid"] = @"CP000001";
     WQLog(@"充电桩的CPID---%@",chargePileID);
     params[@"cpid"] = chargePileID;
     params[@"datacnt"] = @10;
+    
     [QCHttpTool httpQueryCPData:params success:^(id json) {
         
         NSArray *array = json[@"detail"];

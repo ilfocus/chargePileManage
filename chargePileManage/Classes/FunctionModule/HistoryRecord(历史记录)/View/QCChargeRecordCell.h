@@ -12,6 +12,7 @@
 
 @interface QCChargeRecordCell : UITableViewCell
 + (instancetype)cellWithTableView:(UITableView *)tableView;
+
 @property (nonatomic,strong) QCChargeRecordModel *cpRecord;
 
 @end

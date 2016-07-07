@@ -128,6 +128,7 @@
 		72E281F61D0108CD00AD5B86 /* QCChargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E281F51D0108CD00AD5B86 /* QCChargeView.m */; };
 		72E281FC1D0148B300AD5B86 /* DXPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E281FB1D0148B300AD5B86 /* DXPopover.m */; };
 		72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */; };
+		72F516B21D2E32A0003D506D /* QCSearchRecordCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F516B11D2E32A0003D506D /* QCSearchRecordCtrl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -385,6 +386,8 @@
 		72E281FB1D0148B300AD5B86 /* DXPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPopover.m; sourceTree = "<group>"; };
 		72EA12171CF7D4D1009A1ED7 /* QCPileListDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCPileListDetailView.h; sourceTree = "<group>"; };
 		72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCPileListDetailView.m; sourceTree = "<group>"; };
+		72F516B01D2E32A0003D506D /* QCSearchRecordCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSearchRecordCtrl.h; sourceTree = "<group>"; };
+		72F516B11D2E32A0003D506D /* QCSearchRecordCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSearchRecordCtrl.m; sourceTree = "<group>"; };
 		F6D5489189523ECDE4B2E8BD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -645,6 +648,8 @@
 			children = (
 				725760511D0FD1C20003ECAA /* QCHistoryRecordCtrl.h */,
 				725760521D0FD1C20003ECAA /* QCHistoryRecordCtrl.m */,
+				72F516B01D2E32A0003D506D /* QCSearchRecordCtrl.h */,
+				72F516B11D2E32A0003D506D /* QCSearchRecordCtrl.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1371,6 +1376,7 @@
 				7288034A1D0D3734009AB66E /* ZCAudioTool.m in Sources */,
 				726F7E9E1CF593E70068513A /* WQItemModel.m in Sources */,
 				726A9BE41D2664D6003587FA /* QCPersonInfoLabelModel.m in Sources */,
+				72F516B21D2E32A0003D506D /* QCSearchRecordCtrl.m in Sources */,
 				728803511D0D5333009AB66E /* QCChiBaoZiHeader.m in Sources */,
 				72295A711CFD89C600E40E9A /* QCBatteryInfoCtrl.m in Sources */,
 				726A9BD81D26554D003587FA /* QCPersonInfoModel.m in Sources */,

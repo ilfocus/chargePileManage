@@ -126,8 +126,16 @@
     _cpSupplyRecord = cpSupplyRecord;
     
     // 设置数据
-    _chargePileNumLbl.text = [@"用户: " stringByAppendingString:cpSupplyRecord.userID];
-    _chargeTimeLbl.text = [@"时间: " stringByAppendingString:cpSupplyRecord.chargeElectDate];
+    if (cpSupplyRecord.userID) {
+        _chargePileNumLbl.text = [@"用户: " stringByAppendingString:cpSupplyRecord.userID];
+    } else {
+        _chargePileNumLbl.text = @"用户: ";
+    }
+    if (cpSupplyRecord.chargeElectDate) {
+        _chargeTimeLbl.text = [@"时间: " stringByAppendingString:cpSupplyRecord.chargeElectDate];
+    } else {
+        _chargeTimeLbl.text = @"时间: ";
+    }
     _chargeCostLbl.text = [@"费用: " stringByAppendingString:[NSString stringWithFormat:@"%.2f",cpSupplyRecord.supplyElectCost]];
 }
 @end

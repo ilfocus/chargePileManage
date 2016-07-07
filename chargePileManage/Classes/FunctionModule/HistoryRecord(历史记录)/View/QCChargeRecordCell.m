@@ -129,9 +129,18 @@
 {
     _cpRecord = cpRecord;
     
+    WQLog(@"---setData----");
     // 设置数据
-    _chargePileNumLbl.text = [@"桩号: " stringByAppendingString:cpRecord.cpID];
-    _chargeTimeLbl.text = [@"时间: " stringByAppendingString:cpRecord.chargeElectDate];
+    if (cpRecord.cpID) {
+        _chargePileNumLbl.text = [@"桩号: " stringByAppendingString:cpRecord.cpID];
+    } else {
+        _chargePileNumLbl.text = @"桩号: ";
+    }
+    if (cpRecord.chargeElectDate) {
+        _chargeTimeLbl.text = [@"时间: " stringByAppendingString:cpRecord.chargeElectDate];
+    } else {
+        _chargeTimeLbl.text = @"时间";
+    }
     _chargeCostLbl.text = [@"费用: " stringByAppendingString:[NSString stringWithFormat:@"%.2f",cpRecord.chargeElectCost]];
 }
 

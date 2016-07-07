@@ -10,6 +10,10 @@
 @class QCPileListNumModel;
 @class QCPileListDataMode;
 @class QCPileListUserModel;
+
+@class QCChargeRecordModel;
+@class QCSupplyRecordModel;
+
 @interface QCDataCacheTool : NSObject
 /**
  *  缓存一条数据
@@ -43,4 +47,11 @@
 #pragma - mark store and get cpid
 - (NSArray *)getCPListNumberWithParam:(NSString *)dbName;
 - (void) storeCPListNumberWithParam:(NSString *)dbName chargePileID:(QCPileListNumModel *)number;
+
+#pragma - mark CHARGE_RECORD
+- (void)addChargeRecordData:(NSString *)dbName cpData:(QCChargeRecordModel *)data;
+- (NSArray *)getChargeRecordData:(NSString *)dbName;
+#pragma - mark SUPPLY_RECORD
+- (void)addSupplyRecordData:(NSString *)dbName cpData:(QCSupplyRecordModel *)data;
+- (NSArray *)getSupplyRecordData:(NSString *)dbName;
 @end

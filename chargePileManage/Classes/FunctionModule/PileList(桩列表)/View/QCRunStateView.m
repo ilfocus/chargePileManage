@@ -82,8 +82,8 @@
     if (modeData == nil) {
         return;
     }
-    self.voltage = modeData.currentVol;
-    self.current = modeData.currentCur;
+    self.voltage = modeData.currentAVol;
+    self.current = modeData.currentACur;
 }
 - (void)layoutSubviews
 {

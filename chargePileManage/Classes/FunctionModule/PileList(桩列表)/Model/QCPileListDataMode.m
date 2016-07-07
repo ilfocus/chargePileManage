@@ -22,8 +22,8 @@
     self.currentSOC = [[object objectForKey:@"CurrentSOC"] intValue];
     self.chargeTime = [[object objectForKey:@"ChargeTime"] floatValue];
     self.remainTime = [[object objectForKey:@"RemainTime"] floatValue];
-    self.currentVol = [[object objectForKey:@"currentVol"] floatValue];
-    self.currentCur = [[object objectForKey:@"currentCur"] floatValue];
+    self.currentAVol = [[object objectForKey:@"currentAVol"] floatValue];
+    self.currentACur = [[object objectForKey:@"currentACur"] floatValue];
     self.outPower = [[object objectForKey:@"OutPower"] floatValue];
     self.outQuantity = [[object objectForKey:@"OutQuantity"] floatValue];
     self.accTime = [[object objectForKey:@"ACCTime"] intValue];
@@ -101,8 +101,8 @@
         self.currentSOC         = [decoder decodeFloatForKey:@"currentSOC"];
         self.chargeTime         = [decoder decodeIntForKey:@"chargeTime"];
         self.remainTime         = [decoder decodeIntForKey:@"remainTime"];
-        self.currentVol         = [decoder decodeFloatForKey:@"currentVol"];
-        self.currentCur         = [decoder decodeFloatForKey:@"currentCur"];
+        self.currentAVol         = [decoder decodeFloatForKey:@"currentAVol"];
+        self.currentACur         = [decoder decodeFloatForKey:@"currentACur"];
         self.outPower           = [decoder decodeFloatForKey:@"outPower"];
         self.outQuantity        = [decoder decodeFloatForKey:@"outQuantity"];
         self.accTime            = [decoder decodeIntForKey:@"accTime"];
@@ -168,8 +168,8 @@
     [encoder encodeInt:self.chargeTime forKey:@"chargeTime"];
     [encoder encodeInt:self.remainTime forKey:@"remainTime"];
     
-    [encoder encodeFloat:self.currentVol forKey:@"currentVol"];
-    [encoder encodeFloat:self.currentCur forKey:@"currentCur"];
+    [encoder encodeFloat:self.currentAVol forKey:@"currentAVol"];
+    [encoder encodeFloat:self.currentACur forKey:@"currentACur"];
     [encoder encodeFloat:self.outPower forKey:@"outPower"];
     [encoder encodeFloat:self.outQuantity forKey:@"outQuantity"];
     [encoder encodeInt:self.accTime forKey:@"accTime"];
