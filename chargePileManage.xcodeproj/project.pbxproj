@@ -120,6 +120,8 @@
 		728803621D0E7791009AB66E /* QCLoginCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728803601D0E7791009AB66E /* QCLoginCtrl.xib */; };
 		728EB0471D2F4D5B0066E4AE /* QCChooseRecordCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 728EB0451D2F4D5B0066E4AE /* QCChooseRecordCtrl.m */; };
 		728EB0481D2F4D5B0066E4AE /* QCChooseRecordCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728EB0461D2F4D5B0066E4AE /* QCChooseRecordCtrl.xib */; };
+		728EB04B1D3377FB0066E4AE /* QCRecordScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 728EB04A1D3377FB0066E4AE /* QCRecordScrollView.m */; };
+		728EB04E1D338D450066E4AE /* QCSearchRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 728EB04D1D338D450066E4AE /* QCSearchRecordModel.m */; };
 		7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE01CFFBADA003D386B /* UIView+Round.m */; };
 		7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE41CFFC590003D386B /* QCFaultView.m */; };
 		729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAACD1CFBE69300F7A953 /* QCRunStateView.m */; };
@@ -371,6 +373,10 @@
 		728EB0441D2F4D5B0066E4AE /* QCChooseRecordCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChooseRecordCtrl.h; sourceTree = "<group>"; };
 		728EB0451D2F4D5B0066E4AE /* QCChooseRecordCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChooseRecordCtrl.m; sourceTree = "<group>"; };
 		728EB0461D2F4D5B0066E4AE /* QCChooseRecordCtrl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QCChooseRecordCtrl.xib; sourceTree = "<group>"; };
+		728EB0491D3377FB0066E4AE /* QCRecordScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCRecordScrollView.h; sourceTree = "<group>"; };
+		728EB04A1D3377FB0066E4AE /* QCRecordScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCRecordScrollView.m; sourceTree = "<group>"; };
+		728EB04C1D338D450066E4AE /* QCSearchRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSearchRecordModel.h; sourceTree = "<group>"; };
+		728EB04D1D338D450066E4AE /* QCSearchRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSearchRecordModel.m; sourceTree = "<group>"; };
 		7292BADF1CFFBADA003D386B /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
 		7292BAE01CFFBADA003D386B /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Round.m"; sourceTree = "<group>"; };
 		7292BAE31CFFC590003D386B /* QCFaultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultView.h; sourceTree = "<group>"; };
@@ -669,6 +675,8 @@
 				7227923D1D211B2200A2D643 /* QCChargeRecordModel.m */,
 				7227923F1D211B3B00A2D643 /* QCSupplyRecordModel.h */,
 				722792401D211B3B00A2D643 /* QCSupplyRecordModel.m */,
+				728EB04C1D338D450066E4AE /* QCSearchRecordModel.h */,
+				728EB04D1D338D450066E4AE /* QCSearchRecordModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -682,6 +690,8 @@
 				725760581D10EA270003ECAA /* QCSupplyRecordCell.m */,
 				722792581D222D8900A2D643 /* QCChiBaoZiFooter.h */,
 				722792591D222D8900A2D643 /* QCChiBaoZiFooter.m */,
+				728EB0491D3377FB0066E4AE /* QCRecordScrollView.h */,
+				728EB04A1D3377FB0066E4AE /* QCRecordScrollView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1370,6 +1380,7 @@
 				725760561D10E9B60003ECAA /* QCChargeRecordCell.m in Sources */,
 				726F7E9A1CF593E70068513A /* WQBaseTableViewController.m in Sources */,
 				729EAAD11CFC0BDB00F7A953 /* QCFaultInfoView.m in Sources */,
+				728EB04E1D338D450066E4AE /* QCSearchRecordModel.m in Sources */,
 				723977251D24F59A008C4042 /* QCPileListUserModel.m in Sources */,
 				725760A51D1286B90003ECAA /* UIColor+hex.m in Sources */,
 				726A9BD31D265516003587FA /* QCNickNameAlertCtrl.m in Sources */,
@@ -1460,6 +1471,7 @@
 				722792361D21123800A2D643 /* PinyinFormatter.m in Sources */,
 				72295A6B1CFD896100E40E9A /* QCRunStateCtrl.m in Sources */,
 				722792381D21123800A2D643 /* PinyinHelper.m in Sources */,
+				728EB04B1D3377FB0066E4AE /* QCRecordScrollView.m in Sources */,
 				726F7E591CF56E7A0068513A /* UIImage+adaptive_iOS7.m in Sources */,
 				725760981D1284C40003ECAA /* UIButton+Badge.m in Sources */,
 				726A9BD41D265516003587FA /* QCPersonalInfoCtrl.m in Sources */,

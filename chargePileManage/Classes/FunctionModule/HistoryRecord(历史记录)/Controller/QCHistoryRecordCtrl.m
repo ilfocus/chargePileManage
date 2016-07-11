@@ -12,6 +12,7 @@
 #import "UIColor+hex.h"
 #import "QCSearchRecordCtrl.h"
 #import "QCChooseRecordCtrl.h"
+#import "QCSearchRecordModel.h"
 // model
 #import "QCChargeRecordModel.h"
 #import "QCSupplyRecordModel.h"
@@ -31,19 +32,15 @@
 
 
 
-@interface QCHistoryRecordCtrl () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,SearchResultDelegate>
+@interface QCHistoryRecordCtrl () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,SearchResultDelegate,QCChooseRecordCtrlDelegate>
 @property (nonatomic,weak) UIScrollView *scrollView;
 @property (nonatomic,weak) UITableView *chargeRecordView;
 @property (nonatomic,weak) UITableView *supplyRecordView;
-
 @property (nonatomic,weak) UISegmentedControl *segmentedView;
-
 @property (nonatomic,weak) UISearchBar *searchBar;
 @property (nonatomic,strong) UISearchDisplayController *searchDisplayController;
-
 @property (nonatomic,strong) NSMutableArray *chargeRecordDataArray;
 @property (nonatomic,strong) NSMutableArray *supplyRecordDataArray;
-
 @end
 
 @implementation QCHistoryRecordCtrl
@@ -51,11 +48,8 @@
 #pragma - mark initView
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = WQColor(226,226,226);
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2,0);
@@ -81,7 +75,6 @@
     CGRect chargeRecordViewFrame = CGRectMake(0, tableViewY, SCREEN_WIDTH, tableViewH);
     UITableView *chargeRecordView = [[UITableView alloc] initWithFrame:chargeRecordViewFrame style:UITableViewStyleGrouped];
     chargeRecordView.rowHeight = 90;
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     UIView *chargeHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     chargeRecordView.tableHeaderView = chargeHeaderView;
@@ -279,6 +272,7 @@
     QCChooseRecordCtrl *vc = [[QCChooseRecordCtrl alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.title = @"搜索";
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void) charge:(UISegmentedControl *)segmented
@@ -347,8 +341,19 @@
     } else {
 //        WQLog(@"不是scrollView---%@",scrollView);
     }
-    
-    
 }
-
+#pragma - mark sets and gets
+#pragma - mark QCChooseRecordDelegate
+- (void)searchRecord:(QCSearchRecordModel *)searchModel
+{
+    WQLog(@"%s",__func__);
+    WQLog(@"searchModel.searchType---%@",searchModel.searchType);
+    WQLog(@"searchModel.beginTime---%@",searchModel.beginTime);
+    WQLog(@"searchModel.endTime---%@",searchModel.endTime);
+    WQLog(@"searchModel.searchWord---%@",searchModel.searchWord);
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    WQLog(@"%s",__func__);
+}
 @end

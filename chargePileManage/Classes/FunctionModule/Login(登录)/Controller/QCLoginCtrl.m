@@ -81,17 +81,21 @@ NSString *const userKindStrKey           = @"userkind";
     if ([self.userIDText.text isNotBlank] && [self.pwdText.text isNotBlank]) { // 帐号密码都不为空
         // account password sent to the server for validation
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        params[@"loginid"] = @"CPUSER03";
-        params[@"passwd"] = @"password";
+//        params[@"loginid"] = @"CPUSER03";
+//        params[@"passwd"] = @"password";
+        params[@"loginid"] = self.userIDText.text;
+        params[@"passwd"] = self.pwdText.text;
         NSString *ulrString = [NSString stringWithFormat:@"%@%@",CPMAPI_PREFIX,CPMAPI_USER_LOGIN];
         
         [QCHttpTool httpQueryData:ulrString params:params success:^(id json) {
             // parse the data returned by the server
             NSString *errorCode = json[@"errorCode"];
             if (![errorCode isNotBlank]) {
+                WQLog(@"密码输入正确！！！");
                 [self saveUserInfo:json];
                 [UIApplication sharedApplication].keyWindow.rootViewController = [[QCTabBarController alloc]init];
             } else {
+                WQLog(@"输入错误！！！");
                 if (![self.userIDText.text isEqualToString:@"wangqi"]) {
                     [QCReminderUserTool showError:self.view str:@"用户名不存在"];
                 } else if (![self.pwdText.text isEqualToString:@"123456"]) {

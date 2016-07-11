@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@class QCSearchRecordModel;
+// 实现代理
+@protocol QCChooseRecordCtrlDelegate <NSObject>
+
+@optional
+- (void) searchRecord:(QCSearchRecordModel *)searchModel;
+
+@end
+
 
 @interface QCChooseRecordCtrl : UIViewController
-
+@property (nonatomic,weak) id<QCChooseRecordCtrlDelegate> delegate;
 @end
