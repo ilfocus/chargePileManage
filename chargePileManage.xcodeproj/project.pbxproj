@@ -118,6 +118,8 @@
 		728803511D0D5333009AB66E /* QCChiBaoZiHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 728803501D0D5333009AB66E /* QCChiBaoZiHeader.m */; };
 		728803611D0E7791009AB66E /* QCLoginCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7288035F1D0E7791009AB66E /* QCLoginCtrl.m */; };
 		728803621D0E7791009AB66E /* QCLoginCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728803601D0E7791009AB66E /* QCLoginCtrl.xib */; };
+		728EB0471D2F4D5B0066E4AE /* QCChooseRecordCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 728EB0451D2F4D5B0066E4AE /* QCChooseRecordCtrl.m */; };
+		728EB0481D2F4D5B0066E4AE /* QCChooseRecordCtrl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 728EB0461D2F4D5B0066E4AE /* QCChooseRecordCtrl.xib */; };
 		7292BAE11CFFBADA003D386B /* UIView+Round.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE01CFFBADA003D386B /* UIView+Round.m */; };
 		7292BAE51CFFC590003D386B /* QCFaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7292BAE41CFFC590003D386B /* QCFaultView.m */; };
 		729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAACD1CFBE69300F7A953 /* QCRunStateView.m */; };
@@ -366,6 +368,9 @@
 		7288035E1D0E7791009AB66E /* QCLoginCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCLoginCtrl.h; sourceTree = "<group>"; };
 		7288035F1D0E7791009AB66E /* QCLoginCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCLoginCtrl.m; sourceTree = "<group>"; };
 		728803601D0E7791009AB66E /* QCLoginCtrl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QCLoginCtrl.xib; sourceTree = "<group>"; };
+		728EB0441D2F4D5B0066E4AE /* QCChooseRecordCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChooseRecordCtrl.h; sourceTree = "<group>"; };
+		728EB0451D2F4D5B0066E4AE /* QCChooseRecordCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChooseRecordCtrl.m; sourceTree = "<group>"; };
+		728EB0461D2F4D5B0066E4AE /* QCChooseRecordCtrl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QCChooseRecordCtrl.xib; sourceTree = "<group>"; };
 		7292BADF1CFFBADA003D386B /* UIView+Round.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Round.h"; sourceTree = "<group>"; };
 		7292BAE01CFFBADA003D386B /* UIView+Round.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Round.m"; sourceTree = "<group>"; };
 		7292BAE31CFFC590003D386B /* QCFaultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCFaultView.h; sourceTree = "<group>"; };
@@ -650,6 +655,9 @@
 				725760521D0FD1C20003ECAA /* QCHistoryRecordCtrl.m */,
 				72F516B01D2E32A0003D506D /* QCSearchRecordCtrl.h */,
 				72F516B11D2E32A0003D506D /* QCSearchRecordCtrl.m */,
+				728EB0441D2F4D5B0066E4AE /* QCChooseRecordCtrl.h */,
+				728EB0451D2F4D5B0066E4AE /* QCChooseRecordCtrl.m */,
+				728EB0461D2F4D5B0066E4AE /* QCChooseRecordCtrl.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1276,6 +1284,7 @@
 				72378D051CEC6993005E9E52 /* LaunchScreen.storyboard in Resources */,
 				726A9BD21D265516003587FA /* QCFeedBackCtrl.xib in Resources */,
 				728803621D0E7791009AB66E /* QCLoginCtrl.xib in Resources */,
+				728EB0481D2F4D5B0066E4AE /* QCChooseRecordCtrl.xib in Resources */,
 				72378D021CEC6993005E9E52 /* Assets.xcassets in Resources */,
 				728803471D0D3734009AB66E /* trade.bundle in Resources */,
 				72378D001CEC6993005E9E52 /* Main.storyboard in Resources */,
@@ -1435,6 +1444,7 @@
 				726A9BBE1D2654C8003587FA /* QCSysManageCtrl.m in Sources */,
 				722792411D211B3B00A2D643 /* QCSupplyRecordModel.m in Sources */,
 				729EAAD41CFC146A00F7A953 /* QCChargePileParaView.m in Sources */,
+				728EB0471D2F4D5B0066E4AE /* QCChooseRecordCtrl.m in Sources */,
 				728803461D0D3734009AB66E /* NSString+Extension.m in Sources */,
 				72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */,
 				725760961D1284C40003ECAA /* NSTextAttachment+Util.m in Sources */,

@@ -41,7 +41,7 @@
     
     [self setupView];
     
-//    [self loadDataFromDB];
+    [self loadDataFromDB];
 }
 
 - (void) loadDataFromDB

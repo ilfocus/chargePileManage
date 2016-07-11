@@ -15,6 +15,8 @@
 
 #import "QCHttpTool.h"
 #import "YYKit.h"
+#import "WBPopMenuModel.h"
+#import "WBPopMenuSingleton.h"
 
 @interface QCSearchRecordCtrl() <UISearchBarDelegate>
 @property (nonatomic,strong) UISearchDisplayController *searchDisplayController;
@@ -45,25 +47,19 @@
 - (void) setSearch {
     WQLog(@"点击设置");
     
-    UIWindow * window = [[[UIApplication sharedApplication] windows] firstObject];
+//    UIWindow * window = [[[UIApplication sharedApplication] windows] firstObject];
+//    
+//    UIView *backView = [[UIView alloc] initWithFrame:window.bounds];
+//    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
+//    [window addSubview:backView];
+//    
+//    UIView *setCondition = [[UIView alloc] init];
+//    setCondition.backgroundColor = [UIColor whiteColor];
+//    CGFloat setConditionY = self.navigationController.navigationBar.frame.size.height + 20;
+//    setCondition.frame = CGRectMake(0, setConditionY, SCREEN_WIDTH, 100);
+//    [backView addSubview:setCondition];
     
-    UIView *backView = [[UIView alloc] initWithFrame:window.bounds];
-    backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
-    [
-     window addSubview:backView];
-    
-    
-    UIView *setCondition = [[UIView alloc] init];
-    
-    setCondition.backgroundColor = [UIColor whiteColor];
-    
-    CGFloat setConditionY = self.navigationController.navigationBar.frame.size.height + 20;
-    
-    setCondition.frame = CGRectMake(0, setConditionY, SCREEN_WIDTH, 100);
-    [backView addSubview:setCondition];
 }
-
-
 #pragma - mark initUI
 - (void)setSearchBar
 {

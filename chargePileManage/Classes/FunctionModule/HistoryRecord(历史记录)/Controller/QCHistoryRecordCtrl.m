@@ -11,6 +11,7 @@
 #import "QCSupplyRecordCell.h"
 #import "UIColor+hex.h"
 #import "QCSearchRecordCtrl.h"
+#import "QCChooseRecordCtrl.h"
 // model
 #import "QCChargeRecordModel.h"
 #import "QCSupplyRecordModel.h"
@@ -196,6 +197,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.chargeRecordView reloadData];
+                [self.chargeRecordView.mj_header endRefreshing];
             });
             
         } else {
@@ -205,9 +207,9 @@
         WQLog(@"%@",error);
     }];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.chargeRecordView.mj_header endRefreshing];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//    });
 }
 
 - (void) loadMoreCPData
@@ -252,6 +254,7 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.supplyRecordView reloadData];
+                [self.supplyRecordView.mj_header endRefreshing];
             });
         } else {
             
@@ -259,9 +262,6 @@
     } failure:^(NSError *error) {
         WQLog(@"%@",error);
     }];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.supplyRecordView.mj_header endRefreshing];
-    });
 }
 - (void) loadMoreSRData
 {
@@ -276,20 +276,10 @@
 
 - (void) addNewItem:(UIBarButtonItem *)btn
 {
-    NSLog(@"点击UIBarButtonItem!!!");
-    
-//    YLSearchViewController *vc = [[YLSearchViewController alloc] initWithNibName:@"YLSearchViewController" bundle:nil];
-//    //把搜索数据传过去
-//    vc.serchArray = [NSMutableArray arrayWithObjects:@"你好！code4App",@"I love code",@"Hello world",@"乔布斯",@"code4App",@"愿你开心", nil];
-//    //设置代理
-//    vc.delegate = self;
-    
-    QCSearchRecordCtrl *vc = [[QCSearchRecordCtrl alloc] init];
+    QCChooseRecordCtrl *vc = [[QCChooseRecordCtrl alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.title = @"搜索";
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
 }
 - (void) charge:(UISegmentedControl *)segmented
 {
