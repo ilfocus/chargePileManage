@@ -104,7 +104,6 @@ static int pileDataCnt = 0;
         }];
 #else
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    
     NSString *chargePileID  = [NSString stringWithFormat:@"%d",[self.cpid intValue]];
     //params[@"cpid"] = @"CP000001";
     WQLog(@"充电桩的CPID---%@",chargePileID);
@@ -156,8 +155,57 @@ static int pileDataCnt = 0;
 
 - (void) timerEvent
 {
-    [self dataRefresh];
+//    [self dataRefresh];
+    [self loadNewData];
+    [self refreshOneData];
 }
+
+- (void) loadNewData
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSString *chargePileID  = [NSString stringWithFormat:@"%d",[self.cpid intValue]];
+    //params[@"cpid"] = @"CP000001";
+    //WQLog(@"充电桩的CPID---%@",chargePileID);
+    params[@"cpid"] = chargePileID;
+    params[@"datacnt"] = @1;
+    
+    [QCHttpTool httpQueryCPData:params success:^(id json) {
+        
+        NSArray *array = json[@"detail"];
+        if (array) {
+            for (NSDictionary *dict1 in array) {
+                QCPileListDataMode *result = [QCPileListDataMode mj_objectWithKeyValues:dict1];
+                //[cacheCPData addChargePileData:dbName sqlData:sqlData cpData:result];
+                
+                [self.pileDataArray addObject:result];
+                WQLog(@"电压:%f-电流：%f",result.currentAVol,result.currentACur);
+            }
+            //NSArray *array = [cacheCPData cpDataWithParam:dbName];
+            //WQLog(@"Http:cacheCPData---%@",array);
+        }
+    } failure:^(NSError *error) {
+        WQLog(@"获得数据失败---%@",error);
+    }];
+}
+
+- (void) refreshOneData
+{
+    if (self.pileDataArray == nil
+        || self.pileDataArray.count == 0) {
+        return;
+    }
+    QCPileListDataMode *pileData = [[QCPileListDataMode alloc] init];
+    
+    pileData = [self.pileDataArray lastObject];
+    
+    //WQLog(@"数据刷新---%@",self.title);
+    
+    [_runState refreshRunStateViewData:pileData];
+    [_faultInfo refreshFaultViewData:pileData];
+    [_ChargeInfoDetailView refreshChargeInfoViewData:pileData];
+    [_BatteryDetailView refreshBatteryInfoViewData:pileData];
+}
+
 - (void) dataRefresh
 {
     if (self.pileDataArray == nil

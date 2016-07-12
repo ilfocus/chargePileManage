@@ -129,6 +129,8 @@
 		729EAAD41CFC146A00F7A953 /* QCChargePileParaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD31CFC146A00F7A953 /* QCChargePileParaView.m */; };
 		729EAAD91CFC14CA00F7A953 /* QCChargeInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */; };
 		729EAADC1CFC14EE00F7A953 /* QCBatteryInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 729EAADB1CFC14EE00F7A953 /* QCBatteryInfoView.m */; };
+		72A268FD1D3497B100ACCE87 /* UUDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A268FA1D3497B100ACCE87 /* UUDatePicker.m */; };
+		72A268FE1D3497B100ACCE87 /* UUDatePicker_DateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A268FC1D3497B100ACCE87 /* UUDatePicker_DateModel.m */; };
 		72E281F61D0108CD00AD5B86 /* QCChargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E281F51D0108CD00AD5B86 /* QCChargeView.m */; };
 		72E281FC1D0148B300AD5B86 /* DXPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E281FB1D0148B300AD5B86 /* DXPopover.m */; };
 		72EA12191CF7D4D1009A1ED7 /* QCPileListDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72EA12181CF7D4D1009A1ED7 /* QCPileListDetailView.m */; };
@@ -391,6 +393,10 @@
 		729EAAD81CFC14CA00F7A953 /* QCChargeInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChargeInfoView.m; sourceTree = "<group>"; };
 		729EAADA1CFC14EE00F7A953 /* QCBatteryInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCBatteryInfoView.h; sourceTree = "<group>"; };
 		729EAADB1CFC14EE00F7A953 /* QCBatteryInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCBatteryInfoView.m; sourceTree = "<group>"; };
+		72A268F91D3497B100ACCE87 /* UUDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUDatePicker.h; sourceTree = "<group>"; };
+		72A268FA1D3497B100ACCE87 /* UUDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUDatePicker.m; sourceTree = "<group>"; };
+		72A268FB1D3497B100ACCE87 /* UUDatePicker_DateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUDatePicker_DateModel.h; sourceTree = "<group>"; };
+		72A268FC1D3497B100ACCE87 /* UUDatePicker_DateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUDatePicker_DateModel.m; sourceTree = "<group>"; };
 		72E281F41D0108CD00AD5B86 /* QCChargeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCChargeView.h; sourceTree = "<group>"; };
 		72E281F51D0108CD00AD5B86 /* QCChargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCChargeView.m; sourceTree = "<group>"; };
 		72E281FA1D0148B300AD5B86 /* DXPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPopover.h; sourceTree = "<group>"; };
@@ -615,6 +621,7 @@
 		7254FA251CED4A6E008EA77F /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				72A268F81D3497B100ACCE87 /* UUDatePicker_Block */,
 				7227921F1D21123800A2D643 /* PinYin */,
 				728803351D0D3734009AB66E /* ZCTradeView */,
 				728803221D048216009AB66E /* PopMenuView */,
@@ -1157,6 +1164,17 @@
 			name = QCPileListCtrl;
 			sourceTree = "<group>";
 		};
+		72A268F81D3497B100ACCE87 /* UUDatePicker_Block */ = {
+			isa = PBXGroup;
+			children = (
+				72A268F91D3497B100ACCE87 /* UUDatePicker.h */,
+				72A268FA1D3497B100ACCE87 /* UUDatePicker.m */,
+				72A268FB1D3497B100ACCE87 /* UUDatePicker_DateModel.h */,
+				72A268FC1D3497B100ACCE87 /* UUDatePicker_DateModel.m */,
+			);
+			path = UUDatePicker_Block;
+			sourceTree = "<group>";
+		};
 		72E281F31D0108A500AD5B86 /* QCChargeInfoView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1421,9 +1439,11 @@
 				7211DDEC1CF8180600234042 /* QCPileListDataMode.m in Sources */,
 				722792371D21123800A2D643 /* PinYinForObjc.m in Sources */,
 				725760911D1284C40003ECAA /* UIImage+FontAwesome.m in Sources */,
+				72A268FE1D3497B100ACCE87 /* UUDatePicker_DateModel.m in Sources */,
 				728803611D0E7791009AB66E /* QCLoginCtrl.m in Sources */,
 				729EAACE1CFBE69300F7A953 /* QCRunStateView.m in Sources */,
 				7227925A1D222D8900A2D643 /* QCChiBaoZiFooter.m in Sources */,
+				72A268FD1D3497B100ACCE87 /* UUDatePicker.m in Sources */,
 				726F7E9C1CF593E70068513A /* WQItemArrowModel.m in Sources */,
 				725760531D0FD1C20003ECAA /* QCHistoryRecordCtrl.m in Sources */,
 				725760941D1284C40003ECAA /* NSString+pinyin.m in Sources */,

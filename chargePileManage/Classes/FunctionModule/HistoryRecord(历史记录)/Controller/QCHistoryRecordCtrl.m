@@ -351,6 +351,98 @@
     WQLog(@"searchModel.beginTime---%@",searchModel.beginTime);
     WQLog(@"searchModel.endTime---%@",searchModel.endTime);
     WQLog(@"searchModel.searchWord---%@",searchModel.searchWord);
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    if ([searchModel.searchType isEqualToString:@"充电记录"]) {
+        params[@"cpid"] = @([searchModel.searchWord intValue]);
+        params[@"from"] = searchModel.beginTime;
+        params[@"to"] = searchModel.endTime;
+        
+        NSString *ulrString = [NSString stringWithFormat:@"%@%@",CPMAPI_PREFIX,CPMAPI_HISTORY_INFO];
+        
+        [QCHttpTool httpQueryData:ulrString params:params success:^(id json) {
+            // parse the data returned by the server
+            NSString *errorCode = json[@"errorCode"];
+            
+            WQLog(@"---json---%@",json);
+            
+            if (![errorCode isNotBlank]) {
+                
+                NSArray *userArr = json[@"detail"];
+                for (NSDictionary *dict in userArr) {
+                    QCChargeRecordModel *cpModel = [QCChargeRecordModel new];
+                    cpModel.cpID = dict[@"cpId"];
+                    cpModel.chargeElectDate = dict[@"endTime"];
+                    cpModel.chargeElectCost = [dict[@"totalFee"] floatValue];
+                    
+                    WQLog(@"---cpId---%@",dict[@"cpId"]);
+                    WQLog(@"---beginTime---%@",dict[@"beginTime"]);
+                    WQLog(@"---endTime---%@",dict[@"endTime"]);
+                    WQLog(@"---totalFee---%@",dict[@"totalFee"]);
+                    [self.chargeRecordDataArray addObject:cpModel];
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.chargeRecordView reloadData];
+                    [self.chargeRecordView.mj_header endRefreshing];
+                });
+                
+            } else {
+                
+            }
+        } failure:^(NSError *error) {
+            WQLog(@"%@",error);
+        }];
+        
+    } else {
+        
+        self.segmentedView.selectedSegmentIndex = 1;
+        [self charge:self.segmentedView];
+        
+        params[@"cpuserid"] = searchModel.searchWord;
+        
+        params[@"from"] = searchModel.beginTime;
+        params[@"to"] = searchModel.endTime;
+        
+        NSString *ulrString = [NSString stringWithFormat:@"%@%@",CPMAPI_PREFIX,CPMAPI_HISTORY_INFO];
+        
+        [QCHttpTool httpQueryData:ulrString params:params success:^(id json) {
+            // parse the data returned by the server
+            NSString *errorCode = json[@"errorCode"];
+            
+            WQLog(@"---json---%@",json);
+            
+            if (![errorCode isNotBlank]) {
+                
+                NSArray *userArr = json[@"detail"];
+                for (NSDictionary *dict in userArr) {
+                    QCSupplyRecordModel *model = [QCSupplyRecordModel new];
+                    model.userID = dict[@"cpUserId"];
+                    model.chargeElectDate = dict[@"endTime"];
+                    model.supplyElectCost = [dict[@"totalFee"] floatValue];
+                    WQLog(@"---cpUserId---%@",dict[@"cpUserId"]);
+                    WQLog(@"---beginTime---%@",dict[@"beginTime"]);
+                    WQLog(@"---endTime---%@",dict[@"endTime"]);
+                    WQLog(@"---totalFee---%@",dict[@"totalFee"]);
+                    [self.supplyRecordDataArray addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.supplyRecordView reloadData];
+                    [self.supplyRecordView.mj_header endRefreshing];
+                });
+            } else {
+                
+            }
+        } failure:^(NSError *error) {
+            WQLog(@"%@",error);
+        }];
+    }
+    
+    
+    
+    
+    
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
