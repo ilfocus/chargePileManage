@@ -51,4 +51,12 @@ static const CGFloat QCDuration = 1.0;
 {
     [QCReminderUserTool showLoad:view str:NSLocalizedString(@"Loading...", @"HUD loading title")];
 }
+
++ (void) showLogin:(UIView *)view str:(NSString *)str
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    // Set the label text.
+    hud.labelText = str;
+}
+
 @end

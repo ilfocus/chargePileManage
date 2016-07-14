@@ -104,6 +104,7 @@
     // 1.设置数据
     [self setData];
 }
+
 - (void) setData {
     if (self.item.icon) {
         self.iconView.image = [UIImage imageNamed:self.item.icon];

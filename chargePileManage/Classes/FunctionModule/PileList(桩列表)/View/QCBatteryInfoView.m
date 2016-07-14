@@ -74,7 +74,7 @@
     if (modeData == nil) {
         return;
     }
-    self.batterySoc = modeData.batterySoc;
+    self.batterySoc = modeData.batterySOC;
     self.chargeTime = modeData.chargeTime;
     self.remainTime = modeData.remainTime;
 }

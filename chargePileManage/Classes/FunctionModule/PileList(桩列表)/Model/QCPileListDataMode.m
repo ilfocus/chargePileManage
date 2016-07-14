@@ -17,70 +17,70 @@
     
     
     self.chargePileAddress = [[object objectForKey:@"ChargePileAddress"] longLongValue];
-    self.commState = [[object objectForKey:@"CommState"] charValue];
-    
-    self.currentSOC = [[object objectForKey:@"CurrentSOC"] intValue];
-    self.chargeTime = [[object objectForKey:@"ChargeTime"] floatValue];
-    self.remainTime = [[object objectForKey:@"RemainTime"] floatValue];
-    self.currentAVol = [[object objectForKey:@"currentAVol"] floatValue];
-    self.currentACur = [[object objectForKey:@"currentACur"] floatValue];
-    self.outPower = [[object objectForKey:@"OutPower"] floatValue];
-    self.outQuantity = [[object objectForKey:@"OutQuantity"] floatValue];
-    self.accTime = [[object objectForKey:@"ACCTime"] intValue];
-    
+    self.commState         = [[object objectForKey:@"CommState"] charValue];
+
+    self.currentSOC        = [[object objectForKey:@"CurrentSOC"] intValue];
+    self.chargeTime        = [[object objectForKey:@"ChargeTime"] floatValue];
+    self.remainTime        = [[object objectForKey:@"RemainTime"] floatValue];
+    self.currentAVol       = [[object objectForKey:@"currentAVol"] floatValue];
+    self.currentACur       = [[object objectForKey:@"currentACur"] floatValue];
+    self.outPower          = [[object objectForKey:@"OutPower"] floatValue];
+    self.outQuantity       = [[object objectForKey:@"OutQuantity"] floatValue];
+    self.accTime           = [[object objectForKey:@"ACCTime"] intValue];
+
     // fault infomation
-    self.cpInOverVol = [[object objectForKey:@"cpInOverVol"] boolValue];
-    self.cpOutOverVol = [[object objectForKey:@"cpOutOverVol"] boolValue];
-    self.cpInUnderVol = [[object objectForKey:@"cpInUnderVol"] boolValue];
-    self.cpOutUnderVol = [[object objectForKey:@"cpOutUnderVol"] boolValue];
-    
-    self.cpInOverCur = [[object objectForKey:@"cpInOverCur"] boolValue];
-    self.cpOutOverCur = [[object objectForKey:@"cpOutOverCur"] boolValue];
-    self.cpInUnderCur = [[object objectForKey:@"cpInUnderCur"] boolValue];
-    self.cpOutUnderCur = [[object objectForKey:@"cpOutUnderCur"] boolValue];
-    
-    self.cpTempHigh = [[object objectForKey:@"cpTempHigh"] boolValue];
-    self.cpOutShort = [[object objectForKey:@"cpOutShort"] boolValue];
-    
+    self.cpInOverVol       = [[object objectForKey:@"cpInOverVol"] boolValue];
+    self.cpOutOverVol      = [[object objectForKey:@"cpOutOverVol"] boolValue];
+    self.cpInUnderVol      = [[object objectForKey:@"cpInUnderVol"] boolValue];
+    self.cpOutUnderVol     = [[object objectForKey:@"cpOutUnderVol"] boolValue];
+
+    self.cpInOverCur       = [[object objectForKey:@"cpInOverCur"] boolValue];
+    self.cpOutOverCur      = [[object objectForKey:@"cpOutOverCur"] boolValue];
+    self.cpInUnderCur      = [[object objectForKey:@"cpInUnderCur"] boolValue];
+    self.cpOutUnderCur     = [[object objectForKey:@"cpOutUnderCur"] boolValue];
+
+    self.cpTempHigh        = [[object objectForKey:@"cpTempHigh"] boolValue];
+    self.cpOutShort        = [[object objectForKey:@"cpOutShort"] boolValue];
+
     // rate infomation
-    self.totalQuantity = [[object objectForKey:@"TotalQuantity"] floatValue];
-    self.totalFee = [[object objectForKey:@"TotalFee"] floatValue];
-    self.pointQuantity = [[object objectForKey:@"JianQ"] floatValue];
-    self.pointPrice = [[object objectForKey:@"JianPrice"] floatValue];
-    self.pointFee = [[object objectForKey:@"JianFee"] floatValue];
-    self.peakQuantity = [[object objectForKey:@"fengQ"] floatValue];
-    self.peakPrice = [[object objectForKey:@"fengPrice"] floatValue];
-    self.peakFee = [[object objectForKey:@"fengFee"] floatValue];
-    self.flatQuantity = [[object objectForKey:@"PingQ"] floatValue];
-    self.flatPrice = [[object objectForKey:@"PingPrice"] floatValue];
-    self.flatFee = [[object objectForKey:@"PingFee"] floatValue];
-    self.valleyQuantity = [[object objectForKey:@"GUQ"] floatValue];
-    self.valleyPrice = [[object objectForKey:@"GUPrice"] floatValue];
-    self.valleyFee = [[object objectForKey:@"GUFee"] floatValue];
-    
+    self.totalQuantity     = [[object objectForKey:@"TotalQuantity"] floatValue];
+    self.totalFee          = [[object objectForKey:@"TotalFee"] floatValue];
+    self.pointQuantity     = [[object objectForKey:@"JianQ"] floatValue];
+    self.pointPrice        = [[object objectForKey:@"JianPrice"] floatValue];
+    self.pointFee          = [[object objectForKey:@"JianFee"] floatValue];
+    self.peakQuantity      = [[object objectForKey:@"fengQ"] floatValue];
+    self.peakPrice         = [[object objectForKey:@"fengPrice"] floatValue];
+    self.peakFee           = [[object objectForKey:@"fengFee"] floatValue];
+    self.flatQuantity      = [[object objectForKey:@"PingQ"] floatValue];
+    self.flatPrice         = [[object objectForKey:@"PingPrice"] floatValue];
+    self.flatFee           = [[object objectForKey:@"PingFee"] floatValue];
+    self.valleyQuantity    = [[object objectForKey:@"GUQ"] floatValue];
+    self.valleyPrice       = [[object objectForKey:@"GUPrice"] floatValue];
+    self.valleyFee         = [[object objectForKey:@"GUFee"] floatValue];
+
     // battery array infomation
-    self.batterySoc = [[object objectForKey:@"BatterySoc"] floatValue];
-    self.bmsState = [[object objectForKey:@"BMSState"] boolValue];
-    self.portVol = [[object objectForKey:@"PortVol"] floatValue];
-    self.cellNum = [[object objectForKey:@"CellNum"] intValue];
-    self.tempNum = [[object objectForKey:@"TempNum"] intValue];
-    self.maxVol = [[object objectForKey:@"MaxVol"] floatValue];
-    self.maxChargeTemp = [[object objectForKey:@"MaxChargeTemp"] floatValue];
-    
+    self.batterySOC        = [[object objectForKey:@"BatterySOC"] floatValue];
+    self.bmsState          = [[object objectForKey:@"BMSState"] boolValue];
+    self.portVol           = [[object objectForKey:@"PortVol"] floatValue];
+    self.cellNum           = [[object objectForKey:@"CellNum"] intValue];
+    self.tempNum           = [[object objectForKey:@"TempNum"] intValue];
+    self.maxVol            = [[object objectForKey:@"MaxVol"] floatValue];
+    self.maxChargeTemp     = [[object objectForKey:@"MaxChargeTemp"] floatValue];
+
     // battery safty infomation
-    self.cellMaxVol = [[object objectForKey:@"CellMaxVol"] floatValue];
-    self.cellPos = [[object objectForKey:@"CellPos"] intValue];
-    self.cellMinVol = [[object objectForKey:@"CellMinVol"] floatValue];
-    self.cellMinVolPos = [[object objectForKey:@"CellMinVolPos"] intValue];
-    self.maxTemp = [[object objectForKey:@"MaxTemp"] floatValue];
-    self.minTemp = [[object objectForKey:@"MinTemp"] floatValue];
-    
+    self.cellMaxVol        = [[object objectForKey:@"CellMaxVol"] floatValue];
+    self.cellPos           = [[object objectForKey:@"CellPos"] intValue];
+    self.cellMinVol        = [[object objectForKey:@"CellMinVol"] floatValue];
+    self.cellMinVolPos     = [[object objectForKey:@"CellMinVolPos"] intValue];
+    self.maxTemp           = [[object objectForKey:@"MaxTemp"] floatValue];
+    self.minTemp           = [[object objectForKey:@"MinTemp"] floatValue];
+
     // battery alarm infomation
-    self.volDataAlarm = [[object objectForKey:@"VolDataAlarm"] boolValue];
-    self.sampleVolFault = [[object objectForKey:@"SampleVolFault"] boolValue];
-    self.singleVolAlarm = [[object objectForKey:@"SingleVolAlarm"] boolValue];
-    self.fanFailFault = [[object objectForKey:@"FanFailFault"] boolValue];
-    self.sampleTempFault = [[object objectForKey:@"SampleTempFault"] boolValue];
+    self.volDataAlarm      = [[object objectForKey:@"VolDataAlarm"] boolValue];
+    self.sampleVolFault    = [[object objectForKey:@"SampleVolFault"] boolValue];
+    self.singleVolAlarm    = [[object objectForKey:@"SingleVolAlarm"] boolValue];
+    self.fanFailFault      = [[object objectForKey:@"FanFailFault"] boolValue];
+    self.sampleTempFault   = [[object objectForKey:@"SampleTempFault"] boolValue];
     
     return self;
 }
@@ -96,63 +96,63 @@
 {
     if (self = [super init]) {
         
-        self.chargePileAddress  = [decoder decodeInt64ForKey:@"chargePileAddress"];
-        self.commState          = [decoder decodeIntForKey:@"commState"];
-        self.currentSOC         = [decoder decodeFloatForKey:@"currentSOC"];
-        self.chargeTime         = [decoder decodeIntForKey:@"chargeTime"];
-        self.remainTime         = [decoder decodeIntForKey:@"remainTime"];
-        self.currentAVol         = [decoder decodeFloatForKey:@"currentAVol"];
-        self.currentACur         = [decoder decodeFloatForKey:@"currentACur"];
-        self.outPower           = [decoder decodeFloatForKey:@"outPower"];
-        self.outQuantity        = [decoder decodeFloatForKey:@"outQuantity"];
-        self.accTime            = [decoder decodeIntForKey:@"accTime"];
+        self.chargePileAddress = [decoder decodeInt64ForKey:@"chargePileAddress"];
+        self.commState         = [decoder decodeIntForKey:@"commState"];
+        self.currentSOC        = [decoder decodeFloatForKey:@"currentSOC"];
+        self.chargeTime        = [decoder decodeIntForKey:@"chargeTime"];
+        self.remainTime        = [decoder decodeIntForKey:@"remainTime"];
+        self.currentAVol       = [decoder decodeFloatForKey:@"currentAVol"];
+        self.currentACur       = [decoder decodeFloatForKey:@"currentACur"];
+        self.outPower          = [decoder decodeFloatForKey:@"outPower"];
+        self.outQuantity       = [decoder decodeFloatForKey:@"outQuantity"];
+        self.accTime           = [decoder decodeIntForKey:@"accTime"];
         ////////////////////// fault infomation //////////////////////
-        self.cpInOverVol        = [decoder decodeBoolForKey:@"cpInOverVol"];
-        self.cpOutOverVol       = [decoder decodeBoolForKey:@"cpOutOverVol"];
-        self.cpInUnderVol       = [decoder decodeBoolForKey:@"cpInUnderVol"];
-        self.cpOutUnderVol      = [decoder decodeBoolForKey:@"cpOutUnderVol"];
-        self.cpInOverCur        = [decoder decodeBoolForKey:@"cpInOverCur"];
-        self.cpOutOverCur       = [decoder decodeBoolForKey:@"cpOutOverCur"];
-        self.cpInUnderCur       = [decoder decodeBoolForKey:@"cpInUnderCur"];
-        self.cpOutUnderCur      = [decoder decodeBoolForKey:@"cpOutUnderCur"];
-        self.cpTempHigh         = [decoder decodeBoolForKey:@"cpTempHigh"];
-        self.cpOutShort         = [decoder decodeBoolForKey:@"cpOutShort"];
+        self.cpInOverVol       = [decoder decodeBoolForKey:@"cpInOverVol"];
+        self.cpOutOverVol      = [decoder decodeBoolForKey:@"cpOutOverVol"];
+        self.cpInUnderVol      = [decoder decodeBoolForKey:@"cpInUnderVol"];
+        self.cpOutUnderVol     = [decoder decodeBoolForKey:@"cpOutUnderVol"];
+        self.cpInOverCur       = [decoder decodeBoolForKey:@"cpInOverCur"];
+        self.cpOutOverCur      = [decoder decodeBoolForKey:@"cpOutOverCur"];
+        self.cpInUnderCur      = [decoder decodeBoolForKey:@"cpInUnderCur"];
+        self.cpOutUnderCur     = [decoder decodeBoolForKey:@"cpOutUnderCur"];
+        self.cpTempHigh        = [decoder decodeBoolForKey:@"cpTempHigh"];
+        self.cpOutShort        = [decoder decodeBoolForKey:@"cpOutShort"];
         ////////////////////// rate infomation ///////////////////////
-        self.totalQuantity      = [decoder decodeFloatForKey:@"totalQuantity"];
-        self.totalFee           = [decoder decodeFloatForKey:@"totalFee"];
-        self.pointQuantity      = [decoder decodeFloatForKey:@"pointQuantity"];
-        self.pointPrice         = [decoder decodeFloatForKey:@"pointPrice"];
-        self.pointFee           = [decoder decodeFloatForKey:@"pointFee"];
-        self.peakQuantity       = [decoder decodeFloatForKey:@"pointQuantity"];
-        self.peakPrice          = [decoder decodeFloatForKey:@"pointPrice"];
-        self.peakFee            = [decoder decodeFloatForKey:@"pointFee"];
-        self.flatQuantity       = [decoder decodeFloatForKey:@"pointQuantity"];
-        self.flatPrice          = [decoder decodeFloatForKey:@"pointPrice"];
-        self.flatFee            = [decoder decodeFloatForKey:@"pointFee"];
-        self.valleyQuantity     = [decoder decodeFloatForKey:@"pointQuantity"];
-        self.valleyPrice        = [decoder decodeFloatForKey:@"pointPrice"];
-        self.valleyFee          = [decoder decodeFloatForKey:@"pointFee"];
+        self.totalQuantity     = [decoder decodeFloatForKey:@"totalQuantity"];
+        self.totalFee          = [decoder decodeFloatForKey:@"totalFee"];
+        self.pointQuantity     = [decoder decodeFloatForKey:@"pointQuantity"];
+        self.pointPrice        = [decoder decodeFloatForKey:@"pointPrice"];
+        self.pointFee          = [decoder decodeFloatForKey:@"pointFee"];
+        self.peakQuantity      = [decoder decodeFloatForKey:@"pointQuantity"];
+        self.peakPrice         = [decoder decodeFloatForKey:@"pointPrice"];
+        self.peakFee           = [decoder decodeFloatForKey:@"pointFee"];
+        self.flatQuantity      = [decoder decodeFloatForKey:@"pointQuantity"];
+        self.flatPrice         = [decoder decodeFloatForKey:@"pointPrice"];
+        self.flatFee           = [decoder decodeFloatForKey:@"pointFee"];
+        self.valleyQuantity    = [decoder decodeFloatForKey:@"pointQuantity"];
+        self.valleyPrice       = [decoder decodeFloatForKey:@"pointPrice"];
+        self.valleyFee         = [decoder decodeFloatForKey:@"pointFee"];
         ////////////////////// battery array infomation ///////////////////////
-        self.batterySoc         = [decoder decodeFloatForKey:@"batterySoc"];
-        self.bmsState           = [decoder decodeBoolForKey:@"bmsState"];
-        self.portVol            = [decoder decodeFloatForKey:@"portVol"];
-        self.cellNum            = [decoder decodeIntForKey:@"cellNum"];
-        self.tempNum            = [decoder decodeIntForKey:@"tempNum"];
-        self.maxVol             = [decoder decodeFloatForKey:@"maxVol"];
-        self.maxChargeTemp      = [decoder decodeFloatForKey:@"maxChargeTemp"];
+        self.batterySOC        = [decoder decodeFloatForKey:@"batterySOC"];
+        self.bmsState          = [decoder decodeBoolForKey:@"bmsState"];
+        self.portVol           = [decoder decodeFloatForKey:@"portVol"];
+        self.cellNum           = [decoder decodeIntForKey:@"cellNum"];
+        self.tempNum           = [decoder decodeIntForKey:@"tempNum"];
+        self.maxVol            = [decoder decodeFloatForKey:@"maxVol"];
+        self.maxChargeTemp     = [decoder decodeFloatForKey:@"maxChargeTemp"];
         ////////////////////// battery safty infomation ///////////////////////
-        self.cellMaxVol         = [decoder decodeFloatForKey:@"cellMaxVol"];
-        self.cellPos            = [decoder decodeIntForKey:@"cellPos"];
-        self.cellMinVol         = [decoder decodeFloatForKey:@"cellMinVol"];
-        self.cellMinVolPos      = [decoder decodeIntForKey:@"cellMinVolPos"];
-        self.maxTemp            = [decoder decodeFloatForKey:@"maxTemp"];
-        self.minTemp            = [decoder decodeFloatForKey:@"minTemp"];
+        self.cellMaxVol        = [decoder decodeFloatForKey:@"cellMaxVol"];
+        self.cellPos           = [decoder decodeIntForKey:@"cellPos"];
+        self.cellMinVol        = [decoder decodeFloatForKey:@"cellMinVol"];
+        self.cellMinVolPos     = [decoder decodeIntForKey:@"cellMinVolPos"];
+        self.maxTemp           = [decoder decodeFloatForKey:@"maxTemp"];
+        self.minTemp           = [decoder decodeFloatForKey:@"minTemp"];
         ////////////////////// battery alarm infomation ///////////////////////
-        self.volDataAlarm       = [decoder decodeBoolForKey:@"volDataAlarm"];
-        self.sampleVolFault     = [decoder decodeBoolForKey:@"sampleVolFault"];
-        self.singleVolAlarm     = [decoder decodeBoolForKey:@"singleVolAlarm"];
-        self.fanFailFault       = [decoder decodeBoolForKey:@"fanFailFault"];
-        self.sampleTempFault    = [decoder decodeBoolForKey:@"sampleTempFault"];
+        self.volDataAlarm      = [decoder decodeBoolForKey:@"volDataAlarm"];
+        self.sampleVolFault    = [decoder decodeBoolForKey:@"sampleVolFault"];
+        self.singleVolAlarm    = [decoder decodeBoolForKey:@"singleVolAlarm"];
+        self.fanFailFault      = [decoder decodeBoolForKey:@"fanFailFault"];
+        self.sampleTempFault   = [decoder decodeBoolForKey:@"sampleTempFault"];
         
     }
     return self;
@@ -203,7 +203,7 @@
     [encoder encodeFloat:self.valleyPrice forKey:@"valleyPrice"];
     [encoder encodeFloat:self.valleyFee forKey:@"valleyFee"];
     ////////////////////// battery array infomation ///////////////////////
-    [encoder encodeFloat:self.batterySoc forKey:@"batterySoc"];
+    [encoder encodeFloat:self.batterySOC forKey:@"batterySOC"];
     [encoder encodeBool:self.bmsState forKey:@"bmsState"];
     [encoder encodeFloat:self.portVol forKey:@"portVol"];
     [encoder encodeInt:self.cellNum forKey:@"cellNum"];

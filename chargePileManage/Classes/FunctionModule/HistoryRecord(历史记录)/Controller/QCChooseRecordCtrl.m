@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *chargeRecordBtn;
 @property (weak, nonatomic) IBOutlet UIButton *supplyRecordBtn;
+@property (weak, nonatomic) IBOutlet UIButton *faultRecordBtn;
 - (IBAction)chargeRecord;
 - (IBAction)supplyRecord;
 @property (weak, nonatomic) IBOutlet UITextField *checkWord;
@@ -76,7 +77,7 @@
 {
     [self setupBtnBackGroud:_chargeRecordBtn];
     [self setupBtnBackGroud:_supplyRecordBtn];
-    
+    [self setupBtnBackGroud:_faultRecordBtn];
     
     
     NSDate *  senddate=[NSDate date];
@@ -190,8 +191,12 @@
     WQLog(@"%s",__func__);
     _chargeRecordBtn.backgroundColor = [UIColor flatGreenColor];
     _supplyRecordBtn.backgroundColor = [UIColor clearColor];
+    _faultRecordBtn.backgroundColor  = [UIColor clearColor];
+    
     [_chargeRecordBtn setTitleColor:[UIColor flatGreenColor] forState:UIControlStateNormal];
     [_supplyRecordBtn setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+    [_supplyRecordBtn setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+    
     self.searchModel.searchType = @"充电记录";
 }
 
@@ -200,9 +205,25 @@
     WQLog(@"%s",__func__);
     _chargeRecordBtn.backgroundColor = [UIColor clearColor];
     _supplyRecordBtn.backgroundColor = [UIColor flatGreenColor];
+    _faultRecordBtn.backgroundColor  = [UIColor clearColor];
+    
     [_chargeRecordBtn setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
     [_supplyRecordBtn setTitleColor:[UIColor flatGreenColor] forState:UIControlStateNormal];
+    [_faultRecordBtn setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+    
     self.searchModel.searchType = @"供电记录";
+}
+- (IBAction)faultRecord {
+    WQLog(@"%s",__func__);
+    _chargeRecordBtn.backgroundColor = [UIColor clearColor];
+    _supplyRecordBtn.backgroundColor = [UIColor clearColor];
+    _faultRecordBtn.backgroundColor  = [UIColor flatGreenColor];
+    
+    [_chargeRecordBtn setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+    [_supplyRecordBtn setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+    [_faultRecordBtn setTitleColor:[UIColor flatGreenColor] forState:UIControlStateNormal];
+    
+    self.searchModel.searchType = @"故障记录";
 }
 
 #pragma - mark sets and gets

@@ -14,6 +14,8 @@
 #import "QCDataCacheTool.h"
 #import "QCPileListUserModel.h"
 #import "QCHttpTool.h"
+// thrid lib
+#import "MBProgressHUD.h"
 
 
 @interface QCLoginCtrl () <UITextFieldDelegate>
@@ -79,31 +81,31 @@ NSString *const userKindStrKey           = @"userkind";
     
     // save password,through the server for account validation
     if ([self.userIDText.text isNotBlank] && [self.pwdText.text isNotBlank]) { // 帐号密码都不为空
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = NSLocalizedString(@"登录中...", @"HUD loading title");
+        [hud show:YES];
+        
+        
         // account password sent to the server for validation
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//        params[@"loginid"] = @"CPUSER03";
-//        params[@"passwd"] = @"password";
         params[@"loginid"] = self.userIDText.text;
         params[@"passwd"] = self.pwdText.text;
         NSString *ulrString = [NSString stringWithFormat:@"%@%@",CPMAPI_PREFIX,CPMAPI_USER_LOGIN];
         
+        
         [QCHttpTool httpQueryData:ulrString params:params success:^(id json) {
-            // parse the data returned by the server
             NSString *errorCode = json[@"errorCode"];
             if (![errorCode isNotBlank]) {
-                WQLog(@"密码输入正确！！！");
+                [hud hide:YES];
                 [self saveUserInfo:json];
                 [UIApplication sharedApplication].keyWindow.rootViewController = [[QCTabBarController alloc]init];
             } else {
-                WQLog(@"输入错误！！！");
-                if (![self.userIDText.text isEqualToString:@"wangqi"]) {
-                    [QCReminderUserTool showError:self.view str:@"用户名不存在"];
-                } else if (![self.pwdText.text isEqualToString:@"123456"]) {
-                    [QCReminderUserTool showError:self.view str:@"密码不正确"];
-                }
+                [hud hide:YES];
+                [QCReminderUserTool showError:self.view str:@"用户名或密码错误"];
             }
         } failure:^(NSError *error) {
-            WQLog(@"%@",error);
+            [QCReminderUserTool showError:self.view str:@"加载错误"];
         }];
     } else {
         if (![self.userIDText.text isNotBlank]) {

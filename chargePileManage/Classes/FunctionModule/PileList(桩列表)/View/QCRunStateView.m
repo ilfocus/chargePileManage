@@ -16,6 +16,8 @@
 
 /** currentState */
 @property (nonatomic, weak) UILabel *currentStateLabel;
+/** communication state */
+@property (nonatomic,weak) UILabel *comStateLabel;
 /** voltage value*/
 @property (nonatomic, weak) UILabel *volValueLabel;
 /** current value*/
@@ -37,7 +39,6 @@
         
         
         UILabel *titleLbl = [UILabel new];
-        
         titleLbl.font = QCTitleFont;
         titleLbl.text = @"运行状态";
         [self addSubview:titleLbl];
@@ -51,11 +52,21 @@
         } else {
             currentStateLabel.text = @"当前状态：空闲";
         }
-        
         currentStateLabel.font = QCSubTitleFont;
         [self addSubview:currentStateLabel];
         self.currentStateLabel = currentStateLabel;
         
+        // communication
+        UILabel *comStateLabel = [UILabel new];
+        if (self.currentState != nil) {
+            NSString *state = [@"通信状态：" stringByAppendingString:self.currentState];
+            comStateLabel.text = state;
+        } else {
+            comStateLabel.text = @"通信状态：正常";
+        }
+        comStateLabel.font = QCSubTitleFont;
+        [self addSubview:comStateLabel];
+        self.comStateLabel = comStateLabel;
         
         // add voltage value
         UILabel *volValueLabel = [UILabel new];

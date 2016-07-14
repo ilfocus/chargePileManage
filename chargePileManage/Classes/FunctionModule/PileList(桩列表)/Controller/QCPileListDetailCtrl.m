@@ -172,6 +172,7 @@ static int pileDataCnt = 0;
     [QCHttpTool httpQueryCPData:params success:^(id json) {
         
         NSArray *array = json[@"detail"];
+        WQLog(@"JSON---%@",json);
         if (array) {
             for (NSDictionary *dict1 in array) {
                 QCPileListDataMode *result = [QCPileListDataMode mj_objectWithKeyValues:dict1];
@@ -197,8 +198,6 @@ static int pileDataCnt = 0;
     QCPileListDataMode *pileData = [[QCPileListDataMode alloc] init];
     
     pileData = [self.pileDataArray lastObject];
-    
-    //WQLog(@"数据刷新---%@",self.title);
     
     [_runState refreshRunStateViewData:pileData];
     [_faultInfo refreshFaultViewData:pileData];
@@ -287,7 +286,6 @@ static int pileDataCnt = 0;
 {
     
     //WEAK_SELF(vs);
-    
     //CGFloat detailViewH = 300;
     
     QCRunStateView *runState = [[QCRunStateView alloc] init];

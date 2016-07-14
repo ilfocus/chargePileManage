@@ -60,7 +60,7 @@
 @property (nonatomic,assign) float valleyPrice;
 @property (nonatomic,assign) float valleyFee;
 ////////////////////// battery array infomation ///////////////////////
-@property (nonatomic,assign) float batterySoc;
+@property (nonatomic,assign) float batterySOC;
 @property (nonatomic,assign) bool bmsState;
 @property (nonatomic,assign) float portVol;
 @property (nonatomic,assign) int cellNum;

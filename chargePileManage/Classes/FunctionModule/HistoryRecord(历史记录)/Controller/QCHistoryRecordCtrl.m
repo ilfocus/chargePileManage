@@ -32,7 +32,7 @@
 
 
 
-@interface QCHistoryRecordCtrl () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,SearchResultDelegate,QCChooseRecordCtrlDelegate>
+@interface QCHistoryRecordCtrl () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,QCChooseRecordCtrlDelegate>
 @property (nonatomic,weak) UIScrollView *scrollView;
 @property (nonatomic,weak) UITableView *chargeRecordView;
 @property (nonatomic,weak) UITableView *supplyRecordView;
@@ -48,8 +48,22 @@
 #pragma - mark initView
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self setupSelfView];
+    [self setupScrollView];
+    [self setupSegAndTableView];
+    [self setupBarItem];
+    [self setupRefrshControl];
+    [self setupDataFromDB];
+}
+#pragma - mark setupSubViews
+- (void) setupSelfView
+{
     self.view.backgroundColor = WQColor(226,226,226);
-    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+- (void) setupScrollView
+{
+    self.automaticallyAdjustsScrollViewInsets = NO;// 不去自动调整
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2,0);
@@ -58,10 +72,13 @@
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
     self.scrollView.delegate = self;
-    
+}
+- (void) setupSegAndTableView
+{
     CGFloat segmentedHeight = 40;
     CGFloat segmentedY = 64;
-    NSArray *array = @[@"充电记录",@"供电记录"];
+    
+    NSArray *array = @[@"充电记录",@"用户记录",@"故障记录"];
     UISegmentedControl *segmentedView = [[UISegmentedControl alloc] initWithItems:array];
     segmentedView.selectedSegmentIndex = 0;
     segmentedView.tintColor = [UIColor colorWithHex:0x15A230];
@@ -75,7 +92,6 @@
     CGRect chargeRecordViewFrame = CGRectMake(0, tableViewY, SCREEN_WIDTH, tableViewH);
     UITableView *chargeRecordView = [[UITableView alloc] initWithFrame:chargeRecordViewFrame style:UITableViewStyleGrouped];
     chargeRecordView.rowHeight = 90;
-    
     UIView *chargeHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
     chargeRecordView.tableHeaderView = chargeHeaderView;
     chargeRecordView.tableFooterView = chargeHeaderView;
@@ -94,12 +110,14 @@
     self.supplyRecordView = supplyRecordView;
     self.supplyRecordView.delegate = self;
     self.supplyRecordView.dataSource = self;
-    
-    
+}
+- (void) setupBarItem
+{
     UIBarButtonItem *uibtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(addNewItem:)];
     self.navigationItem.rightBarButtonItem  = uibtn;
-    
-    
+}
+- (void) setupRefrshControl
+{
     QCChiBaoZiHeader *chargeRecordheader = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadChargeRecordData)];
     self.chargeRecordView.mj_header = chargeRecordheader;
     
@@ -111,7 +129,9 @@
     self.supplyRecordView.mj_header = supplyRecordheader;
     self.supplyRecordView.mj_footer = [QCChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreSRData)];
     self.supplyRecordView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
-    
+}
+- (void) setupDataFromDB
+{
     // 加载20条数据库中充电数据
     // 验证成功后，把数据存入数据库中
     NSString *dbName = @"chargePileData.sqlite";
@@ -120,6 +140,10 @@
     NSArray *chargeRecordArr = [chargeRecordCache getChargeRecordData:dbName];
     if (chargeRecordArr) {
         //
+        self.chargeRecordDataArray = [chargeRecordArr mutableCopy];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.chargeRecordView reloadData];
+        });
     }
     // 加载20条数据库中用户信息
     NSString *supplyRecordCmd = @"CREATE TABLE IF NOT EXISTS t_supplyRecord (id integer PRIMARY KEY AUTOINCREMENT,userID text,time text,cost text)";
@@ -127,39 +151,23 @@
     NSArray *supplyRecordArr = [supplyRecordCache getSupplyRecordData:dbName];
     if (supplyRecordArr) {
         //
+        self.supplyRecordDataArray = [supplyRecordArr mutableCopy];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.supplyRecordView reloadData];
+        });
     }
 }
-#pragma - mark lazy load
-- (NSMutableArray *)chargeRecordDataArray
-{
-    if (_chargeRecordDataArray == nil) {
-        _chargeRecordDataArray = [NSMutableArray array];
-    }
-    return _chargeRecordDataArray;
-}
-- (NSMutableArray *) supplyRecordDataArray
-{
-    if (_supplyRecordDataArray == nil) {
-        _supplyRecordDataArray = [NSMutableArray array];
-    }
-    return _supplyRecordDataArray;
-}
-
-
-#pragma mark -- SearchResultDelegate
-
-- (void)searchResultData:(NSString *)value {
-
-    WQLog(@"搜索---%@",value);
-}
-
 #pragma - mark mjRefresh Data
+// 加载网络数据
 - (void) loadChargeRecordData
 {
+    // DB
+    NSString *dbName = @"chargePileData.sqlite";
+    NSString *chargeRecordCmd = @"CREATE TABLE IF NOT EXISTS t_chargeRecord (id integer PRIMARY KEY AUTOINCREMENT,chargeNum text,time text,cost text)";
+    QCDataCacheTool *chargeRecordCache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:chargeRecordCmd];
+    
     // 网络加载最新的充电记录
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    
     params[@"cpid"] = @3;
     params[@"from"] = @"20160101";
     params[@"to"] = @"20160701";
@@ -185,7 +193,9 @@
                 WQLog(@"---beginTime---%@",dict[@"beginTime"]);
                 WQLog(@"---endTime---%@",dict[@"endTime"]);
                 WQLog(@"---totalFee---%@",dict[@"totalFee"]);
+                
                 [self.chargeRecordDataArray addObject:cpModel];
+                [chargeRecordCache addChargeRecordData:dbName cpData:cpModel];
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -204,7 +214,6 @@
 //        
 //    });
 }
-
 - (void) loadMoreCPData
 {
     // 从本地数据库加载历史充电记录
@@ -213,9 +222,13 @@
         
     });
 }
-
 - (void) loadSupplyRecordData
 {
+    // 设置数据库
+    NSString *dbName = @"chargePileData.sqlite";
+    NSString *supplyRecordCmd = @"CREATE TABLE IF NOT EXISTS t_supplyRecord (id integer PRIMARY KEY AUTOINCREMENT,userID text,time text,cost text)";
+    QCDataCacheTool *supplyRecordCache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:supplyRecordCmd];
+    
     // 从网络加载最新的供电记录
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
@@ -244,6 +257,7 @@
                 WQLog(@"---endTime---%@",dict[@"endTime"]);
                 WQLog(@"---totalFee---%@",dict[@"totalFee"]);
                 [self.supplyRecordDataArray addObject:model];
+                [supplyRecordCache addSupplyRecordData:dbName cpData:model];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.supplyRecordView reloadData];
@@ -263,10 +277,7 @@
         [self.supplyRecordView.mj_footer endRefreshing];
     });
 }
-
 #pragma mark - private method
-
-
 - (void) addNewItem:(UIBarButtonItem *)btn
 {
     QCChooseRecordCtrl *vc = [[QCChooseRecordCtrl alloc] init];
@@ -277,7 +288,6 @@
 }
 - (void) charge:(UISegmentedControl *)segmented
 {
-    WQLog(@"scrollView---charge");
     if (segmented.selectedSegmentIndex == 0) {
         [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         _searchBar.placeholder = @"桩号查询";
@@ -286,7 +296,6 @@
         _searchBar.placeholder = @"用户查询";
     }
     _scrollView.bouncesZoom = NO;
-
 }
 
 #pragma mark - UITableViewDateSource
@@ -343,6 +352,20 @@
     }
 }
 #pragma - mark sets and gets
+- (NSMutableArray *) chargeRecordDataArray
+{
+    if (_chargeRecordDataArray == nil) {
+        _chargeRecordDataArray = [NSMutableArray array];
+    }
+    return _chargeRecordDataArray;
+}
+- (NSMutableArray *) supplyRecordDataArray
+{
+    if (_supplyRecordDataArray == nil) {
+        _supplyRecordDataArray = [NSMutableArray array];
+    }
+    return _supplyRecordDataArray;
+}
 #pragma - mark QCChooseRecordDelegate
 - (void)searchRecord:(QCSearchRecordModel *)searchModel
 {
@@ -443,9 +466,5 @@
     
     
     
-}
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    WQLog(@"%s",__func__);
 }
 @end

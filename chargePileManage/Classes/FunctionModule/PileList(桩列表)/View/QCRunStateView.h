@@ -13,6 +13,7 @@
 @property (nonatomic,assign) float voltage;
 @property (nonatomic,assign) float current;
 @property (nonatomic,copy) NSString *currentState;
+//@property (nonatomic,copy) NSString *<#string#>;
 
 - (void) refreshRunStateViewData:(QCPileListDataMode *)modeData;
 @end
