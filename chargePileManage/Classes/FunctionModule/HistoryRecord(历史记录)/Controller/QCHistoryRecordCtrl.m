@@ -9,6 +9,7 @@
 #import "QCHistoryRecordCtrl.h"
 #import "QCChargeRecordCell.h"
 #import "QCSupplyRecordCell.h"
+#import "QCFaultRecordCell.h"
 #import "UIColor+hex.h"
 #import "QCSearchRecordCtrl.h"
 #import "QCChooseRecordCtrl.h"
@@ -16,6 +17,7 @@
 // model
 #import "QCChargeRecordModel.h"
 #import "QCSupplyRecordModel.h"
+#import "QCFaultRecordModel.h"
 
 // third lib
 #import "SVSegmentedControl.h"
@@ -36,11 +38,13 @@
 @property (nonatomic,weak) UIScrollView *scrollView;
 @property (nonatomic,weak) UITableView *chargeRecordView;
 @property (nonatomic,weak) UITableView *supplyRecordView;
+@property (nonatomic,weak) UITableView *faultRecordView;
 @property (nonatomic,weak) UISegmentedControl *segmentedView;
-@property (nonatomic,weak) UISearchBar *searchBar;
+//@property (nonatomic,weak) UISearchBar *searchBar;
 @property (nonatomic,strong) UISearchDisplayController *searchDisplayController;
 @property (nonatomic,strong) NSMutableArray *chargeRecordDataArray;
 @property (nonatomic,strong) NSMutableArray *supplyRecordDataArray;
+@property (nonatomic,strong) NSMutableArray *faultRecordDataArray;
 @end
 
 @implementation QCHistoryRecordCtrl
@@ -66,7 +70,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;// 不去自动调整
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2,0);
+    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3,0);
     scrollView.scrollEnabled = YES;
     scrollView.pagingEnabled = YES;
     [self.view addSubview:scrollView];
@@ -110,6 +114,18 @@
     self.supplyRecordView = supplyRecordView;
     self.supplyRecordView.delegate = self;
     self.supplyRecordView.dataSource = self;
+    
+    CGRect FaultRecordViewFrame = CGRectMake(SCREEN_WIDTH * 2, tableViewY, SCREEN_WIDTH, tableViewH);
+    UITableView *faultRecordView = [[UITableView alloc] initWithFrame:FaultRecordViewFrame style:UITableViewStyleGrouped];
+//    faultRecordView.backgroundColor = [UIColor redColor];
+    faultRecordView.rowHeight = 90;
+    UIView *faultHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    faultRecordView.tableHeaderView = faultHeaderView;
+    faultRecordView.tableFooterView = faultHeaderView;
+    [_scrollView addSubview:faultRecordView];
+    self.faultRecordView = faultRecordView;
+    self.faultRecordView.delegate = self;
+    self.faultRecordView.dataSource = self;
 }
 - (void) setupBarItem
 {
@@ -129,6 +145,11 @@
     self.supplyRecordView.mj_header = supplyRecordheader;
     self.supplyRecordView.mj_footer = [QCChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreSRData)];
     self.supplyRecordView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    
+    QCChiBaoZiHeader *faultRecordheader = [QCChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadFaultRecordData)];
+    self.faultRecordView.mj_header = faultRecordheader;
+    self.faultRecordView.mj_footer = [QCChiBaoZiFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreFRData)];
+    self.faultRecordView.tableHeaderView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, SCREEN_WIDTH, 10)];
 }
 - (void) setupDataFromDB
 {
@@ -277,6 +298,85 @@
         [self.supplyRecordView.mj_footer endRefreshing];
     });
 }
+- (void) loadFaultRecordData
+{
+    // 设置数据库
+//    NSString *dbName = @"chargePileData.sqlite";
+//    NSString *supplyRecordCmd = @"CREATE TABLE IF NOT EXISTS t_faultRecord (id integer PRIMARY KEY AUTOINCREMENT,userID text,time text,cost text)";
+//    QCDataCacheTool *supplyRecordCache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:supplyRecordCmd];
+    
+    // 从网络加载最新的供电记录
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    
+    params[@"cpid"] = @"1";
+//    params[@"datacnt"] = @10;
+    params[@"from"] = @"20160101";
+    params[@"to"] = @"20160701";
+    
+    NSString *ulrString = [NSString stringWithFormat:@"%@%@",@"http://192.168.8.132:8080/cpserver/",CPMAPI_FAULT_HISTORY];
+    
+    [QCHttpTool httpQueryData:ulrString params:params success:^(id json) {
+        // parse the data returned by the server
+        NSString *errorCode = json[@"errorCode"];
+        
+        if (![errorCode isNotBlank]) {
+            
+            NSArray *userArr = json[@"detail"];
+            for (NSDictionary *dict in userArr) {
+                
+                QCFaultRecordModel *model = [QCFaultRecordModel new];
+                
+                model.cpID = dict[@"cpid"];
+                model.chargeElectDate = dict[@"happentime"];
+//                model.supplyElectCost = [dict[@"totalFee"] floatValue];
+                model.cpInOverCur = [dict[@"cpInOverCur"] boolValue];
+                model.cpInOverVol = [dict[@"cpInOverVol"] boolValue];
+                model.cpInUnderCur = [dict[@"cpInUnderCur"] boolValue];
+                model.cpInUnderVol = [dict[@"cpInUnderVol"] boolValue];
+                
+                model.cpOutOverCur = [dict[@"cpOutOverCur"] boolValue];
+                model.cpOutOverVol = [dict[@"cpOutOverVol"] boolValue];
+                model.cpOutUnderCur = [dict[@"cpOutUnderCur"] boolValue];
+                model.cpOutUnderVol = [dict[@"cpOutUnderVol"] boolValue];
+                
+                model.cpTempHigh = [dict[@"cpTempHigh"] boolValue];
+                model.cpOutShort = [dict[@"cpOutShort"] boolValue];
+                
+                WQLog(@"---cpInOverCur---%@",dict[@"cpInOverCur"]);
+                WQLog(@"---cpInOverVol---%@",dict[@"cpInOverVol"]);
+                WQLog(@"---cpInUnderCur---%@",dict[@"cpInUnderCur"]);
+                WQLog(@"---cpInUnderVol---%@",dict[@"cpInUnderVol"]);
+                
+                WQLog(@"---cpOutOverCur---%@",dict[@"cpOutOverCur"]);
+                WQLog(@"---cpOutOverVol---%@",dict[@"cpOutOverVol"]);
+                WQLog(@"---cpOutUnderCur---%@",dict[@"cpOutUnderCur"]);
+                WQLog(@"---cpOutUnderVol---%@",dict[@"cpOutUnderVol"]);
+                
+                WQLog(@"---cpTempHigh---%@",dict[@"cpTempHigh"]);
+                WQLog(@"---cpOutShort---%@",dict[@"cpOutShort"]);
+                
+                
+                [self.faultRecordDataArray addObject:model];
+//                [supplyRecordCache addSupplyRecordData:dbName cpData:model];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.faultRecordView reloadData];
+                [self.faultRecordView.mj_header endRefreshing];
+            });
+        } else {
+            
+        }
+    } failure:^(NSError *error) {
+        WQLog(@"%@",error);
+    }];
+}
+- (void) loadMoreFRData
+{
+    // 从本地数据库加载历史供电记录
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.faultRecordView.mj_footer endRefreshing];
+    });
+}
 #pragma mark - private method
 - (void) addNewItem:(UIBarButtonItem *)btn
 {
@@ -290,10 +390,10 @@
 {
     if (segmented.selectedSegmentIndex == 0) {
         [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-        _searchBar.placeholder = @"桩号查询";
-    } else {
+    } else if (segmented.selectedSegmentIndex == 1) {
         [_scrollView setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:YES];
-        _searchBar.placeholder = @"用户查询";
+    } else {
+        [_scrollView setContentOffset:CGPointMake(SCREEN_WIDTH * 2, 0) animated:YES];
     }
     _scrollView.bouncesZoom = NO;
 }
@@ -307,27 +407,27 @@
 {
     if (tableView == _chargeRecordView) {
         return _chargeRecordDataArray.count;
-    } else  {
+    } else  if (tableView == _supplyRecordView) {
         return _supplyRecordDataArray.count;
+    } else {
+        return _faultRecordDataArray.count;
+        //return 10;
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     if (tableView == _chargeRecordView) {
-        WQLog(@"_chargeRecordView---refresh");
         QCChargeRecordCell *cell = [QCChargeRecordCell cellWithTableView:tableView];
         cell.cpRecord = self.chargeRecordDataArray[indexPath.row];
-//        QCChargeRecordModel *model = [QCChargeRecordModel new];
-//        model.cpID = @"001";
-//        model.chargeElectDate = @"20160707";
-//        model.chargeElectCost = 20.65;
-//        cell.cpRecord = model;
         return cell;
-    } else  {
-        WQLog(@"supplyRecordView---refresh");
+    } else if (tableView == _supplyRecordView) {
         QCSupplyRecordCell *cell = [QCSupplyRecordCell cellWithTableView:tableView];
         cell.cpSupplyRecord = self.supplyRecordDataArray[indexPath.row];
+        return cell;
+    } else {
+        QCFaultRecordCell *cell = [QCFaultRecordCell cellWithTableView:tableView];
+        cell.faultRecordModel = self.faultRecordDataArray[indexPath.row];
         return cell;
     }
 }
@@ -336,19 +436,16 @@
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    //WQLog(@"scrollView.contentOffset---%@",NSStringFromCGPoint(scrollView.contentOffset));
-    
     if ([scrollView isMemberOfClass:[UIScrollView class]]) {
-        //WQLog(@"是scrollView---%@",scrollView);
         if (scrollView.contentOffset.x < SCREEN_WIDTH / 2) {
             _segmentedView.selectedSegmentIndex = 0;
-            //_searchBar.placeholder = @"桩号查询";
-        } else {
+        } else if ( scrollView.contentOffset.x >= SCREEN_WIDTH / 2
+                   && scrollView.contentOffset.x < SCREEN_WIDTH * 3 / 2) {
             _segmentedView.selectedSegmentIndex = 1;
-            //_searchBar.placeholder = @"用户查询";
+        } else {
+            _segmentedView.selectedSegmentIndex = 2;
         }
     } else {
-//        WQLog(@"不是scrollView---%@",scrollView);
     }
 }
 #pragma - mark sets and gets
@@ -365,6 +462,13 @@
         _supplyRecordDataArray = [NSMutableArray array];
     }
     return _supplyRecordDataArray;
+}
+- (NSMutableArray *) faultRecordDataArray
+{
+    if (_faultRecordDataArray == nil) {
+        _faultRecordDataArray = [NSMutableArray array];
+    }
+    return _faultRecordDataArray;
 }
 #pragma - mark QCChooseRecordDelegate
 - (void)searchRecord:(QCSearchRecordModel *)searchModel
@@ -418,7 +522,7 @@
             WQLog(@"%@",error);
         }];
         
-    } else {
+    } else if ([searchModel.searchType isEqualToString:@"用户记录"]) {
         
         self.segmentedView.selectedSegmentIndex = 1;
         [self charge:self.segmentedView];
@@ -453,6 +557,72 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.supplyRecordView reloadData];
                     [self.supplyRecordView.mj_header endRefreshing];
+                });
+            } else {
+                
+            }
+        } failure:^(NSError *error) {
+            WQLog(@"%@",error);
+        }];
+    } else {
+        self.segmentedView.selectedSegmentIndex = 2;
+        [self charge:self.segmentedView];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        
+        params[@"cpid"] = searchModel.searchWord;
+        //    params[@"datacnt"] = @10;
+        params[@"from"] = searchModel.beginTime;
+        params[@"to"] = searchModel.endTime;
+        
+        NSString *ulrString = [NSString stringWithFormat:@"%@%@",@"http://192.168.8.132:8080/cpserver/",CPMAPI_FAULT_HISTORY];
+        
+        [QCHttpTool httpQueryData:ulrString params:params success:^(id json) {
+            // parse the data returned by the server
+            NSString *errorCode = json[@"errorCode"];
+            
+            if (![errorCode isNotBlank]) {
+                
+                NSArray *userArr = json[@"detail"];
+                for (NSDictionary *dict in userArr) {
+                    
+                    QCFaultRecordModel *model = [QCFaultRecordModel new];
+                    
+                    model.cpID = dict[@"cpid"];
+                    model.chargeElectDate = dict[@"happentime"];
+                    //                model.supplyElectCost = [dict[@"totalFee"] floatValue];
+                    model.cpInOverCur = [dict[@"cpInOverCur"] boolValue];
+                    model.cpInOverVol = [dict[@"cpInOverVol"] boolValue];
+                    model.cpInUnderCur = [dict[@"cpInUnderCur"] boolValue];
+                    model.cpInUnderVol = [dict[@"cpInUnderVol"] boolValue];
+                    
+                    model.cpOutOverCur = [dict[@"cpOutOverCur"] boolValue];
+                    model.cpOutOverVol = [dict[@"cpOutOverVol"] boolValue];
+                    model.cpOutUnderCur = [dict[@"cpOutUnderCur"] boolValue];
+                    model.cpOutUnderVol = [dict[@"cpOutUnderVol"] boolValue];
+                    
+                    model.cpTempHigh = [dict[@"cpTempHigh"] boolValue];
+                    model.cpOutShort = [dict[@"cpOutShort"] boolValue];
+                    
+                    WQLog(@"---cpInOverCur---%@",dict[@"cpInOverCur"]);
+                    WQLog(@"---cpInOverVol---%@",dict[@"cpInOverVol"]);
+                    WQLog(@"---cpInUnderCur---%@",dict[@"cpInUnderCur"]);
+                    WQLog(@"---cpInUnderVol---%@",dict[@"cpInUnderVol"]);
+                    
+                    WQLog(@"---cpOutOverCur---%@",dict[@"cpOutOverCur"]);
+                    WQLog(@"---cpOutOverVol---%@",dict[@"cpOutOverVol"]);
+                    WQLog(@"---cpOutUnderCur---%@",dict[@"cpOutUnderCur"]);
+                    WQLog(@"---cpOutUnderVol---%@",dict[@"cpOutUnderVol"]);
+                    
+                    WQLog(@"---cpTempHigh---%@",dict[@"cpTempHigh"]);
+                    WQLog(@"---cpOutShort---%@",dict[@"cpOutShort"]);
+                    
+                    
+                    [self.faultRecordDataArray addObject:model];
+                    //                [supplyRecordCache addSupplyRecordData:dbName cpData:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.faultRecordView reloadData];
+                    [self.faultRecordView.mj_header endRefreshing];
                 });
             } else {
                 

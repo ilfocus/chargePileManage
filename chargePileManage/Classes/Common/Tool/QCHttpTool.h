@@ -14,6 +14,7 @@
 #define CPMAPI_PILE_DETAIL              @"getChargePileDetail"
 #define CPMAPI_USER_LOGIN               @"userLogin"
 #define CPMAPI_HISTORY_INFO             @"getChargePileHistInfo"
+#define CPMAPI_FAULT_HISTORY            @"getAlarmReason"
 
 @interface QCHttpTool : NSObject
 #if SERVER_TYPE

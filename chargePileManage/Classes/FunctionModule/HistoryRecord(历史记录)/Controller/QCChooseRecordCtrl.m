@@ -211,7 +211,7 @@
     [_supplyRecordBtn setTitleColor:[UIColor flatGreenColor] forState:UIControlStateNormal];
     [_faultRecordBtn setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
     
-    self.searchModel.searchType = @"供电记录";
+    self.searchModel.searchType = @"用户记录";
 }
 - (IBAction)faultRecord {
     WQLog(@"%s",__func__);
