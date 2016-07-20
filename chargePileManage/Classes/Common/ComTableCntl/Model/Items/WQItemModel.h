@@ -35,6 +35,8 @@ typedef void (^WQItemOption)();
  *  性别
  */
 @property (nonatomic,assign) int gender;
+
+@property (nonatomic,assign) BOOL comState;
 /**
  * 点击cell需要完成的事，block来实现
  */

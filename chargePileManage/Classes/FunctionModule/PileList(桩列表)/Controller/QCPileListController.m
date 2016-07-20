@@ -48,7 +48,7 @@
 {
     // 第一次从数据库加载数据，并显示在界面上
     NSString *dbName = @"chargePileData.sqlite";
-    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text,price text,status text)";
+    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text,price text,currstate text,commstate text)";
     QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
     NSArray *array = [cache getCPListWithParam:dbName];
     if (array) {
@@ -103,7 +103,7 @@
         subTitle = @"当前状态:空闲";
 #else
         QCPileListNumModel *result = [model objectForKey:str];
-        int state = result.status;
+        int state = result.currstate;
         switch (state) {
             case 0:
                 subTitle = [@"当前状态:" stringByAppendingString:@"故障"];
@@ -136,6 +136,8 @@
         
         everyMsgNumber.cpid = cpNumber;
         everyMsgNumber.costValue = result.price;
+        
+        everyMsgNumber.comState = [result.commstate boolValue];
 #endif
         [numArray addObject:everyMsgNumber];
     }
@@ -174,7 +176,7 @@
         NSLog(@"Error: %@", error);
     }];
 #else
-    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text,price text,status text)";
+    NSString *sqlCmd = @"create table if not exists t_number (id integer primary key autoincrement,cpid text,cpnm text,price text,currstate text,commstate text)";
     QCDataCacheTool *cache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:sqlCmd];
     
     // 取数据,先从缓存取，如果缓存为空再请求网络

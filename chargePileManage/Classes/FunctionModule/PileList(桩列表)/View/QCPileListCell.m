@@ -7,10 +7,9 @@
 //
 
 #import "QCPileListCell.h"
-
 #import "WQItemModel.h"
-
 #import "YYKit.h"
+#import "UIView+Round.h"
 
 /** cell的边框宽度 */
 #define QCStatusCellBorder 5
@@ -22,11 +21,14 @@
 @property (nonatomic, weak) UILabel *titleLabel;
 /** 子标题 */
 @property (nonatomic, weak) UILabel *subTitleLabel;
-/**
- *  费用
- */
+/** 费用 */
 @property (nonatomic,weak) UILabel *costLabel;
+/** 通信状态指示灯 */
+@property (nonatomic,weak) UIView *comStateLed;
+
 @property (nonatomic,assign) float costValue;
+
+@property (nonatomic,assign) CGFloat titleWidth;
 /**
  *  箭头
  */
@@ -75,6 +77,8 @@
     titleLable.textColor = [UIColor blackColor];
     [self addSubview:titleLable];
     self.titleLabel = titleLable;
+    CGSize titleLabelSize = [_titleLabel.text sizeWithAttributes:@{NSFontAttributeName : _titleLabel.font}];
+    _titleWidth = titleLabelSize.width + 2 * QCStatusCellBorder;
     
     // 子标题
     UILabel *subTitleLabel = [UILabel new];
@@ -93,6 +97,11 @@
     costLabel.textColor = [UIColor lightGrayColor];
     [self addSubview:costLabel];
     self.costLabel = costLabel;
+    
+    // 通信状态指示
+    UIView *comStateLed = [[UIView alloc] initWithRoundRect:CGRectMake(0, 0, 14, 14)];
+    [self addSubview:comStateLed];
+    self.comStateLed = comStateLed;
     
     // 添加最右边箭头
     self.accessoryView = self.arrowView;
@@ -117,11 +126,20 @@
     cost = [cost stringByAppendingString:@" 元"];
     
     self.costLabel.text = cost;
+    
+    if (self.item.comState) {
+        _comStateLed.backgroundColor = [UIColor greenColor];
+    } else {
+        _comStateLed.backgroundColor = [UIColor redColor];
+    }
+    
 }
 - (void)layoutSubviews {
     [super layoutSubviews];
     
     WEAK_SELF(vs);
+    
+    
     
     [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -135,12 +153,18 @@
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.size.mas_equalTo(CGSizeMake(200, 40));
+        make.size.mas_equalTo(CGSizeMake(_titleWidth, 40));
         
         make.top.equalTo(vs.mas_top).with.offset(QCStatusCellBorder);
         
         make.left.equalTo(_iconView.mas_right).with.offset(QCStatusCellBorder * 2);
         
+    }];
+    
+    [_comStateLed mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_titleLabel.mas_top).with.offset(10 + QCDetailViewBorder);
+        make.left.equalTo(_titleLabel.mas_right).with.offset(2 * QCDetailViewBorder);
+        make.size.mas_equalTo(CGSizeMake(14, 14));
     }];
     
     [_subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -162,6 +186,9 @@
         make.left.equalTo(_subTitleLabel.mas_right).with.offset(QCStatusCellBorder);
         
     }];
+//    WQLog(@"---titleLabel---%p",_titleLabel);
+//    WQLog(@"---subtitleLabel---%p",_subTitleLabel);
+//    WQLog(@"---costLabel---%p",_costLabel);
 }
 
 

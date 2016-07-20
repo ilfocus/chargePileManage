@@ -20,8 +20,10 @@
 @property (nonatomic,copy) NSString *cpid;
 @property (nonatomic,copy) NSString *cpnm;
 
+@property (nonatomic,copy) NSString *commstate;
+
 @property (nonatomic,assign) float price;
-@property (nonatomic,assign) int status;
+@property (nonatomic,assign) int currstate;
 
 @end
 #endif

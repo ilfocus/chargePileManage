@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 
-#define CPMAPI_PREFIX                   @"http://192.168.1.111:8080/cpserver/"
+//#define CPMAPI_PREFIX                   @"http://192.168.1.111:8080/cpserver/"
+
+
+#define CPMAPI_PREFIX                   @"http://192.168.8.132:8080/cpserver/"
 #define CPMAPI_PILE_LIST                @"getChargePileList"
 #define CPMAPI_PILE_DETAIL              @"getChargePileDetail"
 #define CPMAPI_USER_LOGIN               @"userLogin"

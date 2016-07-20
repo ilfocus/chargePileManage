@@ -79,6 +79,7 @@ NSString *const userKindStrKey           = @"userkind";
 
 - (IBAction)login:(id)sender {
     
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[QCTabBarController alloc]init];
     // save password,through the server for account validation
     if ([self.userIDText.text isNotBlank] && [self.pwdText.text isNotBlank]) { // 帐号密码都不为空
         
@@ -96,6 +97,7 @@ NSString *const userKindStrKey           = @"userkind";
         
         [QCHttpTool httpQueryData:ulrString params:params success:^(id json) {
             NSString *errorCode = json[@"errorCode"];
+            WQLog(@"---json---%@",json);
             if (![errorCode isNotBlank]) {
                 [hud hide:YES];
                 [self saveUserInfo:json];
@@ -106,6 +108,7 @@ NSString *const userKindStrKey           = @"userkind";
             }
         } failure:^(NSError *error) {
             [QCReminderUserTool showError:self.view str:@"加载错误"];
+            [hud hide:YES];
         }];
     } else {
         if (![self.userIDText.text isNotBlank]) {
@@ -113,6 +116,7 @@ NSString *const userKindStrKey           = @"userkind";
         } else if (![self.pwdText.text isNotBlank]) {
             [QCReminderUserTool showError:self.view str:@"密码不能为空"];
         }
+        
     }
     
 }
@@ -204,7 +208,6 @@ NSString *const userKindStrKey           = @"userkind";
     } else {
         [self.rememberPwd setImage:[UIImage imageNamed:@"photo_state_normal" ] forState:UIControlStateNormal];
     }
-    
     
     [accountDefaults setBool:_rememberPwdFlg forKey:UserRememberBoolKey];
     [accountDefaults synchronize];

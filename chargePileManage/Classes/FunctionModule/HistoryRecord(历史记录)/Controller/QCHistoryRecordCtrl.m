@@ -171,10 +171,20 @@
     QCDataCacheTool *supplyRecordCache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:supplyRecordCmd];
     NSArray *supplyRecordArr = [supplyRecordCache getSupplyRecordData:dbName];
     if (supplyRecordArr) {
-        //
         self.supplyRecordDataArray = [supplyRecordArr mutableCopy];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.supplyRecordView reloadData];
+        });
+    }
+    
+    // 加载数据库中故障信息
+    NSString *faultRecordCmd = @"CREATE TABLE IF NOT EXISTS t_faultRecord (id integer PRIMARY KEY AUTOINCREMENT,cpID text,happentime text,cpInOverCur text,cpInOverVol text,cpInUnderCur text,cpInUnderVol text,cpOutOverCur text,cpOutOverVol text,cpOutUnderCur text,cpOutUnderVol text,cpTempHigh text,cpOutShort text)";
+    QCDataCacheTool *faultRecordCache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:faultRecordCmd];
+    NSArray *faultRecordArr = [faultRecordCache getFaultRecordData:dbName];
+    if (faultRecordArr) {
+        self.faultRecordDataArray = [faultRecordArr mutableCopy];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.faultRecordView reloadData];
         });
     }
 }
@@ -225,10 +235,15 @@
             });
             
         } else {
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.chargeRecordView.mj_header endRefreshing];
+            });
         }
     } failure:^(NSError *error) {
         WQLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.chargeRecordView.mj_header endRefreshing];
+        });
     }];
     
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -285,10 +300,15 @@
                 [self.supplyRecordView.mj_header endRefreshing];
             });
         } else {
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.supplyRecordView.mj_header endRefreshing];
+            });
         }
     } failure:^(NSError *error) {
         WQLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.supplyRecordView.mj_header endRefreshing];
+        });
     }];
 }
 - (void) loadMoreSRData
@@ -301,17 +321,16 @@
 - (void) loadFaultRecordData
 {
     // 设置数据库
-//    NSString *dbName = @"chargePileData.sqlite";
-//    NSString *supplyRecordCmd = @"CREATE TABLE IF NOT EXISTS t_faultRecord (id integer PRIMARY KEY AUTOINCREMENT,userID text,time text,cost text)";
-//    QCDataCacheTool *supplyRecordCache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:supplyRecordCmd];
+    NSString *dbName = @"chargePileData.sqlite";
+    NSString *faultRecordCmd = @"CREATE TABLE IF NOT EXISTS t_faultRecord (id integer PRIMARY KEY AUTOINCREMENT,cpID text,happentime text,cpInOverCur text,cpInOverVol text,cpInUnderCur text,cpInUnderVol text,cpOutOverCur text,cpOutOverVol text,cpOutUnderCur text,cpOutUnderVol text,cpTempHigh text,cpOutShort text)";
+    QCDataCacheTool *faultRecordCache = [[QCDataCacheTool alloc] initWithDBName:dbName sqlCmd:faultRecordCmd];
     
     // 从网络加载最新的供电记录
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
     params[@"cpid"] = @"1";
-//    params[@"datacnt"] = @10;
     params[@"from"] = @"20160101";
-    params[@"to"] = @"20160701";
+    params[@"to"] = @"20160718";
     
     NSString *ulrString = [NSString stringWithFormat:@"%@%@",@"http://192.168.8.132:8080/cpserver/",CPMAPI_FAULT_HISTORY];
     
@@ -328,7 +347,6 @@
                 
                 model.cpID = dict[@"cpid"];
                 model.chargeElectDate = dict[@"happentime"];
-//                model.supplyElectCost = [dict[@"totalFee"] floatValue];
                 model.cpInOverCur = [dict[@"cpInOverCur"] boolValue];
                 model.cpInOverVol = [dict[@"cpInOverVol"] boolValue];
                 model.cpInUnderCur = [dict[@"cpInUnderCur"] boolValue];
@@ -341,7 +359,7 @@
                 
                 model.cpTempHigh = [dict[@"cpTempHigh"] boolValue];
                 model.cpOutShort = [dict[@"cpOutShort"] boolValue];
-                
+                WQLog(@"------------fault begin -------------------");
                 WQLog(@"---cpInOverCur---%@",dict[@"cpInOverCur"]);
                 WQLog(@"---cpInOverVol---%@",dict[@"cpInOverVol"]);
                 WQLog(@"---cpInUnderCur---%@",dict[@"cpInUnderCur"]);
@@ -354,20 +372,25 @@
                 
                 WQLog(@"---cpTempHigh---%@",dict[@"cpTempHigh"]);
                 WQLog(@"---cpOutShort---%@",dict[@"cpOutShort"]);
-                
+                WQLog(@"------------fault end -------------------");
                 
                 [self.faultRecordDataArray addObject:model];
-//                [supplyRecordCache addSupplyRecordData:dbName cpData:model];
+                [faultRecordCache addFaultRecordData:dbName cpData:model];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.faultRecordView reloadData];
                 [self.faultRecordView.mj_header endRefreshing];
             });
         } else {
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.faultRecordView.mj_header endRefreshing];
+            });
         }
     } failure:^(NSError *error) {
         WQLog(@"%@",error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.faultRecordView.mj_header endRefreshing];
+        });
     }];
 }
 - (void) loadMoreFRData

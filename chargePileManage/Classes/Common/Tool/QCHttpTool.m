@@ -92,7 +92,8 @@
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    NSURLSessionDataTask *dataTask = [manager GET:@"http://192.168.1.111:8080/cpserver/getChargePileList" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSString *ulrString = [CPMAPI_PREFIX stringByAppendingString:CPMAPI_PILE_LIST];
+    NSURLSessionDataTask *dataTask = [manager GET:ulrString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
             success(responseObject);
         }
@@ -107,8 +108,8 @@
 {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    NSURLSessionDataTask *dataTask = [manager GET:@"http://192.168.1.111:8080/cpserver/getChargePileDetail" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSString *urlString = [CPMAPI_PREFIX stringByAppendingString:CPMAPI_PILE_DETAIL];
+    NSURLSessionDataTask *dataTask = [manager GET:urlString parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
             success(responseObject);
         }

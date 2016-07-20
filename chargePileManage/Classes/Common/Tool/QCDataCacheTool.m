@@ -14,6 +14,7 @@
 #import "QCPileListUserModel.h"
 #import "QCChargeRecordModel.h"
 #import "QCSupplyRecordModel.h"
+#import "QCFaultRecordModel.h"
 
 
 @interface QCDataCacheTool ()
@@ -197,7 +198,61 @@ static FMDatabaseQueue *_queue;
     [queue close];
     return statusArray;
 }
+#pragma - mark add and read FAULT_RECORD
 
+#define BTS(b) ([self boolToString:b])
+- (NSString *) boolToString:(BOOL)blData
+{
+    return [NSString stringWithFormat:@"%d",blData];
+}
+
+- (void)addFaultRecordData:(NSString *)dbName cpData:(QCFaultRecordModel *)data
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    [queue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"INSERT INTO t_faultRecord (cpID,happentime,cpInOverCur,cpInOverVol,cpInUnderCur,cpInUnderVol,cpOutOverCur,cpOutOverVol,cpOutUnderCur,cpOutUnderVol,cpTempHigh,cpOutShort) values(?,?,?,?,?,?,?,?,?,?,?,?)",data.cpID,data.chargeElectDate,
+            BTS(data.cpInOverCur),BTS(data.cpInOverVol),BTS(data.cpInUnderCur),BTS(data.cpInUnderVol),
+            BTS(data.cpOutOverCur),BTS(data.cpOutOverVol),BTS(data.cpOutUnderCur),BTS(data.cpOutUnderVol),
+            BTS(data.cpTempHigh),BTS(data.cpOutShort)];
+    }];
+    [queue close];
+}
+
+- (NSArray *)getFaultRecordData:(NSString *) dbName
+{
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:dbName];
+    FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:path];
+    __block NSMutableArray *statusArray = nil;
+    
+    [queue inDatabase:^(FMDatabase *db) {
+        statusArray = [NSMutableArray array];
+        FMResultSet *rs = nil;
+        rs = [db executeQuery:@"select * from t_faultRecord"];
+        while (rs.next) {
+            QCFaultRecordModel *faultRecord = [[QCFaultRecordModel alloc] init];
+            faultRecord.cpID = [rs stringForColumn:@"cpID"];
+            faultRecord.chargeElectDate = [rs stringForColumn:@"happentime"];
+            
+            faultRecord.cpInOverCur = [[rs stringForColumn:@"cpInOverCur"] boolValue];
+            faultRecord.cpInOverVol = [[rs stringForColumn:@"cpInOverVol"] boolValue];
+            faultRecord.cpInUnderCur = [[rs stringForColumn:@"cpInUnderCur"] boolValue];
+            faultRecord.cpInUnderVol = [[rs stringForColumn:@"cpInUnderVol"] boolValue];
+            
+            faultRecord.cpOutOverCur = [[rs stringForColumn:@"cpOutOverCur"] boolValue];
+            faultRecord.cpOutOverVol = [[rs stringForColumn:@"cpOutOverVol"] boolValue];
+            faultRecord.cpOutUnderCur = [[rs stringForColumn:@"cpOutUnderCur"] boolValue];
+            faultRecord.cpOutUnderVol = [[rs stringForColumn:@"cpOutUnderVol"] boolValue];
+            
+            faultRecord.cpTempHigh = [[rs stringForColumn:@"cpTempHigh"] boolValue];
+            faultRecord.cpOutShort = [[rs stringForColumn:@"cpOutShort"] boolValue];
+            
+            [statusArray addObject:faultRecord];
+        }
+    }];
+    [queue close];
+    return statusArray;
+}
 #pragma - mark add and read CP_NUMBER
 - (void) storeCPListNumberWithParam:(NSString *)dbName chargePileID:(QCPileListNumModel *)number
 {
@@ -227,14 +282,14 @@ static FMDatabaseQueue *_queue;
         while (rs.next) {
             QCPileListNumModel *cpNum = [[QCPileListNumModel alloc] init];
 #if SERVER_TYPE
-            cpNum.chargePileNum = [rs stringForColumn:@"chargePileNum"];
+            cpNum.chargePileNum       = [rs stringForColumn:@"chargePileNum"];
 #else
-            cpNum.cpid = [rs stringForColumn:@"cpid"];
-            cpNum.cpnm = [rs stringForColumn:@"cpnm"];
-            cpNum.price = [[rs stringForColumn:@"price"] floatValue];
-            cpNum.status = [[rs stringForColumn:@"status"] intValue];
-            
-            WQLog(@"cpNum---cpid:%@,cpnm:%@,price:%f,status:%d",cpNum.cpid,cpNum.cpnm,cpNum.price,cpNum.status);
+            cpNum.cpid                = [rs stringForColumn:@"cpid"];
+            cpNum.cpnm                = [rs stringForColumn:@"cpnm"];
+            cpNum.price               = [[rs stringForColumn:@"price"] floatValue];
+            cpNum.currstate           = [[rs stringForColumn:@"currstate"] intValue];
+            cpNum.commstate           = [rs stringForColumn:@"commstate"];
+            //WQLog(@"cpNum---cpid:%@,cpnm:%@,price:%f,status:%d",cpNum.cpid,cpNum.cpnm,cpNum.price,cpNum.status);
 #endif
             
             [statusArray addObject:cpNum];
@@ -261,8 +316,8 @@ static FMDatabaseQueue *_queue;
         [db executeUpdate:@"insert into t_number (address,chargePileNum) values(?,?)",address,cpNumber];
 #else
         NSString *price = [NSString stringWithFormat:@"%.2f",number.price];
-        NSString *status = [NSString stringWithFormat:@"%d",number.status];
-        [db executeUpdate:@"insert into t_number (cpid,cpnm,price,status) values(?,?,?,?)",number.cpid,number.cpnm,(int)price,status];
+        NSString *status = [NSString stringWithFormat:@"%d",number.currstate];
+        [db executeUpdate:@"insert into t_number (cpid,cpnm,price,currstate,commstate) values(?,?,?,?,?)",number.cpid,number.cpnm,(int)price,status,number.commstate];
         
 #endif
     }];

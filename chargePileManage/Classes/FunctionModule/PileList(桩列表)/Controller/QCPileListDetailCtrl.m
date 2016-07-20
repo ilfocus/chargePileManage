@@ -83,8 +83,6 @@ static int pileDataCnt = 0;
 //    model3.chargePileNum = @"44444444";
 //    NSArray *arr = @[model,model1,model2,model3];
 //    [cache addChargePileDatas:dbName sqlCmd:sqlCmd cpNumArray:arr];
-//    
-//
     
     NSString *sqlData = @"create table if not exists t_data (id integer primary key autoincrement,address text,cpdata blob)";
     

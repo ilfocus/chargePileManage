@@ -11,7 +11,7 @@
 @interface QCFaultRecordModel : NSObject
 
 @property (nonatomic,copy) NSString *cpID;  // 桩号
-@property (nonatomic,strong) NSString *chargeElectDate;
+@property (nonatomic,copy) NSString *chargeElectDate;
 @property (nonatomic,assign) bool cpInOverVol;
 @property (nonatomic,assign) bool cpOutOverVol;
 @property (nonatomic,assign) bool cpInUnderVol;

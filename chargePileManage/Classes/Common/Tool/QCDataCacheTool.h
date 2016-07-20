@@ -13,6 +13,7 @@
 
 @class QCChargeRecordModel;
 @class QCSupplyRecordModel;
+@class QCFaultRecordModel;
 
 @interface QCDataCacheTool : NSObject
 /**
@@ -54,4 +55,7 @@
 #pragma - mark SUPPLY_RECORD
 - (void)addSupplyRecordData:(NSString *)dbName cpData:(QCSupplyRecordModel *)data;
 - (NSArray *)getSupplyRecordData:(NSString *)dbName;
+#pragma - mark FAULT_RECORD
+- (void)addFaultRecordData:(NSString *)dbName cpData:(QCFaultRecordModel *)data;
+- (NSArray *)getFaultRecordData:(NSString *)dbName;
 @end

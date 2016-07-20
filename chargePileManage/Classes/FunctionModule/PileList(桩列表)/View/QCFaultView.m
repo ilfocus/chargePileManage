@@ -53,7 +53,7 @@
     [super layoutSubviews];
     WEAK_SELF(vs);
     CGSize faultNameLblSize = [_faultNameLbl.text sizeWithAttributes:@{NSFontAttributeName : _faultNameLbl.font}];
-    faultNameLblSize.width += 2;
+    faultNameLblSize.width  += 2;
     faultNameLblSize.height += 2;
     [_faultNameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(vs.mas_top);
